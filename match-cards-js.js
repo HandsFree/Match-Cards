@@ -9,14 +9,14 @@ var w = canvas.width / 2;
 // initial screen
 var MCsplashSc = true;
 // main screen
-var MCgameSc = false;
+var MCgameSc1 = false;
+var MCgameSc2 = false;
+var MCgameSc3 = false;
 
-const MCimage = {
-    bWidth: 70,
-    bHeight: 100,
-    x: 610,
-    y: 400
-};
+var cor1 = false;
+var cor2 = false;
+var cor3 = false;
+var incor = false;
 
 const keys = []; // keyboard operations
 
@@ -48,10 +48,11 @@ const cow = new Image();
 cow.src = "images/cow.jpg";
 
 var sir = new Audio("sounds/siren1.mp3");
+var cow1 = new Audio("sounds/cow.mp3");
 
 function closeSplash() {
     MCsplashSc = false;
-    MCgameSc = true;
+    MCgameSc1 = true;
     window.removeEventListener("click", closeSplash);
 }
 
@@ -83,47 +84,221 @@ function splash() {
 
     if (keys[32]) { // Go to game
         MCsplashSc = false;
-        MCgameSc = true;
+        MCgameSc1 = true;
     }  
     
     window.addEventListener("click", closeSplash);
 }
 
-function game() {
+function firstQus() {
+    ctx.strokeRect(300, 170, 300, 200);
+    ctx.fillStyle = "white";
+    ctx.fillRect(305, 175, 42, 68);
+    ctx.fillStyle = "blue";
+    ctx.font = "50px Comic Sans MS";
+    ctx.fillText("1", 325, 230);
+}
 
+function secQus() {
+    ctx.strokeRect(630, 170, 300, 200);
+    ctx.fillStyle = "white";
+    ctx.fillRect(635, 175, 42, 68);
+    ctx.fillStyle = "blue";
+    ctx.font = "50px Comic Sans MS";
+    ctx.fillText("2", 655, 230);
+}
+
+function thQus() {
+    ctx.strokeRect(300, 400, 300, 200);
+    ctx.fillStyle = "white";
+    ctx.fillRect(305, 406, 42, 68);
+    ctx.fillStyle = "blue";
+    ctx.font = "50px Comic Sans MS";
+    ctx.fillText("3", 325, 458);
+}
+
+function foQus() {
+    ctx.strokeRect(630, 400, 300, 200);
+    ctx.fillStyle = "white";
+    ctx.fillRect(635, 406, 42, 68);
+    ctx.fillStyle = "blue";
+    ctx.font = "50px Comic Sans MS";
+    ctx.fillText("4", 655, 458);
+}
+
+function instructions() {
+    ctx.fillStyle = "blue";
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillText("Match the sound to the picture using the keyboard numbers - 1,2,3,4", w, 700);
+}
+
+/////////  Question 1 //////////////////
+
+function quest1() {
+
+    // Question 1    
     sir.play();
 
-    ctx.fillStyle = "#FFA500";
-    
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = "70px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Match Cards", w, 85);
 
     // white rectangle
     ctx.fillStyle = "white";
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.strokeRect(250, 130, 730, 500);        
     ctx.fillRect(250, 130, 730, 500);
 
     ctx.strokeStyle = "blue";
-    ctx.drawImage(amb, 300, 170, 300, 200);
-    ctx.strokeRect(300, 170, 300, 200);
-    ctx.fillStyle = "white";
-    ctx.fillRect(305, 175, 42, 68);
-    ctx.fillStyle = "blue";
-    ctx.fillText("1", 325, 235);
 
+    ctx.drawImage(amb, 300, 170, 300, 200);
+    firstQus();
+  
     ctx.drawImage(lam, 630, 170, 300, 200);
-    ctx.strokeRect(630, 170, 300, 200);
+    secQus();
 
     ctx.drawImage(micro, 300, 400, 300, 200);
-    ctx.strokeRect(300, 400, 300, 200);
-
+    thQus();
 
     ctx.drawImage(cow, 630, 400, 300, 200);
-    ctx.strokeRect(630, 400, 300, 200);        
+    foQus();
+
+    instructions();
+
+    if (keys[49]) { // Correct
+        sir.pause();
+        sir.currentTime = 0;
+        cor1 = true;
     }
+
+    if (keys[50]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        incor = true;
+    }
+}
+////////// End of Question 1 ////////////////////
+
+/////////  Question 2 //////////////////
+function quest2() {
+
+    // Question 2    
+    cow1.play();
+
+    ctx.font = "70px Comic Sans MS";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Match Cards", w, 85);
+
+    // white rectangle
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(250, 130, 730, 500);        
+    ctx.fillRect(250, 130, 730, 500);
+
+    ctx.strokeStyle = "blue";
+
+    ctx.drawImage(cow, 300, 170, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(micro, 630, 170, 300, 200);
+    secQus();
+
+    ctx.drawImage(lam, 300, 400, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 630, 400, 300, 200);
+    foQus();
+
+    instructions();
+
+
+    if (keys[49]) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        cor2 = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        incor = true;
+    }
+}
+
+////////// End of Question 2 ////////////////////
+
+/////////  Right Answer 1 //////////////////
+    function rightAns1() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was an ambulance!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
+        ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q2
+            MCgameSc1 = false;
+            MCgameSc2 = true;
+        }
+    }
+
+    /////////  Right Answer 2 //////////////////
+    function rightAns2() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was a cow!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
+        ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q3
+            MCgameSc2 = false;
+            MCgameSc3 = true;
+        }
+    }
+
+    /////////  Wrong Awnser //////////////////
+    function wrong() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "red";
+        ctx.textAlign = "center"; 
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("Nope that's not right!", w, 200);
+        ctx.fillText("Try Again!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 420);
+        ctx.fillText("to continue!", w, 490);
+        if (keys[32]) { // Go to return to game
+            incor = false;
+        }
+    }
+
 
 function playGame() {
 
@@ -133,12 +308,70 @@ function playGame() {
         splash();
     }
 
-    if (MCgameSc) {
-        game();
+    ///////// Question 1 //////////////////
+    if (MCgameSc1) {
+        ctx.fillStyle = "#FFA500";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor1) {
+          quest1();
+        }
+
+        if (incor) {
+          wrong();
+        }
+
+        if (cor1) {
+          rightAns1();
+        }
     }
 
-    requestAnimationFrame(playGame);
+    ///////////// Question 2 ////////////////////
+    if (MCgameSc2) {
+        ctx.fillStyle = "#45c345";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor2) {
+          quest2();
+        }
+
+        if (incor) {
+          wrong();
+        }
+
+        if (cor2) {
+          rightAns2();
+        }
+    }
+
+    ///////////// Question 3 ////////////////////
+    if (MCgameSc3) {
+        ctx.fillStyle = "#45c345";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor3) {
+          quest3();
+        }
+
+        if (incor) {
+          wrong();
+        }
+
+        if (cor3) {
+          rightAns3();
+        }
+    }
+
+
+
+///// End of playGame function ////////////////////  
 }
 
-requestAnimationFrame(playGame);  
+
+function animate() {
+    playGame();
+    mId = requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
 
