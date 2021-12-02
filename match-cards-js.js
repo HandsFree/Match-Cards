@@ -18,6 +18,7 @@ var finalScreen = false;
 var cor1 = false;
 var cor2 = false;
 var cor3 = false;
+var cor4 = false;
 var incor = false;
 
 const keys = []; // keyboard operations
@@ -37,6 +38,7 @@ mcSplash.src = "images/match-Cards.png";
 const speech = new Image();
 speech.src = "images/speech.png";
 
+// media for game
 const amb = new Image();
 amb.src = "images/ambulance.jpg";
 
@@ -49,9 +51,14 @@ micro.src = "images/microwave.jpg";
 const cow = new Image();
 cow.src = "images/cow.jpg";
 
+const oldPhn = new Image();
+oldPhn.src = "images/old_phone.jpg";
+
 var sir = new Audio("sounds/siren1.mp3");
 var cow1 = new Audio("sounds/cow.mp3");
 var lamb = new Audio("sounds/lamb.mp3");
+var oldPhone = new Audio("sounds/old-phone.mp3");
+
 
 function closeSplash() {
     MCsplashSc = false;
@@ -282,6 +289,50 @@ function quest3() {
 
 ////////// End of Question 3 ////////////////////
 
+/////////  Question 4 //////////////////
+function quest4() {
+
+    // Question 4    
+    oldPhone.play();
+
+    cardSetUp();
+
+    ctx.drawImage(oldPhn, 300, 170, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(micro, 630, 170, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 300, 400, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 630, 400, 300, 200);
+    foQus();
+
+    instructions();
+
+    if (keys[49]) {
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
+        cor4 = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        incor = true;
+    }
+
+}
+
+////////// End of Question 3 ////////////////////
+
 /////////  Right Answer 1 //////////////////
     function rightAns1() {
         ctx.fillStyle = "white";
@@ -337,13 +388,31 @@ function quest3() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("The sound was a lamb!", w, 300);
         ctx.fillText("Press the Spacebar", w, 400);
-        //ctx.fillText("for the next question!", w, 500);
+        ctx.fillText("for the next question!", w, 500);
 
         if (keys[32]) { // Go to Q3
             MCgameSc3 = false;
-            //MCgameSc4 = true;
+            MCgameSc4 = true;
+        }
+    }
 
-            // Go to the end
+     /////////  Right Answer 4 //////////////////
+     function rightAns4() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was an old telephone!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
+        //ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q3
+            MCgameSc4 = false;
             finalScreen = true;
         }
     }
@@ -431,6 +500,24 @@ function playGame() {
 
         if (cor3) {
           rightAns3();
+        }
+    }
+
+    ///////////// Question 4 ////////////////////
+    if (MCgameSc4) {
+        ctx.fillStyle = "#956088";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor4) {
+          quest4();
+        }
+
+        if (incor) {
+          wrong();
+        }
+
+        if (cor4) {
+          rightAns4();
         }
     }
 
