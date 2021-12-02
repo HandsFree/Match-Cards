@@ -12,6 +12,8 @@ var MCsplashSc = true;
 var MCgameSc1 = false;
 var MCgameSc2 = false;
 var MCgameSc3 = false;
+var MCgameSc4 = false;
+var finalScreen = false;
 
 var cor1 = false;
 var cor2 = false;
@@ -49,6 +51,7 @@ cow.src = "images/cow.jpg";
 
 var sir = new Audio("sounds/siren1.mp3");
 var cow1 = new Audio("sounds/cow.mp3");
+var lamb = new Audio("sounds/lamb.mp3");
 
 function closeSplash() {
     MCsplashSc = false;
@@ -132,6 +135,20 @@ function instructions() {
     ctx.fillText("Match the sound to the picture using the keyboard numbers - 1,2,3,4", w, 700);
 }
 
+function cardSetUp() {
+    // text
+    ctx.font = "70px Comic Sans MS";
+    ctx.fillStyle = "blue";
+    ctx.fillText("Match Cards", w, 85);
+    // white rectangle
+    ctx.fillStyle = "white";
+    // border
+    ctx.lineWidth = 3;
+    ctx.strokeRect(250, 130, 730, 500);        
+    ctx.fillRect(250, 130, 730, 500);
+    ctx.strokeStyle = "blue";
+}
+
 /////////  Question 1 //////////////////
 
 function quest1() {
@@ -139,17 +156,7 @@ function quest1() {
     // Question 1    
     sir.play();
 
-    ctx.font = "70px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards", w, 85);
-
-    // white rectangle
-    ctx.fillStyle = "white";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(250, 130, 730, 500);        
-    ctx.fillRect(250, 130, 730, 500);
-
-    ctx.strokeStyle = "blue";
+    cardSetUp();
 
     ctx.drawImage(amb, 300, 170, 300, 200);
     firstQus();
@@ -182,6 +189,7 @@ function quest1() {
     if (keys[52]) { // Incorrect
         incor = true;
     }
+
 }
 ////////// End of Question 1 ////////////////////
 
@@ -191,19 +199,9 @@ function quest2() {
     // Question 2    
     cow1.play();
 
-    ctx.font = "70px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards", w, 85);
+    cardSetUp();
 
-    // white rectangle
-    ctx.fillStyle = "white";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(250, 130, 730, 500);        
-    ctx.fillRect(250, 130, 730, 500);
-
-    ctx.strokeStyle = "blue";
-
-    ctx.drawImage(cow, 300, 170, 300, 200);
+    ctx.drawImage(amb, 300, 170, 300, 200);
     firstQus();
   
     ctx.drawImage(micro, 630, 170, 300, 200);
@@ -212,16 +210,60 @@ function quest2() {
     ctx.drawImage(lam, 300, 400, 300, 200);
     thQus();
 
-    ctx.drawImage(amb, 630, 400, 300, 200);
+    ctx.drawImage(cow, 630, 400, 300, 200);
     foQus();
 
     instructions();
 
 
-    if (keys[49]) {
+    if (keys[49]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        incor = true;
+    }
+
+    if (keys[52]) { // Correct
         cow1.pause();
         cow1.currentTime = 0;
         cor2 = true;
+    }
+
+}
+
+////////// End of Question 2 ////////////////////
+
+/////////  Question 3 //////////////////
+function quest3() {
+
+    // Question 3    
+    lamb.play();
+
+    cardSetUp();
+
+    ctx.drawImage(lam, 300, 170, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(micro, 630, 170, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 300, 400, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 630, 400, 300, 200);
+    foQus();
+
+    instructions();
+
+    if (keys[49]) {
+        lamb.pause();
+        lamb.currentTime = 0;
+        cor3 = true;
     }
 
     if (keys[50]) { // Incorrect
@@ -235,9 +277,10 @@ function quest2() {
     if (keys[52]) { // Incorrect
         incor = true;
     }
+
 }
 
-////////// End of Question 2 ////////////////////
+////////// End of Question 3 ////////////////////
 
 /////////  Right Answer 1 //////////////////
     function rightAns1() {
@@ -281,6 +324,30 @@ function quest2() {
         }
     }
 
+    /////////  Right Answer 3 //////////////////
+    function rightAns3() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was a lamb!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
+        //ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q3
+            MCgameSc3 = false;
+            //MCgameSc4 = true;
+
+            // Go to the end
+            finalScreen = true;
+        }
+    }
+
     /////////  Wrong Awnser //////////////////
     function wrong() {
         ctx.fillStyle = "white";
@@ -289,11 +356,16 @@ function quest2() {
         ctx.strokeRect(120, 40, 950, 650);
         ctx.fillStyle = "red";
         ctx.textAlign = "center"; 
+        ctx.font = "120px Comic Sans MS";
+        ctx.fillText("Oh No!", w, 170);
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("that's not right!", w, 270);
+        ctx.fillStyle = "blue";
+        ctx.fillText("Why not try Again?", w, 400);
+        ctx.fillStyle = "red";
         ctx.font = "60px Comic Sans MS";
-        ctx.fillText("Nope that's not right!", w, 200);
-        ctx.fillText("Try Again!", w, 300);
-        ctx.fillText("Press the Spacebar", w, 420);
-        ctx.fillText("to continue!", w, 490);
+        ctx.fillText("Press the Spacebar", w, 570);
+        ctx.fillText("to continue!", w, 640);
         if (keys[32]) { // Go to return to game
             incor = false;
         }
@@ -346,7 +418,7 @@ function playGame() {
 
     ///////////// Question 3 ////////////////////
     if (MCgameSc3) {
-        ctx.fillStyle = "#45c345";
+        ctx.fillStyle = "#77a9de";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor3) {
@@ -362,7 +434,18 @@ function playGame() {
         }
     }
 
-
+    ///////////// Final Screen ////////////////////
+    if (finalScreen) {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center"; 
+        ctx.font = "90px Comic Sans MS";
+        ctx.fillText("Well Done", w, 200);
+        ctx.font = "70px Comic Sans MS";
+        ctx.fillText("for completing the", w, 300);
+        ctx.fillText("Match Cards!", w, 400);      
+    }
 
 ///// End of playGame function ////////////////////  
 }
