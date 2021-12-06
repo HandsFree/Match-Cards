@@ -6,6 +6,8 @@ canvas.height = 735;
 // center text
 var w = canvas.width / 2;
 
+//var score = 0;
+
 // initial screen
 var MCsplashSc = true;
 // main screen
@@ -13,12 +15,14 @@ var MCgameSc1 = false;
 var MCgameSc2 = false;
 var MCgameSc3 = false;
 var MCgameSc4 = false;
+var MCgameSc5 = false;
 var finalScreen = false;
 
 var cor1 = false;
 var cor2 = false;
 var cor3 = false;
 var cor4 = false;
+var cor5 = false;
 var incor = false;
 
 const keys = []; // keyboard operations
@@ -54,10 +58,14 @@ cow.src = "images/cow.jpg";
 const oldPhn = new Image();
 oldPhn.src = "images/old_phone.jpg";
 
+const fireEn = new Image();
+fireEn.src = "images/fire_eng.jpg";
+
 var sir = new Audio("sounds/siren1.mp3");
 var cow1 = new Audio("sounds/cow.mp3");
 var lamb = new Audio("sounds/lamb.mp3");
 var oldPhone = new Audio("sounds/old-phone.mp3");
+var fireEng = new Audio("sounds/fire-eng.mp3");
 
 
 function closeSplash() {
@@ -147,6 +155,7 @@ function cardSetUp() {
     ctx.font = "70px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Match Cards", w, 85);
+    //- Score " + score
     // white rectangle
     ctx.fillStyle = "white";
     // border
@@ -186,14 +195,20 @@ function quest1() {
     }
 
     if (keys[50]) { // Incorrect
+        sir.pause();
+        sir.currentTime = 0;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
+        sir.pause();
+        sir.currentTime = 0;
         incor = true;
     }
 
     if (keys[52]) { // Incorrect
+        sir.pause();
+        sir.currentTime = 0;
         incor = true;
     }
 
@@ -224,14 +239,20 @@ function quest2() {
 
 
     if (keys[49]) { // Incorrect
+        cow1.currentTime = 0;
+        cor2 = true;
         incor = true;
     }
 
     if (keys[50]) { // Incorrect
+        cow1.currentTime = 0;
+        cor2 = true;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
+        cow1.currentTime = 0;
+        cor2 = true;
         incor = true;
     }
 
@@ -274,14 +295,20 @@ function quest3() {
     }
 
     if (keys[50]) { // Incorrect
+        lamb.pause();
+        lamb.currentTime = 0;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
+        lamb.pause();
+        lamb.currentTime = 0;
         incor = true;
     }
 
     if (keys[52]) { // Incorrect
+        lamb.pause();
+        lamb.currentTime = 0;
         incor = true;
     }
 
@@ -318,20 +345,76 @@ function quest4() {
     }
 
     if (keys[50]) { // Incorrect
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
         incor = true;
     }
 
     if (keys[52]) { // Incorrect
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
         incor = true;
     }
 
 }
 
-////////// End of Question 3 ////////////////////
+////////// End of Question 4 ////////////////////
+
+/////////  Question 5 //////////////////
+function quest5() {
+
+    // Question 4    
+    fireEng.play();
+
+    cardSetUp();
+
+    ctx.drawImage(fireEn, 300, 170, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(micro, 630, 170, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 300, 400, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 630, 400, 300, 200);
+    foQus();
+
+    instructions();
+
+    if (keys[49]) {
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        cor5 = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+    }
+
+}
+
+////////// End of Question 5 ////////////////////
 
 /////////  Right Answer 1 //////////////////
     function rightAns1() {
@@ -409,10 +492,32 @@ function quest4() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("The sound was an old telephone!", w, 300);
         ctx.fillText("Press the Spacebar", w, 400);
-        //ctx.fillText("for the next question!", w, 500);
+        ctx.fillText("for the next question!", w, 500);
 
         if (keys[32]) { // Go to Q3
             MCgameSc4 = false;
+            MCgameSc5 = true;
+        }
+    }
+
+    /////////  Right Answer 5 //////////////////
+    function rightAns5() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was a Fire Engine!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
+        //ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q3
+            MCgameSc5 = false;
+            //MCgameSc6 = true;
             finalScreen = true;
         }
     }
@@ -455,15 +560,17 @@ function playGame() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor1) {
-          quest1();
+           quest1();
         }
 
         if (incor) {
-          wrong();
+            cor1 = false;
+            wrong();
         }
 
         if (cor1) {
-          rightAns1();
+           rightAns1();
+           //score=score+1;
         }
     }
 
@@ -477,11 +584,13 @@ function playGame() {
         }
 
         if (incor) {
-          wrong();
+            cor2 = false;
+            wrong();
         }
 
         if (cor2) {
           rightAns2();
+          //score=score+1;
         }
     }
 
@@ -491,33 +600,54 @@ function playGame() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor3) {
-          quest3();
+            quest3();
         }
 
         if (incor) {
-          wrong();
+            cor3 = false;
+            wrong();
         }
 
         if (cor3) {
-          rightAns3();
+           rightAns3();
         }
     }
 
     ///////////// Question 4 ////////////////////
     if (MCgameSc4) {
-        ctx.fillStyle = "#956088";
+        ctx.fillStyle = "#8fb58f";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor4) {
-          quest4();
+            quest4();
         }
 
         if (incor) {
-          wrong();
+            cor4 = false;
+            wrong();
         }
 
         if (cor4) {
-          rightAns4();
+            rightAns4();
+        }
+    }
+
+    ///////////// Question 5 ////////////////////
+    if (MCgameSc5) {
+        ctx.fillStyle = "#bca3cf";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor5) {
+            quest5();
+        }
+
+        if (incor) {
+            cor5 = false;
+            wrong();
+        }
+
+        if (cor5) {
+            rightAns5();
         }
     }
 
