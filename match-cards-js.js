@@ -67,7 +67,6 @@ var lamb = new Audio("sounds/lamb.mp3");
 var oldPhone = new Audio("sounds/old-phone.mp3");
 var fireEng = new Audio("sounds/fire-eng.mp3");
 
-
 function closeSplash() {
     MCsplashSc = false;
     MCgameSc1 = true;
@@ -146,10 +145,11 @@ function foQus() {
 
 function instructions() {
     ctx.fillStyle = "blue";
-    ctx.font = "30px Comic Sans MS";
-    ctx.fillText("Match the sound to the picture using the keyboard numbers - 1,2,3,4", w, 700);
+    ctx.font = "25px Comic Sans MS";
+    ctx.fillText("Match the sound to the picture using the keyboard numbers - 1,2,3,4", w, 675);
+    ctx.fillText("or left click on the picture", w, 710);
 }
-
+ 
 function cardSetUp() {
     // text
     ctx.font = "70px Comic Sans MS";
@@ -164,6 +164,50 @@ function cardSetUp() {
     ctx.fillRect(250, 130, 730, 500);
     ctx.strokeStyle = "blue";
 }
+
+////// Q1 Mouse Controls ////////////////////////
+
+function Q1checkClick1(e) {
+    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 170 && e.clientY < 370) {
+        sir.pause();
+        sir.currentTime = 0;
+        cor1 = true;
+        removeEventListener("click", Q1checkClick1);
+    }
+}
+
+function Q1checkClick2(e) {
+    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 170 && e.clientY < 370) {
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q1checkClick2);
+    }
+}
+
+function Q1checkClick3(e) {
+    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 400 && e.clientY < 610) {
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q1checkClick3);
+    }
+}
+
+function Q1checkClick4(e) {
+    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 400 && e.clientY < 610) {
+        //alert("Roerrrr");
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q1checkClick4);
+    }
+}
+
+/////////// end of Q1 Mouse Controls ////////////////////////////////
+
+
+
 
 /////////  Question 1 //////////////////
 
@@ -187,6 +231,11 @@ function quest1() {
     foQus();
 
     instructions();
+
+    addEventListener("click", Q1checkClick1);
+    addEventListener("click", Q1checkClick2);
+    addEventListener("click", Q1checkClick3);
+    addEventListener("click", Q1checkClick4);
 
     if (keys[49]) { // Correct
         sir.pause();
@@ -215,6 +264,53 @@ function quest1() {
 }
 ////////// End of Question 1 ////////////////////
 
+
+
+///////// Q2 Mouse Controls ////////////////////////
+
+function Q2checkClick1(e) {
+    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 170 && e.clientY < 370) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q2checkClick1);
+    }
+}
+
+function Q2checkClick2(e) {
+    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 170 && e.clientY < 370) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q2checkClick2);
+    }
+}
+
+function Q2checkClick3(e) {
+    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 400 && e.clientY < 610) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q2checkClick3);
+    }
+}
+
+function Q2checkClick4(e) {
+    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 400 && e.clientY < 610) {
+        //alert("Roerrrr");
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = false;
+        cor1 = false;
+        cor2 = true;
+        removeEventListener("click", Q2checkClick4);
+    }
+}
+
+/////////// end of Q2 Mouse Controls ////////////////////////////////
+
+
+
 /////////  Question 2 //////////////////
 function quest2() {
 
@@ -237,22 +333,26 @@ function quest2() {
 
     instructions();
 
+    addEventListener("click", Q2checkClick1);
+    addEventListener("click", Q2checkClick2);
+    addEventListener("click", Q2checkClick3);
+    addEventListener("click", Q2checkClick4);
 
     if (keys[49]) { // Incorrect
+        cow1.pause();
         cow1.currentTime = 0;
-        cor2 = true;
         incor = true;
     }
 
     if (keys[50]) { // Incorrect
+        cow1.pause();
         cow1.currentTime = 0;
-        cor2 = true;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
+        cow1.pause();
         cow1.currentTime = 0;
-        cor2 = true;
         incor = true;
     }
 
@@ -416,6 +516,13 @@ function quest5() {
 
 ////////// End of Question 5 ////////////////////
 
+function rightClick1() {
+    incor = false;
+    MCgameSc1 = false;
+    MCgameSc2 = true;
+    window.removeEventListener("click", rightClick1);
+}
+
 /////////  Right Answer 1 //////////////////
     function rightAns1() {
         ctx.fillStyle = "white";
@@ -435,6 +542,15 @@ function quest5() {
             MCgameSc1 = false;
             MCgameSc2 = true;
         }
+
+        addEventListener("click", rightClick1);
+    }
+
+    function rightClick2() {
+        incor = false;
+        MCgameSc2 = false;
+        MCgameSc3 = true;
+        window.removeEventListener("click", rightClick2);
     }
 
     /////////  Right Answer 2 //////////////////
@@ -456,6 +572,8 @@ function quest5() {
             MCgameSc2 = false;
             MCgameSc3 = true;
         }
+
+        addEventListener("click", rightClick2);
     }
 
     /////////  Right Answer 3 //////////////////
@@ -522,6 +640,11 @@ function quest5() {
         }
     }
 
+    function clickWrong() {
+        incor = false;
+        removeEventListener("click", clickWrong);
+    }
+
     /////////  Wrong Awnser //////////////////
     function wrong() {
         ctx.fillStyle = "white";
@@ -540,6 +663,9 @@ function quest5() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("Press the Spacebar", w, 570);
         ctx.fillText("to continue!", w, 640);
+
+        addEventListener("click", clickWrong);
+
         if (keys[32]) { // Go to return to game
             incor = false;
         }
@@ -670,7 +796,7 @@ function playGame() {
 
 function animate() {
     playGame();
-    mId = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
 }
 
 requestAnimationFrame(animate);
