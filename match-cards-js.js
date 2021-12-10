@@ -16,6 +16,7 @@ var MCgameSc2 = false;
 var MCgameSc3 = false;
 var MCgameSc4 = false;
 var MCgameSc5 = false;
+var MCgameSc6 = false;
 var finalScreen = false;
 
 var cor1 = false;
@@ -23,6 +24,7 @@ var cor2 = false;
 var cor3 = false;
 var cor4 = false;
 var cor5 = false;
+var cor6 = false;
 var incor = false;
 
 const keys = []; // keyboard operations
@@ -66,6 +68,8 @@ var cow1 = new Audio("sounds/cow.mp3");
 var lamb = new Audio("sounds/lamb.mp3");
 var oldPhone = new Audio("sounds/old-phone.mp3");
 var fireEng = new Audio("sounds/fire-eng.mp3");
+var microSound = new Audio("sounds/microwave.mp3");
+
 
 function closeSplash() {
     MCsplashSc = false;
@@ -168,7 +172,8 @@ function cardSetUp() {
 ////// Q1 Mouse Controls ////////////////////////
 
 function Q1checkClick1(e) {
-    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 170 && e.clientY < 370) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+        //alert("Moooo");
         sir.pause();
         sir.currentTime = 0;
         cor1 = true;
@@ -177,7 +182,7 @@ function Q1checkClick1(e) {
 }
 
 function Q1checkClick2(e) {
-    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 170 && e.clientY < 370) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
@@ -186,16 +191,17 @@ function Q1checkClick2(e) {
 }
 
 function Q1checkClick3(e) {
-    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 400 && e.clientY < 610) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
+        //alert("Moooo");
         removeEventListener("check", Q1checkClick3);
     }
 }
 
 function Q1checkClick4(e) {
-    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 400 && e.clientY < 610) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
         //alert("Roerrrr");
         sir.pause();
         sir.currentTime = 0;
@@ -269,7 +275,7 @@ function quest1() {
 ///////// Q2 Mouse Controls ////////////////////////
 
 function Q2checkClick1(e) {
-    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 170 && e.clientY < 370) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -278,7 +284,7 @@ function Q2checkClick1(e) {
 }
 
 function Q2checkClick2(e) {
-    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 170 && e.clientY < 370) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -287,7 +293,7 @@ function Q2checkClick2(e) {
 }
 
 function Q2checkClick3(e) {
-    if (e.clientX > 460 && e.clientX < 770 && e.clientY > 400 && e.clientY < 610) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -296,7 +302,7 @@ function Q2checkClick3(e) {
 }
 
 function Q2checkClick4(e) {
-    if (e.clientX > 800 && e.clientX < 1100 && e.clientY > 400 && e.clientY < 610) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
         //alert("Roerrrr");
         cow1.pause();
         cow1.currentTime = 0;
@@ -366,6 +372,50 @@ function quest2() {
 
 ////////// End of Question 2 ////////////////////
 
+///////// Q3 Mouse Controls ////////////////////////
+
+function Q3checkClick1(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+        lamb.pause();
+        lamb.currentTime = 0;
+        incor = false;
+        cor1 = false;
+        cor2 = false;
+        cor3 = true;
+        removeEventListener("click", Q3checkClick1);
+    }
+}
+
+function Q3checkClick2(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+        lamb.pause();
+        lamb.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q3checkClick2);
+    }
+}
+
+function Q3checkClick3(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+        lamb.pause();
+        lamb.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q3checkClick3);
+    }
+}
+
+function Q3checkClick4(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
+        //alert("Roerrrr");
+        lamb.pause();
+        lamb.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q3checkClick4);
+    }
+}
+
+/////////// end of Q3 Mouse Controls ////////////////////////////////
+
 /////////  Question 3 //////////////////
 function quest3() {
 
@@ -387,6 +437,11 @@ function quest3() {
     foQus();
 
     instructions();
+
+    addEventListener("click", Q3checkClick1);
+    addEventListener("click", Q3checkClick2);
+    addEventListener("click", Q3checkClick3);
+    addEventListener("click", Q3checkClick4);
 
     if (keys[49]) {
         lamb.pause();
@@ -416,6 +471,53 @@ function quest3() {
 
 ////////// End of Question 3 ////////////////////
 
+///////// Q4 Mouse Controls ////////////////////////
+
+function Q4checkClick1(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
+        incor = false;
+        cor1 = false;
+        cor2 = false;
+        cor3 = false;
+        cor4 = true;
+        removeEventListener("click", Q4checkClick1);
+
+    }
+}
+
+function Q4checkClick2(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q4checkClick2);
+    }
+}
+
+
+function Q4checkClick3(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q4checkClick3);
+    }
+}
+
+function Q4checkClick4(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
+        //alert("Roerrrr");
+        oldPhone.pause();
+        oldPhone.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q4checkClick4);
+    }
+}
+
+/////////// end of Q4 Mouse Controls ////////////////////////////////
+
 /////////  Question 4 //////////////////
 function quest4() {
 
@@ -438,9 +540,15 @@ function quest4() {
 
     instructions();
 
+    addEventListener("click", Q4checkClick1);
+    addEventListener("click", Q4checkClick2);
+    addEventListener("click", Q4checkClick3);
+    addEventListener("click", Q4checkClick4);
+
     if (keys[49]) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
+        incor = false;
         cor4 = true;
     }
 
@@ -466,6 +574,52 @@ function quest4() {
 
 ////////// End of Question 4 ////////////////////
 
+///////// Q5 Mouse Controls ////////////////////////
+
+function Q5checkClick1(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = false;
+        cor1 = false;
+        cor2 = false;
+        cor3 = false;
+        cor4 = false;
+        cor5 = true;
+        removeEventListener("click", Q5checkClick1);
+    }
+}
+
+function Q5checkClick2(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q5checkClick2);
+    }
+}
+
+function Q5checkClick3(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q5checkClick3);
+    }
+}
+
+function Q5checkClick4(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
+        //alert("Roerrrr");
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q5checkClick4);
+    }
+}
+
+/////////// end of Q5 Mouse Controls ////////////////////////////////
+
 /////////  Question 5 //////////////////
 function quest5() {
 
@@ -488,9 +642,15 @@ function quest5() {
 
     instructions();
 
+    addEventListener("click", Q5checkClick1);
+    addEventListener("click", Q5checkClick2);
+    addEventListener("click", Q5checkClick3);
+    addEventListener("click", Q5checkClick4);
+
     if (keys[49]) {
         fireEng.pause();
         fireEng.currentTime = 0;
+        incor = false;
         cor5 = true;
     }
 
@@ -516,12 +676,124 @@ function quest5() {
 
 ////////// End of Question 5 ////////////////////
 
+
+////// Q6 Mouse Controls ////////////////////////
+
+function Q6checkClick1(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+        //alert("Moooo");
+        microSound.pause();
+        microSound.currentTime = 0;
+        cor6 = true;
+        removeEventListener("click", Q6checkClick1);
+    }
+}
+
+function Q6checkClick2(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q6checkClick2);
+    }
+}
+
+function Q6checkClick3(e) {
+    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+        //alert("Moooo");
+        removeEventListener("check", Q6checkClick3);
+    }
+}
+
+function Q6checkClick4(e) {
+    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
+        //alert("Roerrrr");
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q6checkClick4);
+    }
+}
+
+/////////// end of Q6 Mouse Controls ////////////////////////////////
+
+
+
+
+/////////  Question 6 //////////////////
+
+function quest6() {
+    
+    microSound.play();
+
+    cardSetUp();
+
+    ctx.drawImage(micro, 300, 170, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(lam, 630, 170, 300, 200);
+    secQus();
+
+    ctx.drawImage(amb, 300, 400, 300, 200);
+    thQus();
+
+    ctx.drawImage(cow, 630, 400, 300, 200);
+    foQus();
+
+    instructions();
+
+    addEventListener("click", Q6checkClick1);
+    addEventListener("click", Q6checkClick2);
+    addEventListener("click", Q6checkClick3);
+    addEventListener("click", Q6checkClick4);
+
+    if (keys[49]) { // Correct
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = false;
+        cor6 = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        microSound.pause();
+        microSound.currentTime = 0;
+        incor = true;
+    }
+
+}
+////////// End of Question 6 ////////////////////
+
+
+
+
+
+
+
+//// Answers ///////////////////////
+
+// mouse controls right Answer 1 //
 function rightClick1() {
     incor = false;
     MCgameSc1 = false;
     MCgameSc2 = true;
     window.removeEventListener("click", rightClick1);
 }
+// End mouse controls right Answer //
 
 /////////  Right Answer 1 //////////////////
     function rightAns1() {
@@ -546,12 +818,14 @@ function rightClick1() {
         addEventListener("click", rightClick1);
     }
 
+    // mouse controls right Answer 2 //
     function rightClick2() {
         incor = false;
         MCgameSc2 = false;
         MCgameSc3 = true;
         window.removeEventListener("click", rightClick2);
     }
+    // End mouse controls right Answer //
 
     /////////  Right Answer 2 //////////////////
     function rightAns2() {
@@ -576,6 +850,16 @@ function rightClick1() {
         addEventListener("click", rightClick2);
     }
 
+    // mouse controls right Answer 3 //
+    function rightClick3() {
+        incor = false;
+        MCgameSc2 = false;
+        MCgameSc3 = false;
+        MCgameSc4 = true;
+        removeEventListener("click", rightClick3);
+    }
+    // End mouse controls right Answer //
+
     /////////  Right Answer 3 //////////////////
     function rightAns3() {
         ctx.fillStyle = "white";
@@ -595,7 +879,19 @@ function rightClick1() {
             MCgameSc3 = false;
             MCgameSc4 = true;
         }
+        addEventListener("click", rightClick3);
     }
+
+    // mouse controls right Answer 4 //
+    function rightClick4() {
+        incor = false;
+        MCgameSc2 = false;
+        MCgameSc3 = false;
+        MCgameSc4 = false;
+        MCgameSc5 = true;
+        removeEventListener("click", rightClick4);
+    }
+    // End mouse controls right Answer //
 
      /////////  Right Answer 4 //////////////////
      function rightAns4() {
@@ -612,11 +908,25 @@ function rightClick1() {
         ctx.fillText("Press the Spacebar", w, 400);
         ctx.fillText("for the next question!", w, 500);
 
-        if (keys[32]) { // Go to Q3
+        if (keys[32]) { // Go to Q4
             MCgameSc4 = false;
             MCgameSc5 = true;
         }
+        addEventListener("click", rightClick4);
     }
+
+    // mouse controls right Answer 5 //
+    function rightClick5() {
+        incor = false;
+        MCgameSc2 = false;
+        MCgameSc3 = false;
+        MCgameSc4 = false;
+        MCgameSc5 = false;
+        MCgameSc6 = true;
+        //finalScreen = true;
+        removeEventListener("click", rightClick5);
+    }
+    // End mouse controls right Answer //
 
     /////////  Right Answer 5 //////////////////
     function rightAns5() {
@@ -631,13 +941,46 @@ function rightClick1() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("The sound was a Fire Engine!", w, 300);
         ctx.fillText("Press the Spacebar", w, 400);
+        ctx.fillText("for the next question!", w, 500);
+
+        if (keys[32]) { // Go to Q5
+            MCgameSc5 = false;
+            MCgameSc6 = true;
+            //finalScreen = true;
+        }
+        addEventListener("click", rightClick5);
+    }
+
+      // mouse controls right Answer 6 //
+      function rightClick6() {
+      incor = false;
+      MCgameSc6 = false;
+      finalScreen = true;
+      removeEventListener("click", rightClick6);
+    }
+// End mouse controls right Answer //
+
+    /////////  Right Answer 6 //////////////////
+    function rightAns6() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(120, 40, 950, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(120, 40, 950, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "80px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("The sound was a microwave!", w, 300);
+        ctx.fillText("Press the Spacebar", w, 400);
         //ctx.fillText("for the next question!", w, 500);
 
-        if (keys[32]) { // Go to Q3
-            MCgameSc5 = false;
-            //MCgameSc6 = true;
+        if (keys[32]) { // Go to Q2
+            MCgameSc6 = false;
             finalScreen = true;
         }
+
+        addEventListener("click", rightClick6);
     }
 
     function clickWrong() {
@@ -774,6 +1117,26 @@ function playGame() {
 
         if (cor5) {
             rightAns5();
+        }
+    }
+
+    ///////////// Question 6 ////////////////////
+    if (MCgameSc6) {
+        ctx.fillStyle = "pink";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor6) {
+          quest6();
+        }
+
+        if (incor) {
+            cor6 = false;
+            wrong();
+        }
+
+        if (cor6) {
+          rightAns6();
+          //score=score+1;
         }
     }
 
