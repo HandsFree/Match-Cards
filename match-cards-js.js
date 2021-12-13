@@ -63,6 +63,8 @@ oldPhn.src = "images/old_phone.jpg";
 const fireEn = new Image();
 fireEn.src = "images/fire_eng.jpg";
 
+var splashAud = new Audio("sounds/splash-screen.mp3");
+
 var sir = new Audio("sounds/siren1.mp3");
 var cow1 = new Audio("sounds/cow.mp3");
 var lamb = new Audio("sounds/lamb.mp3");
@@ -102,6 +104,10 @@ function splash() {
     ctx.fillText("Press A", 175, 490);
     ctx.fillText("on your Keyboard", 180, 512);
     ctx.fillText("for Speech", 175, 535);
+
+    if (keys[65]) { // audio
+        splashAud.play();
+    }
 
     if (keys[32]) { // Go to game
         MCsplashSc = false;
