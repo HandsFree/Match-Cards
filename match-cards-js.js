@@ -16,6 +16,7 @@ var play = true;
 // initial screen
 var MCsplashSc = true;
 // main screen
+
 var MCgameSc1 = false;
 var MCgameSc2 = false;
 var MCgameSc3 = false;
@@ -77,6 +78,8 @@ bell.src = "images/doorbel.jpg";
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
 
+var music = new Audio("sounds/ragtime.mp3");
+
 var sir = new Audio("sounds/siren1.mp3");
 var cow1 = new Audio("sounds/cow.mp3");
 var lamb = new Audio("sounds/lamb.mp3");
@@ -105,6 +108,8 @@ function closeSplash() {
     splashAud.currentTime = 0;
     MCsplashSc = false;
     MCgameSc1 = true;
+    music.play();
+    music.volume = 0.1;
     window.removeEventListener("click", closeSplash);
 }
 
@@ -143,6 +148,8 @@ function splash() {
         splashAud.currentTime = 0;
         MCsplashSc = false;
         MCgameSc1 = true;
+        music.play();
+        music.volume = 0.1;
     }  
     
     window.addEventListener("click", closeSplash);
@@ -986,12 +993,15 @@ function rightClick1() {
         ctx.strokeRect(120, 40, 950, 650);
         ctx.fillStyle = "green";
         ctx.textAlign = "center"; 
-        ctx.font = "80px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 200);
+        ctx.font = "100px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 180);
         ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was an ambulance!", w, 300);
-        ctx.fillText("Press the Spacebar", w, 400);
-        ctx.fillText("for the next question!", w, 500);
+        ctx.fillText("The sound was an ambulance!", w, 290);
+        ctx.font = "50px Comic Sans MS";
+        ctx.fillText("Left click on your mouse", w, 400);
+        ctx.fillText("OR", w, 465);
+        ctx.fillText("Press the Spacebar", w, 520);
+        ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Q2
             MCgameSc1 = false;
@@ -1449,7 +1459,7 @@ function playGame() {
 }
 
 
-function animate() {
+function animate() {  
     playGame();
     requestAnimationFrame(animate);
 }
