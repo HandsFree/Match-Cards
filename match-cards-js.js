@@ -621,7 +621,7 @@ function quest4() {
     if (keys[49]) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
-        //incor = false;
+        incor = false;
         cor4 = true;
     }
 
@@ -653,13 +653,8 @@ function Q5checkClick1(e) {
     if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
         fireEng.pause();
         fireEng.currentTime = 0;
-        incor = false;
-        cor1 = false;
-        cor2 = false;
-        cor3 = false;
-        cor4 = false;
-        cor5 = true;
-        removeEventListener("click", Q5checkClick1);
+        incor = true;
+        removeEventListener("click", Q5checkClick1, false);
     }
 }
 
@@ -667,8 +662,13 @@ function Q5checkClick2(e) {
     if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
         fireEng.pause();
         fireEng.currentTime = 0;
-        incor = true;
-        removeEventListener("click", Q5checkClick2);
+        incor = false;
+        cor1 = false;
+        cor2 = false;
+        cor3 = false;
+        cor4 = false;
+        cor5 = true;
+        removeEventListener("click", Q5checkClick2, false);
     }
 }
 
@@ -677,7 +677,7 @@ function Q5checkClick3(e) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q5checkClick3);
+        removeEventListener("click", Q5checkClick3, false);
     }
 }
 
@@ -687,16 +687,14 @@ function Q5checkClick4(e) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q5checkClick4);
+        removeEventListener("click", Q5checkClick4, false);
     }
 }
 
 /////////// end of Q5 Mouse Controls ////////////////////////////////
 
 /////////  Question 5 //////////////////
-function quest5() {
-
-    // Question 4    
+function quest5() {  
     
     if (play) {
         fireEng.play();
@@ -708,10 +706,10 @@ function quest5() {
 
     cardSetUp();
 
-    ctx.drawImage(fireEn, 300, 170, 300, 200);
+    ctx.drawImage(micro, 300, 170, 300, 200);
     firstQus();
   
-    ctx.drawImage(micro, 630, 170, 300, 200);
+    ctx.drawImage(fireEn, 630, 170, 300, 200);
     secQus();
 
     ctx.drawImage(cow, 300, 400, 300, 200);
@@ -727,17 +725,17 @@ function quest5() {
     addEventListener("click", Q5checkClick3);
     addEventListener("click", Q5checkClick4);
 
-    if (keys[49]) {
-        fireEng.pause();
-        fireEng.currentTime = 0;
-        //incor = false;
-        cor5 = true;
-    }
-
-    if (keys[50]) { // Incorrect
+    if (keys[49]) { // Incorrect
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
+    }
+
+    if (keys[50]) { // Correct
+        fireEng.pause();
+        fireEng.currentTime = 0;
+        incor = false;
+        cor5 = true;
     }
 
     if (keys[51]) { // Incorrect
@@ -764,6 +762,7 @@ function Q6checkClick1(e) {
         //alert("Moooo");
         microSound.pause();
         microSound.currentTime = 0;
+        incor = false;
         cor6 = true;
         removeEventListener("click", Q6checkClick1);
     }
@@ -839,7 +838,7 @@ function quest6() {
     if (keys[49]) { // Correct
         microSound.pause();
         microSound.currentTime = 0;
-        //incor = false;
+        incor = false;
         cor6 = true;
     }
 
@@ -979,6 +978,7 @@ function rightClick1() {
     ambVoice.pause();
     ambVoice.currentTime = 0;
     incor = false;
+    cor1 = false;
     MCgameSc1 = false;
     MCgameSc2 = true;
     window.removeEventListener("click", rightClick1);
@@ -1007,6 +1007,7 @@ function rightClick1() {
         if (keys[32]) { // Go to Q2
             MCgameSc1 = false;
             MCgameSc2 = true;
+            cor1 = false;
             ambVoice.pause();
             ambVoice.currentTime = 0;
         }
@@ -1017,6 +1018,7 @@ function rightClick1() {
     // mouse controls right Answer 2 //
     function rightClick2() {
         incor = false;
+        cor2 = false;
         MCgameSc2 = false;
         MCgameSc3 = true;
         cowVoice.pause();
@@ -1049,6 +1051,7 @@ function rightClick1() {
             MCgameSc3 = true;
             cowVoice.pause();
             cowVoice.currentTime = 0;
+            cor2 = false;
         }
 
         addEventListener("click", rightClick2);
@@ -1057,6 +1060,7 @@ function rightClick1() {
     // mouse controls right Answer 3 //
     function rightClick3() {
         incor = false;
+        cor3 = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
         MCgameSc4 = true;
@@ -1086,6 +1090,7 @@ function rightClick1() {
         ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Q4
+            cor3 = false;
             lambVoice.pause();
             lambVoice.currentTime = 0;
             MCgameSc3 = false;
@@ -1097,6 +1102,7 @@ function rightClick1() {
     // mouse controls right Answer 4 //
     function rightClick4() {
         telVoice.pause();
+        cor4 = false;
         telVoice.currentTime = 0;
         incor = false;
         MCgameSc2 = false;
@@ -1127,6 +1133,7 @@ function rightClick1() {
         ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Q5
+            cor4 = false;
             telVoice.pause();
             telVoice.currentTime = 0;
             MCgameSc4 = false;
@@ -1137,6 +1144,7 @@ function rightClick1() {
 
     // mouse controls right Answer 5 //
     function rightClick5() {
+        cor5 = false;
         fEngVoice.pause();
         fEngVoice.currentTime = 0;
         incor = false;
@@ -1169,6 +1177,7 @@ function rightClick1() {
         ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Q6
+            cor5 = false;
             fEngVoice.pause();
             fEngVoice.currentTime = 0;
             MCgameSc5 = false;
@@ -1179,6 +1188,7 @@ function rightClick1() {
 
       // mouse controls right Answer 6 //
       function rightClick6() {
+      cor6 = false;
       microVoice.pause();
       microVoice.currentTime = 0;
       incor = false;
@@ -1210,6 +1220,7 @@ function rightClick1() {
         if (keys[32]) { // Go to Final Screen
             microVoice.pause();
             microVoice.currentTime = 0;
+            cor6 = false;
             MCgameSc6 = false;
             MCgameSc7 = true;
             //finalScreen = true;
@@ -1221,6 +1232,7 @@ function rightClick1() {
 
     // mouse controls right Answer 7 //
     function rightClick7() {
+        cor7 = false;
         doorbell.pause();
         doorbell.currentTime = 0;
         incor = false;
@@ -1250,6 +1262,7 @@ function rightClick1() {
         //ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Final Screen
+            cor7 = false;
             doorbell.pause();
             doorbell.currentTime = 0;
             MCgameSc7 = false;
@@ -1451,6 +1464,8 @@ function playGame() {
     function rightClickFS() {
         wellDoneVoice.pause();
         wellDoneVoice.currentTime = 0;
+        music.pause();
+        music.currentTime = 0;
 
         //incor = false;
         finalScreen = false;
@@ -1471,14 +1486,18 @@ function playGame() {
         ctx.fillText("Match Cards!", w, 400);
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("Left click on your mouse, OR", w, 500);
-        //ctx.fillText("Press the Enter Key", w, 560);
-        ctx.fillText("Press the Spacebar", w, 560);
+        ctx.fillText("Press the Enter Key", w, 560);
+        //ctx.fillText("Press the Spacebar", w, 560);
         ctx.fillText("To play again!", w, 620);
 
-        if (keys[32]) { // Go to Splash Screen
-        //if (keys[13]) { // Go to Splash Screen
+        console.log(MCgameSc1, MCgameSc2, cor4);
+
+
+        if (keys[13]) { // Go to Splash Screen
             wellDoneVoice.pause();
             wellDoneVoice.currentTime = 0;
+            music.pause();
+            music.currentTime = 0;
             finalScreen = false;
             MCsplashSc = true;
         }
