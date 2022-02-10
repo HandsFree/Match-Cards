@@ -2,16 +2,12 @@
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-canvas.width = 1200;
-canvas.height = 735;
 
 
 // center text
 var w = canvas.width / 2;
 
 var play = true;
-
-//var score = 0;
 
 // initial screen
 var MCsplashSc = true;
@@ -105,6 +101,7 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
 
 function closeSplash() {
+    incor = false;
     splashAud.pause();
     splashAud.currentTime = 0;
     MCsplashSc = false;
@@ -118,27 +115,25 @@ function splash() {
     ctx.drawImage(mcSplash, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
-    ctx.fillRect(95, 400, 1010, 300);
+    ctx.fillRect(0, 400, 715, 235);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
-    ctx.font = "50px Comic Sans MS";
+    ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Click the left mouse button", w, 460);
     ctx.fillStyle = "red";
-    ctx.fillText("or press the Spacebar", w, 525);
+    ctx.fillText("or press the Spacebar", w, 510);
     ctx.fillStyle = "blue";
-    ctx.fillText("or use your switch", w, 590);
+    ctx.fillText("or use your switch", w, 560);
     ctx.fillStyle = "purple";
-    ctx.font='900 50px Comic Sans MS';
-    ctx.fillText("to play!", w, 660);
+    ctx.fillText("to play!", w, 610);
     ctx.fillStyle = "white";
-    ctx.fillRect(105, 410, 150, 140);
-    ctx.drawImage(speech, 155, 420, 50, 50);
+    ctx.fillRect(5, 415, 80, 100);
+    ctx.drawImage(speech, 20, 420, 50, 50);
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Press A", 175, 490);
-    ctx.fillText("on your Keyboard", 180, 512);
-    ctx.fillText("for Speech", 175, 535);
+    ctx.fillText("Press A", 45, 490);
+    ctx.fillText("for Speech", 45, 510);
 
     if (keys[65]) { // audio
         splashAud.play();
@@ -151,107 +146,104 @@ function splash() {
         MCgameSc1 = true;
         music.play();
         music.volume = 0.1;
+        incor = false;
     }  
     
     window.addEventListener("click", closeSplash, false);
 }
 
 function firstQus() {
-    ctx.strokeRect(300, 170, 300, 200);
+    ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
-    ctx.fillRect(305, 175, 42, 68);
+    ctx.fillRect(55, 155, 42, 50);
     ctx.fillStyle = "blue";
     ctx.font = "50px Comic Sans MS";
-    ctx.fillText("1", 325, 230);
+    ctx.fillText("1", 75, 200);
 }
 
 function secQus() {
-    ctx.strokeRect(630, 170, 300, 200);
+    ctx.strokeRect(370, 150, 300, 200);
     ctx.fillStyle = "white";
-    ctx.fillRect(635, 175, 42, 68);
+    ctx.fillRect(375, 155, 42, 50);
     ctx.fillStyle = "blue";
     ctx.font = "50px Comic Sans MS";
-    ctx.fillText("2", 655, 230);
+    ctx.fillText("2", 395, 200);
 }
 
 function thQus() {
-    ctx.strokeRect(300, 400, 300, 200);
+    ctx.strokeRect(50, 380, 300, 200);
     ctx.fillStyle = "white";
-    ctx.fillRect(305, 406, 42, 68);
+    ctx.fillRect(55, 385, 42, 50);
     ctx.fillStyle = "blue";
     ctx.font = "50px Comic Sans MS";
-    ctx.fillText("3", 325, 458);
+    ctx.fillText("3", 75, 430);
 }
 
 function foQus() {
-    ctx.strokeRect(630, 400, 300, 200);
+    ctx.strokeRect(370, 380, 300, 200);
     ctx.fillStyle = "white";
-    ctx.fillRect(635, 406, 42, 68);
+    ctx.fillRect(375, 385, 42, 50);
     ctx.fillStyle = "blue";
     ctx.font = "50px Comic Sans MS";
-    ctx.fillText("4", 655, 458);
+    ctx.fillText("4", 395, 430);
 }
 
 function instructions() {
     ctx.fillStyle = "blue";
     ctx.font = "25px Comic Sans MS";
-    ctx.fillText("Match the sound to the picture using the keyboard numbers - 1,2,3,4", w, 675);
-    ctx.fillText("or left click on the picture", w, 710);
+    ctx.fillText("Match the sound to the picture", w, 625);
+	ctx.fillText("using the keyboard numbers - 1,2,3,4", w, 655);
+	ctx.fillText("or left click on the picture", w, 685);
 }
  
 function cardSetUp() {
     // text
-    ctx.font = "70px Comic Sans MS";
+    ctx.font = "80px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards", w, 85);
-    //- Score " + score
+    ctx.fillText("Match Cards", w, 100);
     // white rectangle
     ctx.fillStyle = "white";
     // border
-    ctx.lineWidth = 3;
-    ctx.strokeRect(250, 130, 730, 500);        
-    ctx.fillRect(250, 130, 730, 500);
+    ctx.lineWidth = 3;       
     ctx.strokeStyle = "blue";
 }
 
 ////// Q1 Mouse Controls ////////////////////////
 
 function Q1checkClick1(e) {
-    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
-        //alert("Moooo");
+	if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
+        incor = false;
         cor1 = true;
-        removeEventListener("click", Q1checkClick1, false);
+        removeEventListener("click", Q1checkClick1);
     }
 }
 
 function Q1checkClick2(e) {
-    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q1checkClick2, false);
+        removeEventListener("check", Q1checkClick2);
     }
 }
 
 function Q1checkClick3(e) {
-    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+    if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        //alert("Moooo");
-        removeEventListener("check", Q1checkClick3, false);
+        removeEventListener("check", Q1checkClick3);
     }
 }
 
 function Q1checkClick4(e) {
-    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
-        //alert("Roerrrr");
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q1checkClick4, false);
+        removeEventListener("check", Q1checkClick4);
     }
 }
 
@@ -275,16 +267,24 @@ function quest1() {
 
     cardSetUp();
 
-    ctx.drawImage(amb, 300, 170, 300, 200);
+    ctx.drawImage(amb, 50, 150, 300, 200);
+	amb.path = new Path2D();
+    amb.path.rect(50, 150, 300, 200);
     firstQus();
   
-    ctx.drawImage(lam, 630, 170, 300, 200);
+    ctx.drawImage(lam, 370, 150, 300, 200);
+    lam.path = new Path2D();
+    lam.path.rect(370, 150, 300, 200);
     secQus();
 
-    ctx.drawImage(micro, 300, 400, 300, 200);
+    ctx.drawImage(micro, 50, 380, 300, 200);
+    micro.path = new Path2D();
+    micro.path.rect(50, 380, 300, 200);
     thQus();
 
-    ctx.drawImage(cow, 630, 400, 300, 200);
+    ctx.drawImage(cow, 370, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(370, 380, 300, 200);
     foQus();
 
     instructions();
@@ -326,7 +326,7 @@ function quest1() {
 ///////// Q2 Mouse Controls ////////////////////////
 
 function Q2checkClick1(e) {
-    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 245 && e.screenY < 450) {
+    if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -335,7 +335,7 @@ function Q2checkClick1(e) {
 }
 
 function Q2checkClick2(e) {
-    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 245 && e.screenY < 450) {
+    if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {    
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -344,7 +344,7 @@ function Q2checkClick2(e) {
 }
 
 function Q2checkClick3(e) {
-    if (e.screenX > 460 && e.screenX < 770 && e.screenY > 470 && e.screenY < 680) {
+    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {    
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
@@ -353,8 +353,7 @@ function Q2checkClick3(e) {
 }
 
 function Q2checkClick4(e) {
-    if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
-        //alert("Roerrrr");
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = false;
@@ -382,25 +381,33 @@ function quest2() {
     }
 
     cardSetUp();
-
-    ctx.drawImage(amb, 300, 170, 300, 200);
+    ctx.drawImage(amb, 50, 150, 300, 200);
+    amb.path = new Path2D();
+    amb.path.rect(50, 150, 300, 200);
     firstQus();
   
-    ctx.drawImage(micro, 630, 170, 300, 200);
+    ctx.drawImage(micro, 370, 150, 300, 200);
+    micro.path = new Path2D();
+    micro.path.rect(370, 150, 300, 200);
     secQus();
 
-    ctx.drawImage(lam, 300, 400, 300, 200);
+
+    ctx.drawImage(lam, 50, 380, 300, 200);
+    lam.path = new Path2D();
+    lam.path.rect(50, 380, 300, 200);
     thQus();
 
-    ctx.drawImage(cow, 630, 400, 300, 200);
+    ctx.drawImage(cow, 370, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(370, 380, 300, 200);
     foQus();
 
     instructions();
 
-    addEventListener("click", Q2checkClick1, false);
-    addEventListener("click", Q2checkClick2, false);
-    addEventListener("click", Q2checkClick3, false);
-    addEventListener("click", Q2checkClick4, false);
+    addEventListener("click", Q2checkClick1);
+    addEventListener("click", Q2checkClick2);
+    addEventListener("click", Q2checkClick3);
+    addEventListener("click", Q2checkClick4);
 
     if (keys[49]) { // Incorrect
         cow1.pause();
@@ -683,7 +690,6 @@ function Q5checkClick3(e) {
 
 function Q5checkClick4(e) {
     if (e.screenX > 795 && e.screenX < 1100 && e.screenY > 470 && e.screenY < 680) {
-        //alert("Roerrrr");
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
@@ -989,16 +995,16 @@ function rightClick1() {
     function rightAns1() {
         ambVoice.play();
         ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
+        ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
+        ctx.strokeRect(15, 40, 687, 650);
         ctx.fillStyle = "green";
         ctx.textAlign = "center"; 
         ctx.font = "100px Comic Sans MS";
         ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was an ambulance!", w, 290);
         ctx.font = "50px Comic Sans MS";
+        ctx.fillText("The sound was an ambulance!", w, 290);
+        ctx.font = "30px Comic Sans MS";
         ctx.fillText("Left click on your mouse", w, 400);
         ctx.fillText("OR", w, 465);
         ctx.fillText("Press the Spacebar", w, 520);
@@ -1020,7 +1026,8 @@ function rightClick1() {
         incor = false;
         cor2 = false;
         MCgameSc2 = false;
-        MCgameSc3 = true;
+        finalScreen = true;
+        //MCgameSc3 = true;
         cowVoice.pause();
         cowVoice.currentTime = 0;
         window.removeEventListener("click", rightClick2);
@@ -1031,9 +1038,9 @@ function rightClick1() {
     function rightAns2() {
         cowVoice.play();
         ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
+        ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
+        ctx.strokeRect(15, 40, 687, 650);
         ctx.fillStyle = "green";
         ctx.textAlign = "center"; 
         ctx.font = "100px Comic Sans MS";
@@ -1048,7 +1055,8 @@ function rightClick1() {
 
         if (keys[32]) { // Go to Q3
             MCgameSc2 = false;
-            MCgameSc3 = true;
+            finalScreen = true;
+            //MCgameSc3 = true;
             cowVoice.pause();
             cowVoice.currentTime = 0;
             cor2 = false;
@@ -1057,220 +1065,7 @@ function rightClick1() {
         addEventListener("click", rightClick2);
     }
 
-    // mouse controls right Answer 3 //
-    function rightClick3() {
-        incor = false;
-        cor3 = false;
-        MCgameSc2 = false;
-        MCgameSc3 = false;
-        MCgameSc4 = true;
-        lambVoice.pause();
-        lambVoice.currentTime = 0;
-        window.removeEventListener("click", rightClick3);
-    }
-    // End mouse controls right Answer //
 
-    /////////  Right Answer 3 //////////////////
-    function rightAns3() {
-        lambVoice.play();
-        ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a lamb!", w, 290);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
-
-        if (keys[32]) { // Go to Q4
-            cor3 = false;
-            lambVoice.pause();
-            lambVoice.currentTime = 0;
-            MCgameSc3 = false;
-            MCgameSc4 = true;
-        }
-        addEventListener("click", rightClick3);
-    }
-
-    // mouse controls right Answer 4 //
-    function rightClick4() {
-        telVoice.pause();
-        cor4 = false;
-        telVoice.currentTime = 0;
-        incor = false;
-        MCgameSc2 = false;
-        MCgameSc3 = false;
-        MCgameSc4 = false;
-        MCgameSc5 = true;
-        window.removeEventListener("click", rightClick4);
-    }
-    // End mouse controls right Answer //
-
-     /////////  Right Answer 4 //////////////////
-     function rightAns4() {
-        telVoice.play();
-        ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was an old telephone!", w, 290);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
-
-        if (keys[32]) { // Go to Q5
-            cor4 = false;
-            telVoice.pause();
-            telVoice.currentTime = 0;
-            MCgameSc4 = false;
-            MCgameSc5 = true;
-        }
-        addEventListener("click", rightClick4);
-    }
-
-    // mouse controls right Answer 5 //
-    function rightClick5() {
-        cor5 = false;
-        fEngVoice.pause();
-        fEngVoice.currentTime = 0;
-        incor = false;
-        MCgameSc2 = false;
-        MCgameSc3 = false;
-        MCgameSc4 = false;
-        MCgameSc5 = false;
-        MCgameSc6 = true;
-        window.removeEventListener("click", rightClick5);
-    }
-    // End mouse controls right Answer //
-
-    /////////  Right Answer 5 //////////////////
-    function rightAns5() {
-        fEngVoice.play();
-        ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a Fire Engine!", w, 290);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
-
-        if (keys[32]) { // Go to Q6
-            cor5 = false;
-            fEngVoice.pause();
-            fEngVoice.currentTime = 0;
-            MCgameSc5 = false;
-            MCgameSc6 = true;
-        }
-        addEventListener("click", rightClick5);
-    }
-
-      // mouse controls right Answer 6 //
-      function rightClick6() {
-      cor6 = false;
-      microVoice.pause();
-      microVoice.currentTime = 0;
-      incor = false;
-      MCgameSc6 = false;
-      MCgameSc7 = true;
-      window.removeEventListener("click", rightClick6);
-    }
-// End mouse controls right Answer //
-
-    /////////  Right Answer 6 //////////////////
-    function rightAns6() {
-        microVoice.play();
-        ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a Microwave!", w, 290);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
-
-        if (keys[32]) { // Go to Final Screen
-            microVoice.pause();
-            microVoice.currentTime = 0;
-            cor6 = false;
-            MCgameSc6 = false;
-            MCgameSc7 = true;
-            //finalScreen = true;
-        }
-
-        addEventListener("click", rightClick6);
-    }
-
-
-    // mouse controls right Answer 7 //
-    function rightClick7() {
-        cor7 = false;
-        doorbell.pause();
-        doorbell.currentTime = 0;
-        incor = false;
-        MCgameSc7 = false;
-        finalScreen = true;
-        window.removeEventListener("click", rightClick7);
-      }
-  // End mouse controls right Answer //
-
-     /////////  Right Answer 7 //////////////////
-     function rightAns7() {
-        doorbell.play();
-        ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(120, 40, 950, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a Door Bell!", w, 290);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        //ctx.fillText("for the next question!", w, 610);
-
-        if (keys[32]) { // Go to Final Screen
-            cor7 = false;
-            doorbell.pause();
-            doorbell.currentTime = 0;
-            MCgameSc7 = false;
-            finalScreen = true;
-        }
-
-        addEventListener("click", rightClick7);
-    }
 
     function clickWrong() {
         play = true;
@@ -1285,14 +1080,14 @@ function rightClick1() {
         play = false;
         wrongVoice.play();
         ctx.fillStyle = "white";
-        ctx.fillRect(120, 40, 950, 650);
+        ctx.fillRect(30, 40, 655, 650);
         ctx.strokeStyle = "red";
-        ctx.strokeRect(120, 40, 950, 650);
+        ctx.strokeRect(30, 40, 655, 650);
         ctx.fillStyle = "red";
         ctx.textAlign = "center"; 
         ctx.font = "120px Comic Sans MS";
         ctx.fillText("Oh No!", w, 170);
-        ctx.font = "80px Comic Sans MS";
+        ctx.font = "70px Comic Sans MS";
         ctx.fillText("that's not right!", w, 270);
         ctx.fillStyle = "blue";
         ctx.fillText("Why not try Again?", w, 380);
@@ -1338,12 +1133,11 @@ function playGame() {
 
         if (cor1) {
            rightAns1();
-           //score=score+1;
         }
     }
 
-    ///////////// Question 2 ////////////////////
-    if (MCgameSc2) {
+     ///////////// Question 2 ////////////////////
+     if (MCgameSc2) {
         ctx.fillStyle = "#45c345";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -1358,108 +1152,9 @@ function playGame() {
 
         if (cor2) {
           rightAns2();
-          //score=score+1;
         }
     }
-
-    ///////////// Question 3 ////////////////////
-    if (MCgameSc3) {
-        ctx.fillStyle = "#77a9de";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (!cor3) {
-            quest3();
-        }
-
-        if (incor) {
-            cor3 = false;
-            wrong();
-        }
-
-        if (cor3) {
-           rightAns3();
-        }
-    }
-
-    ///////////// Question 4 ////////////////////
-    if (MCgameSc4) {
-        ctx.fillStyle = "#8fb58f";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (!cor4) {
-            quest4();
-        }
-
-        if (incor) {
-            cor4 = false;
-            wrong();
-        }
-
-        if (cor4) {
-            rightAns4();
-        }
-    }
-
-    ///////////// Question 5 ////////////////////
-    if (MCgameSc5) {
-        ctx.fillStyle = "#bca3cf";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (!cor5) {
-            quest5();
-        }
-
-        if (incor) {
-            cor5 = false;
-            wrong();
-        }
-
-        if (cor5) {
-            rightAns5();
-        }
-    }
-
-    ///////////// Question 6 ////////////////////
-    if (MCgameSc6) {
-        ctx.fillStyle = "pink";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (!cor6) {
-          quest6();
-        }
-
-        if (incor) {
-            cor6 = false;
-            wrong();
-        }
-
-        if (cor6) {
-          rightAns6();
-          //score=score+1;
-        }
-    }
-
-    ///////////// Question 7 ////////////////////
-    if (MCgameSc7) {
-        ctx.fillStyle = "yellow";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (!cor7) {
-          quest7();
-        }
-
-        if (incor) {
-            cor7 = false;
-            wrong();
-        }
-
-        if (cor7) {
-          rightAns7();
-          //score=score+1;
-        }
-    }
-
-    ///////////// Final Screen ////////////////////
+    
 
     function rightClickFS() {
         wellDoneVoice.pause();
@@ -1474,7 +1169,7 @@ function playGame() {
       }
 
     if (finalScreen) {
-        wellDoneVoice.play();
+        //wellDoneVoice.play();
         ctx.fillStyle = "Green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "white";
@@ -1489,8 +1184,6 @@ function playGame() {
         ctx.fillText("Press the Enter Key", w, 560);
         //ctx.fillText("Press the Spacebar", w, 560);
         ctx.fillText("To play again!", w, 620);
-
-        console.log(MCgameSc1, MCgameSc2, cor4);
 
 
         if (keys[13]) { // Go to Splash Screen
