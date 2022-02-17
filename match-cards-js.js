@@ -10,6 +10,8 @@ var play = true;
 // initial screen
 var MCsplashSc = true;
 
+var gameIns = true;
+
 // main screen
 var MCgameSc1 = false;
 var MCgameSc2 = false;
@@ -199,7 +201,7 @@ function cardSetUp() {
     // white rectangle
     ctx.fillStyle = "white";
     // border
-    ctx.lineWidth = 3;       
+    ctx.lineWidth = 4;
     ctx.strokeStyle = "blue";
 }
 
@@ -211,6 +213,11 @@ function rightAnsText() {
 }
 
 ////// Q1 Mouse Controls ////////////////////////
+
+function gameStart(e) {
+    gameIns = false;
+    removeEventListener("click", gameIns);
+}
 
 function Q1checkClick1(e) {
 	if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
@@ -256,7 +263,7 @@ function Q1checkClick4(e) {
 function quest1() {
 
     // Question 1  
-    if (play) {
+    if (play && !gameIns) {
         sir.play();
     }
     if (!play) {
@@ -264,7 +271,9 @@ function quest1() {
         sir.currentTime = 0;
     }
 
+    if (!gameIns) {
     cardSetUp();
+    }
 
     ctx.drawImage(amb, 50, 150, 300, 200);
 	amb.path = new Path2D();
@@ -286,12 +295,52 @@ function quest1() {
     cow.path.rect(370, 380, 300, 200);
     foQus();
 
+    if (!gameIns) {
     instructions();
+    }
 
+    if (gameIns) {
+        ctx.fillStyle = "white";
+        ctx.globalAlpha = 0.85;
+        ctx.fillRect(20, 20, 675, 680);
+        ctx.globalAlpha = 1.0;
+        ctx.textAlign = "center";
+        ctx.fillStyle = "Red";
+        ctx.font = "110px Comic Sans MS";
+        ctx.fillText("Match Cards", w, 150);
+        ctx.fillStyle = "Green";
+        ctx.font = "45px Comic Sans MS";
+        ctx.fillText("Match the sound to the picture", w, 240);
+	    ctx.fillText("using the keyboard numbers", w, 295);
+        ctx.fillText("on the picture - 1,2,3,4", w, 350);
+        ctx.fillStyle = "Purple";
+        ctx.font = "60px Comic Sans MS";
+	    ctx.fillText("OR", w, 415);
+        ctx.fillStyle = "Green";
+        ctx.font = "45px Comic Sans MS";
+        ctx.fillText("by left clicking on the picture", w, 470);
+        ctx.font = "35px Comic Sans MS";
+        ctx.fillStyle = "blue";
+        ctx.fillText("Press the spacebar", w, 550);
+        ctx.fillText("OR", w, 590);
+        ctx.fillText("Left Click on your Mouse", w, 623);
+        ctx.fillText("To Continue...", w, 670);
+
+        if (keys[32]) { // Start game...
+            gameIns = false;
+        } 
+    }
+
+    if (gameIns) {
+        addEventListener("click", gameStart, false);
+    }
+
+    if (!gameIns) {
     addEventListener("click", Q1checkClick1, false);
     addEventListener("click", Q1checkClick2, false);
     addEventListener("click", Q1checkClick3, false);
     addEventListener("click", Q1checkClick4, false);
+    
 
     if (keys[49]) { // Correct
         sir.pause();
@@ -316,6 +365,8 @@ function quest1() {
         sir.currentTime = 0;
         incor = true;
     }
+
+    }// Locked if gameIns = true
 
 }
 ////////// End of Question 1 ////////////////////
@@ -1352,6 +1403,8 @@ function playGame() {
     if (MCgameSc1) {
         ctx.fillStyle = "#FFA500";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        
 
         if (!cor1) {
            quest1();
