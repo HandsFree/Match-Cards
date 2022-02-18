@@ -20,6 +20,9 @@ var MCgameSc4 = false;
 var MCgameSc5 = false;
 var MCgameSc6 = false;
 var MCgameSc7 = false;
+var MCgameSc8 = false;
+var MCgameSc9 = false;
+var MCgameSc10 = false;
 var finalScreen = false;
 
 var cor1 = false;
@@ -29,6 +32,9 @@ var cor4 = false;
 var cor5 = false;
 var cor6 = false;
 var cor7 = false;
+var cor8 = false;
+var cor9 = false;
+var cor10 = false;
 var incor = false;
 
 const keys = []; // keyboard operations
@@ -1055,6 +1061,127 @@ function quest7() {
 }
 ////////// End of Question 7 ////////////////////
 
+
+
+
+
+////// Q8 Mouse Controls ////////////////////////
+
+function Q8checkClick1(e) {
+    if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q8checkClick1);
+    }
+}
+
+function Q8checkClick2(e) {
+    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q8checkClick2);
+    }
+}
+
+function Q8checkClick3(e) {
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = false;
+        cor8 = true;
+        removeEventListener("check", Q8checkClick3);
+    }
+}
+
+function Q8checkClick4(e) {
+    
+    if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
+        cow1.pause();
+        cow1.currentTime = 0;
+        incor = true;
+        removeEventListener("check", Q8checkClick4);
+    }
+}
+
+/////////// end of Q7 Mouse Controls ////////////////////////////////
+
+
+
+/////////  Question 8 //////////////////
+
+function quest8() {
+
+    if (play) {
+        cow1.play();
+    }
+    if (!play) {
+        cow1.pause();
+        cow1.currentTime = 0;
+    }
+
+    cardSetUp();
+
+    ctx.drawImage(bell, 50, 150, 300, 200);
+    bell.path = new Path2D();
+    bell.path.rect(50, 150, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(lam, 370, 150, 300, 200);
+    lam.path = new Path2D();
+    lam.path.rect(370, 150, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 50, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(50, 380, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 370, 380, 300, 200);
+    amb.path = new Path2D();
+    amb.path.rect(370, 380, 300, 200);
+    foQus();
+
+    instructions();
+
+    addEventListener("click", Q8checkClick1);
+    addEventListener("click", Q8checkClick2);
+    addEventListener("click", Q8checkClick3);
+    addEventListener("click", Q8checkClick4);
+
+    if (keys[49]) { // Correct
+        bellSound.pause();
+        bellSound.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        bellSound.pause();
+        bellSound.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        bellSound.pause();
+        bellSound.currentTime = 0;
+        cor8 = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        bellSound.pause();
+        bellSound.currentTime = 0;
+        incor = true;
+    }
+
+}
+////////// End of Question 8 ////////////////////
+
+
+
+
+
+
 //// Answers ///////////////////////
 
 // mouse controls right Answer 1 //
@@ -1311,7 +1438,8 @@ function rightClick1() {
         doorbell.currentTime = 0;
         incor = false;
         MCgameSc7 = false;
-        finalScreen = true;
+        MCgameSc8 = true;
+        //finalScreen = true;
         window.removeEventListener("click", rightClick7);
       }
   // End mouse controls right Answer //
@@ -1332,18 +1460,63 @@ function rightClick1() {
         ctx.font = "40px Comic Sans MS";
         ctx.fillText("Left click on your mouse", w, 400);
         ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        //ctx.fillText("for the next question!", w, 610);
+        //ctx.fillText("Press the Spacebar", w, 520);
+        ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Final Screen
             cor7 = false;
             doorbell.pause();
             doorbell.currentTime = 0;
             MCgameSc7 = false;
-            finalScreen = true;
+            //finalScreen = true;
+            MCgameSc8 = true;
         }
 
         addEventListener("click", rightClick7);
+    }
+
+       // mouse controls right Answer 8 //
+       function rightClick8() {
+        cor8 = false;
+        cowVoice.pause();
+        cowVoice.currentTime = 0;
+        incor = false;
+        MCgameSc8 = false;
+        //MCgameSc9 = true;
+        finalScreen = true;
+        window.removeEventListener("click", rightClick7);
+      }
+  // End mouse controls right Answer //
+
+     /////////  Right Answer 8 //////////////////
+     function rightAns8() {
+        cowVoice.play();
+        ctx.fillStyle = "white";
+        ctx.fillRect(15, 40, 687, 650);
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(15, 40, 687, 650);
+        ctx.fillStyle = "green";
+        ctx.textAlign = "center"; 
+        ctx.font = "100px Comic Sans MS";
+        ctx.fillText("Well Done!", w, 180);
+        ctx.font = "50px Comic Sans MS";
+        ctx.fillText("The sound was a Cow!", w, 290);
+        ctx.font = "40px Comic Sans MS";
+        ctx.fillText("Left click on your mouse", w, 400);
+        ctx.fillText("OR", w, 465);
+        ctx.fillText("Press the Spacebar", w, 520);
+        //ctx.fillText("for the next question!", w, 610);
+
+        if (keys[32]) { // Go to Final Screen
+            cor8 = false;
+            cowVoice.pause();
+            cowVoice.currentTime = 0;
+            MCgameSc8 = false;
+            //MCgameSc9 = true;
+            finalScreen = true;
+        }
+
+        addEventListener("click", rightClick8);
     }
 
 
@@ -1531,6 +1704,63 @@ function playGame() {
 
         if (cor7) {
           rightAns7();
+        }
+    }
+
+    ///////////// Question 8 ////////////////////
+    if (MCgameSc8) {
+        ctx.fillStyle = "#03fcf4";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor8) {
+          quest8();
+        }
+
+        if (incor) {
+            cor8 = false;
+            wrong();
+        }
+
+        if (cor8) {
+          rightAns8();
+        }
+    }
+
+    ///////////// Question 9 ////////////////////
+    if (MCgameSc9) {
+        ctx.fillStyle = "#f0659f";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor9) {
+          quest9();
+        }
+
+        if (incor) {
+            cor9 = false;
+            wrong();
+        }
+
+        if (cor9) {
+          rightAns9();
+        }
+    }
+
+    ///////////// Question 10 ////////////////////
+    if (MCgameSc10) {
+        ctx.fillStyle = "#f7f792";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor10) {
+          quest10();
+        }
+
+        if (incor) {
+            cor10 = false;
+            wrong();
+        }
+
+        if (cor10) {
+          rightAns10();
         }
     }
     
