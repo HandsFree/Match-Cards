@@ -12,6 +12,8 @@ var MCsplashSc = true;
 
 var gameIns = true;
 
+var n = 1;
+
 // main screen
 var MCgameSc1 = false;
 var MCgameSc2 = false;
@@ -79,6 +81,8 @@ bell.src = "images/doorbel.jpg";
 
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
+
+var gameInsSpeech = new Audio("sounds/gameInsSpeech.mp3");
 
 var music = new Audio("sounds/ragtime.mp3");
 
@@ -203,7 +207,7 @@ function cardSetUp() {
     // text
     ctx.font = "80px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards", w, 100);
+    ctx.fillText("Match Cards" + n, w, 100);
     // white rectangle
     ctx.fillStyle = "white";
     // border
@@ -222,6 +226,8 @@ function rightAnsText() {
 
 function gameStart(e) {
     gameIns = false;
+    gameInsSpeech.pause();
+    gameInsSpeech.currentTime = 0;
     removeEventListener("click", gameIns);
 }
 
@@ -306,6 +312,7 @@ function quest1() {
     }
 
     if (gameIns) {
+        gameInsSpeech.play();
         ctx.fillStyle = "white";
         ctx.globalAlpha = 0.85;
         ctx.fillRect(20, 20, 675, 680);
@@ -334,6 +341,8 @@ function quest1() {
 
         if (keys[32]) { // Start game...
             gameIns = false;
+            gameInsSpeech.pause();
+            gameInsSpeech.currentTime = 0;
         } 
     }
 
@@ -1590,6 +1599,7 @@ function playGame() {
 
         if (cor1) {
            rightAns1();
+           n = 2;
         }
     }
 
@@ -1609,6 +1619,7 @@ function playGame() {
 
         if (cor2) {
           rightAns2();
+          n = 3;
         }
     }
 
@@ -1777,7 +1788,7 @@ function playGame() {
       }
 
     if (finalScreen) {
-        //wellDoneVoice.play();
+        wellDoneVoice.play();
         ctx.fillStyle = "Green";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "white";
