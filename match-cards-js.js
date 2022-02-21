@@ -159,6 +159,44 @@ function splash() {
     window.addEventListener("click", closeSplash, false);
 }
 
+function gameInstructions() {
+        gameInsSpeech.play();
+        ctx.fillStyle = "white";
+        ctx.globalAlpha = 0.85;
+        ctx.fillRect(20, 20, 675, 680);
+        ctx.globalAlpha = 1.0;
+        ctx.textAlign = "center";
+        ctx.fillStyle = "Red";
+        ctx.font = "110px Comic Sans MS";
+        ctx.fillText("Match Cards", w, 150);
+        ctx.fillStyle = "Green";
+        ctx.font = "45px Comic Sans MS";
+        ctx.fillText("Match the sound to the picture", w, 240);
+	    ctx.fillText("using the keyboard numbers", w, 295);
+        ctx.fillText("on the picture - 1,2,3,4", w, 350);
+        ctx.fillStyle = "Purple";
+        ctx.font = "60px Comic Sans MS";
+	    ctx.fillText("OR", w, 415);
+        ctx.fillStyle = "Green";
+        ctx.font = "45px Comic Sans MS";
+        ctx.fillText("by left clicking on the picture", w, 470);
+        ctx.font = "35px Comic Sans MS";
+        ctx.fillStyle = "blue";
+        ctx.fillText("Press the spacebar", w, 550);
+        ctx.fillText("OR", w, 590);
+        ctx.fillText("Left Click on your Mouse", w, 623);
+        ctx.fillText("To Continue...", w, 670);
+        /*
+        if (keys[32]) { // Start game...
+            gameIns = false;
+            gameInsSpeech.pause();
+            gameInsSpeech.currentTime = 0;
+        } */
+    }
+
+
+
+
 function firstQus() {
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
@@ -207,7 +245,10 @@ function cardSetUp() {
     // text
     ctx.font = "80px Comic Sans MS";
     ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards" + n, w, 100);
+    ctx.fillText("Match Cards", w, 77);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillStyle = "red";
+    ctx.fillText("Question " + n, w, 125);
     // white rectangle
     ctx.fillStyle = "white";
     // border
@@ -224,11 +265,20 @@ function rightAnsText() {
 
 ////// Q1 Mouse Controls ////////////////////////
 
+//// Keyboard
+function gameStartKeys(e) {
+    gameIns = false;
+    gameInsSpeech.pause();
+    gameInsSpeech.currentTime = 0;
+    window.removeEventListener("keyup", gameStartKeys);
+}
+
+//// Mouse
 function gameStart(e) {
     gameIns = false;
     gameInsSpeech.pause();
     gameInsSpeech.currentTime = 0;
-    removeEventListener("click", gameIns);
+    removeEventListener("click", gameStart);
 }
 
 function Q1checkClick1(e) {
@@ -246,7 +296,7 @@ function Q1checkClick2(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q1checkClick2);
+        removeEventListener("click", Q1checkClick2);
     }
 }
 
@@ -255,7 +305,7 @@ function Q1checkClick3(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q1checkClick3);
+        removeEventListener("click", Q1checkClick3);
     }
 }
 
@@ -264,7 +314,7 @@ function Q1checkClick4(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q1checkClick4);
+        removeEventListener("click", Q1checkClick4);
     }
 }
 
@@ -308,55 +358,26 @@ function quest1() {
     foQus();
 
     if (!gameIns) {
-    instructions();
+        instructions(); // text which appears below images
     }
 
     if (gameIns) {
-        gameInsSpeech.play();
-        ctx.fillStyle = "white";
-        ctx.globalAlpha = 0.85;
-        ctx.fillRect(20, 20, 675, 680);
-        ctx.globalAlpha = 1.0;
-        ctx.textAlign = "center";
-        ctx.fillStyle = "Red";
-        ctx.font = "110px Comic Sans MS";
-        ctx.fillText("Match Cards", w, 150);
-        ctx.fillStyle = "Green";
-        ctx.font = "45px Comic Sans MS";
-        ctx.fillText("Match the sound to the picture", w, 240);
-	    ctx.fillText("using the keyboard numbers", w, 295);
-        ctx.fillText("on the picture - 1,2,3,4", w, 350);
-        ctx.fillStyle = "Purple";
-        ctx.font = "60px Comic Sans MS";
-	    ctx.fillText("OR", w, 415);
-        ctx.fillStyle = "Green";
-        ctx.font = "45px Comic Sans MS";
-        ctx.fillText("by left clicking on the picture", w, 470);
-        ctx.font = "35px Comic Sans MS";
-        ctx.fillStyle = "blue";
-        ctx.fillText("Press the spacebar", w, 550);
-        ctx.fillText("OR", w, 590);
-        ctx.fillText("Left Click on your Mouse", w, 623);
-        ctx.fillText("To Continue...", w, 670);
-
-        if (keys[32]) { // Start game...
-            gameIns = false;
-            gameInsSpeech.pause();
-            gameInsSpeech.currentTime = 0;
-        } 
+        gameInstructions();
     }
 
     if (gameIns) {
+        addEventListener("keydown", gameStartKeys, false);
         addEventListener("click", gameStart, false);
     }
 
-    if (!gameIns) {
+    if (!gameIns) { // mouse controls for images
     addEventListener("click", Q1checkClick1, false);
     addEventListener("click", Q1checkClick2, false);
     addEventListener("click", Q1checkClick3, false);
     addEventListener("click", Q1checkClick4, false);
     
 
+    // keyboard controls for images
     if (keys[49]) { // Correct
         sir.pause();
         sir.currentTime = 0;
@@ -863,7 +884,7 @@ function Q6checkClick2(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q6checkClick2);
+        removeEventListener("click", Q6checkClick2);
     }
 }
 
@@ -872,7 +893,7 @@ function Q6checkClick3(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q6checkClick3);
+        removeEventListener("click", Q6checkClick3);
     }
 }
 
@@ -881,7 +902,7 @@ function Q6checkClick4(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q6checkClick4);
+        removeEventListener("click", Q6checkClick4);
     }
 }
 
@@ -977,7 +998,7 @@ function Q7checkClick2(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q7checkClick2);
+        removeEventListener("click", Q7checkClick2);
     }
 }
 
@@ -986,7 +1007,7 @@ function Q7checkClick3(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q7checkClick3);
+        removeEventListener("click", Q7checkClick3);
     }
 }
 
@@ -995,7 +1016,7 @@ function Q7checkClick4(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q7checkClick4);
+        removeEventListener("click", Q7checkClick4);
     }
 }
 
@@ -1090,7 +1111,7 @@ function Q8checkClick2(e) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q8checkClick2);
+        removeEventListener("click", Q8checkClick2);
     }
 }
 
@@ -1100,7 +1121,7 @@ function Q8checkClick3(e) {
         cow1.currentTime = 0;
         incor = false;
         cor8 = true;
-        removeEventListener("check", Q8checkClick3);
+        removeEventListener("click", Q8checkClick3);
     }
 }
 
@@ -1110,7 +1131,7 @@ function Q8checkClick4(e) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
-        removeEventListener("check", Q8checkClick4);
+        removeEventListener("click", Q8checkClick4);
     }
 }
 
@@ -1493,7 +1514,7 @@ function rightClick1() {
         MCgameSc8 = false;
         //MCgameSc9 = true;
         finalScreen = true;
-        window.removeEventListener("click", rightClick7);
+        window.removeEventListener("click", rightClick8);
       }
   // End mouse controls right Answer //
 
@@ -1584,9 +1605,7 @@ function playGame() {
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
         ctx.fillStyle = "#FFA500";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        
+        ctx.fillRect(0, 0, canvas.width, canvas.height);    
 
         if (!cor1) {
            quest1();
@@ -1639,6 +1658,7 @@ function playGame() {
 
         if (cor3) {
            rightAns3();
+           n = 4;
         }
     }
 
@@ -1658,6 +1678,7 @@ function playGame() {
 
         if (cor4) {
             rightAns4();
+            n = 5;
         }
     }
 
@@ -1677,6 +1698,7 @@ function playGame() {
 
         if (cor5) {
             rightAns5();
+            n = 6;
         }
     }
 
@@ -1696,6 +1718,7 @@ function playGame() {
 
         if (cor6) {
           rightAns6();
+          n = 7;
         }
     }
 
@@ -1715,6 +1738,7 @@ function playGame() {
 
         if (cor7) {
           rightAns7();
+          n = 8;
         }
     }
 
@@ -1734,6 +1758,7 @@ function playGame() {
 
         if (cor8) {
           rightAns8();
+          n = 9;
         }
     }
 
@@ -1753,6 +1778,7 @@ function playGame() {
 
         if (cor9) {
           rightAns9();
+          n = 10;
         }
     }
 
@@ -1772,6 +1798,7 @@ function playGame() {
 
         if (cor10) {
           rightAns10();
+          //n = 11;
         }
     }
     
@@ -1803,6 +1830,7 @@ function playGame() {
         ctx.fillText("Press the Enter Key", w, 560);
         //ctx.fillText("Press the Spacebar", w, 560);
         ctx.fillText("To play again!", w, 620);
+        n = 1;
 
 
         if (keys[13]) { // Go to Splash Screen
