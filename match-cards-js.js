@@ -79,6 +79,19 @@ fireEn.src = "images/fire_eng.jpg";
 const bell = new Image();
 bell.src = "images/doorbel.jpg";
 
+const pigeon = new Image();
+pigeon.src = "images/pigeon.jpg";
+
+const polac = new Image();
+polac.src = "images/polacanthus.jpg";
+
+const rook = new Image();
+rook.src = "images/rook.jpg";
+
+const Rugby = new Image();
+Rugby.src = "images/Rugby.jpg";
+
+
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
 
@@ -93,6 +106,10 @@ var oldPhone = new Audio("sounds/old-phone.mp3");
 var fireEng = new Audio("sounds/fire-eng.mp3");
 var microSound = new Audio("sounds/microwave.mp3");
 var bellSound = new Audio("sounds/DoorbellSound.mp3");
+var pigeonSdEff = new Audio("sounds/pigeon.mp3");
+var roarEff = new Audio("sounds/roar.mp3");
+var rookEff = new Audio("sounds/rook_song.mp3");
+var rugbyEff  = new Audio("sounds/rugby.mp3");
 
 // Voices
 var wrongVoice = new Audio("sounds/wrong-v.mp3");
@@ -1116,7 +1133,7 @@ function Q8checkClick2(e) {
 }
 
 function Q8checkClick3(e) {
-    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+    if (polac.path && ctx.isPointInPath(polac.path, event.offsetX, event.offsetY)) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = false;
@@ -1135,7 +1152,7 @@ function Q8checkClick4(e) {
     }
 }
 
-/////////// end of Q7 Mouse Controls ////////////////////////////////
+/////////// end of Q8 Mouse Controls ////////////////////////////////
 
 
 
@@ -1144,11 +1161,11 @@ function Q8checkClick4(e) {
 function quest8() {
 
     if (play) {
-        cow1.play();
+        roarEff.play();
     }
     if (!play) {
-        cow1.pause();
-        cow1.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
     }
 
     cardSetUp();
@@ -1163,9 +1180,9 @@ function quest8() {
     lam.path.rect(370, 150, 300, 200);
     secQus();
 
-    ctx.drawImage(cow, 50, 380, 300, 200);
-    cow.path = new Path2D();
-    cow.path.rect(50, 380, 300, 200);
+    ctx.drawImage(polac, 50, 380, 300, 200);
+    polac.path = new Path2D();
+    polac.path.rect(50, 380, 300, 200);
     thQus();
 
     ctx.drawImage(amb, 370, 380, 300, 200);
@@ -1181,31 +1198,264 @@ function quest8() {
     addEventListener("click", Q8checkClick4);
 
     if (keys[49]) { // Correct
-        bellSound.pause();
-        bellSound.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
     }
 
     if (keys[50]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
     }
 
     if (keys[51]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         cor8 = true;
     }
 
     if (keys[52]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
     }
 
 }
 ////////// End of Question 8 ////////////////////
+
+
+
+
+////// Q9 Mouse Controls ////////////////////////
+
+function Q9checkClick1(e) {
+    if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q9checkClick1);
+    }
+}
+
+function Q9checkClick2(e) {
+    if (pigeon.path && ctx.isPointInPath(pigeon.path, event.offsetX, event.offsetY)) {
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = false;
+        cor9 = true;
+        removeEventListener("click", Q9checkClick2);
+    }
+}
+
+function Q9checkClick3(e) {
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q9checkClick3);
+    }
+}
+
+function Q9checkClick4(e) {
+    
+    if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q9checkClick4);
+    }
+}
+
+/////////// end of Q9 Mouse Controls ////////////////////////////////
+
+
+
+/////////  Question 9 //////////////////
+
+function quest9() {
+
+    if (play) {
+        pigeonSdEff.play();
+    }
+    if (!play) {
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+    }
+
+    cardSetUp();
+
+    ctx.drawImage(bell, 50, 150, 300, 200);
+    bell.path = new Path2D();
+    bell.path.rect(50, 150, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(pigeon, 370, 150, 300, 200);
+    pigeon.path = new Path2D();
+    pigeon.path.rect(370, 150, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 50, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(50, 380, 300, 200);
+    thQus();
+
+    ctx.drawImage(amb, 370, 380, 300, 200);
+    amb.path = new Path2D();
+    amb.path.rect(370, 380, 300, 200);
+    foQus();
+
+    instructions();
+
+    addEventListener("click", Q9checkClick1);
+    addEventListener("click", Q9checkClick2);
+    addEventListener("click", Q9checkClick3);
+    addEventListener("click", Q9checkClick4);
+
+    if (keys[49]) { // Correct
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        cor9 = true;
+    }
+
+    if (keys[51]) { // Incorrect
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        pigeonSdEff.pause();
+        pigeonSdEff.currentTime = 0;
+        incor = true;
+    }
+
+}
+////////// End of Question 9 ////////////////////
+
+
+
+
+
+
+////// Q10 Mouse Controls ////////////////////////
+
+function Q10checkClick1(e) {
+    if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q10checkClick1);
+    }
+}
+
+function Q10checkClick2(e) {
+    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q10checkClick2);
+    }
+}
+
+function Q10checkClick3(e) {
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true;
+        removeEventListener("click", Q10checkClick3);
+    }
+}
+
+function Q10checkClick4(e) {   
+    if (Rugby.path && ctx.isPointInPath(Rugby.path, event.offsetX, event.offsetY)) {
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = false;
+        cor10 = true;
+        removeEventListener("click", Q10checkClick4);
+    }
+}
+
+/////////// end of Q10 Mouse Controls ////////////////////////////////
+
+
+
+/////////  Question 10 //////////////////
+
+function quest10() {
+
+    if (play) {
+        rugbyEff.play();
+    }
+    if (!play) {
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+    }
+
+    cardSetUp();
+
+    ctx.drawImage(rook, 50, 150, 300, 200);
+    rook.path = new Path2D();
+    rook.path.rect(50, 150, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(lam, 370, 150, 300, 200);
+    lam.path = new Path2D();
+    lam.path.rect(370, 150, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 50, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(50, 380, 300, 200);
+    thQus();
+
+    ctx.drawImage(Rugby, 370, 380, 300, 200);
+    Rugby.path = new Path2D();
+    Rugby.path.rect(370, 380, 300, 200);
+    foQus();
+
+    instructions();
+
+    addEventListener("click", Q10checkClick1);
+    addEventListener("click", Q10checkClick2);
+    addEventListener("click", Q10checkClick3);
+    addEventListener("click", Q10checkClick4);
+
+    if (keys[49]) { // Correct
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true; 
+    }
+
+    if (keys[51]) { // Incorrect
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        rugbyEff.pause();
+        rugbyEff.currentTime = 0;
+        cor10 = true;   
+    }
+
+}
+////////// End of Question 10 ////////////////////
+
+
 
 
 
@@ -1490,7 +1740,7 @@ function rightClick1() {
         ctx.font = "40px Comic Sans MS";
         ctx.fillText("Left click on your mouse", w, 400);
         ctx.fillText("OR", w, 465);
-        //ctx.fillText("Press the Spacebar", w, 520);
+        ctx.fillText("Press the Spacebar", w, 520);
         ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Final Screen
@@ -1505,22 +1755,25 @@ function rightClick1() {
         addEventListener("click", rightClick7);
     }
 
+
+
+
+
        // mouse controls right Answer 8 //
        function rightClick8() {
         cor8 = false;
-        cowVoice.pause();
-        cowVoice.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = false;
         MCgameSc8 = false;
-        //MCgameSc9 = true;
-        finalScreen = true;
+        MCgameSc9 = true;
+        //finalScreen = true;
         window.removeEventListener("click", rightClick8);
       }
   // End mouse controls right Answer //
 
      /////////  Right Answer 8 //////////////////
      function rightAns8() {
-        cowVoice.play();
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -1529,25 +1782,124 @@ function rightClick1() {
         ctx.textAlign = "center"; 
         ctx.font = "100px Comic Sans MS";
         ctx.fillText("Well Done!", w, 180);
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("The sound was a Cow!", w, 290);
-        ctx.font = "40px Comic Sans MS";
+        ctx.font = "35px Comic Sans MS";
+        ctx.fillText("The sound was a Polacanthus Dinosaur", w, 290);
+        ctx.font = "30px Comic Sans MS";
         ctx.fillText("Left click on your mouse", w, 400);
         ctx.fillText("OR", w, 465);
         ctx.fillText("Press the Spacebar", w, 520);
-        //ctx.fillText("for the next question!", w, 610);
+        ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Final Screen
             cor8 = false;
             cowVoice.pause();
             cowVoice.currentTime = 0;
             MCgameSc8 = false;
-            //MCgameSc9 = true;
-            finalScreen = true;
+            MCgameSc9 = true;
+            //finalScreen = true;
         }
 
         addEventListener("click", rightClick8);
     }
+
+
+
+
+
+// mouse controls right Answer 9 //
+function rightClick9() {
+    cor9 = false;
+    pigeonSdEff.pause();
+    pigeonSdEff.currentTime = 0;
+    incor = false;
+    MCgameSc9 = false;
+    MCgameSc10 = true;
+    //finalScreen = true;
+    window.removeEventListener("click", rightClick9);
+  }
+// End mouse controls right Answer //
+
+ /////////  Right Answer 9 //////////////////
+ function rightAns9() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(15, 40, 687, 650);
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(15, 40, 687, 650);
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center"; 
+    ctx.font = "100px Comic Sans MS";
+    ctx.fillText("Well Done!", w, 180);
+    ctx.font = "50px Comic Sans MS";
+    ctx.fillText("The sound was a Pigeon!", w, 290);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("Left click on your mouse", w, 400);
+    ctx.fillText("OR", w, 465);
+    ctx.fillText("Press the Spacebar", w, 520);
+    ctx.fillText("for the next question!", w, 610);
+
+    if (keys[32]) { // Go to Final Screen
+        cor9 = false;
+        cowVoice.pause();
+        cowVoice.currentTime = 0;
+        MCgameSc9 = false;
+        MCgameSc10 = true;
+        //finalScreen = true;
+    }
+
+    addEventListener("click", rightClick9);
+}
+
+
+
+
+
+
+// mouse controls right Answer 10 //
+function rightClick10() {
+    cor10 = false;
+    rugbyEff.pause();
+    rugbyEff.currentTime = 0;
+    incor = false;
+    MCgameSc10 = false;
+    //MCgameSc10 = true;
+    finalScreen = true;
+    window.removeEventListener("click", rightClick10);
+  }
+// End mouse controls right Answer //
+
+ /////////  Right Answer 10 //////////////////
+ function rightAns10() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(15, 40, 687, 650);
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(15, 40, 687, 650);
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center"; 
+    ctx.font = "100px Comic Sans MS";
+    ctx.fillText("Well Done!", w, 180);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("The sound was a game of Rugby!", w, 290);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("Left click on your mouse", w, 400);
+    ctx.fillText("OR", w, 465);
+    ctx.fillText("Press the Spacebar", w, 520);
+    //ctx.fillText("for the next question!", w, 610);
+
+    if (keys[32]) { // Go to Final Screen
+        cor10 = false;
+        cowVoice.pause();
+        cowVoice.currentTime = 0;
+        MCgameSc10 = false;
+        finalScreen = true;
+    }
+
+    addEventListener("click", rightClick10);
+}
+
+
+
+
+
 
 
 
@@ -1764,7 +2116,7 @@ function playGame() {
 
     ///////////// Question 9 ////////////////////
     if (MCgameSc9) {
-        ctx.fillStyle = "#f0659f";
+        ctx.fillStyle = "#93a832";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor9) {
