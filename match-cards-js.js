@@ -5,6 +5,13 @@ const ctx = canvas.getContext('2d');
 // center text
 var w = canvas.width / 2;
 
+///////////////////////////////////// 9/3/22
+// explaining screen
+var instructionsSc = false;
+// main screen
+var gameSc = false;
+////////////////////////////////////
+
 var play = true;
 
 // initial screen
@@ -55,6 +62,14 @@ mcSplash.src = "images/match-Cards.png";
 
 const speech = new Image();
 speech.src = "images/speech.png";
+
+const settings = new Image();
+settings.src = "images/settings.png";
+
+// Settings Menu
+const mBack = new Image();
+mBack.src = "images/menu-back.png";
+
 
 // media for game
 // Pictures
@@ -124,6 +139,109 @@ var doorbell = new Audio("sounds/doorbell-v1.mp3");
 
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
+/***********For Menu************/
+var togSet=true;
+var togMenu=false;
+var speechOn=true;
+var musicOn=true;
+var picOn=true;
+var col=true;
+/************end****************/
+
+
+
+function showMenu() {
+    togMenu=true;
+    togSet=false;
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 0.9; 
+    ctx.fillRect(120, 40, 950, 650);
+    ctx.globalAlpha = 1.0; 
+    ctx.fillStyle = "white";
+    ctx.textAlign = "center"; 
+    ctx.font = "45px Arial";
+    ctx.fillText("Settings", w, 100);
+    ctx.font = "35px Arial";
+
+    if (!musicOn) {
+        duck.pause();
+        }
+
+
+    if (col) {
+        ctx.fillText("Balloon Colour: Purple - press R to change to Red", w, 200);
+        if (keys[82]) { //r
+            col=false;
+        }
+    }
+
+    if (!col) {
+        ctx.fillText("Balloon Colour: Red - press P to change to Purple", w, 200);
+        if (keys[80]) { //q
+            col=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
+    if (speechOn) {
+        ctx.fillText("Speech: On - press O to change", w, 300);
+        if (keys[79]) { //o
+            speechOn=false;
+        }
+    }
+
+    if (!speechOn) {
+        ctx.fillText("Speech: Off - press B to change", w, 300);
+        if (keys[66]) { //b
+            speechOn=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
+    
+    if (musicOn) {
+        ctx.fillText("Music and Effects: On - press M to change", w, 400);
+        if (keys[77]) { //m
+            musicOn=false;
+        }
+    }
+
+    if (!musicOn) {
+        ctx.fillText("Music and Effects: Off - press U to change", w, 400);
+        if (keys[85]) { //u
+            musicOn=true;
+        }
+    }
+
+    /*------------------------------------------------------ */
+
+    if (picOn) {
+        ctx.fillText("Picture: On - press C to change", w, 500);
+        if (keys[67]) { //o
+            picOn=false;
+        }
+    }
+
+    if (!picOn) {
+        ctx.fillText("Colour: On - press I to change", w, 500);
+        if (keys[73]) { //f
+            picOn=true;
+        }
+    }
+
+    ctx.font = "30px Arial";
+    ctx.fillText("Return to Game", w, 600);
+    ctx.fillText("Press G", w, 640);
+
+    if (keys[71]) { //g
+        togSet=true;
+        togMenu=false;
+    }
+}
+
+
 function closeSplash() {
     incor = false;
     splashAud.pause();
@@ -142,7 +260,7 @@ function splash() {
     ctx.fillRect(0, 400, 715, 235);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
-    ctx.font = "40px Comic Sans MS";
+    ctx.font = "38px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("Click the left mouse button", w, 460);
     ctx.fillStyle = "red";
@@ -152,15 +270,35 @@ function splash() {
     ctx.fillStyle = "purple";
     ctx.fillText("to play!", w, 610);
     ctx.fillStyle = "white";
-    ctx.fillRect(5, 415, 80, 100);
-    ctx.drawImage(speech, 20, 420, 50, 50);
+    ctx.fillRect(5, 415, 90, 100);
+
+    ctx.drawImage(speech, 25, 425, 55, 55);
+    //speech.path = new Path2D();
+    //speech.path.rect(25, 425, 55, 55);
+
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Press A", 45, 490);
-    ctx.fillText("for Speech", 45, 510);
+    ctx.fillText("_", 43, 499);
+    ctx.fillText("speech", 48, 497);
 
-    if (keys[65]) { // audio
+    ctx.fillStyle = "white";
+    ctx.fillRect(620, 415, 90, 100);
+
+    ctx.drawImage(settings, 625, 415, 80, 80);
+    //settings.path = new Path2D();
+    //settings.path.rect(625, 415, 80, 80);
+    
+    ctx.font = "bold 15px arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("_", 641, 502);
+    ctx.fillText("settings", 665, 500);
+
+    if (keys[69]) { // audio
         splashAud.play();
+    }
+
+    if (keys[83]) { // audio
+        microSound.play();
     }
 
     if (keys[32]) { // Go to game
@@ -257,8 +395,30 @@ function instructions() {
 	ctx.fillText("using the keyboard numbers - 1,2,3,4", w, 655);
 	ctx.fillText("or left click on the picture", w, 685);
 }
- 
+
+// Setting Menu mouse controls
+function settingMouse(e) {
+    if (settings.path && ctx.isPointInPath(settings.path, event.offsetX, event.offsetY)) {
+        showMenu();
+        removeEventListener("click", settingMouse);
+    }
+}
+
 function cardSetUp() {
+    // settings
+    ctx.drawImage(settings, 0, 0, 80, 80);
+    settings.path = new Path2D();
+    settings.path.rect(0, 0, 80, 80);
+    addEventListener("click", settingMouse, false);
+
+    ctx.font = "15px Comic Sans MS";
+    ctx.fillStyle = "blue";
+    ctx.fillText("settings", 40, 90);
+
+    if (keys[83]) { // audio
+        microSound.play();
+    }
+
     // text
     ctx.font = "80px Comic Sans MS";
     ctx.fillStyle = "blue";
@@ -273,6 +433,8 @@ function cardSetUp() {
     ctx.strokeStyle = "blue";
 }
 
+///////////////////////////////////
+////part of right awnser text//////
 function rightAnsText() {
     ctx.fillText("Left click on your mouse", w, 400);
     ctx.fillText("OR", w, 465);
@@ -309,7 +471,7 @@ function Q1checkClick1(e) {
 }
 
 function Q1checkClick2(e) {
-    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
+    if (lam.path2 && ctx.isPointInPath(lam.path2, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
@@ -318,7 +480,7 @@ function Q1checkClick2(e) {
 }
 
 function Q1checkClick3(e) {
-    if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {
+    if (micro.path3 && ctx.isPointInPath(micro.path3, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
@@ -327,7 +489,7 @@ function Q1checkClick3(e) {
 }
 
 function Q1checkClick4(e) {
-    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+    if (cow.path4 && ctx.isPointInPath(cow.path4, event.offsetX, event.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
@@ -354,24 +516,26 @@ function quest1() {
     cardSetUp();
     }
 
+    //const x = canvas.width / 2 - width / 2 : img.x;
+	//const y = canvas.height / 2 - height / 2 : img.y;
     ctx.drawImage(amb, 50, 150, 300, 200);
 	amb.path = new Path2D();
     amb.path.rect(50, 150, 300, 200);
     firstQus();
   
     ctx.drawImage(lam, 370, 150, 300, 200);
-    lam.path = new Path2D();
-    lam.path.rect(370, 150, 300, 200);
+    lam.path2 = new Path2D();
+    lam.path2.rect(370, 150, 300, 200);
     secQus();
 
     ctx.drawImage(micro, 50, 380, 300, 200);
-    micro.path = new Path2D();
-    micro.path.rect(50, 380, 300, 200);
+    micro.path3 = new Path2D();
+    micro.path3.rect(50, 380, 300, 200);
     thQus();
 
     ctx.drawImage(cow, 370, 380, 300, 200);
-    cow.path = new Path2D();
-    cow.path.rect(370, 380, 300, 200);
+    cow.path4 = new Path2D();
+    cow.path4.rect(370, 380, 300, 200);
     foQus();
 
     if (!gameIns) {
@@ -1945,6 +2109,21 @@ function rightClick10() {
         }
     }
 
+    function menu() {
+
+        /*if (picOn) {
+            ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
+        }
+    
+        if (togSet) {
+            settings();
+        }*/
+    
+        if (togMenu) {
+            showMenu();
+        }
+    }
+
 
 function playGame() {
 
@@ -1953,6 +2132,10 @@ function playGame() {
     if (MCsplashSc) {
         splash();
     }
+
+    /*if (togMenu) {
+        showMenu();
+        }*/
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
