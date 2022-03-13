@@ -2,6 +2,9 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+const wdt = 300;
+const ht = 200;
+
 // center text
 var w = canvas.width / 2;
 
@@ -140,7 +143,7 @@ var doorbell = new Audio("sounds/doorbell-v1.mp3");
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
 /***********For Menu************/
-var togSet=true;
+//var togSet=true;
 var togMenu=false;
 var speechOn=true;
 var musicOn=true;
@@ -152,7 +155,8 @@ var col=true;
 
 function showMenu() {
     togMenu=true;
-    togSet=false;
+    //togSet=false;
+
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9; 
     ctx.fillRect(120, 40, 950, 650);
@@ -236,7 +240,7 @@ function showMenu() {
     ctx.fillText("Press G", w, 640);
 
     if (keys[71]) { //g
-        togSet=true;
+        //togSet=true;
         togMenu=false;
     }
 }
@@ -250,7 +254,7 @@ function closeSplash() {
     MCgameSc1 = true;
     music.play();
     music.volume = 0.1;
-    window.removeEventListener("click", closeSplash, false);
+    canvas.removeEventListener("click", closeSplash, false);
 }
 
 function splash() {
@@ -311,7 +315,7 @@ function splash() {
         incor = false;
     }  
     
-    window.addEventListener("click", closeSplash, false);
+    canvas.addEventListener("click", closeSplash, false);
 }
 
 function gameInstructions() {
@@ -398,7 +402,8 @@ function instructions() {
 
 // Setting Menu mouse controls
 function settingMouse(e) {
-    if (settings.path && ctx.isPointInPath(settings.path, event.offsetX, event.offsetY)) {
+    if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+        togMenu=true;
         showMenu();
         removeEventListener("click", settingMouse);
     }
@@ -409,7 +414,12 @@ function cardSetUp() {
     ctx.drawImage(settings, 0, 0, 80, 80);
     settings.path = new Path2D();
     settings.path.rect(0, 0, 80, 80);
-    addEventListener("click", settingMouse, false);
+    canvas.addEventListener("click", settingMouse, false);
+
+    if (keys[83]) { // audio
+        togMenu=true;
+        showMenu();
+    }
 
     ctx.font = "15px Comic Sans MS";
     ctx.fillStyle = "blue";
@@ -449,7 +459,7 @@ function gameStartKeys(e) {
     gameIns = false;
     gameInsSpeech.pause();
     gameInsSpeech.currentTime = 0;
-    window.removeEventListener("keyup", gameStartKeys);
+    canvas.removeEventListener("keyup", gameStartKeys);
 }
 
 //// Mouse
@@ -457,43 +467,45 @@ function gameStart(e) {
     gameIns = false;
     gameInsSpeech.pause();
     gameInsSpeech.currentTime = 0;
-    removeEventListener("click", gameStart);
+    canvas.removeEventListener("click", gameStart);
 }
 
 function Q1checkClick1(e) {
-	if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
+	if (ctx.isPointInPath(amb.path, e.offsetX, e.offsetY)) {
+        console.log(amb.path11);
         sir.pause();
         sir.currentTime = 0;
         incor = false;
         cor1 = true;
-        removeEventListener("click", Q1checkClick1);
+        canvas.removeEventListener("click", Q1checkClick1);
     }
 }
 
+
 function Q1checkClick2(e) {
-    if (lam.path2 && ctx.isPointInPath(lam.path2, event.offsetX, event.offsetY)) {
+    if (ctx.isPointInPath(lam.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q1checkClick2);
+        canvas.removeEventListener("click", Q1checkClick2);
     }
 }
 
 function Q1checkClick3(e) {
-    if (micro.path3 && ctx.isPointInPath(micro.path3, event.offsetX, event.offsetY)) {
+    if (ctx.isPointInPath(micro.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q1checkClick3);
+        canvas.removeEventListener("click", Q1checkClick3);
     }
 }
 
 function Q1checkClick4(e) {
-    if (cow.path4 && ctx.isPointInPath(cow.path4, event.offsetX, event.offsetY)) {
+    if (ctx.isPointInPath(cow.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q1checkClick4);
+        canvas.removeEventListener("click", Q1checkClick4);
     }
 }
 
@@ -516,26 +528,24 @@ function quest1() {
     cardSetUp();
     }
 
-    //const x = canvas.width / 2 - width / 2 : img.x;
-	//const y = canvas.height / 2 - height / 2 : img.y;
-    ctx.drawImage(amb, 50, 150, 300, 200);
+    ctx.drawImage(amb, 50, 150, wdt, ht);
 	amb.path = new Path2D();
-    amb.path.rect(50, 150, 300, 200);
+    amb.path.rect(50, 150, wdt, ht);
     firstQus();
   
-    ctx.drawImage(lam, 370, 150, 300, 200);
-    lam.path2 = new Path2D();
-    lam.path2.rect(370, 150, 300, 200);
+    ctx.drawImage(lam, 370, 150, wdt, ht);
+    lam.path = new Path2D();
+    lam.path.rect(370, 150, wdt, ht);
     secQus();
 
-    ctx.drawImage(micro, 50, 380, 300, 200);
-    micro.path3 = new Path2D();
-    micro.path3.rect(50, 380, 300, 200);
+    ctx.drawImage(micro, 50, 380, wdt, ht);
+    micro.path = new Path2D();
+    micro.path.rect(50, 380, wdt, ht);
     thQus();
 
-    ctx.drawImage(cow, 370, 380, 300, 200);
-    cow.path4 = new Path2D();
-    cow.path4.rect(370, 380, 300, 200);
+    ctx.drawImage(cow, 370, 380, wdt, ht);
+    cow.path = new Path2D();
+    cow.path.rect(370, 380, wdt, ht);
     foQus();
 
     if (!gameIns) {
@@ -547,15 +557,15 @@ function quest1() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("keydown", gameStartKeys, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
-    addEventListener("click", Q1checkClick1, false);
-    addEventListener("click", Q1checkClick2, false);
-    addEventListener("click", Q1checkClick3, false);
-    addEventListener("click", Q1checkClick4, false);
+    canvas.addEventListener("click", Q1checkClick1);
+    canvas.addEventListener("click", Q1checkClick2);
+    canvas.addEventListener("click", Q1checkClick3);
+    canvas.addEventListener("click", Q1checkClick4);
     
 
     // keyboard controls for images
@@ -586,6 +596,8 @@ function quest1() {
     }// Locked if gameIns = true
 
 }
+
+
 ////////// End of Question 1 ////////////////////
 
 ///////// Q2 Mouse Controls ////////////////////////
@@ -669,10 +681,10 @@ function quest2() {
 
     instructions();
 
-    addEventListener("click", Q2checkClick1);
-    addEventListener("click", Q2checkClick2);
-    addEventListener("click", Q2checkClick3);
-    addEventListener("click", Q2checkClick4);
+    canvas.addEventListener("click", Q2checkClick1);
+    canvas.addEventListener("click", Q2checkClick2);
+    canvas.addEventListener("click", Q2checkClick3);
+    canvas.addEventListener("click", Q2checkClick4);
 
     if (keys[49]) { // Incorrect
         cow1.pause();
@@ -782,10 +794,10 @@ function quest3() {
 
     instructions();
 
-    addEventListener("click", Q3checkClick1, false);
-    addEventListener("click", Q3checkClick2, false);
-    addEventListener("click", Q3checkClick3, false);
-    addEventListener("click", Q3checkClick4, false);
+    canvas.addEventListener("click", Q3checkClick1, false);
+    canvas.addEventListener("click", Q3checkClick2, false);
+    canvas.addEventListener("click", Q3checkClick3, false);
+    canvas.addEventListener("click", Q3checkClick4, false);
 
     if (keys[49]) {
         lamb.pause();
@@ -898,10 +910,10 @@ function quest4() {
 
     instructions();
 
-    addEventListener("click", Q4checkClick1);
-    addEventListener("click", Q4checkClick2);
-    addEventListener("click", Q4checkClick3);
-    addEventListener("click", Q4checkClick4);
+    canvas.addEventListener("click", Q4checkClick1);
+    canvas.addEventListener("click", Q4checkClick2);
+    canvas.addEventListener("click", Q4checkClick3);
+    canvas.addEventListener("click", Q4checkClick4);
 
     if (keys[49]) {
         oldPhone.pause();
@@ -1013,10 +1025,10 @@ function quest5() {
 
     instructions();
 
-    addEventListener("click", Q5checkClick1);
-    addEventListener("click", Q5checkClick2);
-    addEventListener("click", Q5checkClick3);
-    addEventListener("click", Q5checkClick4);
+    canvas.addEventListener("click", Q5checkClick1);
+    canvas.addEventListener("click", Q5checkClick2);
+    canvas.addEventListener("click", Q5checkClick3);
+    canvas.addEventListener("click", Q5checkClick4);
 
     if (keys[49]) { // Incorrect
         fireEng.pause();
@@ -1128,10 +1140,10 @@ function quest6() {
 
     instructions();
 
-    addEventListener("click", Q6checkClick1);
-    addEventListener("click", Q6checkClick2);
-    addEventListener("click", Q6checkClick3);
-    addEventListener("click", Q6checkClick4);
+    canvas.addEventListener("click", Q6checkClick1);
+    canvas.addEventListener("click", Q6checkClick2);
+    canvas.addEventListener("click", Q6checkClick3);
+    canvas.addEventListener("click", Q6checkClick4);
 
     if (keys[49]) { // Correct
         microSound.pause();
@@ -1239,10 +1251,10 @@ function quest7() {
 
     instructions();
 
-    addEventListener("click", Q7checkClick1);
-    addEventListener("click", Q7checkClick2);
-    addEventListener("click", Q7checkClick3);
-    addEventListener("click", Q7checkClick4);
+    canvas.addEventListener("click", Q7checkClick1);
+    canvas.addEventListener("click", Q7checkClick2);
+    canvas.addEventListener("click", Q7checkClick3);
+    canvas.addEventListener("click", Q7checkClick4);
 
     if (keys[49]) { // Correct
         bellSound.pause();
@@ -1356,10 +1368,10 @@ function quest8() {
 
     instructions();
 
-    addEventListener("click", Q8checkClick1);
-    addEventListener("click", Q8checkClick2);
-    addEventListener("click", Q8checkClick3);
-    addEventListener("click", Q8checkClick4);
+    canvas.addEventListener("click", Q8checkClick1);
+    canvas.addEventListener("click", Q8checkClick2);
+    canvas.addEventListener("click", Q8checkClick3);
+    canvas.addEventListener("click", Q8checkClick4);
 
     if (keys[49]) { // Correct
         roarEff.pause();
@@ -1471,10 +1483,10 @@ function quest9() {
 
     instructions();
 
-    addEventListener("click", Q9checkClick1);
-    addEventListener("click", Q9checkClick2);
-    addEventListener("click", Q9checkClick3);
-    addEventListener("click", Q9checkClick4);
+    canvas.addEventListener("click", Q9checkClick1);
+    canvas.addEventListener("click", Q9checkClick2);
+    canvas.addEventListener("click", Q9checkClick3);
+    canvas.addEventListener("click", Q9checkClick4);
 
     if (keys[49]) { // Correct
         pigeonSdEff.pause();
@@ -1587,10 +1599,10 @@ function quest10() {
 
     instructions();
 
-    addEventListener("click", Q10checkClick1);
-    addEventListener("click", Q10checkClick2);
-    addEventListener("click", Q10checkClick3);
-    addEventListener("click", Q10checkClick4);
+    canvas.addEventListener("click", Q10checkClick1);
+    canvas.addEventListener("click", Q10checkClick2);
+    canvas.addEventListener("click", Q10checkClick3);
+    canvas.addEventListener("click", Q10checkClick4);
 
     if (keys[49]) { // Correct
         rugbyEff.pause();
@@ -1664,7 +1676,7 @@ function rightClick1() {
             ambVoice.currentTime = 0;
         }
 
-        addEventListener("click", rightClick1);
+        canvas.addEventListener("click", rightClick1);
     }
 
     // mouse controls right Answer 2 //
@@ -1705,7 +1717,7 @@ function rightClick1() {
             cor2 = false;
         }
 
-        addEventListener("click", rightClick2);
+        canvas.addEventListener("click", rightClick2);
     }
 
        // mouse controls right Answer 3 //
@@ -1747,7 +1759,7 @@ function rightClick1() {
             MCgameSc3 = false;
             MCgameSc4 = true;
         }
-        addEventListener("click", rightClick3);
+        canvas.addEventListener("click", rightClick3);
     }
 
     // mouse controls right Answer 4 //
@@ -1788,7 +1800,7 @@ function rightClick1() {
             MCgameSc4 = false;
             MCgameSc5 = true;
         }
-        addEventListener("click", rightClick4);
+        canvas.addEventListener("click", rightClick4);
     }
 
     // mouse controls right Answer 5 //
@@ -1830,7 +1842,7 @@ function rightClick1() {
             MCgameSc5 = false;
             MCgameSc6 = true;
         }
-        addEventListener("click", rightClick5);
+        canvas.addEventListener("click", rightClick5);
     }
 
       // mouse controls right Answer 6 //
@@ -1871,7 +1883,7 @@ function rightClick1() {
             //finalScreen = true;
         }
 
-        addEventListener("click", rightClick6);
+        canvas.addEventListener("click", rightClick6);
     }
 
 
@@ -1916,7 +1928,7 @@ function rightClick1() {
             MCgameSc8 = true;
         }
 
-        addEventListener("click", rightClick7);
+        canvas.addEventListener("click", rightClick7);
     }
 
 
@@ -1963,7 +1975,7 @@ function rightClick1() {
             //finalScreen = true;
         }
 
-        addEventListener("click", rightClick8);
+        canvas.addEventListener("click", rightClick8);
     }
 
 
@@ -2010,7 +2022,7 @@ function rightClick9() {
         //finalScreen = true;
     }
 
-    addEventListener("click", rightClick9);
+    canvas.addEventListener("click", rightClick9);
 }
 
 
@@ -2057,14 +2069,8 @@ function rightClick10() {
         finalScreen = true;
     }
 
-    addEventListener("click", rightClick10);
+    canvas.addEventListener("click", rightClick10);
 }
-
-
-
-
-
-
 
 
     // mouse controls Wrong Answer //
@@ -2072,8 +2078,18 @@ function rightClick10() {
         play = true;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
+        cor1 = false;
+        cor2 = false;
+        cor3 = false;
+        cor4 = false;
+        cor5 = false;
+        cor6 = false;
+        cor7 = false;
+        cor8 = false;
+        cor9 = false;
+        cor10 = false;
         incor = false;
-        window.removeEventListener("click", clickWrong);
+        removeEventListener("click", clickWrong);
     }
 
     /////////  Wrong Awnser //////////////////
@@ -2109,21 +2125,6 @@ function rightClick10() {
         }
     }
 
-    function menu() {
-
-        /*if (picOn) {
-            ctx.drawImage(balGame, 0, 0, canvas.width, canvas.height);
-        }
-    
-        if (togSet) {
-            settings();
-        }*/
-    
-        if (togMenu) {
-            showMenu();
-        }
-    }
-
 
 function playGame() {
 
@@ -2133,9 +2134,9 @@ function playGame() {
         splash();
     }
 
-    /*if (togMenu) {
+    if (togMenu) {
         showMenu();
-        }*/
+    }
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
@@ -2377,7 +2378,7 @@ function playGame() {
             MCsplashSc = true;
         }
 
-        addEventListener("click", rightClickFS);
+        canvas.addEventListener("click", rightClickFS);
 
     }
 
