@@ -301,9 +301,9 @@ function splash() {
         splashAud.play();
     }
 
-    if (keys[83]) { // audio
+    /*if (keys[83]) { // audio
         microSound.play();
-    }
+    }*/
 
     if (keys[32]) { // Go to game
         splashAud.pause();
@@ -401,33 +401,33 @@ function instructions() {
 }
 
 // Setting Menu mouse controls
-function settingMouse(e) {
+/*function settingMouse(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
         togMenu=true;
         showMenu();
-        removeEventListener("click", settingMouse);
+        canvas.removeEventListener("click", settingMouse);
     }
-}
+}*/
 
 function cardSetUp() {
     // settings
     ctx.drawImage(settings, 0, 0, 80, 80);
     settings.path = new Path2D();
     settings.path.rect(0, 0, 80, 80);
-    canvas.addEventListener("click", settingMouse, false);
+    //canvas.addEventListener("click", settingMouse, false);
 
-    if (keys[83]) { // audio
+    /*if (keys[83]) { // audio
         togMenu=true;
         showMenu();
-    }
+    }*/
 
     ctx.font = "15px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("settings", 40, 90);
 
-    if (keys[83]) { // audio
+    /*if (keys[83]) { // audio
         microSound.play();
-    }
+    }*/
 
     // text
     ctx.font = "80px Comic Sans MS";
@@ -459,7 +459,7 @@ function gameStartKeys(e) {
     gameIns = false;
     gameInsSpeech.pause();
     gameInsSpeech.currentTime = 0;
-    canvas.removeEventListener("keyup", gameStartKeys);
+    window.removeEventListener("keyup", gameStartKeys);
 }
 
 //// Mouse
@@ -467,7 +467,7 @@ function gameStart(e) {
     gameIns = false;
     gameInsSpeech.pause();
     gameInsSpeech.currentTime = 0;
-    canvas.removeEventListener("click", gameStart);
+    removeEventListener("click", gameStart);
 }
 
 function Q1checkClick1(e) {
@@ -557,8 +557,8 @@ function quest1() {
     }
 
     if (gameIns) {
-        canvas.addEventListener("keydown", gameStartKeys, false);
-        canvas.addEventListener("click", gameStart, false);
+        window.addEventListener("keydown", gameStartKeys, false);
+        addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -607,7 +607,7 @@ function Q2checkClick1(e) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q2checkClick1, false);
+        canvas.removeEventListener("click", Q2checkClick1, false);
     }
 }
 
@@ -616,7 +616,7 @@ function Q2checkClick2(e) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q2checkClick2, false);
+        canvas.removeEventListener("click", Q2checkClick2, false);
     }
 }
 
@@ -625,7 +625,7 @@ function Q2checkClick3(e) {
         cow1.pause();
         cow1.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q2checkClick3, false);
+        canvas.removeEventListener("click", Q2checkClick3, false);
     }
 }
 
@@ -636,7 +636,7 @@ function Q2checkClick4(e) {
         incor = false;
         cor1 = false;
         cor2 = true;
-        removeEventListener("click", Q2checkClick4, false);
+        canvas.removeEventListener("click", Q2checkClick4, false);
     }
 }
 
@@ -724,7 +724,7 @@ function Q3checkClick1(e) {
         cor1 = false;
         cor2 = false;
         cor3 = true;
-        removeEventListener("click", Q3checkClick1, false);
+        canvas.removeEventListener("click", Q3checkClick1, false);
     }
 }
 
@@ -733,7 +733,7 @@ function Q3checkClick2(e) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q3checkClick2, false);
+        canvas.removeEventListener("click", Q3checkClick2, false);
     }
 }
 
@@ -742,7 +742,7 @@ function Q3checkClick3(e) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q3checkClick3, false);
+        canvas.removeEventListener("click", Q3checkClick3, false);
     }
 }
 
@@ -751,7 +751,7 @@ function Q3checkClick4(e) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q3checkClick4, false);
+        canvas.removeEventListener("click", Q3checkClick4, false);
     }
 }
 
@@ -839,7 +839,7 @@ function Q4checkClick1(e) {
         cor2 = false;
         cor3 = false;
         cor4 = true;
-        removeEventListener("click", Q4checkClick1);
+        canvas.removeEventListener("click", Q4checkClick1);
     }
 }
 
@@ -848,7 +848,7 @@ function Q4checkClick2(e) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q4checkClick2);
+        canvas.removeEventListener("click", Q4checkClick2);
     }
 }
 
@@ -858,7 +858,7 @@ function Q4checkClick3(e) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q4checkClick3);
+        canvas.removeEventListener("click", Q4checkClick3);
     }
 }
 
@@ -867,7 +867,7 @@ function Q4checkClick4(e) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q4checkClick4);
+        canvas.removeEventListener("click", Q4checkClick4);
     }
 }
 
@@ -951,7 +951,7 @@ function Q5checkClick1(e) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q5checkClick1, false);
+        canvas.removeEventListener("click", Q5checkClick1, false);
     }
 }
 
@@ -965,7 +965,7 @@ function Q5checkClick2(e) {
         cor3 = false;
         cor4 = false;
         cor5 = true;
-        removeEventListener("click", Q5checkClick2, false);
+        canvas.removeEventListener("click", Q5checkClick2, false);
     }
 }
 
@@ -974,7 +974,7 @@ function Q5checkClick3(e) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q5checkClick3, false);
+        canvas.removeEventListener("click", Q5checkClick3, false);
     }
 }
 
@@ -983,7 +983,7 @@ function Q5checkClick4(e) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q5checkClick4, false);
+        canvas.removeEventListener("click", Q5checkClick4, false);
     }
 }
 
@@ -1068,7 +1068,7 @@ function Q6checkClick1(e) {
         microSound.currentTime = 0;
         incor = false;
         cor6 = true;
-        removeEventListener("click", Q6checkClick1);
+        canvas.removeEventListener("click", Q6checkClick1);
     }
 }
 
@@ -1077,7 +1077,7 @@ function Q6checkClick2(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q6checkClick2);
+        canvas.removeEventListener("click", Q6checkClick2);
     }
 }
 
@@ -1086,7 +1086,7 @@ function Q6checkClick3(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q6checkClick3);
+        canvas.removeEventListener("click", Q6checkClick3);
     }
 }
 
@@ -1095,7 +1095,7 @@ function Q6checkClick4(e) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q6checkClick4);
+        canvas.removeEventListener("click", Q6checkClick4);
     }
 }
 
@@ -1182,7 +1182,7 @@ function Q7checkClick1(e) {
         bellSound.currentTime = 0;
         incor = false;
         cor7 = true;
-        removeEventListener("click", Q7checkClick1);
+        canvas.removeEventListener("click", Q7checkClick1);
     }
 }
 
@@ -1191,7 +1191,7 @@ function Q7checkClick2(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q7checkClick2);
+        canvas.removeEventListener("click", Q7checkClick2);
     }
 }
 
@@ -1200,7 +1200,7 @@ function Q7checkClick3(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q7checkClick3);
+        canvas.removeEventListener("click", Q7checkClick3);
     }
 }
 
@@ -1209,7 +1209,7 @@ function Q7checkClick4(e) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q7checkClick4);
+        canvas.removeEventListener("click", Q7checkClick4);
     }
 }
 
@@ -1295,7 +1295,7 @@ function Q8checkClick1(e) {
         roarEff.pause();
         roarEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q8checkClick1);
+        canvas.removeEventListener("click", Q8checkClick1);
     }
 }
 
@@ -1304,7 +1304,7 @@ function Q8checkClick2(e) {
         roarEff.pause();
         roarEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q8checkClick2);
+        canvas.removeEventListener("click", Q8checkClick2);
     }
 }
 
@@ -1314,7 +1314,7 @@ function Q8checkClick3(e) {
         roarEff.currentTime = 0;
         incor = false;
         cor8 = true;
-        removeEventListener("click", Q8checkClick3);
+        canvas.removeEventListener("click", Q8checkClick3);
     }
 }
 
@@ -1324,7 +1324,7 @@ function Q8checkClick4(e) {
         roarEff.pause();
         roarEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q8checkClick4);
+        canvas.removeEventListener("click", Q8checkClick4);
     }
 }
 
@@ -1410,7 +1410,7 @@ function Q9checkClick1(e) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q9checkClick1);
+        canvas.removeEventListener("click", Q9checkClick1);
     }
 }
 
@@ -1420,7 +1420,7 @@ function Q9checkClick2(e) {
         pigeonSdEff.currentTime = 0;
         incor = false;
         cor9 = true;
-        removeEventListener("click", Q9checkClick2);
+        canvas.removeEventListener("click", Q9checkClick2);
     }
 }
 
@@ -1429,7 +1429,7 @@ function Q9checkClick3(e) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q9checkClick3);
+        canvas.removeEventListener("click", Q9checkClick3);
     }
 }
 
@@ -1439,7 +1439,7 @@ function Q9checkClick4(e) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q9checkClick4);
+        canvas.removeEventListener("click", Q9checkClick4);
     }
 }
 
@@ -1527,7 +1527,7 @@ function Q10checkClick1(e) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q10checkClick1);
+        canvas.removeEventListener("click", Q10checkClick1);
     }
 }
 
@@ -1536,7 +1536,7 @@ function Q10checkClick2(e) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q10checkClick2);
+        canvas.removeEventListener("click", Q10checkClick2);
     }
 }
 
@@ -1545,7 +1545,7 @@ function Q10checkClick3(e) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
         incor = true;
-        removeEventListener("click", Q10checkClick3);
+        canvas.removeEventListener("click", Q10checkClick3);
     }
 }
 
@@ -1555,7 +1555,7 @@ function Q10checkClick4(e) {
         rugbyEff.currentTime = 0;
         incor = false;
         cor10 = true;
-        removeEventListener("click", Q10checkClick4);
+        canvas.removeEventListener("click", Q10checkClick4);
     }
 }
 
@@ -1648,7 +1648,7 @@ function rightClick1() {
     cor1 = false;
     MCgameSc1 = false;
     MCgameSc2 = true;
-    window.removeEventListener("click", rightClick1);
+    removeEventListener("click", rightClick1);
 }
 // End mouse controls right Answer //
 
@@ -1676,7 +1676,7 @@ function rightClick1() {
             ambVoice.currentTime = 0;
         }
 
-        canvas.addEventListener("click", rightClick1);
+        addEventListener("click", rightClick1);
     }
 
     // mouse controls right Answer 2 //
@@ -1688,7 +1688,7 @@ function rightClick1() {
         MCgameSc3 = true;
         cowVoice.pause();
         cowVoice.currentTime = 0;
-        window.removeEventListener("click", rightClick2);
+        removeEventListener("click", rightClick2);
     }
     // End mouse controls right Answer //
 
@@ -1717,7 +1717,7 @@ function rightClick1() {
             cor2 = false;
         }
 
-        canvas.addEventListener("click", rightClick2);
+        addEventListener("click", rightClick2);
     }
 
        // mouse controls right Answer 3 //
@@ -1729,7 +1729,7 @@ function rightClick1() {
         MCgameSc4 = true;
         lambVoice.pause();
         lambVoice.currentTime = 0;
-        window.removeEventListener("click", rightClick3);
+        removeEventListener("click", rightClick3);
     }
     // End mouse controls right Answer //
 
@@ -1759,7 +1759,7 @@ function rightClick1() {
             MCgameSc3 = false;
             MCgameSc4 = true;
         }
-        canvas.addEventListener("click", rightClick3);
+        addEventListener("click", rightClick3);
     }
 
     // mouse controls right Answer 4 //
@@ -1773,7 +1773,7 @@ function rightClick1() {
         MCgameSc4 = false;
         //finalScreen = true;
         MCgameSc5 = true;
-        window.removeEventListener("click", rightClick4);
+        removeEventListener("click", rightClick4);
     }
     // End mouse controls right Answer //
 
@@ -1800,7 +1800,7 @@ function rightClick1() {
             MCgameSc4 = false;
             MCgameSc5 = true;
         }
-        canvas.addEventListener("click", rightClick4);
+        addEventListener("click", rightClick4);
     }
 
     // mouse controls right Answer 5 //
@@ -1815,7 +1815,7 @@ function rightClick1() {
         MCgameSc5 = false;
         //finalScreen = true;
         MCgameSc6 = true;
-        window.removeEventListener("click", rightClick5);
+        removeEventListener("click", rightClick5);
     }
     // End mouse controls right Answer //
 
@@ -1842,7 +1842,7 @@ function rightClick1() {
             MCgameSc5 = false;
             MCgameSc6 = true;
         }
-        canvas.addEventListener("click", rightClick5);
+        addEventListener("click", rightClick5);
     }
 
       // mouse controls right Answer 6 //
@@ -1854,7 +1854,7 @@ function rightClick1() {
       MCgameSc6 = false;
       //finalScreen = true;
       MCgameSc7 = true;
-      window.removeEventListener("click", rightClick6);
+      removeEventListener("click", rightClick6);
     }
 // End mouse controls right Answer //
 
@@ -1883,7 +1883,7 @@ function rightClick1() {
             //finalScreen = true;
         }
 
-        canvas.addEventListener("click", rightClick6);
+        addEventListener("click", rightClick6);
     }
 
 
@@ -1896,7 +1896,7 @@ function rightClick1() {
         MCgameSc7 = false;
         MCgameSc8 = true;
         //finalScreen = true;
-        window.removeEventListener("click", rightClick7);
+        removeEventListener("click", rightClick7);
       }
   // End mouse controls right Answer //
 
@@ -1928,7 +1928,7 @@ function rightClick1() {
             MCgameSc8 = true;
         }
 
-        canvas.addEventListener("click", rightClick7);
+        addEventListener("click", rightClick7);
     }
 
 
@@ -1944,7 +1944,7 @@ function rightClick1() {
         MCgameSc8 = false;
         MCgameSc9 = true;
         //finalScreen = true;
-        window.removeEventListener("click", rightClick8);
+        removeEventListener("click", rightClick8);
       }
   // End mouse controls right Answer //
 
@@ -1975,7 +1975,7 @@ function rightClick1() {
             //finalScreen = true;
         }
 
-        canvas.addEventListener("click", rightClick8);
+        addEventListener("click", rightClick8);
     }
 
 
@@ -1991,7 +1991,7 @@ function rightClick9() {
     MCgameSc9 = false;
     MCgameSc10 = true;
     //finalScreen = true;
-    window.removeEventListener("click", rightClick9);
+    removeEventListener("click", rightClick9);
   }
 // End mouse controls right Answer //
 
@@ -2022,7 +2022,7 @@ function rightClick9() {
         //finalScreen = true;
     }
 
-    canvas.addEventListener("click", rightClick9);
+    addEventListener("click", rightClick9);
 }
 
 
@@ -2039,7 +2039,7 @@ function rightClick10() {
     MCgameSc10 = false;
     //MCgameSc10 = true;
     finalScreen = true;
-    window.removeEventListener("click", rightClick10);
+    removeEventListener("click", rightClick10);
   }
 // End mouse controls right Answer //
 
@@ -2069,7 +2069,7 @@ function rightClick10() {
         finalScreen = true;
     }
 
-    canvas.addEventListener("click", rightClick10);
+    addEventListener("click", rightClick10);
 }
 
 
@@ -2378,7 +2378,7 @@ function playGame() {
             MCsplashSc = true;
         }
 
-        canvas.addEventListener("click", rightClickFS);
+        addEventListener("click", rightClickFS);
 
     }
 
