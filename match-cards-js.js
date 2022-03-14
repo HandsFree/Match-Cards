@@ -125,7 +125,7 @@ var fireEng = new Audio("sounds/fire-eng.mp3");
 var microSound = new Audio("sounds/microwave.mp3");
 var bellSound = new Audio("sounds/DoorbellSound.mp3");
 var pigeonSdEff = new Audio("sounds/pigeon.mp3");
-var roarEff = new Audio("sounds/roar.mp3");
+var roarEff = new Audio("sounds/Roar.mp3");
 var rookEff = new Audio("sounds/rook_song.mp3");
 var rugbyEff  = new Audio("sounds/rugby.mp3");
 
@@ -254,7 +254,7 @@ function closeSplash() {
     MCgameSc1 = true;
     music.play();
     music.volume = 0.1;
-    canvas.removeEventListener("click", closeSplash, false);
+    removeEventListener("click", closeSplash, false);
 }
 
 function splash() {
@@ -315,7 +315,7 @@ function splash() {
         incor = false;
     }  
     
-    canvas.addEventListener("click", closeSplash, false);
+    addEventListener("click", closeSplash, false);
 }
 
 function gameInstructions() {
@@ -1292,8 +1292,8 @@ function quest7() {
 
 function Q8checkClick1(e) {
     if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
-        cow1.pause();
-        cow1.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
         removeEventListener("click", Q8checkClick1);
     }
@@ -1301,8 +1301,8 @@ function Q8checkClick1(e) {
 
 function Q8checkClick2(e) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
-        cow1.pause();
-        cow1.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
         removeEventListener("click", Q8checkClick2);
     }
@@ -1310,8 +1310,8 @@ function Q8checkClick2(e) {
 
 function Q8checkClick3(e) {
     if (polac.path && ctx.isPointInPath(polac.path, event.offsetX, event.offsetY)) {
-        cow1.pause();
-        cow1.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = false;
         cor8 = true;
         removeEventListener("click", Q8checkClick3);
@@ -1321,8 +1321,8 @@ function Q8checkClick3(e) {
 function Q8checkClick4(e) {
     
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
-        cow1.pause();
-        cow1.currentTime = 0;
+        roarEff.pause();
+        roarEff.currentTime = 0;
         incor = true;
         removeEventListener("click", Q8checkClick4);
     }
@@ -2134,9 +2134,9 @@ function playGame() {
         splash();
     }
 
-    if (togMenu) {
+    /*if (togMenu) {
         showMenu();
-    }
+    }*/
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
