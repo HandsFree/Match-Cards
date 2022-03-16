@@ -10,7 +10,7 @@ var w = canvas.width / 2;
 
 ///////////////////////////////////// 9/3/22
 // explaining screen
-var instructionsSc = false;
+//var instructionsSc = false;
 // main screen
 var gameSc = false;
 ////////////////////////////////////
@@ -71,8 +71,10 @@ settings.src = "images/settings.png";
 
 // Settings Menu
 const mBack = new Image();
-mBack.src = "images/menu-back.png";
+mBack.src = "images/menuAssets/backGr1.png";
 
+const cross = new Image();
+cross.src = "images/menuAssets/cross.png";
 
 // media for game
 // Pictures
@@ -140,109 +142,44 @@ var fEngVoice = new Audio("sounds/fire-en-v1.mp3");
 var microVoice = new Audio("sounds/micro-v1.mp3");
 var doorbell = new Audio("sounds/doorbell-v1.mp3");
 
+var polyEff = new Audio("sounds/polyEff.mp3");
+var pigEff = new Audio("sounds/pigEff.mp3");
+var rugEff = new Audio("sounds/rugEff.mp3");
+
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
 /***********For Menu************/
-//var togSet=true;
-var togMenu=false;
-var speechOn=true;
+var setMenu=false;
+/*var speechOn=true;
 var musicOn=true;
 var picOn=true;
-var col=true;
+var col=true;*/
 /************end****************/
 
+// End Menu and return to game
+function endMenu(e) {
+    if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+        setMenu=false;
+        
+        canvas.removeEventListener("click", endMenu);
+    }
+}
 
 
 function showMenu() {
-    togMenu=true;
-    //togSet=false;
-
     ctx.fillStyle = "black";
-    ctx.globalAlpha = 0.9; 
-    ctx.fillRect(120, 40, 950, 650);
+    ctx.globalAlpha = 0.9;
+    ctx.drawImage(mBack, 0, 0, canvas.width, canvas.height);
     ctx.globalAlpha = 1.0; 
-    ctx.fillStyle = "white";
     ctx.textAlign = "center"; 
-    ctx.font = "45px Arial";
-    ctx.fillText("Settings", w, 100);
-    ctx.font = "35px Arial";
+	ctx.font = "100 90px Impact, fantasy";
+    ctx.fillText("Settings", w, 110);
 
-    if (!musicOn) {
-        duck.pause();
-        }
+    ctx.drawImage(cross, w-30, 640, 50, 50);
+    cross.path = new Path2D();
+    cross.path.rect(w-30, 640, 50, 50);
 
-
-    if (col) {
-        ctx.fillText("Balloon Colour: Purple - press R to change to Red", w, 200);
-        if (keys[82]) { //r
-            col=false;
-        }
-    }
-
-    if (!col) {
-        ctx.fillText("Balloon Colour: Red - press P to change to Purple", w, 200);
-        if (keys[80]) { //q
-            col=true;
-        }
-    }
-
-    /*------------------------------------------------------ */
-
-    if (speechOn) {
-        ctx.fillText("Speech: On - press O to change", w, 300);
-        if (keys[79]) { //o
-            speechOn=false;
-        }
-    }
-
-    if (!speechOn) {
-        ctx.fillText("Speech: Off - press B to change", w, 300);
-        if (keys[66]) { //b
-            speechOn=true;
-        }
-    }
-
-    /*------------------------------------------------------ */
-
-    
-    if (musicOn) {
-        ctx.fillText("Music and Effects: On - press M to change", w, 400);
-        if (keys[77]) { //m
-            musicOn=false;
-        }
-    }
-
-    if (!musicOn) {
-        ctx.fillText("Music and Effects: Off - press U to change", w, 400);
-        if (keys[85]) { //u
-            musicOn=true;
-        }
-    }
-
-    /*------------------------------------------------------ */
-
-    if (picOn) {
-        ctx.fillText("Picture: On - press C to change", w, 500);
-        if (keys[67]) { //o
-            picOn=false;
-        }
-    }
-
-    if (!picOn) {
-        ctx.fillText("Colour: On - press I to change", w, 500);
-        if (keys[73]) { //f
-            picOn=true;
-        }
-    }
-
-    ctx.font = "30px Arial";
-    ctx.fillText("Return to Game", w, 600);
-    ctx.fillText("Press G", w, 640);
-
-    if (keys[71]) { //g
-        //togSet=true;
-        togMenu=false;
-    }
+    canvas.addEventListener("click", endMenu);
 }
 
 
@@ -401,20 +338,20 @@ function instructions() {
 }
 
 // Setting Menu mouse controls
-/*function settingMouse(e) {
+function settingMouse(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
-        togMenu=true;
-        showMenu();
+        setMenu=true;
         canvas.removeEventListener("click", settingMouse);
     }
-}*/
+}
 
 function cardSetUp() {
     // settings
     ctx.drawImage(settings, 0, 0, 80, 80);
     settings.path = new Path2D();
     settings.path.rect(0, 0, 80, 80);
-    //canvas.addEventListener("click", settingMouse, false);
+
+    canvas.addEventListener("click", settingMouse, false);
 
     /*if (keys[83]) { // audio
         togMenu=true;
@@ -472,7 +409,6 @@ function gameStart(e) {
 
 function Q1checkClick1(e) {
 	if (ctx.isPointInPath(amb.path, e.offsetX, e.offsetY)) {
-        console.log(amb.path11);
         sir.pause();
         sir.currentTime = 0;
         incor = false;
@@ -1938,18 +1874,18 @@ function rightClick1() {
        // mouse controls right Answer 8 //
        function rightClick8() {
         cor8 = false;
-        roarEff.pause();
-        roarEff.currentTime = 0;
+        polyEff.pause();
+        polyEff.currentTime = 0;
         incor = false;
         MCgameSc8 = false;
         MCgameSc9 = true;
-        //finalScreen = true;
         removeEventListener("click", rightClick8);
       }
   // End mouse controls right Answer //
 
      /////////  Right Answer 8 //////////////////
      function rightAns8() {
+        polyEff.play();
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -1968,11 +1904,10 @@ function rightClick1() {
 
         if (keys[32]) { // Go to Final Screen
             cor8 = false;
-            cowVoice.pause();
-            cowVoice.currentTime = 0;
+            polyEff.pause();
+            polyEff.currentTime = 0;
             MCgameSc8 = false;
             MCgameSc9 = true;
-            //finalScreen = true;
         }
 
         addEventListener("click", rightClick8);
@@ -1985,18 +1920,18 @@ function rightClick1() {
 // mouse controls right Answer 9 //
 function rightClick9() {
     cor9 = false;
-    pigeonSdEff.pause();
-    pigeonSdEff.currentTime = 0;
+    pigEff.pause();
+    pigEff.currentTime = 0;
     incor = false;
     MCgameSc9 = false;
     MCgameSc10 = true;
-    //finalScreen = true;
     removeEventListener("click", rightClick9);
   }
 // End mouse controls right Answer //
 
  /////////  Right Answer 9 //////////////////
  function rightAns9() {
+    pigEff.play();
     ctx.fillStyle = "white";
     ctx.fillRect(15, 40, 687, 650);
     ctx.strokeStyle = "green";
@@ -2015,11 +1950,10 @@ function rightClick9() {
 
     if (keys[32]) { // Go to Final Screen
         cor9 = false;
-        cowVoice.pause();
-        cowVoice.currentTime = 0;
+        pigEff.pause();
+        pigEff.currentTime = 0;
         MCgameSc9 = false;
         MCgameSc10 = true;
-        //finalScreen = true;
     }
 
     addEventListener("click", rightClick9);
@@ -2033,8 +1967,8 @@ function rightClick9() {
 // mouse controls right Answer 10 //
 function rightClick10() {
     cor10 = false;
-    rugbyEff.pause();
-    rugbyEff.currentTime = 0;
+    rugEff.pause();
+    rugEff.currentTime = 0;
     incor = false;
     MCgameSc10 = false;
     //MCgameSc10 = true;
@@ -2045,6 +1979,7 @@ function rightClick10() {
 
  /////////  Right Answer 10 //////////////////
  function rightAns10() {
+    rugEff.play();
     ctx.fillStyle = "white";
     ctx.fillRect(15, 40, 687, 650);
     ctx.strokeStyle = "green";
@@ -2063,8 +1998,8 @@ function rightClick10() {
 
     if (keys[32]) { // Go to Final Screen
         cor10 = false;
-        cowVoice.pause();
-        cowVoice.currentTime = 0;
+        rugEff.pause();
+        rugEff.currentTime = 0;
         MCgameSc10 = false;
         finalScreen = true;
     }
@@ -2134,9 +2069,11 @@ function playGame() {
         splash();
     }
 
-    /*if (togMenu) {
+    if (setMenu) {
         showMenu();
-    }*/
+    }
+
+    if (!setMenu) {
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
@@ -2384,6 +2321,8 @@ function playGame() {
 
 ///// End of playGame function ////////////////////  
 }
+
+} // not setMenu
 
 
 function animate() {  
