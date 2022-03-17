@@ -73,6 +73,21 @@ settings.src = "images/settings.png";
 const mBack = new Image();
 mBack.src = "images/menuAssets/backGr1.png";
 
+const mus = new Image();
+mus.src = "images/menuAssets/music.png";
+
+const background = new Image();
+background.src = "images/menuAssets/background.png";
+
+const speechEff = new Image();
+speechEff.src = "images/menuAssets/speech.png";
+
+const tick = new Image();
+tick.src = "images/menuAssets/tick.png";
+
+const unticked = new Image();
+unticked.src = "images/menuAssets/unticked.png";
+
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
 
@@ -150,9 +165,9 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
 /***********For Menu************/
 var setMenu=false;
-/*var speechOn=true;
+//var speechOn=true;
 var musicOn=true;
-var picOn=true;
+/*var picOn=true;
 var col=true;*/
 /************end****************/
 
@@ -160,7 +175,7 @@ var col=true;*/
 function endMenu(e) {
     if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
         setMenu=false;
-        
+    
         canvas.removeEventListener("click", endMenu);
     }
 }
@@ -174,7 +189,35 @@ function showMenu() {
     ctx.textAlign = "center"; 
 	ctx.font = "100 90px Impact, fantasy";
     ctx.fillText("Settings", w, 110);
+    ctx.textAlign = "left";
 
+    // Toggle Music
+    ctx.drawImage(mus, 62, 130, 250, 50);
+    ctx.drawImage(tick, 62, 190, 50, 50);
+    ctx.font = "700 30px Arial";
+    ctx.fillText("On", 120, 230);
+    ctx.drawImage(unticked, 62, 245, 50, 50);
+    ctx.fillText("Off", 120, 282);
+
+    // Toggle Background
+    ctx.drawImage(background, 410, 130, 250, 50);
+    ctx.drawImage(tick, 410, 190, 50, 50);
+    ctx.font = "700 30px Arial";
+    ctx.fillText("Colourful", 470, 230);
+    ctx.drawImage(unticked, 410, 245, 50, 50);
+    ctx.fillText("Green", 470, 282);
+
+    // Toggle Speech
+    ctx.drawImage(speechEff, 62, 310, 250, 50);
+    ctx.drawImage(tick, 62, 370, 50, 50);
+    ctx.font = "700 30px Arial";
+    ctx.fillText("On", 120, 230);
+    ctx.drawImage(unticked, 62, 245, 50, 50);
+    ctx.fillText("Off", 120, 282);
+
+
+    // Close Menu
+    ctx.textAlign = "center"; 
     ctx.drawImage(cross, w-30, 640, 50, 50);
     cross.path = new Path2D();
     cross.path.rect(w-30, 640, 50, 50);
