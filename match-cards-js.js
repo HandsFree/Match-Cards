@@ -66,6 +66,12 @@ mcSplash.src = "images/match-Cards.png";
 const speech = new Image();
 speech.src = "images/speech.png";
 
+const clickHere = new Image();
+clickHere.src = "images/clickHere.png";
+
+const soundBox = new Image();
+soundBox.src = "images/soundBox.png";
+
 const settings = new Image();
 settings.src = "images/settings.png";
 
@@ -87,6 +93,15 @@ tick.src = "images/menuAssets/tick.png";
 
 const unticked = new Image();
 unticked.src = "images/menuAssets/unticked.png";
+
+const Q2 = new Image();
+Q2.src = "images/menuAssets/Q2.png";
+
+const Q4 = new Image();
+Q4.src = "images/menuAssets/Q4.png";
+
+const noQs = new Image();
+noQs.src = "images/menuAssets/noQuestions.png";
 
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
@@ -174,8 +189,7 @@ var col=true;*/
 // End Menu and return to game
 function endMenu(e) {
     if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
-        setMenu=false;
-    
+        setMenu=false;  
         canvas.removeEventListener("click", endMenu);
     }
 }
@@ -211,9 +225,17 @@ function showMenu() {
     ctx.drawImage(speechEff, 62, 310, 250, 50);
     ctx.drawImage(tick, 62, 370, 50, 50);
     ctx.font = "700 30px Arial";
-    ctx.fillText("On", 120, 230);
-    ctx.drawImage(unticked, 62, 245, 50, 50);
-    ctx.fillText("Off", 120, 282);
+    ctx.fillText("On", 120, 410);
+    ctx.drawImage(unticked, 62, 425, 50, 50);
+    ctx.fillText("Off", 120, 461);
+
+    // Toggle Number of Questions
+    ctx.drawImage(noQs, 410, 310, 250, 50);
+    ctx.drawImage(Q2, 410, 370, 50, 50);
+    ctx.drawImage(Q4, 461, 370, 50, 50);
+    ctx.drawImage(Q2, 512, 370, 50, 50);
+    ctx.drawImage(Q2, 563, 370, 50, 50);
+    ctx.drawImage(Q2, 614, 370, 50, 50);
 
 
     // Close Menu
@@ -225,16 +247,32 @@ function showMenu() {
     canvas.addEventListener("click", endMenu);
 }
 
+// End Splash Screen
+function closeSplash(e) {
+    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {
+        incor = false;
+        splashAud.pause();
+        splashAud.currentTime = 0;
+        MCsplashSc = false;
+        MCgameSc1 = true;
+        canvas.removeEventListener("click", closeSplash);
+    }
+}
 
-function closeSplash() {
-    incor = false;
-    splashAud.pause();
-    splashAud.currentTime = 0;
-    MCsplashSc = false;
-    MCgameSc1 = true;
-    music.play();
-    music.volume = 0.1;
-    removeEventListener("click", closeSplash, false);
+// Speech code for Mouse
+function speechMouse(e) {
+    if (ctx.isPointInPath(speech.path, e.offsetX, e.offsetY)) {
+        splashAud.play();
+        canvas.removeEventListener("click", speechMouse);
+    }
+}
+
+// Settings Menu mouse controls
+function settingMouse1(e) {
+    if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+        setMenu=true;
+        canvas.removeEventListener("click", settingMouse1);
+    }
 }
 
 function splash() {
@@ -244,46 +282,47 @@ function splash() {
     ctx.fillRect(0, 400, 715, 235);
     ctx.globalAlpha = 1.0;
     ctx.textAlign = "center"; 
-    ctx.font = "38px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("Click the left mouse button", w, 460);
-    ctx.fillStyle = "red";
-    ctx.fillText("or press the Spacebar", w, 510);
-    ctx.fillStyle = "blue";
-    ctx.fillText("or use your switch", w, 560);
-    ctx.fillStyle = "purple";
+    ctx.font = "30px Comic Sans MS";
+    ctx.fillStyle = "navy";
+
+    ctx.drawImage(clickHere, 162, 410, 394, 90);
+    clickHere.path = new Path2D();
+    clickHere.path.rect(162, 410, 394, 90);
+
+    ctx.fillText("or press the Spacebar", w, 535);
+    ctx.fillText("or use your switch", w, 572);
     ctx.fillText("to play!", w, 610);
     ctx.fillStyle = "white";
-    ctx.fillRect(5, 415, 90, 100);
 
-    ctx.drawImage(speech, 25, 425, 55, 55);
-    //speech.path = new Path2D();
-    //speech.path.rect(25, 425, 55, 55);
-
+    // Speech code //
+    ctx.drawImage(soundBox, 25, 409, 110, 130);
+    ctx.drawImage(speech, 55, 435, 55, 55);
+    speech.path = new Path2D();
+    speech.path.rect(25, 409, 55, 55);
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("_", 43, 499);
-    ctx.fillText("speech", 48, 497);
+    ctx.fillText("_", 73, 512);
+    ctx.fillText("speech", 77, 510);
+    // End of Speech Code //
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(620, 415, 90, 100);
-
-    ctx.drawImage(settings, 625, 415, 80, 80);
-    //settings.path = new Path2D();
-    //settings.path.rect(625, 415, 80, 80);
-    
+    // Settings code //
+    ctx.drawImage(soundBox, 580, 409, 110, 130);
+    ctx.drawImage(settings, 594, 420, 80, 80);
+    settings.path = new Path2D();
+    settings.path.rect(580, 409, 110, 130); 
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("_", 641, 502);
-    ctx.fillText("settings", 665, 500);
+    ctx.fillText("_", 611, 512);
+    ctx.fillText("settings", 635, 510);
+    // End of Settings Code
 
     if (keys[69]) { // audio
         splashAud.play();
     }
 
-    /*if (keys[83]) { // audio
-        microSound.play();
-    }*/
+    if (keys[83]) { // settings
+        setMenu=true;
+    }
 
     if (keys[32]) { // Go to game
         splashAud.pause();
@@ -295,7 +334,9 @@ function splash() {
         incor = false;
     }  
     
-    addEventListener("click", closeSplash, false);
+    canvas.addEventListener("click", closeSplash);
+    canvas.addEventListener("click", speechMouse);
+    canvas.addEventListener("click", settingMouse1);
 }
 
 function gameInstructions() {
@@ -396,18 +437,14 @@ function cardSetUp() {
 
     canvas.addEventListener("click", settingMouse, false);
 
-    /*if (keys[83]) { // audio
-        togMenu=true;
-        showMenu();
-    }*/
+    // Keyboard Settings
+    if (keys[83]) { // settings
+        setMenu=true;
+    }
 
     ctx.font = "15px Comic Sans MS";
     ctx.fillStyle = "blue";
     ctx.fillText("settings", 40, 90);
-
-    /*if (keys[83]) { // audio
-        microSound.play();
-    }*/
 
     // text
     ctx.font = "80px Comic Sans MS";
@@ -2108,15 +2145,18 @@ function playGame() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (MCsplashSc) {
-        splash();
-    }
+    music.play();
+    music.volume = 0.1;
 
     if (setMenu) {
         showMenu();
     }
 
     if (!setMenu) {
+
+    if (MCsplashSc) {
+        splash();
+    }    
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
