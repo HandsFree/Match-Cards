@@ -2,6 +2,7 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+
 const wdt = 300;
 const ht = 200;
 
@@ -20,7 +21,7 @@ var play = true;
 // initial screen
 var MCsplashSc = true;
 
-var gameIns = true;
+var gameIns=false;
 
 var n = 1;
 
@@ -108,8 +109,11 @@ noQs.src = "images/menuAssets/noQuestions.png";
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
 
+const cross1 = new Image();
+cross1.src = "images/menuAssets/cross1.png";
+
 const insMouse = new Image();
-insMouse.src = "images/menuAssets/instructions.png";
+insMouse.src = "images/menuAssets/gi.png";
 
 // media for game
 // Pictures
@@ -213,7 +217,7 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
 /***********For Menu************/
 // To keep Match Cards frozen while the Settings Menu is active //
-var locked = false;
+var locked = true;
 
 // Close menu
 var setMenu=false;
@@ -232,16 +236,40 @@ var col=true;*/
 // End Mouse Menu and return to game //
 function endMenu(e) {
     if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+        incor = false;
+        cor1=false;
+        cor2=false;
+        cor3=false;
+        cor4=false;
+        cor5=false;
+        cor6=false;
+        cor7=false;
+        cor8=false;
+        cor9=false;
+        cor10=false;
         setMenu=false;
-        locked=false;
+        locked=true;
         canvas.removeEventListener("click", endMenu);
     }
 }
 ////////////////////End of Mouse Close//////////////////////
 
+// Instructions //
 function gameInsMouse(e) {
     if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
-    
+        locked=true;
+        gameIns=true;
+        incor = false;
+        cor1=false;
+        cor2=false;
+        cor3=false;
+        cor4=false;
+        cor5=false;
+        cor6=false;
+        cor7=false;
+        cor8=false;
+        cor9=false;
+        cor10=false;
         canvas.removeEventListener("click", gameInsMouse);
     }
 }
@@ -260,6 +288,7 @@ function togback(e) {
 function togback1(e) {
     if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
         back = !back;
+        //back = false;
         ctx.drawImage(tick, 410, 190, 50, 50);
         console.log(back);
         canvas.removeEventListener("click", togback1);
@@ -286,10 +315,14 @@ function togbackG1(e) {
 /////End of Mouse Background Change///////////////////
 
 function showMenu() {
-    locked=true;
+    locked=false;
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9;
+
+    if (!gameIns) {
     ctx.drawImage(mBack, 0, 0, canvas.width, canvas.height);
+    }
+
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
 	ctx.font = "100 90px Impact, fantasy";
@@ -372,9 +405,9 @@ function showMenu() {
 
     // Match Cards Instructions
     ctx.textAlign = "center"; 
-    ctx.drawImage(insMouse, w-250/2, 500, 250, 50);
+    ctx.drawImage(insMouse, w-266/2, 470, 266, 133);
     insMouse.path = new Path2D();
-    insMouse.path.rect(w-250/2, 500, 250, 50);
+    insMouse.path.rect(w-266/2, 470, 266, 133);
 
     // Close Menu
     ctx.textAlign = "center"; 
@@ -425,6 +458,7 @@ function closeSplash(e) {
         splashAud.currentTime = 0;
         MCsplashSc = false;
         MCgameSc1 = true;
+        gameIns = true;
         canvas.removeEventListener("click", closeSplash);
     }
 }
@@ -509,12 +543,34 @@ function splash() {
     canvas.addEventListener("click", settingMouse1);
 }
 
+
+
+
+
+function closeSplash1(e) {
+    if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+        incor = false;
+        cor1=false;
+        cor2=false;
+        cor3=false;
+        cor4=false;
+        cor5=false;
+        cor6=false;
+        cor7=false;
+        cor8=false;
+        cor9=false;
+        cor10=false;
+        gameIns=false;
+        canvas.removeEventListener("click", closeSplash1);
+    }
+}
+
 function gameInstructions() {
         music.play();
         music.volume = 0.1;
         gameInsSpeech.play();
         ctx.fillStyle = "white";
-        ctx.globalAlpha = 0.85;
+        //ctx.globalAlpha = 0.85;
         ctx.fillRect(20, 20, 675, 680);
         ctx.globalAlpha = 1.0;
         ctx.textAlign = "center";
@@ -534,10 +590,18 @@ function gameInstructions() {
         ctx.fillText("by left clicking on the picture", w, 470);
         ctx.font = "35px Comic Sans MS";
         ctx.fillStyle = "blue";
-        ctx.fillText("Press the spacebar", w, 550);
-        ctx.fillText("OR", w, 590);
-        ctx.fillText("Left Click on your Mouse", w, 623);
-        ctx.fillText("To Continue...", w, 670);
+
+        // Close Menu
+        ctx.fillText("Click below", w, 550);
+        ctx.textAlign = "center"; 
+        ctx.drawImage(cross1, w-30, 560, 50, 50);
+        cross1.path = new Path2D();
+        cross1.path.rect(w-30, 560, 50, 50);
+
+        ctx.fillText("OR", w, 645);
+        ctx.fillText("Press the spacebar", w, 680);
+
+        canvas.addEventListener("click", closeSplash1);
         /*
         if (keys[32]) { // Start game...
             gameIns = false;
@@ -545,6 +609,28 @@ function gameInstructions() {
             gameInsSpeech.currentTime = 0;
         } */
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -702,6 +788,7 @@ function Q1checkClick4(e) {
 /////////  Question 1 //////////////////
 
 function quest1() {
+
 
     // Question 1  
     if (play && !gameIns) {
@@ -2323,18 +2410,26 @@ function playGame() {
         showMenu();
     }
 
-    if (!setMenu && !locked) {
+    if (gameIns) {
+        gameInstructions();
+    }
+
+    if (!setMenu && locked) {
 
     if (MCsplashSc) {
         splash();
     }    
 
     ///////// Question 1 //////////////////
-    if (MCgameSc1) {
+    if (MCgameSc1 && locked) {
+
+        //console.log(locked);
 
         if (back) {
             ctx.fillStyle = "#FFA500";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2356,7 +2451,7 @@ function playGame() {
     }
 
      ///////////// Question 2 ////////////////////
-     if (MCgameSc2) {
+     if (MCgameSc2 && locked) {
 
         if (back) {
             ctx.fillStyle = "#45c345";
