@@ -2,8 +2,6 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
-var lockMseSet = false;
-
 const wdt = 300;
 const ht = 200;
 
@@ -106,11 +104,32 @@ const untickedMus = new Image();
 untickedMus.src = "images/menuAssets/untickedMus.png";
 /////////////////////////////////////////////////////////////
 
+
+//////////////////////////////////////////////////////////
+const tickSp = new Image();
+tickSp.src = "images/menuAssets/tickSp.png";
+
+const untickedSp = new Image();
+untickedSp.src = "images/menuAssets/untickedSp.png";
+/////////////////////////////////////////////////////////////
+
+
+
 const Q2 = new Image();
 Q2.src = "images/menuAssets/Q2.png";
 
 const Q4 = new Image();
 Q4.src = "images/menuAssets/Q4.png";
+
+const Q6 = new Image();
+Q6.src = "images/menuAssets/Q2.png";
+
+const Q8 = new Image();
+Q8.src = "images/menuAssets/Q4.png";
+
+const Q10 = new Image();
+Q10.src = "images/menuAssets/Q2.png";
+
 
 const noQs = new Image();
 noQs.src = "images/menuAssets/noQuestions.png";
@@ -235,15 +254,14 @@ function locked() {
 
 
 /***********For Menu************/
-// To keep Match Cards frozen while the Settings Menu is active //
-//var locked = true;
 
 // Close menu
 var setMenu=false;
 
 // Background Music
+// On
 var bkMus = true;
-
+// Off
 var bkMus1 = false;
 
 // Set Background
@@ -252,9 +270,12 @@ var back = true;
 // White
 var back1 = false;
 
-//var musicOn=true;
-/*var picOn=true;
-var col=true;*/
+// Set Speech
+// On
+var togSpeech = true;
+// Off
+var togSpeech1 = false;
+
 /************end****************/
 
 // End Mouse Menu and return to game //
@@ -262,7 +283,6 @@ function endMenu(e) {
     if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
         locked();
         setMenu=false;
-        lockMseSet = false;
         canvas.removeEventListener("click", endMenu);
     }
 }
@@ -273,7 +293,6 @@ function gameInsMouse(e) {
     if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
         gameIns=true;
         locked();
-        lockMseSet = false;
         canvas.removeEventListener("click", gameInsMouse);
     }
 }
@@ -292,25 +311,17 @@ function togMus(e) {
 
 function togMus1(e) {
     if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
-
-        if (lockMseSet) {
         bkMus = !bkMus;
-        }
-
         ctx.drawImage(tickMus, 62, 190, 50, 50);
-        //console.log(bkMus);
+        console.log(bkMus);
         canvas.removeEventListener("click", togback1);
     }
 }
 
 function togMusG(e) {
     if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
-
-        if (lockMseSet) {
-            bkMus1 = !bkMus1;
-        }
-
-        //console.log(bkMus1);
+        bkMus1 = !bkMus1;
+        console.log(bkMus1);
         ctx.drawImage(tickMus, 62, 245, 50, 50);
         canvas.removeEventListener("click", togbackG);
     }
@@ -345,12 +356,7 @@ function togback(e) {
 
 function togback1(e) {
     if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
-
-        if (lockMseSet) {
         back = !back;
-        }
-
-        //back = false;
         ctx.drawImage(tick, 410, 190, 50, 50);
         //console.log(back);
         canvas.removeEventListener("click", togback1);
@@ -359,12 +365,7 @@ function togback1(e) {
 
 function togbackG(e) {
     if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
-
-        if (lockMseSet) {
         back1 = !back1;
-        }
-
-        //console.log(back1);
         ctx.drawImage(tick, 410, 245, 50, 50);
         canvas.removeEventListener("click", togbackG);
     }
@@ -380,9 +381,54 @@ function togbackG1(e) {
 }
 /////End of Mouse Background Change///////////////////
 
+
+
+
+
+////// Speech change ///////////////////
+function togSp(e) {
+    if (ctx.isPointInPath(tickSp.path, e.offsetX, e.offsetY)) {
+        togSpeech=true;
+        //console.log(togSpeech);
+        ctx.drawImage(untickedSp, 62, 190, 50, 50);
+        canvas.removeEventListener("click", togback);
+    }
+}
+
+function togSp1(e) {
+    if (ctx.isPointInPath(untickedSp.path, e.offsetX, e.offsetY)) {
+        togSpeech = !togSpeech;
+        console.log(togSpeech);
+        ctx.drawImage(tickSp, 62, 190, 50, 50);
+        canvas.removeEventListener("click", togback1);
+    }
+}
+
+function togSpG(e) {
+    if (ctx.isPointInPath(untickedSp.path, e.offsetX, e.offsetY)) {
+        togSpeech1 = !togSpeech1;
+        ctx.drawImage(tickSp, 62, 245, 50, 50);
+        canvas.removeEventListener("click", togbackG);
+    }
+}
+
+function togSpG1(e) {
+    if (ctx.isPointInPath(tickSp.path, e.offsetX, e.offsetY)) {
+        togSpeech1=false;
+        ctx.drawImage(untickedSp, 62, 245, 50, 50);
+        canvas.removeEventListener("click", togbackG1);
+    }
+}
+/////End of Mouse Speech Change///////////////////
+
+
+
+
+
+
+
+
 function showMenu() {
-    lockMseSet = true;
-    console.log("lockMseSet is:", lockMseSet);
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9;
 
@@ -398,14 +444,6 @@ function showMenu() {
 
     // Toggle Music
     ctx.drawImage(mus, 62, 130, 250, 50);
-
-    //var tickMus;
-
-    /*if (back) {
-        ctx.drawImage(tick, 410, 190, 50, 50);
-        tick.path = new Path2D();
-        tick.path.rect(410, 190, 50, 50);
-    }*/
 
     if (bkMus) {
         ctx.drawImage(tickMus, 62, 190, 50, 50);
@@ -475,21 +513,49 @@ function showMenu() {
 
     ctx.fillText("White", 470, 282);
 
+
+
     // Toggle Speech
     ctx.drawImage(speechEff, 62, 310, 250, 50);
-    ctx.drawImage(tick, 62, 370, 50, 50);
+
+    if (togSpeech) {
+        ctx.drawImage(tickSp, 62, 370, 50, 50);
+        tickSp.path = new Path2D();
+        tickSp.path.rect(62, 370, 50, 50);
+    }
+
+    if (!togSpeech) {
+        ctx.drawImage(untickedSp, 62, 370, 50, 50);
+        untickedSp.path = new Path2D();
+        untickedSp.path.rect(62, 370, 50, 50);
+    }
+
     ctx.font = "700 30px Arial";
     ctx.fillText("On", 120, 410);
-    ctx.drawImage(unticked, 62, 425, 50, 50);
+
+    if (!togSpeech1) {
+        ctx.drawImage(untickedSp, 62, 425, 50, 50);
+        untickedSp.path = new Path2D();
+        untickedSp.path.rect(62, 425, 50, 50);
+    }
+
+    if (togSpeech1) {
+        ctx.drawImage(tickSp, 62, 425, 50, 50);
+        tickSp.path = new Path2D();
+        tickSp.path.rect(62, 425, 50, 50);
+    }
+
+
+
     ctx.fillText("Off", 120, 461);
 
     // Toggle Number of Questions
     ctx.drawImage(noQs, 410, 310, 250, 50);
     ctx.drawImage(Q2, 410, 370, 50, 50);
     ctx.drawImage(Q4, 461, 370, 50, 50);
-    ctx.drawImage(Q2, 512, 370, 50, 50);
-    ctx.drawImage(Q2, 563, 370, 50, 50);
-    ctx.drawImage(Q2, 614, 370, 50, 50);
+    ctx.drawImage(Q6, 512, 370, 50, 50);
+    ctx.drawImage(Q8, 563, 370, 50, 50);
+    ctx.drawImage(Q10, 614, 370, 50, 50);
 
     // Match Cards Instructions
     ctx.textAlign = "center"; 
@@ -505,7 +571,6 @@ function showMenu() {
 
 
     // Music //
-    if (lockMseSet) {
     canvas.addEventListener("click", togMus);
     canvas.addEventListener("click", togMus1);
     canvas.addEventListener("click", togMusG);
@@ -518,10 +583,15 @@ function showMenu() {
     canvas.addEventListener("click", togbackG);
     canvas.addEventListener("click", togbackG1);
 
+    // Speech //
+    canvas.addEventListener("click", togSp);
+    canvas.addEventListener("click", togSp1);
+    canvas.addEventListener("click", togSpG);
+    canvas.addEventListener("click", togSpG1);
+
     canvas.addEventListener("click", gameInsMouse);
 
     canvas.addEventListener("click", endMenu);
-    }
 }
 
 
@@ -652,6 +722,14 @@ function splash() {
 
 function closeSplash1(e) {
     if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+
+
+        gameInsSpeech.pause();
+        gameInsSpeech.currentTime = 0;
+
+
+
+
         incor = false;
         cor1=false;
         cor2=false;
@@ -670,12 +748,14 @@ function closeSplash1(e) {
 
 function gameInstructions() {
 
-        /*if (bkMus) {
-            music.play();
-            music.volume = 0.1;
-        }*/
-
+    if (togSpeech) {
         gameInsSpeech.play();
+    }
+    if (!togSpeech) {
+        gameInsSpeech.pause();
+        gameInsSpeech.currentTime = 0;
+    }
+        
         ctx.fillStyle = "white";
         //ctx.globalAlpha = 0.85;
         ctx.fillRect(20, 20, 675, 680);
@@ -896,7 +976,7 @@ function Q1checkClick4(e) {
 
 function quest1() {
 
-    console.log("lockMseSet is:", lockMseSet);
+    //console.log("lockMseSet is:", lockMseSet);
 
     // Question 1  
     if (play && !gameIns) {
@@ -1030,7 +1110,7 @@ function Q2checkClick4(e) {
 /////////  Question 2 //////////////////
 function quest2() {
 
-    console.log("lockMseSet is:", lockMseSet);
+    //console.log("lockMseSet is:", lockMseSet);
 
     // Question 2    
 
@@ -2038,8 +2118,17 @@ function rightClick1() {
 // End mouse controls right Answer //
 
 /////////  Right Answer 1 //////////////////
+
     function rightAns1() {
-        ambVoice.play();
+
+        if (togSpeech) {
+            ambVoice.play();
+        }
+        if (!togSpeech) {
+            ambVoice.pause();
+            ambVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2079,7 +2168,15 @@ function rightClick1() {
 
     /////////  Right Answer 2 //////////////////
     function rightAns2() {
-        cowVoice.play();
+        
+        if (togSpeech) {
+            cowVoice.play();
+        }
+        if (!togSpeech) {
+            cowVoice.pause();
+            cowVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2120,7 +2217,15 @@ function rightClick1() {
 
     /////////  Right Answer 3 //////////////////
     function rightAns3() {
-        lambVoice.play();
+        
+        if (togSpeech) {
+            lambVoice.play();
+        }
+        if (!togSpeech) {
+            lambVoice.pause();
+            lambVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2164,7 +2269,15 @@ function rightClick1() {
 
      /////////  Right Answer 4 //////////////////
      function rightAns4() {
-        telVoice.play();
+        
+        if (togSpeech) {
+            telVoice.play();
+        }
+        if (!togSpeech) {
+            telVoice.pause();
+            telVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2522,7 +2635,7 @@ function playGame() {
         gameInstructions();
     }
 
-    if (!setMenu && !lockMseSet) {
+    if (!setMenu) {
 
     if (MCsplashSc) {
         splash();
@@ -2854,18 +2967,7 @@ function animate() {
         music.pause();
         music.currentTime = 0;
     }
-
-    /*
-    if (bkSp) {
-        music.play();
-        music.volume = 0.1;
-    }
-
-    if (!bkSp) {
-        music.pause();
-        music.currentTime = 0;
-    }
-    */
+    
 
     playGame();
     requestAnimationFrame(animate);
