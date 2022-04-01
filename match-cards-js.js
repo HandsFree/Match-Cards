@@ -122,13 +122,13 @@ const Q4 = new Image();
 Q4.src = "images/menuAssets/Q4.png";
 
 const Q6 = new Image();
-Q6.src = "images/menuAssets/Q2.png";
+Q6.src = "images/menuAssets/Q6.png";
 
 const Q8 = new Image();
-Q8.src = "images/menuAssets/Q4.png";
+Q8.src = "images/menuAssets/Q8.png";
 
 const Q10 = new Image();
-Q10.src = "images/menuAssets/Q2.png";
+Q10.src = "images/menuAssets/Q10.png";
 
 
 const noQs = new Image();
@@ -600,25 +600,6 @@ function showMenu() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // End Splash Screen
 function closeSplash(e) {
     if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {
@@ -635,7 +616,16 @@ function closeSplash(e) {
 // Speech code for Mouse
 function speechMouse(e) {
     if (ctx.isPointInPath(speech.path, e.offsetX, e.offsetY)) {
-        splashAud.play();
+  
+        if (togSpeech) {
+            splashAud.play();
+        }
+    
+        if (!togSpeech) {
+            splashAud.pause();
+            splashAud.currentTime = 0;
+        }
+
         canvas.removeEventListener("click", speechMouse);
     }
 }
@@ -799,29 +789,6 @@ function gameInstructions() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function firstQus() {
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
@@ -975,8 +942,6 @@ function Q1checkClick4(e) {
 /////////  Question 1 //////////////////
 
 function quest1() {
-
-    //console.log("lockMseSet is:", lockMseSet);
 
     // Question 1  
     if (play && !gameIns) {
@@ -2319,7 +2284,16 @@ function rightClick1() {
 
     /////////  Right Answer 5 //////////////////
     function rightAns5() {
-        fEngVoice.play();
+
+        if (togSpeech) {
+            fEngVoice.play();
+        }
+
+        if (!togSpeech) {
+            fEngVoice.pause();
+            fEngVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2358,7 +2332,16 @@ function rightClick1() {
 
     /////////  Right Answer 6 //////////////////
     function rightAns6() {
-        microVoice.play();
+        
+        if (togSpeech) {
+            microVoice.play();
+        }
+
+        if (!togSpeech) {
+            microVoice.pause();
+            microVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2400,7 +2383,16 @@ function rightClick1() {
 
      /////////  Right Answer 7 //////////////////
      function rightAns7() {
-        doorbell.play();
+
+        if (togSpeech) {
+            doorbell.play();
+        }
+
+        if (!togSpeech) {
+            doorbell.pause();
+            doorbell.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2429,10 +2421,6 @@ function rightClick1() {
         addEventListener("click", rightClick7);
     }
 
-
-
-
-
        // mouse controls right Answer 8 //
        function rightClick8() {
         cor8 = false;
@@ -2447,7 +2435,16 @@ function rightClick1() {
 
      /////////  Right Answer 8 //////////////////
      function rightAns8() {
-        polyEff.play();
+
+        if (togSpeech) {
+            polyEff.play();
+        }
+
+        if (!togSpeech) {
+            polyEff.pause();
+            polyEff.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(15, 40, 687, 650);
         ctx.strokeStyle = "green";
@@ -2493,7 +2490,16 @@ function rightClick9() {
 
  /////////  Right Answer 9 //////////////////
  function rightAns9() {
-    pigEff.play();
+
+    if (togSpeech) {
+        pigEff.play();
+    }
+
+    if (!togSpeech) {
+        pigEff.pause();
+        pigEff.currentTime = 0;
+    }
+
     ctx.fillStyle = "white";
     ctx.fillRect(15, 40, 687, 650);
     ctx.strokeStyle = "green";
@@ -2541,7 +2547,16 @@ function rightClick10() {
 
  /////////  Right Answer 10 //////////////////
  function rightAns10() {
-    rugEff.play();
+
+    if (togSpeech) {
+        rugEff.play();
+    }
+
+    if (!togSpeech) {
+        rugEff.pause();
+        rugEff.currentTime = 0;
+    }
+
     ctx.fillStyle = "white";
     ctx.fillRect(15, 40, 687, 650);
     ctx.strokeStyle = "green";
@@ -2592,7 +2607,16 @@ function rightClick10() {
     /////////  Wrong Awnser //////////////////
     function wrong() {     
         play = false;
-        wrongVoice.play();
+
+        if (togSpeech) {
+            wrongVoice.play();
+        }
+    
+        if (!togSpeech) {
+            wrongVoice.pause();
+            wrongVoice.currentTime = 0;
+        }
+
         ctx.fillStyle = "white";
         ctx.fillRect(30, 40, 655, 650);
         ctx.strokeStyle = "red";
@@ -2675,7 +2699,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#45c345";
-        } else {
+        }
+        
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2701,7 +2727,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#77a9de";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2727,7 +2755,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#8fb58f";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2753,7 +2783,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#bca3cf";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2779,7 +2811,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "pink";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2805,7 +2839,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "yellow";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2831,7 +2867,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#03fcf4";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2857,7 +2895,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#93a832";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2883,7 +2923,9 @@ function playGame() {
 
         if (back) {
             ctx.fillStyle = "#f7f792";
-        } else {
+        }
+
+        if (!back) {
             ctx.fillStyle = "white";
         }
 
@@ -2919,10 +2961,26 @@ function playGame() {
       }
 
     if (finalScreen) {
-        wellDoneVoice.play();
-        ctx.fillStyle = "Green";
+
+        if (back) {
+            ctx.fillStyle = "Green";
+        }
+
+        if (!back) {
+            ctx.fillStyle = "white";
+        }
+
+        if (togSpeech) {
+            wellDoneVoice.play();
+        }
+        
+        if (!togSpeech) {
+            wellDoneVoice.pause();
+            wellDoneVoice.currentTime = 0;
+        }
+
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "yellow";
         ctx.textAlign = "center"; 
         ctx.font = "90px Comic Sans MS";
         ctx.fillText("Well Done", w, 200);
