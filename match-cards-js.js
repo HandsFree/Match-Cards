@@ -2,27 +2,22 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+// Photo dimensions
 const wdt = 300;
 const ht = 200;
 
 // center text
 var w = canvas.width / 2;
 
-///////////////////////////////////// 9/3/22
-// explaining screen
-//var instructionsSc = false;
 // main screen
 var gameSc = false;
-////////////////////////////////////
-
-var play = true;
 
 // initial screen
 var MCsplashSc = true;
 
 var gameIns=false;
 
-var n = 1;
+var n = 1; // Question Count
 
 // main screen
 var MCgameSc1 = false;
@@ -114,21 +109,25 @@ untickedSp.src = "images/menuAssets/untickedSp.png";
 /////////////////////////////////////////////////////////////
 
 
-
-const Q2 = new Image();
-Q2.src = "images/menuAssets/Q2.png";
-
+// Green
 const Q4 = new Image();
-Q4.src = "images/menuAssets/Q4.png";
-
-const Q6 = new Image();
-Q6.src = "images/menuAssets/Q6.png";
+Q4.src = "images/menuAssets/Q4T.png";
 
 const Q8 = new Image();
-Q8.src = "images/menuAssets/Q8.png";
+Q8.src = "images/menuAssets/Q8T.png";
 
-const Q10 = new Image();
-Q10.src = "images/menuAssets/Q10.png";
+const Q12 = new Image();
+Q12.src = "images/menuAssets/Q12T.png";
+
+// Red
+const Q4S = new Image();
+Q4S.src = "images/menuAssets/Q4TS.png";
+
+const Q8S = new Image();
+Q8S.src = "images/menuAssets/Q8TS.png";
+
+const Q12S = new Image();
+Q12S.src = "images/menuAssets/Q12TS.png";
 
 
 const noQs = new Image();
@@ -288,6 +287,10 @@ function endMenu(e) {
 }
 ////////////////////End of Mouse Close//////////////////////
 
+
+
+
+
 // Instructions //
 function gameInsMouse(e) {
     if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
@@ -296,6 +299,10 @@ function gameInsMouse(e) {
         canvas.removeEventListener("click", gameInsMouse);
     }
 }
+
+
+
+
 
 
 
@@ -313,7 +320,7 @@ function togMus1(e) {
     if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
         bkMus = !bkMus;
         ctx.drawImage(tickMus, 62, 190, 50, 50);
-        console.log(bkMus);
+        //console.log(bkMus);
         canvas.removeEventListener("click", togback1);
     }
 }
@@ -383,8 +390,6 @@ function togbackG1(e) {
 
 
 
-
-
 ////// Speech change ///////////////////
 function togSp(e) {
     if (ctx.isPointInPath(tickSp.path, e.offsetX, e.offsetY)) {
@@ -429,6 +434,7 @@ function togSpG1(e) {
 
 
 function showMenu() {
+
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9;
 
@@ -438,8 +444,8 @@ function showMenu() {
 
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
-	ctx.font = "100 90px Impact, fantasy";
-    ctx.fillText("Settings", w, 110);
+	ctx.font = "100 80px Impact, fantasy";
+    ctx.fillText("Settings", w, 100);
     ctx.textAlign = "left";
 
     // Toggle Music
@@ -475,7 +481,7 @@ function showMenu() {
 
         ctx.fillText("Off", 120, 282);
 
-
+  
 
     // Toggle Background
     ctx.drawImage(background, 410, 130, 250, 50);
@@ -496,9 +502,6 @@ function showMenu() {
     ctx.font = "700 30px Arial";
     ctx.fillText("Colourful", 470, 230);
 
-
-    
-
     if (!back1) {
         ctx.drawImage(unticked, 410, 245, 50, 50);
         unticked.path = new Path2D();
@@ -512,6 +515,8 @@ function showMenu() {
     } 
 
     ctx.fillText("White", 470, 282);
+
+
 
 
 
@@ -551,15 +556,13 @@ function showMenu() {
 
     // Toggle Number of Questions
     ctx.drawImage(noQs, 410, 310, 250, 50);
-    ctx.drawImage(Q2, 410, 370, 50, 50);
-    ctx.drawImage(Q4, 461, 370, 50, 50);
-    ctx.drawImage(Q6, 512, 370, 50, 50);
-    ctx.drawImage(Q8, 563, 370, 50, 50);
-    ctx.drawImage(Q10, 614, 370, 50, 50);
+    ctx.drawImage(Q4, 422, 370, 70, 70);
+    ctx.drawImage(Q8, 497, 370, 70, 70);
+    ctx.drawImage(Q12S, 575, 370, 70, 70);
 
     // Match Cards Instructions
     ctx.textAlign = "center"; 
-    ctx.drawImage(insMouse, w-266/2, 470, 266, 133);
+    ctx.drawImage(insMouse, w-266/2, 480, 266, 133);
     insMouse.path = new Path2D();
     insMouse.path.rect(w-266/2, 470, 266, 133);
 
@@ -708,29 +711,11 @@ function splash() {
 
 
 
-
-
 function closeSplash1(e) {
     if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
-
-
         gameInsSpeech.pause();
         gameInsSpeech.currentTime = 0;
-
-
-
-
-        incor = false;
-        cor1=false;
-        cor2=false;
-        cor3=false;
-        cor4=false;
-        cor5=false;
-        cor6=false;
-        cor7=false;
-        cor8=false;
-        cor9=false;
-        cor10=false;
+        locked();      
         gameIns=false;
         canvas.removeEventListener("click", closeSplash1);
     }
@@ -943,11 +928,15 @@ function Q1checkClick4(e) {
 
 function quest1() {
 
-    // Question 1  
-    if (play && !gameIns) {
+    // Question 1 
+    if (!gameIns && !setMenu) {
+        console.log(setMenu + "RRRRRR");
         sir.play();
     }
-    if (!play) {
+    
+    ////// Not Working ///////////////////
+    if (setMenu) {
+        console.log(setMenu + "RRRRRR");
         sir.pause();
         sir.currentTime = 0;
     }
@@ -1075,14 +1064,12 @@ function Q2checkClick4(e) {
 /////////  Question 2 //////////////////
 function quest2() {
 
-    //console.log("lockMseSet is:", lockMseSet);
-
     // Question 2    
 
-    if (play) {
+    if (!setMenu) {
         cow1.play();
     }
-    if (!play) {
+    if (setMenu) {
         cow1.pause();
         cow1.currentTime = 0;
     }
@@ -1192,10 +1179,11 @@ function quest3() {
 
     // Question 3    
 
-    if (play) {
+    if (!setMenu) {
         lamb.play();
     }
-    if (!play) {
+
+    if (setMenu) {
         lamb.pause();
         lamb.currentTime = 0;
     }
@@ -1308,10 +1296,10 @@ function quest4() {
 
     // Question 4    
 
-    if (play) {
+    if (!setMenu) {
         oldPhone.play();
     }
-    if (!play) {
+    if (setMenu) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
     }
@@ -1422,10 +1410,10 @@ function Q5checkClick4(e) {
 /////////  Question 5 //////////////////
 function quest5() {  
     
-    if (play) {
+    if (!setMenu) {
         fireEng.play();
     }
-    if (!play) {
+    if (setMenu) {
         fireEng.pause();
         fireEng.currentTime = 0;
     }
@@ -1538,10 +1526,10 @@ function Q6checkClick4(e) {
 
 function quest6() {
 
-    if (play) {
+    if (!setMenu) {
         microSound.play();
     }
-    if (!play) {
+    if (setMenu) {
         microSound.pause();
         microSound.currentTime = 0;
     }
@@ -1649,10 +1637,10 @@ function Q7checkClick4(e) {
 
 function quest7() {
 
-    if (play) {
+    if (!setMenu) {
         bellSound.play();
     }
-    if (!play) {
+    if (setMenu) {
         bellSound.pause();
         bellSound.currentTime = 0;
     }
@@ -1766,10 +1754,10 @@ function Q8checkClick4(e) {
 
 function quest8() {
 
-    if (play) {
+    if (!setMenu) {
         roarEff.play();
     }
-    if (!play) {
+    if (setMenu) {
         roarEff.pause();
         roarEff.currentTime = 0;
     }
@@ -1881,10 +1869,10 @@ function Q9checkClick4(e) {
 
 function quest9() {
 
-    if (play) {
+    if (!setMenu) {
         pigeonSdEff.play();
     }
-    if (!play) {
+    if (setMenu) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
     }
@@ -1997,10 +1985,10 @@ function Q10checkClick4(e) {
 
 function quest10() {
 
-    if (play) {
+    if (!setMenu) {
         rugbyEff.play();
     }
-    if (!play) {
+    if (setMenu) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
     }
@@ -2085,6 +2073,8 @@ function rightClick1() {
 /////////  Right Answer 1 //////////////////
 
     function rightAns1() {
+
+        
 
         if (togSpeech) {
             ambVoice.play();
@@ -2605,7 +2595,8 @@ function rightClick10() {
     }
 
     /////////  Wrong Awnser //////////////////
-    function wrong() {     
+    function wrong() {  
+       
         play = false;
 
         if (togSpeech) {
@@ -2668,7 +2659,6 @@ function playGame() {
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
 
-
         if (back) {
             ctx.fillStyle = "#FFA500";
         }
@@ -2677,7 +2667,7 @@ function playGame() {
             ctx.fillStyle = "white";
         }
 
-        ctx.fillRect(0, 0, canvas.width, canvas.height);    
+        ctx.fillRect(0, 0, canvas.width, canvas.height); 
 
         if (!cor1) {
            quest1();
