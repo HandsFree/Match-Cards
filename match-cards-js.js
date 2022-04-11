@@ -484,7 +484,7 @@ function togSpG1(e) {
 
 
 // Start Q4 //
-
+/*
 function MtogQ4(e) {
     if (ctx.isPointInPath(Q4.path, e.offsetX, e.offsetY)) {
         togQs4=false;
@@ -521,7 +521,7 @@ function MtogQG1(e) {
         canvas.removeEventListener("click", MtogQ41);
     }
 }
-
+*/
 
 
 //---------------------//
@@ -529,6 +529,7 @@ function MtogQG1(e) {
 
 
 // Start Q8 //
+/*
 function MtogQ8(e) {
     if (path.Q8 && ctx.isPointInPath(Q8.path, e.offsetX, e.offsetY)) {
         togQs8=false;
@@ -546,9 +547,11 @@ function MtogQ81(e) {
         canvas.removeEventListener("click", MtogQ81);
     }
 }
+*/
 // End Q8 //
 
 // Start Q12 //
+/*
 function MtogQ12(e) {
     if (ctx.isPointInPath(Q12.path, e.offsetX, e.offsetY)) {
         togQs12=false;
@@ -568,6 +571,7 @@ function MtogQ121(e) {
         canvas.removeEventListener("click", MtogQ121);
     }
 }
+*/
 // End Q12 //
 
 
@@ -795,13 +799,14 @@ function showMenu() {
     canvas.addEventListener("click", togSpG1);
 
     // Questions //
-    
+    /*
     canvas.addEventListener("click", MtogQ4);
     canvas.addEventListener("click", MtogQ41);
     canvas.addEventListener("click", MtogQ8);
     canvas.addEventListener("click", MtogQ81);
     canvas.addEventListener("click", MtogQ12);
     canvas.addEventListener("click", MtogQ121);
+    */
     
 
     canvas.addEventListener("click", gameInsMouse);
