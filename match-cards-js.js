@@ -1,4 +1,6 @@
 
+
+
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
@@ -9,6 +11,7 @@ const ht = 200;
 // center text
 var w = canvas.width / 2;
 
+
 // main screen
 var gameSc = false;
 
@@ -17,9 +20,11 @@ var MCsplashSc = true;
 
 var gameIns=false;
 
+var sEff = true;
+
 var n = 1; // Question Count
 
-// main screen
+// Questions 
 var MCgameSc1 = false;
 var MCgameSc2 = false;
 var MCgameSc3 = false;
@@ -30,8 +35,13 @@ var MCgameSc7 = false;
 var MCgameSc8 = false;
 var MCgameSc9 = false;
 var MCgameSc10 = false;
+
+var MCgameSc11 = false;
+var MCgameSc12 = false;
+
 var finalScreen = false;
 
+// Answers
 var cor1 = false;
 var cor2 = false;
 var cor3 = false;
@@ -42,6 +52,11 @@ var cor7 = false;
 var cor8 = false;
 var cor9 = false;
 var cor10 = false;
+
+var cor11 = false;
+var cor12 = false;
+
+// Wrong Answer
 var incor = false;
 
 
@@ -178,6 +193,24 @@ const Rugby = new Image();
 Rugby.src = "images/Rugby.jpg";
 
 
+//////////////////////////////
+// new
+const collie = new Image();
+collie.src = "images/collie.jpg";
+
+const pCar = new Image();
+pCar.src = "images/policeCar.jpg";
+
+const tennis = new Image();
+tennis.src = "images/tennis.jpg";
+
+const tram = new Image();
+tram.src = "images/tram.jpg";
+
+
+
+/////////////////////////////////
+
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
 
@@ -197,6 +230,9 @@ var roarEff = new Audio("sounds/Roar.mp3");
 var rookEff = new Audio("sounds/rook_song.mp3");
 var rugbyEff  = new Audio("sounds/rugby.mp3");
 
+var barkEff = new Audio("sounds/bark.mp3");
+var tramEff  = new Audio("sounds/TramBell.mp3");
+
 // Voices
 var wrongVoice = new Audio("sounds/wrong-v.mp3");
 
@@ -210,20 +246,12 @@ var doorbell = new Audio("sounds/doorbell-v1.mp3");
 
 var polyEff = new Audio("sounds/polyEff.mp3");
 var pigEff = new Audio("sounds/pigEff.mp3");
-var rugEff = new Audio("sounds/rugEff.mp3");
+var rugEff = new Audio("sounds/rugbyVce.mp3");
+
+var barkVce = new Audio("sounds/barkVce.mp3");
+var tramVce = new Audio("sounds/tramVce.mp3");
 
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
-
-
-
-
-
-
-
-
-
-
-
 
 function locked() {
     incor = false;
@@ -237,18 +265,9 @@ function locked() {
     cor8=false;
     cor9=false;
     cor10=false;
+    cor11=false;
+    cor12=false;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -256,6 +275,7 @@ function locked() {
 
 // Close menu
 var setMenu=false;
+
 
 // Background Music
 // On
@@ -275,19 +295,28 @@ var togSpeech = true;
 // Off
 var togSpeech1 = false;
 
+// Questions
+var togQs4 = true;
+var togQs4S = false;
+
+var togQs8 = true;
+var togQs8S = false;
+
+var togQs12 = false;
+var togQs12S = true;
+
 /************end****************/
 
 // End Mouse Menu and return to game //
 function endMenu(e) {
     if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
         locked();
+        sEff = true;
         setMenu=false;
         canvas.removeEventListener("click", endMenu);
     }
 }
 ////////////////////End of Mouse Close//////////////////////
-
-
 
 
 
@@ -301,11 +330,6 @@ function gameInsMouse(e) {
 }
 
 
-
-
-
-
-
 ////// music change ///////////////////
 function togMus(e) {
     if (ctx.isPointInPath(tickMus.path, e.offsetX, e.offsetY)) {
@@ -315,6 +339,7 @@ function togMus(e) {
         canvas.removeEventListener("click", togback);
     }
 }
+
 
 function togMus1(e) {
     if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
@@ -351,27 +376,40 @@ function togMusG1(e) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ////// Background change ///////////////////
 function togback(e) {
     if (ctx.isPointInPath(tick.path, e.offsetX, e.offsetY)) {
         back=true;
         ctx.drawImage(unticked, 410, 190, 50, 50);
-        //console.log(back);
         canvas.removeEventListener("click", togback);
     }
 }
 
 function togback1(e) {
     if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
+        back=false;
         back = !back;
         ctx.drawImage(tick, 410, 190, 50, 50);
-        //console.log(back);
         canvas.removeEventListener("click", togback1);
     }
 }
 
+
 function togbackG(e) {
     if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
+        back1=true;
         back1 = !back1;
         ctx.drawImage(tick, 410, 245, 50, 50);
         canvas.removeEventListener("click", togbackG);
@@ -386,6 +424,22 @@ function togbackG1(e) {
         canvas.removeEventListener("click", togbackG1);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////End of Mouse Background Change///////////////////
 
 
@@ -426,7 +480,95 @@ function togSpG1(e) {
 }
 /////End of Mouse Speech Change///////////////////
 
+////// Qustions change ///////////////////
 
+
+// Start Q4 //
+
+function MtogQ4(e) {
+    if (ctx.isPointInPath(Q4.path, e.offsetX, e.offsetY)) {
+        togQs4=false;
+        console.log(togQs4);
+        ctx.drawImage(Q4S, 422, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ4);
+    }
+}
+
+function MtogQ41(e) {
+    if (ctx.isPointInPath(Q4S.path, e.offsetX, e.offsetY)) {
+        togQs4 = !togQs4;
+        console.log(togQs4);
+        ctx.drawImage(Q4, 422, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ41);
+    }
+}
+
+
+function MtogQ4G(e) {
+    if (ctx.isPointInPath(Q4.path, e.offsetX, e.offsetY)) {
+        togQs4=false;
+        console.log(togQs4);
+        ctx.drawImage(Q4S, 422, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ4);
+    }
+}
+
+function MtogQG1(e) {
+    if (ctx.isPointInPath(Q4S.path, e.offsetX, e.offsetY)) {
+        togQs4 = !togQs4;
+        console.log(togQs4);
+        ctx.drawImage(Q4, 422, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ41);
+    }
+}
+
+
+
+//---------------------//
+// End Q4 //
+
+
+// Start Q8 //
+function MtogQ8(e) {
+    if (path.Q8 && ctx.isPointInPath(Q8.path, e.offsetX, e.offsetY)) {
+        togQs8=false;
+        console.log(togQs8);
+        ctx.drawImage(Q8S, 497, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ8);
+    }
+}
+
+function MtogQ81(e) {
+    if (path.Q8S && ctx.isPointInPath(Q8S.path, e.offsetX, e.offsetY)) {
+        togQs8 = !togQs8;
+        console.log(togQs8);
+        ctx.drawImage(Q8, 497, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ81);
+    }
+}
+// End Q8 //
+
+// Start Q12 //
+function MtogQ12(e) {
+    if (ctx.isPointInPath(Q12.path, e.offsetX, e.offsetY)) {
+        togQs12=false;
+        console.log(togQs12);
+        ctx.drawImage(Q12S, 575, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ12);
+    }
+}
+
+
+
+function MtogQ121(e) {
+    if (ctx.isPointInPath(Q12S.path, e.offsetX, e.offsetY)) {
+        togQs12 = !togQs12;
+        console.log(togQs12);
+        ctx.drawImage(Q12, 575, 370, 70, 70);
+        canvas.removeEventListener("click", MtogQ121);
+    }
+}
+// End Q12 //
 
 
 
@@ -435,12 +577,19 @@ function togSpG1(e) {
 
 function showMenu() {
 
+    
+
+    sEff=false;
+
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9;
 
     if (!gameIns) {
     ctx.drawImage(mBack, 0, 0, canvas.width, canvas.height);
     }
+
+
+
 
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
@@ -550,15 +699,62 @@ function showMenu() {
         tickSp.path.rect(62, 425, 50, 50);
     }
 
-
-
     ctx.fillText("Off", 120, 461);
+    // End of tog Speech //
+
+  
+
+
+
+
 
     // Toggle Number of Questions
     ctx.drawImage(noQs, 410, 310, 250, 50);
-    ctx.drawImage(Q4, 422, 370, 70, 70);
-    ctx.drawImage(Q8, 497, 370, 70, 70);
-    ctx.drawImage(Q12S, 575, 370, 70, 70);
+
+    // Question 4
+    if (togQs4) {
+        ctx.drawImage(Q4, 422, 370, 70, 70);
+        Q4.path = new Path2D();
+        Q4.path.rect(422, 370, 70, 70);
+    }
+
+    if (!togQs4) {
+        ctx.drawImage(Q4S, 422, 370, 70, 70);
+        Q4S.path = new Path2D();
+        Q4S.path.rect(422, 370, 70, 70);
+    }
+
+    //----------------------------------------//
+
+    // Question 8
+    if (togQs8) {
+        ctx.drawImage(Q8, 497, 370, 70, 70);
+        Q8.path = new Path2D();
+        Q8.path.rect(497, 370, 70, 70);
+    }
+
+    if (!togQs8) {
+        ctx.drawImage(Q8S, 497, 370, 70, 70);
+        Q8S.path = new Path2D();
+        Q8S.path.rect(497, 370, 70, 70);
+    }
+
+    //----------------------------------------//
+
+    // Question 12
+    if (togQs12) {
+        ctx.drawImage(Q12, 575, 370, 70, 70);
+        Q12.path = new Path2D();
+        Q12.path.rect(575, 370, 70, 70);
+    }
+
+    if (!togQs12) {
+        ctx.drawImage(Q12S, 575, 370, 70, 70);
+        Q12S.path = new Path2D();
+        Q12S.path.rect(575, 370, 70, 70);
+    }
+
+    //-----------------------------------------//
 
     // Match Cards Instructions
     ctx.textAlign = "center"; 
@@ -573,6 +769,9 @@ function showMenu() {
     cross.path.rect(w-30, 640, 50, 50);
 
 
+    
+
+    //if (!deleteMenu) {
     // Music //
     canvas.addEventListener("click", togMus);
     canvas.addEventListener("click", togMus1);
@@ -581,10 +780,13 @@ function showMenu() {
 
 
     // Background // 
+
+
     canvas.addEventListener("click", togback);
     canvas.addEventListener("click", togback1);
     canvas.addEventListener("click", togbackG);
     canvas.addEventListener("click", togbackG1);
+    
 
     // Speech //
     canvas.addEventListener("click", togSp);
@@ -592,9 +794,22 @@ function showMenu() {
     canvas.addEventListener("click", togSpG);
     canvas.addEventListener("click", togSpG1);
 
+    // Questions //
+    
+    canvas.addEventListener("click", MtogQ4);
+    canvas.addEventListener("click", MtogQ41);
+    canvas.addEventListener("click", MtogQ8);
+    canvas.addEventListener("click", MtogQ81);
+    canvas.addEventListener("click", MtogQ12);
+    canvas.addEventListener("click", MtogQ121);
+    
+
     canvas.addEventListener("click", gameInsMouse);
 
     canvas.addEventListener("click", endMenu);
+
+   
+
 }
 
 
@@ -606,7 +821,7 @@ function showMenu() {
 // End Splash Screen
 function closeSplash(e) {
     if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {
-        incor = false;
+        locked();
         splashAud.pause();
         splashAud.currentTime = 0;
         MCsplashSc = false;
@@ -715,7 +930,7 @@ function closeSplash1(e) {
     if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
         gameInsSpeech.pause();
         gameInsSpeech.currentTime = 0;
-        locked();      
+        locked();
         gameIns=false;
         canvas.removeEventListener("click", closeSplash1);
     }
@@ -762,6 +977,8 @@ function gameInstructions() {
 
         ctx.fillText("OR", w, 645);
         ctx.fillText("Press the spacebar", w, 680);
+
+        locked();
 
         canvas.addEventListener("click", closeSplash1);
         /*
@@ -821,7 +1038,13 @@ function instructions() {
 // Setting Menu mouse controls
 function settingMouse(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
-        setMenu=true;
+
+
+        setMenu=true;;
+
+
+
+
         canvas.removeEventListener("click", settingMouse);
     }
 }
@@ -832,7 +1055,7 @@ function cardSetUp() {
     settings.path = new Path2D();
     settings.path.rect(0, 0, 80, 80);
 
-    canvas.addEventListener("click", settingMouse, false);
+    canvas.addEventListener("click", settingMouse);
 
     // Keyboard Settings
     if (keys[83]) { // settings
@@ -928,15 +1151,15 @@ function Q1checkClick4(e) {
 
 function quest1() {
 
-    // Question 1 
-    if (!gameIns && !setMenu) {
-        console.log(setMenu + "RRRRRR");
+    // Question 1
+    // Only runs if instuctions and settings menu are off.
+    if (!gameIns && sEff) {
+        console.log(sEff + "Running");
         sir.play();
     }
     
-    ////// Not Working ///////////////////
-    if (setMenu) {
-        console.log(setMenu + "RRRRRR");
+    if (!sEff) {
+        console.log(sEff + "Paused");
         sir.pause();
         sir.currentTime = 0;
     }
@@ -1066,10 +1289,10 @@ function quest2() {
 
     // Question 2    
 
-    if (!setMenu) {
+    if (sEff) {
         cow1.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         cow1.pause();
         cow1.currentTime = 0;
     }
@@ -1179,11 +1402,11 @@ function quest3() {
 
     // Question 3    
 
-    if (!setMenu) {
+    if (sEff) {
         lamb.play();
     }
 
-    if (setMenu) {
+    if (!sEff) {
         lamb.pause();
         lamb.currentTime = 0;
     }
@@ -1296,10 +1519,10 @@ function quest4() {
 
     // Question 4    
 
-    if (!setMenu) {
+    if (sEff) {
         oldPhone.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
     }
@@ -1410,10 +1633,10 @@ function Q5checkClick4(e) {
 /////////  Question 5 //////////////////
 function quest5() {  
     
-    if (!setMenu) {
+    if (sEff) {
         fireEng.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         fireEng.pause();
         fireEng.currentTime = 0;
     }
@@ -1526,10 +1749,10 @@ function Q6checkClick4(e) {
 
 function quest6() {
 
-    if (!setMenu) {
+    if (sEff) {
         microSound.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         microSound.pause();
         microSound.currentTime = 0;
     }
@@ -1637,10 +1860,10 @@ function Q7checkClick4(e) {
 
 function quest7() {
 
-    if (!setMenu) {
+    if (sEff) {
         bellSound.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         bellSound.pause();
         bellSound.currentTime = 0;
     }
@@ -1754,10 +1977,10 @@ function Q8checkClick4(e) {
 
 function quest8() {
 
-    if (!setMenu) {
+    if (sEff) {
         roarEff.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         roarEff.pause();
         roarEff.currentTime = 0;
     }
@@ -1869,10 +2092,10 @@ function Q9checkClick4(e) {
 
 function quest9() {
 
-    if (!setMenu) {
+    if (sEff) {
         pigeonSdEff.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
     }
@@ -1981,14 +2204,38 @@ function Q10checkClick4(e) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /////////  Question 10 //////////////////
 
 function quest10() {
 
-    if (!setMenu) {
+    if (sEff) {
         rugbyEff.play();
     }
-    if (setMenu) {
+    if (!sEff) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
     }
@@ -2048,6 +2295,248 @@ function quest10() {
 
 }
 ////////// End of Question 10 ////////////////////
+
+
+
+
+
+
+
+////// Q11 Mouse Controls ////////////////////////
+
+function Q11checkClick1(e) {
+    if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q11checkClick1);
+    }
+}
+
+function Q11checkClick2(e) {
+    if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q11checkClick2);
+    }
+}
+
+function Q11checkClick3(e) {
+    if (collie.path && ctx.isPointInPath(collie.path, event.offsetX, event.offsetY)) {
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = false;
+        cor11 = true;       
+        canvas.removeEventListener("click", Q11checkClick3);
+    }
+}
+
+function Q11checkClick4(e) {   
+    if (pCar.path && ctx.isPointInPath(pCar.path, event.offsetX, event.offsetY)) {
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q11checkClick4);
+    }
+}
+
+/////////// end of Q11 Mouse Controls ////////////////////////////////
+
+
+
+/////////  Question 11 //////////////////
+
+function quest11() {
+
+    if (sEff) {
+        barkEff.play();
+    }
+    if (!sEff) {
+        barkEff.pause();
+        barkEff.currentTime = 0;
+    }
+
+    cardSetUp();
+
+    ctx.drawImage(rook, 50, 150, 300, 200);
+    rook.path = new Path2D();
+    rook.path.rect(50, 150, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(lam, 370, 150, 300, 200);
+    lam.path = new Path2D();
+    lam.path.rect(370, 150, 300, 200);
+    secQus();
+
+    ctx.drawImage(collie, 50, 380, 300, 200);
+    collie.path = new Path2D();
+    collie.path.rect(50, 380, 300, 200);
+    thQus();
+
+    ctx.drawImage(pCar, 370, 380, 300, 200);
+    pCar.path = new Path2D();
+    pCar.path.rect(370, 380, 300, 200);
+    foQus();
+
+    instructions();
+
+    canvas.addEventListener("click", Q11checkClick1);
+    canvas.addEventListener("click", Q11checkClick2);
+    canvas.addEventListener("click", Q11checkClick3);
+    canvas.addEventListener("click", Q11checkClick4);
+
+    if (keys[49]) { // Correct
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true; 
+    }
+
+    if (keys[51]) { // Incorrect
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        barkEff.pause();
+        barkEff.currentTime = 0;
+        cor11 = true;   
+    }
+
+}
+////////// End of Question 11 ////////////////////
+
+
+
+
+
+
+
+
+
+
+////// Q12 Mouse Controls ////////////////////////
+
+function Q12checkClick1(e) {
+    if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q12checkClick1);
+    }
+}
+
+function Q12checkClick2(e) {
+    if (tennis.path && ctx.isPointInPath(tennis.path, event.offsetX, event.offsetY)) {
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q12checkClick2);
+    }
+}
+
+function Q12checkClick3(e) {
+    if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true;
+        canvas.removeEventListener("click", Q12checkClick3);
+    }
+}
+
+function Q12checkClick4(e) {   
+    if (tram.path && ctx.isPointInPath(tram.path, event.offsetX, event.offsetY)) {
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = false;
+        cor12 = true;
+        //console.log(cor12);
+        canvas.removeEventListener("click", Q12checkClick4);
+    }
+}
+
+/////////// end of Q12 Mouse Controls ////////////////////////////////
+
+
+
+/////////  Question 12 //////////////////
+
+function quest12() {
+
+    if (sEff) {
+        tramEff.play();
+    }
+    if (!sEff) {
+        tramEff.pause();
+        tramEff.currentTime = 0;
+    }
+
+    cardSetUp();
+
+    ctx.drawImage(rook, 50, 150, 300, 200);
+    rook.path = new Path2D();
+    rook.path.rect(50, 150, 300, 200);
+    firstQus();
+  
+    ctx.drawImage(tennis, 370, 150, 300, 200);
+    tennis.path = new Path2D();
+    tennis.path.rect(370, 150, 300, 200);
+    secQus();
+
+    ctx.drawImage(cow, 50, 380, 300, 200);
+    cow.path = new Path2D();
+    cow.path.rect(50, 380, 300, 200);
+    thQus();
+
+    ctx.drawImage(tram, 370, 380, 300, 200);
+    tram.path = new Path2D();
+    tram.path.rect(370, 380, 300, 200);
+    foQus();
+
+    instructions();
+
+    canvas.addEventListener("click", Q12checkClick1);
+    canvas.addEventListener("click", Q12checkClick2);
+    canvas.addEventListener("click", Q12checkClick3);
+    canvas.addEventListener("click", Q12checkClick4);
+
+    if (keys[49]) { // Correct
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[50]) { // Incorrect
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true; 
+    }
+
+    if (keys[51]) { // Incorrect
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        incor = true;
+    }
+
+    if (keys[52]) { // Incorrect
+        tramEff.pause();
+        tramEff.currentTime = 0;
+        cor12 = true;
+    }
+
+}
+////////// End of Question 12 ////////////////////
+
+
+
+
 
 
 
@@ -2216,8 +2705,15 @@ function rightClick1() {
         MCgameSc2 = false;
         MCgameSc3 = false;
         MCgameSc4 = false;
-        //finalScreen = true;
-        MCgameSc5 = true;
+       
+        if (togQs4) {
+            MCgameSc5 = true;
+        }
+
+        if (!togQs4) {
+            finalScreen = true;
+        }
+
         removeEventListener("click", rightClick4);
     }
     // End mouse controls right Answer //
@@ -2418,7 +2914,15 @@ function rightClick1() {
         polyEff.currentTime = 0;
         incor = false;
         MCgameSc8 = false;
-        MCgameSc9 = true;
+
+        if (togQs8) {
+            MCgameSc9 = true;
+        }
+
+        if (!togQs8) {
+            finalScreen = true;
+        }
+
         removeEventListener("click", rightClick8);
       }
   // End mouse controls right Answer //
@@ -2529,8 +3033,8 @@ function rightClick10() {
     rugEff.currentTime = 0;
     incor = false;
     MCgameSc10 = false;
-    //MCgameSc10 = true;
-    finalScreen = true;
+    MCgameSc11 = true;
+    //finalScreen = true;
     removeEventListener("click", rightClick10);
   }
 // End mouse controls right Answer //
@@ -2561,43 +3065,165 @@ function rightClick10() {
     ctx.fillText("Left click on your mouse", w, 400);
     ctx.fillText("OR", w, 465);
     ctx.fillText("Press the Spacebar", w, 520);
-    //ctx.fillText("for the next question!", w, 610);
+    ctx.fillText("for the next question!", w, 610);
 
     if (keys[32]) { // Go to Final Screen
         cor10 = false;
         rugEff.pause();
         rugEff.currentTime = 0;
         MCgameSc10 = false;
-        finalScreen = true;
+        MCgameSc11 = true;
+        //finalScreen = true;
     }
 
     addEventListener("click", rightClick10);
 }
 
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+// mouse controls right Answer 11 //
+
+function rightClick11() {
+    cor11 = false;
+    barkVce.pause();
+    barkVce.currentTime = 0;
+    incor = false;
+    MCgameSc11 = false;
+    MCgameSc12 = true;
+    //finalScreen = true;
+    removeEventListener("click", rightClick11);
+  }
+// End mouse controls right Answer //
+
+ /////////  Right Answer 11 //////////////////
+ function rightAns11() {
+
+    if (togSpeech) {
+        barkVce.play();
+    }
+
+    if (!togSpeech) {
+        barkVce.pause();
+        barkVce.currentTime = 0;
+    }
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(15, 40, 687, 650);
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(15, 40, 687, 650);
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center"; 
+    ctx.font = "100px Comic Sans MS";
+    ctx.fillText("Amazing!", w, 180);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("The sound was a Collie Dog!", w, 290);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("Left click on your mouse", w, 400);
+    ctx.fillText("OR", w, 465);
+    ctx.fillText("Press the Spacebar", w, 520);
+    ctx.fillText("for the next question!", w, 610);
+
+    if (keys[32]) { // Go to Final Screen
+        cor11 = false;
+        barkVce.pause();
+        barkVce.currentTime = 0;
+        MCgameSc11 = false;
+        MCgameSc12 = true;
+        //finalScreen = true;
+    }
+
+    addEventListener("click", rightClick11);
+}
+// End of 11 ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+// 12 //
+// mouse controls right Answer 12 //
+function rightClick12() {
+    cor12 = false;
+    tramVce.pause();
+    tramVce.currentTime = 0;
+    incor = false;
+    MCgameSc12 = false;
+    finalScreen = true;
+    removeEventListener("click", rightClick12);
+  }
+// End mouse controls right Answer //
+
+ /////////  Right Answer 12 //////////////////
+ function rightAns12() {
+
+    if (togSpeech) {
+        tramVce.play();
+    }
+
+    if (!togSpeech) {
+        tramVce.pause();
+        tramVce.currentTime = 0;
+    }
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(15, 40, 687, 650);
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(15, 40, 687, 650);
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center"; 
+    ctx.font = "90px Comic Sans MS";
+    ctx.fillText("Excellent work!", w, 180);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("The sound was a Tram!", w, 290);
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillText("Left click on your mouse", w, 400);
+    ctx.fillText("OR", w, 465);
+    ctx.fillText("Press the Spacebar", w, 520);
+    //ctx.fillText("for the next question!", w, 610);
+
+    if (keys[32]) { // Go to Final Screen
+        cor12 = false;
+        tramVce.pause();
+        tramVce.currentTime = 0;
+        MCgameSc12 = false;
+        finalScreen = true;
+    }
+
+    addEventListener("click", rightClick12);
+}
+
+// End of 12 //
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     // mouse controls Wrong Answer //
     function clickWrong() {
-        play = true;
+        sEff = true;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
-        cor1 = false;
-        cor2 = false;
-        cor3 = false;
-        cor4 = false;
-        cor5 = false;
-        cor6 = false;
-        cor7 = false;
-        cor8 = false;
-        cor9 = false;
-        cor10 = false;
-        incor = false;
+        locked();
         removeEventListener("click", clickWrong);
     }
 
     /////////  Wrong Awnser //////////////////
     function wrong() {  
        
-        play = false;
+        sEff = false;
 
         if (togSpeech) {
             wrongVoice.play();
@@ -2633,7 +3259,7 @@ function rightClick10() {
             incor = false;
             wrongVoice.pause();
             wrongVoice.currentTime = 0;
-            play = true;
+            sEff = true;
         }
     }
 
@@ -2932,7 +3558,66 @@ function playGame() {
 
         if (cor10) {
           rightAns10();
-          //n = 11;
+          n = 11;
+        }
+    }
+
+
+
+    ///////////// Question 11 ////////////////////
+    if (MCgameSc11) {
+
+        if (back) {
+            ctx.fillStyle = "#42f5a4";
+        }
+
+        if (!back) {
+            ctx.fillStyle = "white";
+        }
+
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor11) {
+          quest11();
+        }
+
+        if (incor) {
+            cor11 = false;
+            wrong();
+        }
+
+        if (cor11) {
+          rightAns11();
+          n = 12;
+        }
+    }
+
+
+
+    ///////////// Question 12 ////////////////////
+    if (MCgameSc12) {
+
+        if (back) {
+            ctx.fillStyle = "#edb4e5";
+        }
+
+        if (!back) {
+            ctx.fillStyle = "white";
+        }
+
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (!cor12) {
+          quest12();
+        }
+
+        if (incor) {
+            cor12 = false;
+            wrong();
+        }
+
+        if (cor12) {
+          rightAns12();
         }
     }
 
@@ -2953,7 +3638,7 @@ function playGame() {
     if (finalScreen) {
 
         if (back) {
-            ctx.fillStyle = "Green";
+            ctx.fillStyle = "#c5f542";
         }
 
         if (!back) {
@@ -2970,7 +3655,7 @@ function playGame() {
         }
 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "yellow";
+        ctx.fillStyle = "blue";
         ctx.textAlign = "center"; 
         ctx.font = "90px Comic Sans MS";
         ctx.fillText("Well Done", w, 200);
@@ -3005,6 +3690,8 @@ function playGame() {
 
 
 function animate() {
+
+    
 
     if (bkMus) {
         music.play();
