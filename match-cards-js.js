@@ -202,7 +202,7 @@ const pCar = new Image();
 pCar.src = "images/policeCar.jpg";
 
 const tennis = new Image();
-tennis.src = "images/tennis.jpg";
+tennis.src = "images/tennis.JPG";
 
 const tram = new Image();
 tram.src = "images/tram.jpg";
