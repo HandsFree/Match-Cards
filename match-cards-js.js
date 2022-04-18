@@ -87,66 +87,70 @@ soundBox.src = "images/soundBox.png";
 const settings = new Image();
 settings.src = "images/settings.png";
 
+
+
 // Settings Menu
 const mBack = new Image();
 mBack.src = "images/menuAssets/backGr1.png";
 
+///////////////////////////////////////////////////////////
+// tick image // 15/4/22
+const rTick1 = new Image();
+rTick1.src = "images/menuAssets/rTick1.png";
+///////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////
+// music images // 14/4/22
 const mus = new Image();
 mus.src = "images/menuAssets/music.png";
 
+const BoxMus1 = new Image();
+BoxMus1.src = "images/menuAssets/BoxMus1.png";
+
+const BoxMus2 = new Image();
+BoxMus2.src = "images/menuAssets/BoxMus2.png";
+//////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+// background images // 14/4/22
 const background = new Image();
 background.src = "images/menuAssets/background.png";
 
+const BoxBack1 = new Image();
+BoxBack1.src = "images/menuAssets/BoxBack1.png";
+
+const BoxBack2 = new Image();
+BoxBack2.src = "images/menuAssets/BoxBack2.png";
+//////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////
+// Speech images // 16/4/22
 const speechEff = new Image();
 speechEff.src = "images/menuAssets/speech.png";
 
-const tick = new Image();
-tick.src = "images/menuAssets/tick.png";
+const BoxSp1 = new Image();
+BoxSp1.src = "images/menuAssets/BoxSp1.png";
 
-const unticked = new Image();
-unticked.src = "images/menuAssets/unticked.png";
-
+const BoxSp2 = new Image();
+BoxSp2.src = "images/menuAssets/BoxSp2.png";
 //////////////////////////////////////////////////////////
-const tickMus = new Image();
-tickMus.src = "images/menuAssets/tickMus.png";
 
-const untickedMus = new Image();
-untickedMus.src = "images/menuAssets/untickedMus.png";
-/////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////
-const tickSp = new Image();
-tickSp.src = "images/menuAssets/tickSp.png";
-
-const untickedSp = new Image();
-untickedSp.src = "images/menuAssets/untickedSp.png";
-/////////////////////////////////////////////////////////////
-
-
-// Green
-const Q4 = new Image();
-Q4.src = "images/menuAssets/Q4T.png";
-
-const Q8 = new Image();
-Q8.src = "images/menuAssets/Q8T.png";
-
-const Q12 = new Image();
-Q12.src = "images/menuAssets/Q12T.png";
-
-// Red
-const Q4S = new Image();
-Q4S.src = "images/menuAssets/Q4TS.png";
-
-const Q8S = new Image();
-Q8S.src = "images/menuAssets/Q8TS.png";
-
-const Q12S = new Image();
-Q12S.src = "images/menuAssets/Q12TS.png";
-
-
+/////////////////////////////////////////////////////////
+// Questions images // 17/4/22
 const noQs = new Image();
 noQs.src = "images/menuAssets/noQuestions.png";
+
+const BoxQ41 = new Image();
+BoxQ41.src = "images/menuAssets/BoxQ41.png";
+
+const BoxQ81 = new Image();
+BoxQ81.src = "images/menuAssets/BoxQ81.png";
+
+const BoxQ121 = new Image();
+BoxQ121.src = "images/menuAssets/BoxQ121.png";
+///////////////////////////////////////////////////////////
+
+
 
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
@@ -206,6 +210,8 @@ tennis.src = "images/tennis.JPG";
 
 const tram = new Image();
 tram.src = "images/tram.jpg";
+
+
 
 
 
@@ -276,34 +282,18 @@ function locked() {
 // Close menu
 var setMenu=false;
 
-
 // Background Music
-// On
 var bkMus = true;
-// Off
-var bkMus1 = false;
 
 // Set Background
-// Colorful
 var back = true;
-// White
-var back1 = false;
 
 // Set Speech
-// On
 var togSpeech = true;
-// Off
-var togSpeech1 = false;
 
 // Questions
-var togQs4 = true;
-var togQs4S = false;
+var togQs = true;
 
-var togQs8 = true;
-var togQs8S = false;
-
-var togQs12 = false;
-var togQs12S = true;
 
 /************end****************/
 
@@ -336,128 +326,62 @@ function gameInsMouse(e) {
 ////// music change ///////////////////
 ///////////////////////////////////////
 
-function togMus(e) {
-    if (ctx.isPointInPath(tickMus.path, e.offsetX, e.offsetY)) {
+function MustickT(e) {
+    if (ctx.isPointInPath(BoxMus1.path, e.offsetX, e.offsetY)) {
         bkMus=true;
-        ctx.drawImage(untickedMus, 62, 190, 50, 50);
-        canvas.removeEventListener("click", togMus);
+        canvas.removeEventListener("click", MustickT);
    }
 }
 
-
-
-
-function togMus1(e) {
-    if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
-        bkMus = !bkMus;;
-        ctx.drawImage(tickMus, 62, 190, 50, 50);
-        canvas.removeEventListener("click", togMus1);
-    }
+function MustickF(e) {
+    if (ctx.isPointInPath(BoxMus2.path, e.offsetX, e.offsetY)) {
+        bkMus=false;
+        canvas.removeEventListener("click", MustickF);
+   }
 }
-
-
-function togMusG(e) {
-    if (ctx.isPointInPath(untickedMus.path, e.offsetX, e.offsetY)) {
-        bkMus1 = !bkMus1;
-        ctx.drawImage(tickMus, 62, 245, 50, 50);    
-        canvas.removeEventListener("click", togMusG);
-        
-    }
-}
-
-
-
-function togMusG1(e) {
-    if (ctx.isPointInPath(tickMus.path, e.offsetX, e.offsetY)) {
-        bkMus1=false;
-        ctx.drawImage(untickedMus, 62, 245, 50, 50);
-        canvas.removeEventListener("click", togMusG1);
-    }
-}
-
-
-
 
 /////End of Mouse music Change///////////////////
 /////////////////////////////////////////////////
 
+////// Background change ////////////////////
+/////////////////////////////////////////////
 
-////// Background change ///////////////////
-/*function togback(e) {
-    if (ctx.isPointInPath(tick.path, e.offsetX, e.offsetY)) {
+function BacktickT(e) {
+    if (ctx.isPointInPath(BoxBack1.path, e.offsetX, e.offsetY)) {
         back=true;
-        ctx.drawImage(unticked, 410, 190, 50, 50);
-        canvas.removeEventListener("click", togback);
-    }
+        canvas.removeEventListener("click", BacktickT);
+   }
 }
 
-function togback1(e) {
-    if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
-        //back=false;
-        back = !back;
-        ctx.drawImage(tick, 410, 190, 50, 50);
-        canvas.removeEventListener("click", togback1);
-    }
+function BacktickF(e) {
+    if (ctx.isPointInPath(BoxBack2.path, e.offsetX, e.offsetY)) {
+        back=false;
+        canvas.removeEventListener("click", BacktickF);
+   }
 }
 
+/////End of Mouse background Change///////////////////
+/////////////////////////////////////////////////
 
-function togbackG(e) {
-    if (ctx.isPointInPath(unticked.path, e.offsetX, e.offsetY)) {
-        //back1=true;
-        back1 = !back1;
-        ctx.drawImage(tick, 410, 245, 50, 50);
-        canvas.removeEventListener("click", togbackG);
-    }
-}
+////// Speech change ////////////////////
+/////////////////////////////////////////////
 
-function togbackG1(e) {
-    if (ctx.isPointInPath(tick.path, e.offsetX, e.offsetY)) {
-        back1=false;
-        //console.log(back1);
-        ctx.drawImage(unticked, 410, 245, 50, 50);
-        canvas.removeEventListener("click", togbackG1);
-    }
-}*/
-
-/////End of Mouse Background Change///////////////////
-
-
-
-////// Speech change ///////////////////
-/*function togSp(e) {
-    if (ctx.isPointInPath(tickSp.path, e.offsetX, e.offsetY)) {
+function SptickT(e) {
+    if (ctx.isPointInPath(BoxSp1.path, e.offsetX, e.offsetY)) {
         togSpeech=true;
-        //console.log(togSpeech);
-        ctx.drawImage(untickedSp, 62, 190, 50, 50);
-        canvas.removeEventListener("click", togSp);
-    }
+        canvas.removeEventListener("click", SptickT);
+   }
 }
 
-function togSp1(e) {
-    if (ctx.isPointInPath(untickedSp.path, e.offsetX, e.offsetY)) {
-        togSpeech = !togSpeech;
-        console.log(togSpeech);
-        ctx.drawImage(tickSp, 62, 190, 50, 50);
-        canvas.removeEventListener("click", togSp1);
-    }
+function SptickF(e) {
+    if (ctx.isPointInPath(BoxSp2.path, e.offsetX, e.offsetY)) {
+        togSpeech=false;
+        canvas.removeEventListener("click", SptickF);
+   }
 }
 
-function togSpG(e) {
-    if (ctx.isPointInPath(untickedSp.path, e.offsetX, e.offsetY)) {
-        togSpeech1 = !togSpeech1;
-        ctx.drawImage(tickSp, 62, 245, 50, 50);
-        canvas.removeEventListener("click", togSpG);
-    }
-}
-
-function togSpG1(e) {
-    if (ctx.isPointInPath(tickSp.path, e.offsetX, e.offsetY)) {
-        togSpeech1=false;
-        ctx.drawImage(untickedSp, 62, 245, 50, 50);
-        canvas.removeEventListener("click", togSpG1);
-    }
-}*/
 /////End of Mouse Speech Change///////////////////
+/////////////////////////////////////////////////
 
 ////// Qustions change ///////////////////
 
@@ -585,185 +509,122 @@ function showMenu() {
 
     // Toggle Music
     ctx.drawImage(mus, 62, 130, 250, 50);
+ 
+    ctx.font = "700 30px Arial";
+
+    ctx.drawImage(BoxMus1, 62, 190, 50, 50);
+    BoxMus1.path = new Path2D();
+    BoxMus1.path.rect(62, 190, 50, 50);
 
     if (bkMus) {
-        ctx.drawImage(tickMus, 62, 190, 50, 50);
-        tickMus.path = new Path2D();
-        tickMus.path.rect(62, 130, 50, 50);
+        ctx.drawImage(rTick1, 67, 192, 50, 40);
     }
+
+    ctx.fillText("On", 120, 230);
+
+    ctx.drawImage(BoxMus2, 62, 245, 50, 50);
+    BoxMus2.path = new Path2D();
+    BoxMus2.path.rect(62, 245, 50, 50);
 
     if (!bkMus) {
-        ctx.drawImage(untickedMus, 62, 190, 50, 50);
-        untickedMus.path = new Path2D();
-        untickedMus.path.rect(62, 130, 50, 50);
+        ctx.drawImage(rTick1, 67, 247, 50, 40);
     }
 
-        ctx.font = "700 30px Arial";
-        ctx.fillText("On", 120, 230);
+    ctx.fillText("Off", 120, 282);
 
-
-    if (!bkMus1) {    
-        ctx.drawImage(untickedMus, 62, 245, 50, 50);
-        untickedMus.path = new Path2D();
-        untickedMus.path.rect(62, 245, 50, 50);
-    }
-
-    if (bkMus1) {
-        ctx.drawImage(tickMus, 62, 245, 50, 50);
-        tickMus.path = new Path2D();
-        tickMus.path.rect(62, 245, 50, 50);
-    }
-
-        ctx.fillText("Off", 120, 282);
-
-
-
-  /////////////////
-  if (!setMenu) {
-  ///////////////////
-
-
-
-
+    canvas.addEventListener("click", MustickT);
+    canvas.addEventListener("click", MustickF);
+    // End of Music
+    
 
     // Toggle Background
     ctx.drawImage(background, 410, 130, 250, 50);
 
+    ctx.drawImage(BoxBack1, 410, 190, 50, 50);
+    BoxBack1.path = new Path2D();
+    BoxBack1.path.rect(410, 190, 50, 50);
 
     if (back) {
-        ctx.drawImage(tick, 410, 190, 50, 50);
-        tick.path = new Path2D();
-        tick.path.rect(410, 190, 50, 50);
+        ctx.drawImage(rTick1, 417, 192, 50, 40);
+        console.log("back is " + back);
     }
 
-    if (!back) {
-       ctx.drawImage(unticked, 410, 190, 50, 50);
-       unticked.path = new Path2D();
-       unticked.path.rect(410, 190, 50, 50);
-    }
-
-    ctx.font = "700 30px Arial";
     ctx.fillText("Colourful", 470, 230);
 
-    if (!back1) {
-        ctx.drawImage(unticked, 410, 245, 50, 50);
-        unticked.path = new Path2D();
-        unticked.path.rect(410, 245, 50, 50);
+    ctx.drawImage(BoxBack2, 410, 245, 50, 50);
+    BoxBack2.path = new Path2D();
+    BoxBack2.path.rect(410, 245, 50, 50);
+
+    if (!back) {
+        ctx.drawImage(rTick1, 417, 247, 50, 40);
     }
-   
-    if (back1) {
-        ctx.drawImage(tick, 410, 245, 50, 50);
-        tick.path = new Path2D();
-        tick.path.rect(410, 245, 50, 50);
-    } 
 
     ctx.fillText("White", 470, 282);
 
-
-
+    canvas.addEventListener("click", BacktickT);
+    canvas.addEventListener("click", BacktickF);
+    // End of Background
 
 
     // Toggle Speech
     ctx.drawImage(speechEff, 62, 310, 250, 50);
 
+    ctx.drawImage(BoxSp1, 62, 370, 50, 50);
+    BoxSp1.path = new Path2D();
+    BoxSp1.path.rect(62, 370, 50, 50);
+
     if (togSpeech) {
-        ctx.drawImage(tickSp, 62, 370, 50, 50);
-        tickSp.path = new Path2D();
-        tickSp.path.rect(62, 370, 50, 50);
+        ctx.drawImage(rTick1, 67, 372, 50, 40);
     }
+
+    ctx.fillText("On", 120, 407);
+
+    ctx.drawImage(BoxSp2, 62, 425, 50, 50);
+    BoxSp2.path = new Path2D();
+    BoxSp2.path.rect(62, 425, 50, 50);
 
     if (!togSpeech) {
-        ctx.drawImage(untickedSp, 62, 370, 50, 50);
-        untickedSp.path = new Path2D();
-        untickedSp.path.rect(62, 370, 50, 50);
+        ctx.drawImage(rTick1, 67, 427, 50, 40);
     }
 
-    ctx.font = "700 30px Arial";
-    ctx.fillText("On", 120, 410);
+    ctx.fillText("Off", 120, 462);
 
-    if (!togSpeech1) {
-        ctx.drawImage(untickedSp, 62, 425, 50, 50);
-        untickedSp.path = new Path2D();
-        untickedSp.path.rect(62, 425, 50, 50);
-    }
+    canvas.addEventListener("click", SptickT);
+    canvas.addEventListener("click", SptickF);
 
-    if (togSpeech1) {
-        ctx.drawImage(tickSp, 62, 425, 50, 50);
-        tickSp.path = new Path2D();
-        tickSp.path.rect(62, 425, 50, 50);
-    }
-
-    ctx.fillText("Off", 120, 461);
-
-}// setMenu
-
-
-
-    // End of tog Speech //
-
-  
-
-
-
+    // End of Speech
 
 
     // Toggle Number of Questions
-    /*ctx.drawImage(noQs, 410, 310, 250, 50);
+    ctx.drawImage(noQs, 410, 310, 250, 50);
 
-    // Question 4
-    if (togQs4) {
-        ctx.drawImage(Q4, 422, 370, 70, 70);
-        Q4.path = new Path2D();
-        Q4.path.rect(422, 370, 70, 70);
+    ctx.drawImage(BoxQ41, 420, 370, 60, 60);
+    BoxQ41.path = new Path2D();
+    BoxQ41.path.rect(420, 370, 60, 60);
+    ctx.fillText("4", 440, 410);
+
+    if (togQs) {
+        ctx.drawImage(rTick1, 427, 370, 50, 50);
     }
 
-    if (!togQs4) {
-        ctx.drawImage(Q4S, 422, 370, 70, 70);
-        Q4S.path = new Path2D();
-        Q4S.path.rect(422, 370, 70, 70);
-    }*/
+    ctx.drawImage(BoxQ81, 502, 370, 60, 60);
+    BoxQ81.path = new Path2D();
+    BoxQ81.path.rect(502, 370, 60, 60);
+    ctx.fillText("8", 523, 410);
 
-    //----------------------------------------//
-
-    // Question 8
-    /*if (togQs8) {
-        ctx.drawImage(Q8, 497, 370, 70, 70);
-        Q8.path = new Path2D();
-        Q8.path.rect(497, 370, 70, 70);
-    }
-
-    if (!togQs8) {
-        ctx.drawImage(Q8S, 497, 370, 70, 70);
-        Q8S.path = new Path2D();
-        Q8S.path.rect(497, 370, 70, 70);
-    }*/
-
-    //----------------------------------------//
-
-    // Question 12
-    /*if (togQs12) {
-        ctx.drawImage(Q12, 575, 370, 70, 70);
-        Q12.path = new Path2D();
-        Q12.path.rect(575, 370, 70, 70);
-    }
-
-    if (!togQs12) {
-        ctx.drawImage(Q12S, 575, 370, 70, 70);
-        Q12S.path = new Path2D();
-        Q12S.path.rect(575, 370, 70, 70);
-    }*/
-
-    //-----------------------------------------//
-
-    // Match Cards Instructions
+    ctx.drawImage(BoxQ121, 585, 370, 60, 60);
+    BoxQ121.path = new Path2D();
+    BoxQ121.path.rect(585, 370, 60, 60);
+    ctx.fillText("12", 597, 410);
 
 
-    if (!setMenu) {
+    // Instructions
     ctx.textAlign = "center"; 
     ctx.drawImage(insMouse, w-266/2, 480, 266, 133);
     insMouse.path = new Path2D();
     insMouse.path.rect(w-266/2, 470, 266, 133);
-    } // !setMenu
+
+    canvas.addEventListener("click", gameInsMouse);
 
     // Close Menu
     ctx.textAlign = "center"; 
@@ -771,65 +632,9 @@ function showMenu() {
     cross.path = new Path2D();
     cross.path.rect(w-30, 640, 50, 50);
 
-
-    
-
-    if(setMenu) {
-    // Music //
-    canvas.addEventListener("click", togMus);
-    canvas.addEventListener("click", togMus1);
-    canvas.addEventListener("click", togMusG);
-    canvas.addEventListener("click", togMusG1);
-
-
-
-    // Background // 
-
-/*
-    canvas.addEventListener("click", togback);
-    canvas.addEventListener("click", togback1);
-    canvas.addEventListener("click", togbackG);
-    canvas.addEventListener("click", togbackG1);
-    */
-    
-
-    // Speech //
-    /*canvas.addEventListener("click", togSp);
-    canvas.addEventListener("click", togSp1);
-    canvas.addEventListener("click", togSpG);
-    canvas.addEventListener("click", togSpG1);
-    */
-
-    }// setMenu
-
-// locked if setMenu = false
-
-    // Questions //
-    
-    /*canvas.addEventListener("click", MtogQ4);
-    canvas.addEventListener("click", MtogQ41);
-
-    canvas.addEventListener("click", MtogQ8);
-    canvas.addEventListener("click", MtogQ81);
-
-    canvas.addEventListener("click", MtogQ12);
-    canvas.addEventListener("click", MtogQ121);*/
-    
-    
-
-    canvas.addEventListener("click", gameInsMouse);
-
-
-
     canvas.addEventListener("click", endMenu);
-    
-   
 
 }
-
-
-
-
 
 
 
@@ -1057,13 +862,7 @@ function instructions() {
 // Setting Menu mouse controls
 function settingMouse(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
-
-
-        setMenu=true;;
-
-
-
-
+        setMenu=true;
         canvas.removeEventListener("click", settingMouse);
     }
 }
@@ -2725,11 +2524,11 @@ function rightClick1() {
         MCgameSc3 = false;
         MCgameSc4 = false;
        
-        if (togQs4) {
+        if (togQs) {
             MCgameSc5 = true;
         }
 
-        if (!togQs4) {
+        if (!togQs) {
             finalScreen = true;
         }
 
@@ -2934,11 +2733,11 @@ function rightClick1() {
         incor = false;
         MCgameSc8 = false;
 
-        if (togQs8) {
+        if (togQs) {
             MCgameSc9 = true;
         }
 
-        if (!togQs8) {
+        if (!togQs) {
             finalScreen = true;
         }
 
