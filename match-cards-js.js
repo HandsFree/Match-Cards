@@ -8,6 +8,30 @@ const ctx = canvas.getContext('2d');
 const wdt = 300;
 const ht = 200;
 
+/***********For Menu************/
+
+// Close menu
+var setMenu=false;
+
+// Background Music
+var bkMus = true;
+
+// Set Background
+var back = true;
+
+// Set Speech
+var togSpeech = true;
+
+// Questions
+var togQs1 = false;
+
+var togQs2 = false;
+
+var togQs3 = true;
+
+
+/************end****************/
+
 // center text
 var w = canvas.width / 2;
 
@@ -275,27 +299,12 @@ function locked() {
     cor12=false;
 }
 
+////////////////////////////////////
+if (!setMenu) {
+//////////////////////////////////////
 
 
-/***********For Menu************/
 
-// Close menu
-var setMenu=false;
-
-// Background Music
-var bkMus = true;
-
-// Set Background
-var back = true;
-
-// Set Speech
-var togSpeech = true;
-
-// Questions
-var togQs = true;
-
-
-/************end****************/
 
 // End Mouse Menu and return to game //
 function endMenu(e) {
@@ -384,107 +393,53 @@ function SptickF(e) {
 /////////////////////////////////////////////////
 
 ////// Qustions change ///////////////////
-
-
 // Start Q4 //
-
-
-/*function MtogQ4(e) {
-    if (ctx.isPointInPath(Q4.path, e.offsetX, e.offsetY)) {
-        togQs4=false;
-        console.log(togQs4);
-        ctx.drawImage(Q4S, 422, 370, 70, 70);
+function MtogQ4(e) {
+    if (ctx.isPointInPath(BoxQ41.path, e.offsetX, e.offsetY)) {
+        togQs1 = true;
+        togQs2 = false;
+        togQs3 = false;
         canvas.removeEventListener("click", MtogQ4);
     }
 }
-
-function MtogQ41(e) {
-    if (ctx.isPointInPath(Q4S.path, e.offsetX, e.offsetY)) {
-        togQs4 = !togQs4;
-        console.log(togQs4);
-        ctx.drawImage(Q4, 422, 370, 70, 70);
-        canvas.removeEventListener("click", MtogQ41);
-    }
-}
-
-
-function MtogQ4G(e) {
-    if (ctx.isPointInPath(Q4.path, e.offsetX, e.offsetY)) {
-        togQs4=false;
-        console.log(togQs4);
-        ctx.drawImage(Q4S, 422, 370, 70, 70);
-        canvas.removeEventListener("click", MtogQ4);
-    }
-}
-
-function MtogQG1(e) {
-    if (ctx.isPointInPath(Q4S.path, e.offsetX, e.offsetY)) {
-        togQs4 = !togQs4;
-        console.log(togQs4);
-        ctx.drawImage(Q4, 422, 370, 70, 70);
-        canvas.removeEventListener("click", MtogQ41);
-    }
-}*/
-
-
-
-//---------------------//
 // End Q4 //
 
 
 // Start Q8 //
-
-/*function MtogQ8(e) {
-    if (path.Q8 && ctx.isPointInPath(Q8.path, e.offsetX, e.offsetY)) {
-        togQs8=false;
-        console.log(togQs8);
-        ctx.drawImage(Q8S, 497, 370, 70, 70);
+function MtogQ8(e) {
+    if (ctx.isPointInPath(BoxQ81.path, e.offsetX, e.offsetY)) {
+        togQs2 = true;
+        togQs1 = false;
+        togQs3 = false;
         canvas.removeEventListener("click", MtogQ8);
     }
 }
-
-function MtogQ81(e) {
-    if (path.Q8S && ctx.isPointInPath(Q8S.path, e.offsetX, e.offsetY)) {
-        togQs8 = !togQs8;
-        console.log(togQs8);
-        ctx.drawImage(Q8, 497, 370, 70, 70);
-        canvas.removeEventListener("click", MtogQ81);
-    }
-}*/
-
 // End Q8 //
 
 // Start Q12 //
-
-/*function MtogQ12(e) {
-    if (ctx.isPointInPath(Q12.path, e.offsetX, e.offsetY)) {
-        togQs12=false;
-        console.log(togQs12);
-        ctx.drawImage(Q12S, 575, 370, 70, 70);
+function MtogQ12(e) {
+    if (ctx.isPointInPath(BoxQ121.path, e.offsetX, e.offsetY)) {
+        togQs3 = true;
+        togQs1 = false;
+        togQs2 = false;
         canvas.removeEventListener("click", MtogQ12);
     }
 }
-
-
-
-function MtogQ121(e) {
-    if (ctx.isPointInPath(Q12S.path, e.offsetX, e.offsetY)) {
-        togQs12 = !togQs12;
-        console.log(togQs12);
-        ctx.drawImage(Q12, 575, 370, 70, 70);
-        canvas.removeEventListener("click", MtogQ121);
-    }
-}*/
-
 // End Q12 //
 
+///////////////////////////////////////////
+} // locked if setMenu is false
+///////////////////////////////////////////
 
 
 
+////////////////////////////////////
+if (!setMenu) {
+//////////////////////////////////////
 
 function showMenu() {
 
-    console.log("setMenu is " + setMenu);
+    //console.log("setMenu is " + setMenu);
 
     sEff=false;
 
@@ -500,11 +455,6 @@ function showMenu() {
 	ctx.font = "100 80px Impact, fantasy";
     ctx.fillText("Settings", w, 100);
     ctx.textAlign = "left";
-
-
-    
-
-
 
 
     // Toggle Music
@@ -598,24 +548,41 @@ function showMenu() {
     // Toggle Number of Questions
     ctx.drawImage(noQs, 410, 310, 250, 50);
 
+    // Q4
     ctx.drawImage(BoxQ41, 420, 370, 60, 60);
     BoxQ41.path = new Path2D();
     BoxQ41.path.rect(420, 370, 60, 60);
     ctx.fillText("4", 440, 410);
 
-    if (togQs) {
+    if (togQs1) {
         ctx.drawImage(rTick1, 427, 370, 50, 50);
     }
 
+    canvas.addEventListener("click", MtogQ4);
+
+    // Q8
     ctx.drawImage(BoxQ81, 502, 370, 60, 60);
     BoxQ81.path = new Path2D();
     BoxQ81.path.rect(502, 370, 60, 60);
     ctx.fillText("8", 523, 410);
 
+    if (togQs2) {
+        ctx.drawImage(rTick1, 509, 370, 50, 50);
+    }
+
+    canvas.addEventListener("click", MtogQ8);
+
+    // Q12
     ctx.drawImage(BoxQ121, 585, 370, 60, 60);
     BoxQ121.path = new Path2D();
     BoxQ121.path.rect(585, 370, 60, 60);
     ctx.fillText("12", 597, 410);
+
+    if (togQs3) {
+        ctx.drawImage(rTick1, 591, 370, 50, 50);
+    }
+
+    canvas.addEventListener("click", MtogQ12);
 
 
     // Instructions
@@ -635,7 +602,6 @@ function showMenu() {
     canvas.addEventListener("click", endMenu);
 
 }
-
 
 
 // End Splash Screen
@@ -675,6 +641,10 @@ function settingMouse1(e) {
         canvas.removeEventListener("click", settingMouse1);
     }
 }
+
+///////////////////////////////////////////
+} // locked if setMenu is false
+///////////////////////////////////////////
 
 function splash() {
     ctx.drawImage(mcSplash, 0, 0, canvas.width, canvas.height);
@@ -2524,11 +2494,11 @@ function rightClick1() {
         MCgameSc3 = false;
         MCgameSc4 = false;
        
-        if (togQs) {
+        if (!togQs1) {
             MCgameSc5 = true;
         }
 
-        if (!togQs) {
+        if (togQs1) {
             finalScreen = true;
         }
 
@@ -2733,11 +2703,11 @@ function rightClick1() {
         incor = false;
         MCgameSc8 = false;
 
-        if (togQs) {
+        if (!togQs2) {
             MCgameSc9 = true;
         }
 
-        if (!togQs) {
+        if (togQs2) {
             finalScreen = true;
         }
 
@@ -3040,6 +3010,10 @@ function rightClick12() {
 
     /////////  Wrong Awnser //////////////////
     function wrong() {
+
+        if (back) {
+        }// end of back
+
        
         sEff = false;
 
@@ -3079,7 +3053,11 @@ function rightClick12() {
             wrongVoice.currentTime = 0;
             sEff = true;
         }
-    }
+
+    
+
+
+}
 
 
 function playGame() {
