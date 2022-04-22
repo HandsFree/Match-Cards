@@ -7,7 +7,7 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
-
+//BackCl = false;
 
 // Photo dimensions
 const wdt = 300;
@@ -314,11 +314,20 @@ function locked() {
 
 // End Mouse Menu and return to game //
 function endMenu(e) {
-    if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
-        locked();
-        sEff = true;
-        setMenu=false;
-        canvas.removeEventListener("click", endMenu);
+    if (setMenu) {
+        if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+            locked();
+            sEff = true;
+
+
+            //BackCl = false;
+
+
+
+
+           setMenu=false;
+           canvas.removeEventListener("click", endMenu);
+        }
     }
 }
 ////////////////////End of Mouse Close//////////////////////
@@ -329,10 +338,12 @@ function endMenu(e) {
 
 // Instructions //
 function gameInsMouse(e) {
-    if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
-        gameIns=true;
-        locked();
-        canvas.removeEventListener("click", gameInsMouse);
+    if (setMenu) {
+        if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
+            gameIns=true;
+            locked();
+            canvas.removeEventListener("click", gameInsMouse);
+        }
     }
 }
 
@@ -341,17 +352,21 @@ function gameInsMouse(e) {
 ///////////////////////////////////////
 
 function MustickT(e) {
-    if (ctx.isPointInPath(BoxMus1.path, e.offsetX, e.offsetY)) {
-        bkMus=true;
-        canvas.removeEventListener("click", MustickT);
-   }
+    if (setMenu) {
+        if (ctx.isPointInPath(BoxMus1.path, e.offsetX, e.offsetY)) {
+            bkMus=true;
+            canvas.removeEventListener("click", MustickT);
+        }
+    } // setMenu
 }
 
 function MustickF(e) {
-    if (ctx.isPointInPath(BoxMus2.path, e.offsetX, e.offsetY)) {
-        bkMus=false;
-        canvas.removeEventListener("click", MustickF);
-   }
+    if (setMenu) {
+        if (ctx.isPointInPath(BoxMus2.path, e.offsetX, e.offsetY)) {
+            bkMus=false;
+            canvas.removeEventListener("click", MustickF);
+        }
+    } // setMenu
 }
 
 /////End of Mouse music Change///////////////////
@@ -360,23 +375,28 @@ function MustickF(e) {
 ////// Background change ////////////////////
 /////////////////////////////////////////////
 
+
 function BacktickT(e) {
-    if (ctx.isPointInPath(BoxBack1.path, e.offsetX, e.offsetY)) {
-        //back=true;
-        colod = true;
-        white = false;
-        canvas.removeEventListener("click", BacktickT);
-   }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxBack1.path, e.offsetX, e.offsetY)) {
+           colod = true;
+           white = false;
+           canvas.removeEventListener("click", BacktickT);
+        }
+    } // setMenu
 }
 
 function BacktickF(e) {
-    if (ctx.isPointInPath(BoxBack2.path, e.offsetX, e.offsetY)) {
-        //back=false;
-        colod = false;
-        white = true;
-        canvas.removeEventListener("click", BacktickF);
-   }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxBack2.path, e.offsetX, e.offsetY)) {
+           colod = false;
+           white = true;
+           canvas.removeEventListener("click", BacktickF);
+        }
+    } // setMenu
 }
+
+
 
 /////End of Mouse background Change///////////////////
 /////////////////////////////////////////////////
@@ -385,17 +405,21 @@ function BacktickF(e) {
 /////////////////////////////////////////////
 
 function SptickT(e) {
-    if (ctx.isPointInPath(BoxSp1.path, e.offsetX, e.offsetY)) {
-        togSpeech=true;
-        canvas.removeEventListener("click", SptickT);
-   }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxSp1.path, e.offsetX, e.offsetY)) {
+           togSpeech=true;
+           canvas.removeEventListener("click", SptickT);
+       }
+    }
 }
 
 function SptickF(e) {
-    if (ctx.isPointInPath(BoxSp2.path, e.offsetX, e.offsetY)) {
-        togSpeech=false;
-        canvas.removeEventListener("click", SptickF);
-   }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxSp2.path, e.offsetX, e.offsetY)) {
+           togSpeech=false;
+           canvas.removeEventListener("click", SptickF);
+       }
+    }
 }
 
 /////End of Mouse Speech Change///////////////////
@@ -404,11 +428,13 @@ function SptickF(e) {
 ////// Qustions change ///////////////////
 // Start Q4 //
 function MtogQ4(e) {
-    if (ctx.isPointInPath(BoxQ41.path, e.offsetX, e.offsetY)) {
-        togQs1 = true;
-        togQs2 = false;
-        togQs3 = false;
-        canvas.removeEventListener("click", MtogQ4);
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxQ41.path, e.offsetX, e.offsetY)) {
+           togQs1 = true;
+           togQs2 = false;
+           togQs3 = false;
+           canvas.removeEventListener("click", MtogQ4);
+       }
     }
 }
 // End Q4 //
@@ -416,28 +442,29 @@ function MtogQ4(e) {
 
 // Start Q8 //
 function MtogQ8(e) {
-    if (ctx.isPointInPath(BoxQ81.path, e.offsetX, e.offsetY)) {
-        togQs2 = true;
-        togQs1 = false;
-        togQs3 = false;
-        canvas.removeEventListener("click", MtogQ8);
-    }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxQ81.path, e.offsetX, e.offsetY)) {
+           togQs2 = true;
+           togQs1 = false;
+           togQs3 = false;
+           canvas.removeEventListener("click", MtogQ8);
+       }
+    } // setMenu
 }
 // End Q8 //
 
 // Start Q12 //
 function MtogQ12(e) {
-    if (ctx.isPointInPath(BoxQ121.path, e.offsetX, e.offsetY)) {
-        togQs3 = true;
-        togQs1 = false;
-        togQs2 = false;
-        canvas.removeEventListener("click", MtogQ12);
-    }
+    if (setMenu) {
+       if (ctx.isPointInPath(BoxQ121.path, e.offsetX, e.offsetY)) {
+           togQs3 = true;
+           togQs1 = false;
+           togQs2 = false;
+           canvas.removeEventListener("click", MtogQ12);
+        }
+    } // setMenu
 }
 // End Q12 //
-
-
-
 
 
 function showMenu() {
@@ -491,7 +518,10 @@ function showMenu() {
     // End of Music
     
 
+
     // Toggle Background
+  
+    //if (BackCl) {
     ctx.drawImage(background, 410, 130, 250, 50);
 
     ctx.drawImage(BoxBack1, 410, 190, 50, 50);
@@ -509,7 +539,6 @@ function showMenu() {
     BoxBack2.path = new Path2D();
     BoxBack2.path.rect(410, 245, 50, 50);
 
-    //if (!back) {
     if (white) {
         ctx.drawImage(rTick1, 417, 247, 50, 40);
     }
@@ -518,6 +547,10 @@ function showMenu() {
 
     canvas.addEventListener("click", BacktickT);
     canvas.addEventListener("click", BacktickF);
+
+
+//} // backcl
+
     // End of Background
 
 
@@ -647,6 +680,13 @@ function speechMouse(e) {
 function settingMouse1(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
         setMenu=true;
+
+
+
+        //BackCl=true;
+
+
+
         canvas.removeEventListener("click", settingMouse1);
     }
 }
@@ -862,6 +902,11 @@ function instructions() {
 // Setting Menu mouse controls
 function settingMouse(e) {
     if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+
+
+        //BackCl=true;
+
+
         setMenu=true;
         canvas.removeEventListener("click", settingMouse);
     }
