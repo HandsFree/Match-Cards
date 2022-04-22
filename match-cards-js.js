@@ -116,6 +116,9 @@ clickHere.src = "images/clickHere.png";
 const soundBox = new Image();
 soundBox.src = "images/soundBox.png";
 
+const SettingsBox = new Image();
+SettingsBox.src = "images/SettingsBox.png";
+
 const settings = new Image();
 settings.src = "images/settings.png";
 
@@ -470,6 +473,8 @@ function MtogQ12(e) {
 function showMenu() {
 
     sEff=false;
+    splashAud.pause();
+    splashAud.currentTime = 0;
 
     ctx.fillStyle = "black";
     ctx.globalAlpha = 0.9;
@@ -661,24 +666,26 @@ function closeSplash(e) {
 
 // Speech code for Mouse
 function speechMouse(e) {
-    if (ctx.isPointInPath(speech.path, e.offsetX, e.offsetY)) {
+    if (!setMenu) {
+        if (ctx.isPointInPath(soundBox.path, e.offsetX, e.offsetY)) {
   
-        if (togSpeech) {
+            if (togSpeech) {
             splashAud.play();
-        }
+            }
     
-        if (!togSpeech) {
+            if (!togSpeech) {
             splashAud.pause();
             splashAud.currentTime = 0;
-        }
+            }
 
-        canvas.removeEventListener("click", speechMouse);
+            canvas.removeEventListener("click", speechMouse);
+        }
     }
 }
 
 // Settings Menu mouse controls
 function settingMouse1(e) {
-    if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+    if (SettingsBox.path && ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
         setMenu=true;
 
 
@@ -715,8 +722,8 @@ function splash() {
     // Speech code //
     ctx.drawImage(soundBox, 25, 409, 110, 130);
     ctx.drawImage(speech, 55, 435, 55, 55);
-    speech.path = new Path2D();
-    speech.path.rect(25, 409, 55, 55);
+    soundBox.path = new Path2D();
+    soundBox.path.rect(25, 409, 110, 130);
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
     ctx.fillText("_", 73, 512);
@@ -724,10 +731,10 @@ function splash() {
     // End of Speech Code //
 
     // Settings code //
-    ctx.drawImage(soundBox, 580, 409, 110, 130);
+    ctx.drawImage(SettingsBox, 580, 409, 110, 130);
     ctx.drawImage(settings, 594, 420, 80, 80);
-    settings.path = new Path2D();
-    settings.path.rect(580, 409, 110, 130); 
+    SettingsBox.path = new Path2D();
+    SettingsBox.path.rect(580, 409, 110, 130); 
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
     ctx.fillText("_", 611, 512);
