@@ -312,24 +312,15 @@ function locked() {
 
 
 
-
-
-
 // End Mouse Menu and return to game //
 function endMenu(e) {
     if (setMenu) {
         if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             locked();
             sEff = true;
-
-
             //BackCl = false;
-
-
-
-
-           setMenu=false;
-           canvas.removeEventListener("click", endMenu);
+            setMenu=false;
+            canvas.removeEventListener("click", endMenu);
         }
     }
 }
@@ -471,7 +462,7 @@ function MtogQ12(e) {
 
 
 function showMenu() {
-
+  if (setMenu) {
     sEff=false;
     splashAud.pause();
     splashAud.currentTime = 0;
@@ -644,24 +635,24 @@ function showMenu() {
 
     canvas.addEventListener("click", endMenu);
 
+  } //setMenu
+
 }
 
 
 // End Splash Screen
 function closeSplash(e) {
+  if (!setMenu) {
     if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {
         locked();
         splashAud.pause();
         splashAud.currentTime = 0;
         MCsplashSc = false;
         MCgameSc1 = true;
-
-
         gameIns = true;
-
         canvas.removeEventListener("click", closeSplash);
-
     }
+  }
 }
 
 // Speech code for Mouse
@@ -685,22 +676,17 @@ function speechMouse(e) {
 
 // Settings Menu mouse controls
 function settingMouse1(e) {
-    if (SettingsBox.path && ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
-        setMenu=true;
-
-
-
-        //BackCl=true;
-
-
-
-        canvas.removeEventListener("click", settingMouse1);
+    if (!setMenu) {
+        if (ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
+            setMenu=true;
+            //BackCl=true;
+            canvas.removeEventListener("click", settingMouse1);
+        }
     }
 }
 
-
-
 function splash() {
+  if (!setMenu) {
     ctx.drawImage(mcSplash, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
@@ -720,10 +706,12 @@ function splash() {
     ctx.fillStyle = "white";
 
     // Speech code //
-    ctx.drawImage(soundBox, 25, 409, 110, 130);
-    ctx.drawImage(speech, 55, 435, 55, 55);
+    /*ctx.drawImage(soundBox, 25, 409, 110, 130); 
     soundBox.path = new Path2D();
     soundBox.path.rect(25, 409, 110, 130);
+
+    ctx.drawImage(speech, 55, 435, 55, 55);
+
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
     ctx.fillText("_", 73, 512);
@@ -732,13 +720,15 @@ function splash() {
 
     // Settings code //
     ctx.drawImage(SettingsBox, 580, 409, 110, 130);
-    ctx.drawImage(settings, 594, 420, 80, 80);
     SettingsBox.path = new Path2D();
-    SettingsBox.path.rect(580, 409, 110, 130); 
+    SettingsBox.path.rect(580, 409, 110, 130);
+
+    ctx.drawImage(settings, 594, 420, 80, 80);
+
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
     ctx.fillText("_", 611, 512);
-    ctx.fillText("settings", 635, 510);
+    ctx.fillText("settings", 635, 510);*/
     // End of Settings Code
 
     if (keys[69]) { // audio
@@ -766,38 +756,36 @@ function splash() {
     canvas.addEventListener("click", closeSplash);
     canvas.addEventListener("click", speechMouse);
     canvas.addEventListener("click", settingMouse1);
+  }
 }
 
 
 
 function closeSplash1(e) {
-    if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
-        gameInsSpeech.pause();
-        gameInsSpeech.currentTime = 0;
-        locked();
-        incor=false;
-        gameIns=false;
-        canvas.removeEventListener("click", closeSplash1);
+    if (setMenu) {
+        if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+           gameInsSpeech.pause();
+           gameInsSpeech.currentTime = 0;
+           locked();
+           incor=false;
+           gameIns=false;
+           canvas.removeEventListener("click", closeSplash1);
+        }
     }
 }
 
 
-
-
 //// Mouse
 function gameStart(e) {
-   if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
-    gameIns = false;
-    gameInsSpeech.pause();
-    gameInsSpeech.currentTime = 0;
-    canvas.removeEventListener("click", gameStart);
-   }
+    if (!setMenu) {
+        if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+            gameIns = false;
+            gameInsSpeech.pause();
+            gameInsSpeech.currentTime = 0;
+            canvas.removeEventListener("click", gameStart);
+        }
+    }
 }
-
-
-
-
-
 
 
 function gameInstructions() {
@@ -857,11 +845,6 @@ function gameInstructions() {
 
 
 
-
-
-
-
-
 function firstQus() {
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
@@ -908,15 +891,13 @@ function instructions() {
 
 // Setting Menu mouse controls
 function settingMouse(e) {
-    if (settings.path && ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
-
-
+  //if (!setMenu) {
+    if (ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
         //BackCl=true;
-
-
         setMenu=true;
         canvas.removeEventListener("click", settingMouse);
-    }
+    //}
+  }
 }
 
 function cardSetUp() {
@@ -971,26 +952,8 @@ function gameStartKeys(e) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function Q1checkClick1(e) {
+    if (!setMenu) {
 	if (ctx.isPointInPath(amb.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
@@ -998,33 +961,40 @@ function Q1checkClick1(e) {
         cor1 = true;
         canvas.removeEventListener("click", Q1checkClick1);
     }
+    }
 }
 
 
 function Q1checkClick2(e) {
+    if (!setMenu) {
     if (ctx.isPointInPath(lam.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q1checkClick2);
     }
+    }
 }
 
 function Q1checkClick3(e) {
+    if (!setMenu) {
     if (ctx.isPointInPath(micro.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q1checkClick3);
     }
+    }
 }
 
 function Q1checkClick4(e) {
+    if (!setMenu) {
     if (ctx.isPointInPath(cow.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q1checkClick4);
+    }
     }
 }
 
@@ -3061,9 +3031,6 @@ function rightClick12() {
         MCgameSc12 = false;
         finalScreen = true;
     }
-
-    
-
     addEventListener("click", rightClick12);
 }
 
@@ -3076,11 +3043,13 @@ function rightClick12() {
 
     // mouse controls Wrong Answer //
     function clickWrong() {
+        if (!setMenu) {
         sEff = true;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         locked();
         removeEventListener("click", clickWrong);
+        }
     }
 
     /////////  Wrong Awnser //////////////////
