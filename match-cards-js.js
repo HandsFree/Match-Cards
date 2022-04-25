@@ -13,6 +13,9 @@ canvas.focus();
 const wdt = 300;
 const ht = 200;
 
+var splashSpeech = true;
+var splashSettings = true;
+
 /***********For Menu************/
     
 
@@ -643,13 +646,20 @@ function showMenu() {
 // End Splash Screen
 function closeSplash(e) {
   if (!setMenu) {
-    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {
+    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {  
+        
         locked();
         splashAud.pause();
         splashAud.currentTime = 0;
+
         MCsplashSc = false;
+
+        splashSpeech = false;
+        splashSettings = false;
+
         MCgameSc1 = true;
         gameIns = true;
+
         canvas.removeEventListener("click", closeSplash);
     }
   }
@@ -658,7 +668,7 @@ function closeSplash(e) {
 // Speech code for Mouse
 function speechMouse(e) {
     if (!setMenu) {
-        if (ctx.isPointInPath(soundBox.path, e.offsetX, e.offsetY)) {
+        if (splashSpeech && splashSettings && ctx.isPointInPath(soundBox.path, e.offsetX, e.offsetY)) {
   
             if (togSpeech) {
             splashAud.play();
@@ -675,18 +685,23 @@ function speechMouse(e) {
 }
 
 // Settings Menu mouse controls
+
 function settingMouse1(e) {
     if (!setMenu) {
-        if (ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
+        if (splashSpeech && splashSettings && ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
+
             setMenu=true;
+
             //BackCl=true;
             canvas.removeEventListener("click", settingMouse1);
         }
     }
 }
 
+
 function splash() {
   if (!setMenu) {
+
     ctx.drawImage(mcSplash, 0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
@@ -706,7 +721,9 @@ function splash() {
     ctx.fillStyle = "white";
 
     // Speech code //
-    /*ctx.drawImage(soundBox, 25, 409, 110, 130); 
+
+
+    ctx.drawImage(soundBox, 25, 409, 110, 130); 
     soundBox.path = new Path2D();
     soundBox.path.rect(25, 409, 110, 130);
 
@@ -728,8 +745,9 @@ function splash() {
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
     ctx.fillText("_", 611, 512);
-    ctx.fillText("settings", 635, 510);*/
+    ctx.fillText("settings", 635, 510);
     // End of Settings Code
+
 
     if (keys[69]) { // audio
         splashAud.play();
@@ -752,11 +770,13 @@ function splash() {
 
         incor = false;
     }  
-    
+       
     canvas.addEventListener("click", closeSplash);
     canvas.addEventListener("click", speechMouse);
     canvas.addEventListener("click", settingMouse1);
+
   }
+
 }
 
 
@@ -789,6 +809,8 @@ function gameStart(e) {
 
 
 function gameInstructions() {
+
+    
 
     if (togSpeech) {
         gameInsSpeech.play();
@@ -838,6 +860,8 @@ function gameInstructions() {
         }
 
         if (!setMenu) {
+            splashSpeech = false;
+            splashSettings = false;
             canvas.addEventListener("click", gameStart);  
         }
 
@@ -3118,8 +3142,11 @@ function playGame() {
         splash();
     }    
 
+    
+
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
+
 
         if (colod) {
             ctx.fillStyle = "#FFA500";
@@ -3468,6 +3495,12 @@ function playGame() {
         music.currentTime = 0;
         finalScreen = false;
         MCsplashSc = true;
+
+
+
+
+
+
         removeEventListener("click", rightClickFS);
       }
 
@@ -3503,8 +3536,11 @@ function playGame() {
         ctx.fillText("Press the Enter Key", w, 560);
         //ctx.fillText("Press the Spacebar", w, 560);
         ctx.fillText("To play again!", w, 620);
+
         n = 1;
 
+        splashSpeech = true;
+        splashSettings = true;
 
         if (keys[13]) { // Go to Splash Screen
             wellDoneVoice.pause();
