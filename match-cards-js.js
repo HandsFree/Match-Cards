@@ -16,6 +16,14 @@ const ht = 200;
 var splashSpeech = true;
 var splashSettings = true;
 
+//Switch Controls
+
+//Settings Menu
+togKey = true;
+
+//Game
+selectNo = true;
+
 /***********For Menu************/
     
 
@@ -471,7 +479,6 @@ function showMenu() {
     splashAud.currentTime = 0;
 
     ctx.fillStyle = "black";
-    ctx.globalAlpha = 0.9;
 
     if (!gameIns) {
     ctx.drawImage(mBack, 0, 0, canvas.width, canvas.height);
@@ -486,6 +493,15 @@ function showMenu() {
 
     // Toggle Music
     
+    // Switch & Keyboard Controls
+    if (togKey) {
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "Blue";
+        ctx.fillRect(62, 190, 250, 50);
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
 
     ctx.drawImage(mus, 62, 130, 250, 50);
  
@@ -873,7 +889,13 @@ function firstQus() {
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(55, 155, 42, 50);
+
+    if (selectNo) {
+    ctx.fillStyle = "red";
+    } else {
     ctx.fillStyle = "blue";
+    }
+
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("1", 75, 200);
 }
