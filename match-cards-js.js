@@ -16,13 +16,38 @@ const ht = 200;
 var splashSpeech = true;
 var splashSettings = true;
 
-//Switch Controls
+//////////////////////////////////////
+// 1/5/22 //
+var game1 = true;
+var game2 = false;
+var game3 = false;
+var game4 = false;
+////////////////////////////////////
 
-//Settings Menu
-togKey = true;
+// 3/5/22
+var Sw1 = true;
+var Sw2 = false;
+var Sw3 = false;
+var Sw4 = false;
 
-//Game
-selectNo = true;
+
+//Switch Controls/////////////////////////
+//                                      //
+//Settings Menu                         //
+var KeyboardMenu = false;               //
+var KeyMenu = new Array(1, 2, 3, 4);    // 
+//Game                                  //
+var KeyboardGame = false;               //
+var KeyGame1 = true;                    //
+var KeyGame2 = false;                 //
+var KeyGame3 = false;                   //
+var KeyGame4 = false;                   //
+//                                      //
+///End Switch Controls////////////////////
+
+
+
+
 
 /***********For Menu************/
     
@@ -78,7 +103,6 @@ var MCgameSc7 = false;
 var MCgameSc8 = false;
 var MCgameSc9 = false;
 var MCgameSc10 = false;
-
 var MCgameSc11 = false;
 var MCgameSc12 = false;
 
@@ -95,7 +119,6 @@ var cor7 = false;
 var cor8 = false;
 var cor9 = false;
 var cor10 = false;
-
 var cor11 = false;
 var cor12 = false;
 
@@ -360,6 +383,7 @@ function MustickT(e) {
     if (setMenu) {
         if (ctx.isPointInPath(BoxMus1.path, e.offsetX, e.offsetY)) {
             bkMus=true;
+            //togKey=true;
             canvas.removeEventListener("click", MustickT);
         }
     } // setMenu
@@ -369,6 +393,7 @@ function MustickF(e) {
     if (setMenu) {
         if (ctx.isPointInPath(BoxMus2.path, e.offsetX, e.offsetY)) {
             bkMus=false;
+            //togKey=false;
             canvas.removeEventListener("click", MustickF);
         }
     } // setMenu
@@ -474,6 +499,7 @@ function MtogQ12(e) {
 
 function showMenu() {
   if (setMenu) {
+
     sEff=false;
     splashAud.pause();
     splashAud.currentTime = 0;
@@ -492,14 +518,17 @@ function showMenu() {
 
 
     // Toggle Music
-    
-    // Switch & Keyboard Controls
-    if (togKey) {
+
+    if (KeyboardMenu) {
+    if (KeyMenu[0]) {
+        //ctx.font = "100 10px Impact, fantasy";
+        //ctx.fillText("No 1", 62,190);
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = "Blue";
         ctx.fillRect(62, 190, 250, 50);
     }
-
+}
+    
     ctx.fillStyle = "black";
     ctx.globalAlpha = 1.0;
 
@@ -510,6 +539,17 @@ function showMenu() {
     ctx.drawImage(BoxMus1, 62, 190, 50, 50);
     BoxMus1.path = new Path2D();
     BoxMus1.path.rect(62, 190, 50, 50);
+
+    if (KeyboardMenu) {
+    if (KeyMenu[1]) {
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "Blue";
+        ctx.fillRect(62, 245, 250, 50);
+    }
+}
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
 
     if (bkMus) {
         ctx.drawImage(rTick1, 67, 192, 50, 40);
@@ -539,9 +579,31 @@ function showMenu() {
     //if (BackCl) {
     ctx.drawImage(background, 410, 130, 250, 50);
 
+    if (KeyboardMenu) {
+    if (KeyMenu[2]) {
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "Blue";
+        ctx.fillRect(410, 190, 250, 50);
+    }
+}
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
     ctx.drawImage(BoxBack1, 410, 190, 50, 50);
     BoxBack1.path = new Path2D();
     BoxBack1.path.rect(410, 190, 50, 50);
+
+    if (KeyboardMenu) {
+    if (KeyMenu[3]) {
+        ctx.globalAlpha = 0.3;
+        ctx.fillStyle = "Blue";
+        ctx.fillRect(410, 245, 250, 50);
+    }
+}
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
 
     //if (back) {
     if (colod) {  
@@ -553,6 +615,8 @@ function showMenu() {
     ctx.drawImage(BoxBack2, 410, 245, 50, 50);
     BoxBack2.path = new Path2D();
     BoxBack2.path.rect(410, 245, 50, 50);
+
+    
 
     if (white) {
         ctx.drawImage(rTick1, 417, 247, 50, 40);
@@ -654,7 +718,18 @@ function showMenu() {
 
     canvas.addEventListener("click", endMenu);
 
-  } //setMenu
+    // keyboard controls for Menu
+    if (keys[9]) { // Music
+        KeyMenu[0];
+        bkMus=true;
+    }
+
+    if (keys[9]) { // Music
+        KeyMenu[1];
+        bkMus=true;
+    }
+
+} // setMenu
 
 }
 
@@ -739,37 +814,40 @@ function splash() {
     // Speech code //
 
 
-    ctx.drawImage(soundBox, 25, 409, 110, 130); 
+    ctx.drawImage(soundBox, 25, 409, 110, 180); 
     soundBox.path = new Path2D();
-    soundBox.path.rect(25, 409, 110, 130);
+    soundBox.path.rect(25, 409, 110, 180);
 
     ctx.drawImage(speech, 55, 435, 55, 55);
 
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("_", 73, 512);
-    ctx.fillText("speech", 77, 510);
+    ctx.fillText("speech", 77, 520);
+    ctx.fillText("S Key", 77, 540);
     // End of Speech Code //
 
     // Settings code //
-    ctx.drawImage(SettingsBox, 580, 409, 110, 130);
+    ctx.drawImage(SettingsBox, 580, 409, 110, 180);
     SettingsBox.path = new Path2D();
-    SettingsBox.path.rect(580, 409, 110, 130);
+    SettingsBox.path.rect(580, 409, 110, 180);
 
     ctx.drawImage(settings, 594, 420, 80, 80);
 
     ctx.font = "bold 15px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("_", 611, 512);
     ctx.fillText("settings", 635, 510);
+    ctx.fillText("TAB Key", 635, 530);
+    ctx.fillText("OR", 635, 545);
+    ctx.fillText("Switch", 635, 560);
     // End of Settings Code
 
 
-    if (keys[69]) { // audio
+    if (keys[83]) { // audio
         splashAud.play();
     }
 
-    if (keys[83]) { // settings
+    if (keys[9]) { // settings
+        KeyboardMenu=true;
         setMenu=true;
     }
 
@@ -777,6 +855,9 @@ function splash() {
         splashAud.pause();
         splashAud.currentTime = 0;
         MCsplashSc = false;
+
+        KeyboardGame = true;
+
         MCgameSc1 = true;
 
         if (bkMus) {
@@ -885,15 +966,27 @@ function gameInstructions() {
 
 
 
+
 function firstQus() {
+
+ 
+
+    if (KeyboardGame && KeyGame1 && game1) {
+        //console.log("KeyGame1 is " + KeyGame1);
+
+        ctx.strokeStyle = "red";
+        } else {
+        ctx.strokeStyle = "blue";
+    }
+
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(55, 155, 42, 50);
 
-    if (selectNo) {
-    ctx.fillStyle = "red";
-    } else {
-    ctx.fillStyle = "blue";
+    if (KeyboardGame && KeyGame1 && game1) {
+        ctx.fillStyle = "red";
+        } else {
+        ctx.fillStyle = "blue";
     }
 
     ctx.font = "50px Comic Sans MS";
@@ -901,30 +994,70 @@ function firstQus() {
 }
 
 function secQus() {
+    if (KeyboardGame && KeyGame2 && game2) {
+        ctx.strokeStyle = "red";
+        } else {
+        ctx.strokeStyle = "blue";
+    }
     ctx.strokeRect(370, 150, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(375, 155, 42, 50);
-    ctx.fillStyle = "blue";
+
+    if (KeyboardGame && KeyGame2 && game2) {
+        ctx.fillStyle = "red";
+        } else {
+        ctx.fillStyle = "blue";
+    }
+
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("2", 395, 200);
 }
 
 function thQus() {
+
+    if (KeyboardGame && KeyGame3 && game3) {
+        ctx.strokeStyle = "red";
+        } else {
+        ctx.strokeStyle = "blue";
+    }
+
     ctx.strokeRect(50, 380, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(55, 385, 42, 50);
-    ctx.fillStyle = "blue";
+
+    if (KeyboardGame && KeyGame3 && game3) {
+        ctx.fillStyle = "red";
+        } else {
+        ctx.fillStyle = "blue";
+    }
+
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("3", 75, 430);
 }
 
 function foQus() {
+
+    if (KeyboardGame && KeyGame4 && game4) {
+        ctx.strokeStyle = "red";
+        console.log("KeyGame4 is " + KeyGame4);
+        } else {
+        ctx.strokeStyle = "blue";
+    }
+
     ctx.strokeRect(370, 380, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(375, 385, 42, 50);
-    ctx.fillStyle = "blue";
+
+    if (KeyboardGame && KeyGame4 && game4) {
+        ctx.fillStyle = "red";
+        } else {
+        ctx.fillStyle = "blue";
+    }
+
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("4", 395, 430);
+
+    
 }
 
 function instructions() {
@@ -974,8 +1107,15 @@ function cardSetUp() {
     ctx.fillStyle = "white";
     // border
     ctx.lineWidth = 4;
-    ctx.strokeStyle = "blue";
+    //ctx.strokeStyle = "blue";
 }
+
+
+
+
+
+
+
 
 ///////////////////////////////////
 ////part of right awnser text//////
@@ -987,6 +1127,95 @@ function rightAnsText() {
 }
 
 ////// Q1 Mouse Controls ////////////////////////
+
+var te = false;
+
+
+// 1/5/22 ////////////////////////////////////////
+
+function switchtKeys1(e) {
+    if ((keys[16]) && game1 && KeyGame1 && Sw1) {
+        //console.log("game1 is " + game1);
+        game1 = false;
+        game2 = true;
+        game3 = false;
+        game4 = false;
+        KeyGame1 = false;
+        KeyGame2 = true;
+        KeyGame3 = false;
+        KeyGame4 = false;
+        Sw1 = false;
+        Sw2 = true;
+        removeEventListener("keydown", switchtKeys1, false);
+    }
+}
+
+function switchtKeys2(e) {
+    if ((keys[16]) && game2 && KeyGame2 && Sw2) {
+    console.log("game2 is " + game2 + " KeyGame2 is " + KeyGame2);
+    game1 = false;
+    game2 = false;
+    game3 = true;
+    game4 = false;
+    //console.log("game3 is " + game3);
+    game4 = false;
+    KeyGame1 = false;
+    KeyGame2 = false;
+    KeyGame3 = true;
+    KeyGame4 = false;
+    Sw1 = false;
+    Sw2 = false;
+    Sw3 = true;
+    Sw4 = false;
+    removeEventListener("keydown", switchtKeys2, false);
+    }
+}
+
+
+function switchtKeys3(e) {
+    if ((keys[16]) && game3 && KeyGame3 && Sw3) {
+    console.log("game3 is " + game3);
+    game1 = false;
+    game2 = false;
+    game3 = false;
+    game4 = true;
+    KeyGame1 = false;
+    KeyGame2 = false;
+    KeyGame3 = false;
+    KeyGame4 = true;
+    Sw1 = false;
+    Sw2 = false;
+    Sw3 = false;
+    Sw4 = true;
+    removeEventListener("keydown", switchtKeys3, false);
+    }
+}
+
+function switchtKeys4(e) {
+    if ((keys[16]) && game4 && KeyGame4 && Sw4) {
+    console.log("game4 is " + game4);
+    game1 = true;
+    game2 = false;
+    game3 = false;
+    game4 = false;
+    KeyGame1 = true;
+    KeyGame2 = false;
+    KeyGame3 = false;
+    KeyGame4 = false;
+    Sw1 = true;
+    Sw2 = false;
+    Sw3 = false;
+    Sw4 = false;
+    
+    removeEventListener("keydown", switchtKeys4, false);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 //// Keyboard
 function gameStartKeys(e) {
@@ -1105,6 +1334,34 @@ function quest1() {
     canvas.addEventListener("click", Q1checkClick2);
     canvas.addEventListener("click", Q1checkClick3);
     canvas.addEventListener("click", Q1checkClick4);
+
+
+    
+
+
+    // Keyboard and Switch Controls
+    
+    if (Sw1) {
+    addEventListener("keydown", switchtKeys1, false);
+    }
+
+    if (Sw2) {
+    addEventListener("keydown", switchtKeys2, false);
+    }
+    
+    if (Sw3) {
+    addEventListener("keydown", switchtKeys3, false);
+    }
+    
+    if (Sw4) {
+    addEventListener("keydown", switchtKeys4, false);
+    }
+
+
+
+
+
+
     
 
     // keyboard controls for images
