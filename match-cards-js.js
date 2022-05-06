@@ -17,6 +17,82 @@ var splashSpeech = true;
 var splashSettings = true;
 
 
+    function switchtKeys1(e) {
+        if ((keys[32]) && KeyGame1 && Sw1) {
+            KeyGame1 = false;
+            KeyGame2 = true;
+            KeyGame3 = false;
+            KeyGame4 = false;
+            Sw1 = false;
+            Sw2 = true;
+            removeEventListener("keydown", switchtKeys1, false);
+        }
+    }
+    
+    function switchtKeys2(e) {
+        if ((keys[32]) && KeyGame2 && Sw2) {
+        KeyGame1 = false;
+        KeyGame2 = false;
+        KeyGame3 = true;
+        KeyGame4 = false;
+        Sw1 = false;
+        Sw2 = false;
+        Sw3 = true;
+        Sw4 = false;
+    
+        removeEventListener("keydown", switchtKeys2, false);
+        }
+    }
+    
+    
+    function switchtKeys3(e) {
+        if ((keys[32]) && KeyGame3 && Sw3) {
+        KeyGame1 = false;
+        KeyGame2 = false;
+        KeyGame3 = false;
+        KeyGame4 = true;
+        Sw1 = false;
+        Sw2 = false;
+        Sw3 = false;
+        Sw4 = true;
+        removeEventListener("keydown", switchtKeys3, false);
+        }
+    }
+    
+    function switchtKeys4(e) {
+        if ((keys[32]) && KeyGame4 && Sw4) {
+        KeyGame1 = true;
+        KeyGame2 = false;
+        KeyGame3 = false;
+        KeyGame4 = false;
+        Sw1 = true;
+        Sw2 = false;
+        Sw3 = false;
+        Sw4 = false;
+        removeEventListener("keydown", switchtKeys4, false);
+        }
+    }
+    
+    function keyboardAndswitch() {
+
+        if (Sw1) {
+        addEventListener("keydown", switchtKeys1, false);
+        }
+    
+        if (Sw2) {
+        addEventListener("keydown", switchtKeys2, false);
+        }
+        
+        if (Sw3) {
+        addEventListener("keydown", switchtKeys3, false);
+        }
+        
+        if (Sw4) {
+        addEventListener("keydown", switchtKeys4, false);
+        }
+
+    }
+
 //Switch Controls/////////////////////////
 //                                      //
 //Settings Menu                         //
@@ -1193,67 +1269,11 @@ function rightAnsText() {
     ctx.fillText("for the next question!", w, 610);
 }
 
-////// Q1 Mouse Controls ////////////////////////
+////// Q1 Keyboard Controls ////////////////////////
 
 
 
-function switchtKeys1(e) {
-    if ((keys[32]) && KeyGame1 && Sw1) {
-        KeyGame1 = false;
-        KeyGame2 = true;
-        KeyGame3 = false;
-        KeyGame4 = false;
-        Sw1 = false;
-        Sw2 = true;
-        removeEventListener("keydown", switchtKeys1, false);
-    }
-}
 
-function switchtKeys2(e) {
-    if ((keys[32]) && KeyGame2 && Sw2) {
-    KeyGame1 = false;
-    KeyGame2 = false;
-    KeyGame3 = true;
-    KeyGame4 = false;
-    Sw1 = false;
-    Sw2 = false;
-    Sw3 = true;
-    Sw4 = false;
-
-    removeEventListener("keydown", switchtKeys2, false);
-    }
-}
-
-
-function switchtKeys3(e) {
-    if ((keys[32]) && KeyGame3 && Sw3) {
-    KeyGame1 = false;
-    KeyGame2 = false;
-    KeyGame3 = false;
-    KeyGame4 = true;
-    Sw1 = false;
-    Sw2 = false;
-    Sw3 = false;
-    Sw4 = true;
-    removeEventListener("keydown", switchtKeys3, false);
-    }
-}
-
-function switchtKeys4(e) {
-    if ((keys[32]) && KeyGame4 && Sw4) {
-    KeyGame1 = true;
-    KeyGame2 = false;
-    KeyGame3 = false;
-    KeyGame4 = false;
-    Sw1 = true;
-    Sw2 = false;
-    Sw3 = false;
-    Sw4 = false;
-    removeEventListener("keydown", switchtKeys4, false);
-    }
-}
-
-///////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1268,6 +1288,8 @@ function gameStartKeys(e) {
 }
 
 
+
+////// Q1 Mouse Controls ////////////////////////
 
 function Q1checkClick1(e) {
     if (!setMenu) {
@@ -1382,30 +1404,16 @@ function quest1() {
 
 
     // Keyboard and Switch Controls
-    
-    if (Sw1) {
-    addEventListener("keydown", switchtKeys1, false);
-    }
 
-    if (Sw2) {
-    addEventListener("keydown", switchtKeys2, false);
-    }
+    keyboardAndswitch();
     
-    if (Sw3) {
-    addEventListener("keydown", switchtKeys3, false);
-    }
     
-    if (Sw4) {
-    addEventListener("keydown", switchtKeys4, false);
-    }
-
-
-/////////////////////////////////////////
-// 4/5/22 //
 // keyboard controls for images
+
     if (keys[13] && KeyGame1 && Sw1) { // Correct
         sir.pause();
         sir.currentTime = 0;
+        incor = false;
         cor1 = true;
     }
 
@@ -1426,34 +1434,11 @@ function quest1() {
         sir.currentTime = 0;
         incor = true;
     }
+
 //////////////////////////////////////////
 
     
 
-    // keyboard controls for images
-    if (keys[49]) { // Correct
-        sir.pause();
-        sir.currentTime = 0;
-        cor1 = true;
-    }
-
-    if (keys[50]) { // Incorrect
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[51]) { // Incorrect
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Incorrect
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
 
     }// Locked if gameIns = true
 
@@ -1548,29 +1533,41 @@ function quest2() {
     canvas.addEventListener("click", Q2checkClick3);
     canvas.addEventListener("click", Q2checkClick4);
 
-    if (keys[49]) { // Incorrect
-        cow1.pause();
-        cow1.currentTime = 0;
-        incor = true;
-    }
+        // Keyboard and Switch Controls
 
-    if (keys[50]) { // Incorrect
-        cow1.pause();
-        cow1.currentTime = 0;
-        incor = true;
-    }
+        keyboardAndswitch();
+    
+    
+        // keyboard controls for images
+        
+            if (keys[13] && KeyGame1 && Sw1) { // Correct
+                cow1.pause();
+                cow1.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame2 && Sw2) { // Correct
+                cow1.pause();
+                cow1.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame3 && Sw3) { // Correct
+                cow1.pause();
+                cow1.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame4 && Sw4) { // Correct
+                cow1.pause();
+                cow1.currentTime = 0;
+                incor = false;
+                cor2 = true;
+            }
+            
+        //////////////////////////////////////////
 
-    if (keys[51]) { // Incorrect
-        cow1.pause();
-        cow1.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Correct
-        cow1.pause();
-        cow1.currentTime = 0;
-        cor2 = true;
-    }
+    
 
 }
 
@@ -1662,30 +1659,40 @@ function quest3() {
     canvas.addEventListener("click", Q3checkClick3, false);
     canvas.addEventListener("click", Q3checkClick4, false);
 
-    if (keys[49]) {
-        lamb.pause();
-        lamb.currentTime = 0;
-        cor3 = true;
-    }
+    // Keyboard and Switch Controls
 
+    keyboardAndswitch();
+    
+    
+    // keyboard controls for images
+    
+        if (keys[13] && KeyGame1 && Sw1) { // Correct
+            lamb.pause();
+            lamb.currentTime = 0;
+            incor = false;
+            cor3 = true;
+        }
+    
+        if (keys[13] && KeyGame2 && Sw2) { // Correct
+            lamb.pause();
+            lamb.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame3 && Sw3) { // Correct
+            lamb.pause();
+            lamb.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame4 && Sw4) { // Correct
+            lamb.pause();
+            lamb.currentTime = 0;
+            incor = true;
+        }
+        
+    //////////////////////////////////////////
 
-    if (keys[50]) { // Incorrect
-        lamb.pause();
-        lamb.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[51]) { // Incorrect
-        lamb.pause();
-        lamb.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Incorrect
-        lamb.pause();
-        lamb.currentTime = 0;
-        incor = true;
-    }
 
 }
 
@@ -1778,30 +1785,40 @@ function quest4() {
     canvas.addEventListener("click", Q4checkClick3);
     canvas.addEventListener("click", Q4checkClick4);
 
-    if (keys[49]) {
-        oldPhone.pause();
-        oldPhone.currentTime = 0;
-        incor = false;
-        cor4 = true;
-    }
+     // Keyboard and Switch Controls
 
-    if (keys[50]) { // Incorrect
-        oldPhone.pause();
-        oldPhone.currentTime = 0;
-        incor = true;
-    }
+     keyboardAndswitch();
+    
+    
+     // keyboard controls for images
+     
+         if (keys[13] && KeyGame1 && Sw1) { // Correct
+            oldPhone.pause();
+            oldPhone.currentTime = 0;
+            incor = false;
+            cor4 = true;
+         }
+     
+         if (keys[13] && KeyGame2 && Sw2) { // Correct
+            oldPhone.pause();
+            oldPhone.currentTime = 0;
+             incor = true;
+         }
+     
+         if (keys[13] && KeyGame3 && Sw3) { // Correct
+            oldPhone.pause();
+            oldPhone.currentTime = 0;
+             incor = true;
+         }
+     
+         if (keys[13] && KeyGame4 && Sw4) { // Correct
+            oldPhone.pause();
+            oldPhone.currentTime = 0;
+             incor = true;
+         }
+         
+     //////////////////////////////////////////
 
-    if (keys[51]) { // Incorrect
-        oldPhone.pause();
-        oldPhone.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Incorrect
-        oldPhone.pause();
-        oldPhone.currentTime = 0;
-        incor = true;
-    }
 
 }
 
@@ -1893,30 +1910,41 @@ function quest5() {
     canvas.addEventListener("click", Q5checkClick3);
     canvas.addEventListener("click", Q5checkClick4);
 
-    if (keys[49]) { // Incorrect
+    // Keyboard and Switch Controls
+
+    keyboardAndswitch();
+    
+    
+// keyboard controls for images
+
+    if (keys[13] && KeyGame1 && Sw1) { // Correct
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
     }
 
-    if (keys[50]) { // Correct
+    if (keys[13] && KeyGame2 && Sw2) { // Correct
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = false;
         cor5 = true;
     }
 
-    if (keys[51]) { // Incorrect
+    if (keys[13] && KeyGame3 && Sw3) { // Correct
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
     }
 
-    if (keys[52]) { // Incorrect
+    if (keys[13] && KeyGame4 && Sw4) { // Correct
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
     }
+
+//////////////////////////////////////////
+
+    
 
 }
 
@@ -2007,6 +2035,40 @@ function quest6() {
     canvas.addEventListener("click", Q6checkClick2);
     canvas.addEventListener("click", Q6checkClick3);
     canvas.addEventListener("click", Q6checkClick4);
+
+        // Keyboard and Switch Controls
+
+        keyboardAndswitch();
+    
+    
+        // keyboard controls for images
+        
+            if (keys[13] && KeyGame1 && Sw1) { // Correct
+                microSound.pause();
+                microSound.currentTime = 0;
+                incor = false;
+                cor6 = true;
+            }
+        
+            if (keys[13] && KeyGame2 && Sw2) { // Correct
+                microSound.pause();
+                microSound.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame3 && Sw3) { // Correct
+                microSound.pause();
+                microSound.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame4 && Sw4) { // Correct
+                microSound.pause();
+                microSound.currentTime = 0;
+                incor = true;
+            }
+        
+        //////////////////////////////////////////
 
     if (keys[49]) { // Correct
         microSound.pause();
