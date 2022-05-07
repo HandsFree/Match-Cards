@@ -1394,10 +1394,13 @@ function quest1() {
     }
 
     if (!gameIns) { // mouse controls for images
+
+        if (!KeyboardGame) {
     canvas.addEventListener("click", Q1checkClick1);
     canvas.addEventListener("click", Q1checkClick2);
     canvas.addEventListener("click", Q1checkClick3);
     canvas.addEventListener("click", Q1checkClick4);
+        }
 
 
     
@@ -1409,6 +1412,7 @@ function quest1() {
     
     
 // keyboard controls for images
+
 
     if (keys[13] && KeyGame1 && Sw1) { // Correct
         sir.pause();
@@ -1528,10 +1532,12 @@ function quest2() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q2checkClick1);
     canvas.addEventListener("click", Q2checkClick2);
     canvas.addEventListener("click", Q2checkClick3);
     canvas.addEventListener("click", Q2checkClick4);
+    }
 
         // Keyboard and Switch Controls
 
@@ -1654,10 +1660,12 @@ function quest3() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q3checkClick1, false);
     canvas.addEventListener("click", Q3checkClick2, false);
     canvas.addEventListener("click", Q3checkClick3, false);
     canvas.addEventListener("click", Q3checkClick4, false);
+    }
 
     // Keyboard and Switch Controls
 
@@ -1780,10 +1788,12 @@ function quest4() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q4checkClick1);
     canvas.addEventListener("click", Q4checkClick2);
     canvas.addEventListener("click", Q4checkClick3);
     canvas.addEventListener("click", Q4checkClick4);
+    }
 
      // Keyboard and Switch Controls
 
@@ -1905,10 +1915,12 @@ function quest5() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q5checkClick1);
     canvas.addEventListener("click", Q5checkClick2);
     canvas.addEventListener("click", Q5checkClick3);
     canvas.addEventListener("click", Q5checkClick4);
+    }
 
     // Keyboard and Switch Controls
 
@@ -2031,10 +2043,12 @@ function quest6() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q6checkClick1);
     canvas.addEventListener("click", Q6checkClick2);
     canvas.addEventListener("click", Q6checkClick3);
     canvas.addEventListener("click", Q6checkClick4);
+    }
 
         // Keyboard and Switch Controls
 
@@ -2070,30 +2084,7 @@ function quest6() {
         
         //////////////////////////////////////////
 
-    if (keys[49]) { // Correct
-        microSound.pause();
-        microSound.currentTime = 0;
-        incor = false;
-        cor6 = true;
-    }
-
-    if (keys[50]) { // Incorrect
-        microSound.pause();
-        microSound.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[51]) { // Incorrect
-        microSound.pause();
-        microSound.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Incorrect
-        microSound.pause();
-        microSound.currentTime = 0;
-        incor = true;
-    }
+   
 
 }
 ////////// End of Question 6 ////////////////////
@@ -2176,35 +2167,48 @@ function quest7() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q7checkClick1);
     canvas.addEventListener("click", Q7checkClick2);
     canvas.addEventListener("click", Q7checkClick3);
     canvas.addEventListener("click", Q7checkClick4);
-
-    if (keys[49]) { // Correct
-        bellSound.pause();
-        bellSound.currentTime = 0;
-        //incor = false;
-        cor7 = true;
     }
 
-    if (keys[50]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
-        incor = true;
-    }
+     // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
-        incor = true;
-    }
+     keyboardAndswitch();
+    
+    
+     // keyboard controls for images
+     
+         if (keys[13] && KeyGame1 && Sw1) { // Correct
+            bellSound.pause();
+            bellSound.currentTime = 0;
+             incor = false;
+             cor7 = true;
+         }
+     
+         if (keys[13] && KeyGame2 && Sw2) { // Correct
+            bellSound.pause();
+            bellSound.currentTime = 0;
+             incor = true;
+         }
+     
+         if (keys[13] && KeyGame3 && Sw3) { // Correct
+            bellSound.pause();
+            bellSound.currentTime = 0;
+             incor = true;
+         }
+     
+         if (keys[13] && KeyGame4 && Sw4) { // Correct
+            bellSound.pause();
+            bellSound.currentTime = 0;
+             incor = true;
+         }
+     
+     //////////////////////////////////////////
 
-    if (keys[52]) { // Incorrect
-        bellSound.pause();
-        bellSound.currentTime = 0;
-        incor = true;
-    }
+    
 
 }
 ////////// End of Question 7 ////////////////////
@@ -2293,34 +2297,47 @@ function quest8() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q8checkClick1);
     canvas.addEventListener("click", Q8checkClick2);
     canvas.addEventListener("click", Q8checkClick3);
     canvas.addEventListener("click", Q8checkClick4);
-
-    if (keys[49]) { // Correct
-        roarEff.pause();
-        roarEff.currentTime = 0;
-        incor = true;
     }
 
-    if (keys[50]) { // Incorrect
-        roarEff.pause();
-        roarEff.currentTime = 0;
-        incor = true;
-    }
+    // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        roarEff.pause();
-        roarEff.currentTime = 0;
-        cor8 = true;
-    }
+    keyboardAndswitch();
+    
+    
+    // keyboard controls for images
+    
+        if (keys[13] && KeyGame1 && Sw1) { // Correct
+            roarEff.pause();
+            roarEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame2 && Sw2) { // Correct
+            roarEff.pause();
+            roarEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame3 && Sw3) { // Correct
+            roarEff.pause();
+            roarEff.currentTime = 0;
+            incor = false;
+            cor8 = true;
+        }
+    
+        if (keys[13] && KeyGame4 && Sw4) { // Correct
+            roarEff.pause();
+            roarEff.currentTime = 0;
+            incor = true;
+        }
+    
+    //////////////////////////////////////////
 
-    if (keys[52]) { // Incorrect
-        roarEff.pause();
-        roarEff.currentTime = 0;
-        incor = true;
-    }
 
 }
 ////////// End of Question 8 ////////////////////
@@ -2408,34 +2425,48 @@ function quest9() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q9checkClick1);
     canvas.addEventListener("click", Q9checkClick2);
     canvas.addEventListener("click", Q9checkClick3);
     canvas.addEventListener("click", Q9checkClick4);
-
-    if (keys[49]) { // Correct
-        pigeonSdEff.pause();
-        pigeonSdEff.currentTime = 0;
-        incor = true;
     }
 
-    if (keys[50]) { // Incorrect
-        pigeonSdEff.pause();
-        pigeonSdEff.currentTime = 0;
-        cor9 = true;
-    }
+    // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        pigeonSdEff.pause();
-        pigeonSdEff.currentTime = 0;
-        incor = true;
-    }
+    keyboardAndswitch();
+    
+    
+    // keyboard controls for images
+    
+        if (keys[13] && KeyGame1 && Sw1) { // Correct
+            pigeonSdEff.pause();
+            pigeonSdEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame2 && Sw2) { // Correct
+            pigeonSdEff.pause();
+            pigeonSdEff.currentTime = 0;
+            incor = false;
+            cor9 = true;
+        }
+    
+        if (keys[13] && KeyGame3 && Sw3) { // Correct
+            pigeonSdEff.pause();
+            pigeonSdEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame4 && Sw4) { // Correct
+            pigeonSdEff.pause();
+            pigeonSdEff.currentTime = 0;
+            incor = true;
+        }
+    
+    //////////////////////////////////////////
 
-    if (keys[52]) { // Incorrect
-        pigeonSdEff.pause();
-        pigeonSdEff.currentTime = 0;
-        incor = true;
-    }
+    
 
 }
 ////////// End of Question 9 ////////////////////
@@ -2525,34 +2556,47 @@ function quest10() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q10checkClick1);
     canvas.addEventListener("click", Q10checkClick2);
     canvas.addEventListener("click", Q10checkClick3);
     canvas.addEventListener("click", Q10checkClick4);
-
-    if (keys[49]) { // Correct
-        rugbyEff.pause();
-        rugbyEff.currentTime = 0;
-        incor = true;
     }
 
-    if (keys[50]) { // Incorrect
-        rugbyEff.pause();
-        rugbyEff.currentTime = 0;
-        incor = true; 
-    }
+    // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        rugbyEff.pause();
-        rugbyEff.currentTime = 0;
-        incor = true;
-    }
+    keyboardAndswitch();
+    
+    
+    // keyboard controls for images
+    
+        if (keys[13] && KeyGame1 && Sw1) { // Correct
+            rugbyEff.pause();
+            rugbyEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame2 && Sw2) { // Correct
+            rugbyEff.pause();
+            rugbyEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame3 && Sw3) { // Correct
+            rugbyEff.pause();
+            rugbyEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame4 && Sw4) { // Correct
+            rugbyEff.pause();
+            rugbyEff.currentTime = 0;
+            incor = false;
+            cor10 = true;
+        }
+    
+    //////////////////////////////////////////
 
-    if (keys[52]) { // Incorrect
-        rugbyEff.pause();
-        rugbyEff.currentTime = 0;
-        cor10 = true;   
-    }
 
 }
 ////////// End of Question 10 ////////////////////
@@ -2642,34 +2686,47 @@ function quest11() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q11checkClick1);
     canvas.addEventListener("click", Q11checkClick2);
     canvas.addEventListener("click", Q11checkClick3);
     canvas.addEventListener("click", Q11checkClick4);
-
-    if (keys[49]) { // Correct
-        barkEff.pause();
-        barkEff.currentTime = 0;
-        incor = true;
     }
 
-    if (keys[50]) { // Incorrect
-        barkEff.pause();
-        barkEff.currentTime = 0;
-        incor = true; 
-    }
+    // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        barkEff.pause();
-        barkEff.currentTime = 0;
-        incor = true;
-    }
+    keyboardAndswitch();
+    
+    
+    // keyboard controls for images
+    
+        if (keys[13] && KeyGame1 && Sw1) { // Correct
+            barkEff.pause();
+            barkEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame2 && Sw2) { // Correct
+            barkEff.pause();
+            barkEff.currentTime = 0;
+            incor = true;
+        }
+    
+        if (keys[13] && KeyGame3 && Sw3) { // Correct
+            barkEff.pause();
+            barkEff.currentTime = 0;
+            incor = false;
+            cor11 = true;         
+        }
+    
+        if (keys[13] && KeyGame4 && Sw4) { // Correct
+            barkEff.pause();
+            barkEff.currentTime = 0;
+            incor = true;
+        }
+    
+    //////////////////////////////////////////
 
-    if (keys[52]) { // Incorrect
-        barkEff.pause();
-        barkEff.currentTime = 0;
-        cor11 = true;   
-    }
 
 }
 ////////// End of Question 11 ////////////////////
@@ -2763,34 +2820,46 @@ function quest12() {
 
     instructions();
 
+    if (!KeyboardGame) {
     canvas.addEventListener("click", Q12checkClick1);
     canvas.addEventListener("click", Q12checkClick2);
     canvas.addEventListener("click", Q12checkClick3);
     canvas.addEventListener("click", Q12checkClick4);
-
-    if (keys[49]) { // Correct
-        tramEff.pause();
-        tramEff.currentTime = 0;
-        incor = true;
     }
 
-    if (keys[50]) { // Incorrect
-        tramEff.pause();
-        tramEff.currentTime = 0;
-        incor = true; 
-    }
+        // Keyboard and Switch Controls
 
-    if (keys[51]) { // Incorrect
-        tramEff.pause();
-        tramEff.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[52]) { // Incorrect
-        tramEff.pause();
-        tramEff.currentTime = 0;
-        cor12 = true;
-    }
+        keyboardAndswitch();
+    
+    
+        // keyboard controls for images
+        
+            if (keys[13] && KeyGame1 && Sw1) { // Correct
+                tramEff.pause();
+                tramEff.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame2 && Sw2) { // Correct
+                tramEff.pause();
+                tramEff.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame3 && Sw3) { // Correct
+                tramEff.pause();
+                tramEff.currentTime = 0;
+                incor = true;
+            }
+        
+            if (keys[13] && KeyGame4 && Sw4) { // Correct
+                tramEff.pause();
+                tramEff.currentTime = 0;
+                incor = false;
+                cor12 = true;
+            }
+        
+        //////////////////////////////////////////
 
 }
 ////////// End of Question 12 ////////////////////
@@ -3978,6 +4047,7 @@ function playGame() {
         //ctx.fillText("Press the Spacebar", w, 560);
         ctx.fillText("To play again!", w, 620);
 
+        KeyboardGame = false;
         n = 1;
 
         splashSpeech = true;
