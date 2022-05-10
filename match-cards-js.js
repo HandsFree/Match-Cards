@@ -38,8 +38,7 @@ var splashSettings = true;
         Sw1 = false;
         Sw2 = false;
         Sw3 = true;
-        Sw4 = false;
-    
+        Sw4 = false; 
         removeEventListener("keydown", switchtKeys2, false);
         }
     }
@@ -97,7 +96,14 @@ var splashSettings = true;
 //                                      //
 //Settings Menu                         //
 var KeyboardMenu = false;               //
-var KeyMenu = new Array(1, 2, 3, 4);    // 
+var KeyMenu1 = true;                    // 
+var KeyMenu2 = false;                   // 
+var KeyMenu3 = false;                   // 
+var KeyMenu4 = false;                   // 
+var MSw1 = true;                        //
+var MSw2 = false;                       //
+var MSw3 = false;                       //
+var MSw4 = false;                       //
 //Game                                  //
 var KeyboardGame = false;               //
 var KeyGame1 = true;                    //
@@ -296,6 +302,12 @@ cross1.src = "images/menuAssets/cross1.png";
 const insMouse = new Image();
 insMouse.src = "images/menuAssets/gi.png";
 
+const le = new Image();
+le.src = "images/menuAssets/le.png";
+
+const gm1 = new Image();
+gm1.src = "images/menuAssets/gm1.png";
+
 // media for game
 // Pictures
 const amb = new Image();
@@ -410,6 +422,61 @@ function locked() {
     cor12=false;
 }
 
+
+function switchtKeysM1(e) {
+    if ((keys[32]) && KeyMenu1 && MSw1) {
+        KeyMenu1 = false;
+        KeyMenu2 = true;
+        KeyMenu3 = false;
+        KeyMenu4 = false;
+        MSw1 = false;
+        MSw2 = true;
+        removeEventListener("keydown", switchtKeysM1, false);
+    }
+}
+
+function switchtKeysM2(e) {
+    if ((keys[32]) && KeyMenu2 && MSw2) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = true;
+    KeyMenu4 = false;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = true;
+    MSw4 = false; 
+    removeEventListener("keydown", switchtKeysM2, false);
+    }
+}
+
+
+function switchtKeysM3(e) {
+    if ((keys[32]) && KeyMenu3 && MSw3) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = true;
+    removeEventListener("keydown", switchtKeysM3, false);
+    }
+}
+
+function switchtKeysM4(e) {
+    if ((keys[32]) && KeyMenu4 && MSw4) {
+    KeyMenu1 = true;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    MSw1 = true;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    removeEventListener("keydown", switchtKeysM4, false);
+    }
+}
 
 
 // End Mouse Menu and return to game //
@@ -562,6 +629,9 @@ function MtogQ12(e) {
 }
 // End Q12 //
 
+
+// Keyboard and Switch Controls
+// Return to Tab 1 Picture
 function returnKey() {
          KeyGame1 = true;
          KeyGame2 = false;
@@ -600,9 +670,7 @@ function showMenu() {
     // Toggle Music
 
     if (KeyboardMenu) {
-    if (KeyMenu[0]) {
-        //ctx.font = "100 10px Impact, fantasy";
-        //ctx.fillText("No 1", 62,190);
+    if (KeyMenu1) {
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = "Blue";
         ctx.fillRect(62, 190, 250, 50);
@@ -621,7 +689,7 @@ function showMenu() {
     BoxMus1.path.rect(62, 190, 50, 50);
 
     if (KeyboardMenu) {
-    if (KeyMenu[1]) {
+    if (KeyMenu2) {
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = "Blue";
         ctx.fillRect(62, 245, 250, 50);
@@ -660,7 +728,7 @@ function showMenu() {
     ctx.drawImage(background, 410, 130, 250, 50);
 
     if (KeyboardMenu) {
-    if (KeyMenu[2]) {
+    if (KeyMenu3) {
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = "Blue";
         ctx.fillRect(410, 190, 250, 50);
@@ -675,7 +743,7 @@ function showMenu() {
     BoxBack1.path.rect(410, 190, 50, 50);
 
     if (KeyboardMenu) {
-    if (KeyMenu[3]) {
+    if (KeyMenu4) {
         ctx.globalAlpha = 0.3;
         ctx.fillStyle = "Blue";
         ctx.fillRect(410, 245, 250, 50);
@@ -782,24 +850,45 @@ function showMenu() {
     canvas.addEventListener("click", MtogQ12);
 
 
+    
+///////////////////////////////////////////
+    // Game Mode
+    ctx.drawImage(gm1, 65, 485, 200, 100);
+    /////////////////////////////////////////////
+
+
+
+
     // Instructions
     ctx.textAlign = "center"; 
-    ctx.drawImage(insMouse, w-266/2, 480, 266, 133);
+    ctx.drawImage(insMouse, 268, 485, 200, 100);
     insMouse.path = new Path2D();
-    insMouse.path.rect(w-266/2, 470, 266, 133);
+    insMouse.path.rect(268, 485, 200, 100);
 
     canvas.addEventListener("click", gameInsMouse);
 
+    ///////////////////////////////////////////
+    // Language Mode
+    ctx.drawImage(le, 470, 485, 200, 100);
+    /////////////////////////////////////////////
+
     // Close Menu
     ctx.textAlign = "center"; 
-    ctx.drawImage(cross, w-30, 640, 50, 50);
+    ctx.drawImage(cross, w-30, 645, 50, 50);
     cross.path = new Path2D();
-    cross.path.rect(w-30, 640, 50, 50);
+    cross.path.rect(w-30, 645, 50, 50);
 
     canvas.addEventListener("click", endMenu);
 
+    if (KeyboardMenu) {
+    ctx.textAlign = "center"; 
+	ctx.font = "900 18px Comic Sans MS";
+    ctx.fillText("Use the SPACEBAR to select and then", w, 610);
+    ctx.fillText("use the ENTER KEY to change settings", w, 633);
+    
+
     // keyboard controls for Menu
-    if (keys[9]) { // Music
+    /*if (keys[9]) { // Music
         KeyMenu[0];
         bkMus=true;
     }
@@ -807,7 +896,25 @@ function showMenu() {
     if (keys[9]) { // Music
         KeyMenu[1];
         bkMus=true;
-    }
+    }*/
+
+        if (MSw1) {
+        addEventListener("keydown", switchtKeysM1, false);
+        }
+    
+        if (MSw2) {
+        addEventListener("keydown", switchtKeysM2, false);
+        }
+        
+        if (MSw3) {
+        addEventListener("keydown", switchtKeysM3, false);
+        }
+        
+        if (MSw4) {
+        addEventListener("keydown", switchtKeysM4, false);
+        }
+
+    } // KeyboardMenu
 
 } // setMenu
 
@@ -949,9 +1056,9 @@ function splash() {
 
     ctx.drawImage(speech, 55, 435, 55, 55);
 
-    ctx.font = "bold 15px arial";
+    ctx.font = "900 12px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("speech", 77, 520);
+    ctx.fillText("Speech", 77, 520);
     ctx.fillText("S Key", 77, 540);
     // End of Speech Code //
 
@@ -962,10 +1069,10 @@ function splash() {
 
     ctx.drawImage(settings, 594, 420, 80, 80);
 
-    ctx.font = "bold 15px arial";
+    ctx.font = "900 12px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("settings", 635, 510);
-    ctx.fillText("TAB Key", 635, 530);
+    ctx.fillText("Settings", 635, 510);
+    ctx.fillText("ENTER Key", 635, 530);
     ctx.fillText("OR", 635, 545);
     ctx.fillText("Switch", 635, 560);
     // End of Settings Code
@@ -975,7 +1082,7 @@ function splash() {
         splashAud.play();
     }
 
-    if (keys[9]) { // settings
+    if (keys[13]) { // settings
         KeyboardMenu=true;
         setMenu=true;
     }
@@ -1059,29 +1166,26 @@ function gameInstructions() {
         ctx.fillStyle = "Red";
         ctx.font = "110px Comic Sans MS";
         ctx.fillText("Match Cards", w, 150);
-        ctx.fillStyle = "Green";
+        ctx.fillStyle = "Blue";
+        ctx.font = "600 65px Comic Sans MS";
+        ctx.fillText("Match the sound", w, 240);
+        ctx.fillText("to the picture!", w, 300);
         ctx.font = "45px Comic Sans MS";
-        ctx.fillText("Match the sound to the picture", w, 240);
-	    ctx.fillText("using the keyboard numbers", w, 295);
-        ctx.fillText("on the picture - 1,2,3,4", w, 350);
         ctx.fillStyle = "Purple";
-        ctx.font = "60px Comic Sans MS";
-	    ctx.fillText("OR", w, 415);
-        ctx.fillStyle = "Green";
-        ctx.font = "45px Comic Sans MS";
-        ctx.fillText("by left clicking on the picture", w, 470);
-        ctx.font = "35px Comic Sans MS";
-        ctx.fillStyle = "blue";
+	    ctx.fillText("Using your Mouse to", w, 380);
+        ctx.fillText("Left Click on the picture", w, 440);
 
         // Close Menu
-        ctx.fillText("Click below", w, 550);
+        ctx.font = "35px Comic Sans MS";
+        ctx.fillStyle = "blue";
+        ctx.fillText("Let's Go!", w, 550);
         ctx.textAlign = "center"; 
         ctx.drawImage(cross1, w-30, 560, 50, 50);
         cross1.path = new Path2D();
         cross1.path.rect(w-30, 560, 50, 50);
 
-        ctx.fillText("OR", w, 645);
-        ctx.fillText("Press the spacebar", w, 680);
+    
+        //ctx.fillText("Press the spacebar", w, 680);
 
         incor=false;
         locked();
@@ -1409,6 +1513,7 @@ function quest1() {
     // Keyboard and Switch Controls
 
     keyboardAndswitch();
+    
     
     
 // keyboard controls for images
