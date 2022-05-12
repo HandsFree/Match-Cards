@@ -7,6 +7,8 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
+var SetSplashKey = true;
+
 //BackCl = false;
 
 // Photo dimensions
@@ -99,11 +101,23 @@ var KeyboardMenu = false;               //
 var KeyMenu1 = true;                    // 
 var KeyMenu2 = false;                   // 
 var KeyMenu3 = false;                   // 
-var KeyMenu4 = false;                   // 
+var KeyMenu4 = false;                   //
+var KeyMenu5 = false;                   //
+var KeyMenu6 = false;                   //
+var KeyMenu7 = false;                   //
+var KeyMenu8 = false;                   //
+var KeyMenu9 = false;                   //
+                                        //
 var MSw1 = true;                        //
 var MSw2 = false;                       //
 var MSw3 = false;                       //
 var MSw4 = false;                       //
+var MSw5 = false;                       //
+var MSw6 = false;                       //                                        
+var MSw7 = false;                       // 
+var MSw8 = false;                       //
+var MSw9 = false;                       //
+                                        //
 //Game                                  //
 var KeyboardGame = false;               //
 var KeyGame1 = true;                    //
@@ -235,13 +249,13 @@ const mBack = new Image();
 mBack.src = "images/menuAssets/backGr1.png";
 
 ///////////////////////////////////////////////////////////
-// tick image // 15/4/22
+// tick image //
 const rTick1 = new Image();
 rTick1.src = "images/menuAssets/rTick1.png";
 ///////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////
-// music images // 14/4/22
+// music images //
 const mus = new Image();
 mus.src = "images/menuAssets/music.png";
 
@@ -253,7 +267,7 @@ BoxMus2.src = "images/menuAssets/BoxMus2.png";
 //////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////
-// background images // 14/4/22
+// background images //
 const background = new Image();
 background.src = "images/menuAssets/background.png";
 
@@ -429,8 +443,14 @@ function switchtKeysM1(e) {
         KeyMenu2 = true;
         KeyMenu3 = false;
         KeyMenu4 = false;
+        KeyMenu5 = false;
+        KeyMenu6 = false;
         MSw1 = false;
         MSw2 = true;
+        MSw3 = false;
+        MSw4 = false;
+        MSw5 = false;
+        MSw6 = false;
         removeEventListener("keydown", switchtKeysM1, false);
     }
 }
@@ -441,10 +461,14 @@ function switchtKeysM2(e) {
     KeyMenu2 = false;
     KeyMenu3 = true;
     KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
     MSw1 = false;
     MSw2 = false;
     MSw3 = true;
-    MSw4 = false; 
+    MSw4 = false;
+    MSw5 = false; 
+    MSw6 = false; 
     removeEventListener("keydown", switchtKeysM2, false);
     }
 }
@@ -456,25 +480,143 @@ function switchtKeysM3(e) {
     KeyMenu2 = false;
     KeyMenu3 = false;
     KeyMenu4 = true;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
     MSw1 = false;
     MSw2 = false;
     MSw3 = false;
     MSw4 = true;
+    MSw5 = false;
+    MSw6 = false;
     removeEventListener("keydown", switchtKeysM3, false);
     }
 }
 
 function switchtKeysM4(e) {
     if ((keys[32]) && KeyMenu4 && MSw4) {
-    KeyMenu1 = true;
+    KeyMenu1 = false;
     KeyMenu2 = false;
     KeyMenu3 = false;
     KeyMenu4 = false;
+    KeyMenu5 = true;
+    KeyMenu6 = false;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = true;
+    MSw6 = false;
+    removeEventListener("keydown", switchtKeysM4, false);
+    }
+}
+
+function switchtKeysM5(e) {
+    if ((keys[32]) && KeyMenu5 && MSw5) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = true;
+    removeEventListener("keydown", switchtKeysM5, false);
+    }
+}
+
+function switchtKeysM6(e) {
+    if ((keys[32]) && KeyMenu6 && MSw6) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = true;
     MSw1 = true;
     MSw2 = false;
     MSw3 = false;
     MSw4 = false;
-    removeEventListener("keydown", switchtKeysM4, false);
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = true;
+    removeEventListener("keydown", switchtKeysM6, false);
+    }
+}
+
+function switchtKeysM7(e) {
+    if ((keys[32]) && KeyMenu7 && MSw7) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = true;
+    KeyMenu9 = false;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = true;
+    MSw9 = false;
+    removeEventListener("keydown", switchtKeysM7, false);
+    }
+}
+
+function switchtKeysM8(e) {
+    if ((keys[32]) && KeyMenu8 && MSw8) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = true;
+    removeEventListener("keydown", switchtKeysM8, false);
+    }
+}
+
+function switchtKeysM9(e) {
+    if ((keys[32]) && KeyMenu9 && MSw9) {
+    KeyMenu1 = true;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = false;
+    MSw1 = true;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = false;
+    removeEventListener("keydown", switchtKeysM9, false);
     }
 }
 
@@ -650,6 +792,10 @@ function returnKey() {
 function showMenu() {
   if (setMenu) {
 
+    if (KeyboardGame) {
+    gameIns = false;
+    }
+
     sEff=false;
     splashAud.pause();
     splashAud.currentTime = 0;
@@ -784,6 +930,18 @@ function showMenu() {
     // Toggle Speech
     ctx.drawImage(speechEff, 62, 310, 250, 50);
 
+    if (KeyboardMenu) {
+        if (KeyMenu5) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(62, 370, 250, 50);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
+
     ctx.drawImage(BoxSp1, 62, 370, 50, 50);
     BoxSp1.path = new Path2D();
     BoxSp1.path.rect(62, 370, 50, 50);
@@ -793,6 +951,17 @@ function showMenu() {
     }
 
     ctx.fillText("On", 120, 407);
+
+    if (KeyboardMenu) {
+        if (KeyMenu6) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(62, 425, 250, 50);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
 
     ctx.drawImage(BoxSp2, 62, 425, 50, 50);
     BoxSp2.path = new Path2D();
@@ -815,6 +984,18 @@ function showMenu() {
 
     // Q4
     ctx.drawImage(BoxQ41, 420, 370, 60, 60);
+
+    if (KeyboardMenu) {
+        if (KeyMenu7) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(420, 370, 60, 60);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
     BoxQ41.path = new Path2D();
     BoxQ41.path.rect(420, 370, 60, 60);
     ctx.fillText("4", 440, 410);
@@ -827,6 +1008,19 @@ function showMenu() {
 
     // Q8
     ctx.drawImage(BoxQ81, 502, 370, 60, 60);
+
+    
+    if (KeyboardMenu) {
+        if (KeyMenu8) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(502, 370, 60, 60);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
     BoxQ81.path = new Path2D();
     BoxQ81.path.rect(502, 370, 60, 60);
     ctx.fillText("8", 523, 410);
@@ -839,6 +1033,19 @@ function showMenu() {
 
     // Q12
     ctx.drawImage(BoxQ121, 585, 370, 60, 60);
+
+    
+    if (KeyboardMenu) {
+        if (KeyMenu9) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(585, 370, 60, 60);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
     BoxQ121.path = new Path2D();
     BoxQ121.path.rect(585, 370, 60, 60);
     ctx.fillText("12", 597, 410);
@@ -888,15 +1095,6 @@ function showMenu() {
     
 
     // keyboard controls for Menu
-    /*if (keys[9]) { // Music
-        KeyMenu[0];
-        bkMus=true;
-    }
-
-    if (keys[9]) { // Music
-        KeyMenu[1];
-        bkMus=true;
-    }*/
 
         if (MSw1) {
         addEventListener("keydown", switchtKeysM1, false);
@@ -912,6 +1110,26 @@ function showMenu() {
         
         if (MSw4) {
         addEventListener("keydown", switchtKeysM4, false);
+        }
+
+        if (MSw5) {
+        addEventListener("keydown", switchtKeysM5, false);
+        }
+
+        if (MSw6) {
+        addEventListener("keydown", switchtKeysM6, false);
+        }
+
+        if (MSw7) {
+        addEventListener("keydown", switchtKeysM7, false);
+        }
+
+        if (MSw8) {
+        addEventListener("keydown", switchtKeysM8, false);
+        }
+                
+        if (MSw9) {
+        addEventListener("keydown", switchtKeysM9, false);
         }
 
     } // KeyboardMenu
@@ -995,7 +1213,12 @@ if (keys[32]) { // Go to game
     splashAud.currentTime = 0;
     MCsplashSc = false;
 
+    //gameIns = false;
+    gameIns = true;
     KeyboardGame = true;
+
+    splashSpeech = false;
+    splashSettings = false;
 
     MCgameSc1 = true;
 
@@ -1006,8 +1229,19 @@ if (keys[32]) { // Go to game
 
     incor = false;
 
+    SetSplashKey = false;
+
     removeEventListener("keydown", gameStKey, false);
 }
+}
+
+function settingsKey(e) {
+    if (keys[13] && SetSplashKey) { // settings
+        KeyboardMenu=true;
+        setMenu=true;
+        gameIns = false;
+        removeEventListener("keydown", settingsKey, false);
+    }
 }
 
 
@@ -1082,10 +1316,7 @@ function splash() {
         splashAud.play();
     }
 
-    if (keys[13]) { // settings
-        KeyboardMenu=true;
-        setMenu=true;
-    }
+    
 
 
 
@@ -1106,6 +1337,7 @@ function splash() {
 
 
     addEventListener("keydown", gameStKey, false);
+    addEventListener("keydown", settingsKey, false);
     
     
 
@@ -1148,8 +1380,6 @@ function gameStart(e) {
 
 function gameInstructions() {
 
-    
-
     if (togSpeech) {
         gameInsSpeech.play();
     }
@@ -1170,22 +1400,43 @@ function gameInstructions() {
         ctx.font = "600 65px Comic Sans MS";
         ctx.fillText("Match the sound", w, 240);
         ctx.fillText("to the picture!", w, 300);
-        ctx.font = "45px Comic Sans MS";
+        ctx.font = "30px Comic Sans MS";
         ctx.fillStyle = "Purple";
+
+        if (KeyboardGame) {
+            ctx.fillText("Press the SPACEBAR to tab", w, 380);
+            ctx.fillText("between the pictures", w, 430);
+            ctx.fillText("and press the ENTER KEY to select one", w, 480);
+            ctx.fillStyle = "Green";
+            ctx.font = "600 26px Comic Sans MS";
+            ctx.fillText("OR use your Switch - you need two Switches", w, 540);
+        }
+
+        if (!KeyboardGame) { 
 	    ctx.fillText("Using your Mouse to", w, 380);
         ctx.fillText("Left Click on the picture", w, 440);
+        }
 
-        // Close Menu
-        ctx.font = "35px Comic Sans MS";
-        ctx.fillStyle = "blue";
-        ctx.fillText("Let's Go!", w, 550);
+        ctx.font = "30px Comic Sans MS";
+        ctx.fillStyle = "Red";
+        
+
+        if (KeyboardGame) {
+            ctx.textAlign = "center"; 
+            ctx.fillText("Let's Go!", w, 620);
+            ctx.fillText("Press the SPACEBAR to start!", w, 660);
+        }
+
+        if (!KeyboardGame) { 
         ctx.textAlign = "center"; 
+        ctx.fillText("Let's Go!", w, 550);
         ctx.drawImage(cross1, w-30, 560, 50, 50);
         cross1.path = new Path2D();
         cross1.path.rect(w-30, 560, 50, 50);
+        }
 
     
-        //ctx.fillText("Press the spacebar", w, 680);
+        
 
         incor=false;
         locked();
@@ -1198,7 +1449,7 @@ function gameInstructions() {
             splashSpeech = false;
             splashSettings = false;
             canvas.addEventListener("click", gameStart);  
-        }
+        }    
 
     }
 
@@ -1207,7 +1458,10 @@ function gameInstructions() {
 
 function firstQus() {
 
- 
+
+    console.log("gameIns is " + gameIns);
+
+    console.log("setMenu is " + setMenu);
 
     if (KeyboardGame && KeyGame1) {
         //console.log("KeyGame1 is " + KeyGame1);
@@ -1303,11 +1557,13 @@ function instructions() {
         ctx.font = "900 24px Comic Sans MS";
         ctx.fillStyle = "red";
         ctx.fillText("Match the sound to the picture", w, 615);
-    } else {
+    }
+    if (!KeyboardGame) {
         ctx.font = "35px Comic Sans MS";
         ctx.fillStyle = "blue";
         ctx.fillText("Match the sound to the picture", w, 625);
     }
+
     if (KeyboardGame) {
     ctx.fillStyle = "blue";
     ctx.font = "22px Comic Sans MS";
@@ -1316,7 +1572,9 @@ function instructions() {
     ctx.fillText("and then", w, 671);
     ctx.fillStyle = "blue";
     ctx.fillText("press the ENTER KEY to select one", w, 700);
-    } else {
+    }
+
+    if (!KeyboardGame) {
 	ctx.fillText("Left Click on the picture", w, 680);
     }
 }
@@ -1518,7 +1776,6 @@ function quest1() {
     
 // keyboard controls for images
 
-
     if (keys[13] && KeyGame1 && Sw1) { // Correct
         sir.pause();
         sir.currentTime = 0;
@@ -1543,6 +1800,7 @@ function quest1() {
         sir.currentTime = 0;
         incor = true;
     }
+
 
 //////////////////////////////////////////
 
@@ -3032,6 +3290,9 @@ function rightClick1() {
         addEventListener("click", rightClick1);
     }
 
+
+
+
     // mouse controls right Answer 2 //
     function rightClick2() {
         incor = false;
@@ -3696,6 +3957,7 @@ function keyWrong() {
     /////////  Wrong Awnser //////////////////
     function wrong() {
 
+
         sEff = false;
 
         if (togSpeech) {
@@ -4164,6 +4426,7 @@ function playGame() {
             music.pause();
             music.currentTime = 0;
             finalScreen = false;
+            SetSplashKey = true;
             MCsplashSc = true;
         }
 
