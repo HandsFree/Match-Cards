@@ -15,12 +15,17 @@ var SetSplashKey = true;
 const wdt = 300;
 const ht = 200;
 
+//////////////////////////////////
+var mouseMode = false;
+var keyboardMode = false;
+//////////////////////////////////
+
 var splashSpeech = true;
 var splashSettings = true;
 
 
     function switchtKeys1(e) {
-        if ((keys[32]) && KeyGame1 && Sw1) {
+        if ((keys[32]) && KeyGame1 && Sw1 && !mouseMode && keyboardMode) {
             KeyGame1 = false;
             KeyGame2 = true;
             KeyGame3 = false;
@@ -32,7 +37,7 @@ var splashSettings = true;
     }
     
     function switchtKeys2(e) {
-        if ((keys[32]) && KeyGame2 && Sw2) {
+        if ((keys[32]) && KeyGame2 && Sw2 && !mouseMode && keyboardMode) {
         KeyGame1 = false;
         KeyGame2 = false;
         KeyGame3 = true;
@@ -47,7 +52,7 @@ var splashSettings = true;
     
     
     function switchtKeys3(e) {
-        if ((keys[32]) && KeyGame3 && Sw3) {
+        if ((keys[32]) && KeyGame3 && Sw3 && !mouseMode && keyboardMode) {
         KeyGame1 = false;
         KeyGame2 = false;
         KeyGame3 = false;
@@ -61,7 +66,7 @@ var splashSettings = true;
     }
     
     function switchtKeys4(e) {
-        if ((keys[32]) && KeyGame4 && Sw4) {
+        if ((keys[32]) && KeyGame4 && Sw4 && !mouseMode && keyboardMode) {
         KeyGame1 = true;
         KeyGame2 = false;
         KeyGame3 = false;
@@ -75,23 +80,21 @@ var splashSettings = true;
     }
     
     function keyboardAndswitch() {
-
-        if (Sw1) {
+        if (Sw1 && !mouseMode && keyboardMode) {
         addEventListener("keydown", switchtKeys1, false);
         }
     
-        if (Sw2) {
+        if (Sw2 && !mouseMode && keyboardMode) {
         addEventListener("keydown", switchtKeys2, false);
         }
         
-        if (Sw3) {
+        if (Sw3 && !mouseMode && keyboardMode) {
         addEventListener("keydown", switchtKeys3, false);
         }
         
-        if (Sw4) {
+        if (Sw4 && !mouseMode && keyboardMode) {
         addEventListener("keydown", switchtKeys4, false);
         }
-
     }
 
 //Switch Controls/////////////////////////
@@ -216,11 +219,15 @@ var incor = false;
 const keys = []; // keyboard operations
 
 window.addEventListener("keydown", function(e){
+    if (!mouseMode) {
     keys[e.keyCode] = true;
+    }
 });
 
 window.addEventListener("keyup", function(e){
+    if (!mouseMode) {
     delete keys[e.keyCode];
+    }
 });
 
 //Splash
@@ -321,6 +328,9 @@ le.src = "images/menuAssets/le.png";
 
 const gm1 = new Image();
 gm1.src = "images/menuAssets/gm1.png";
+
+const gk = new Image();
+gk.src = "images/menuAssets/gk.png";
 
 // media for game
 // Pictures
@@ -629,6 +639,22 @@ function endMenu(e) {
             sEff = true;
             //BackCl = false;
             setMenu=false;
+
+            if (keyboardMode) {
+                mouseMode=false;
+                KeyboardGame=true;
+                returnKey();      
+            }
+
+            if (mouseMode) {
+                mouseMode=true;
+                KeyboardGame=false;
+                KeyGame1=false;
+                KeyGame2=false;
+                KeyGame3=false;
+                KeyGame4=false;
+            }
+
             canvas.removeEventListener("click", endMenu);
         }
     }
@@ -770,6 +796,30 @@ function MtogQ12(e) {
     } // setMenu
 }
 // End Q12 //
+
+
+// Game Mode //
+function gameMode1(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(gm1.path, e.offsetX, e.offsetY)) {
+           mouseMode = false;
+           keyboardMode = true;
+           KeyboardMenu=true;
+           canvas.removeEventListener("click", gameMode1);
+        }
+    } 
+}
+
+function gameMode2(e) {
+    if (setMenu) {
+       if (keyboardMode && ctx.isPointInPath(gk.path, e.offsetX, e.offsetY)) {
+           mouseMode = true;
+           keyboardMode = false;
+           KeyboardMenu=false;
+           canvas.removeEventListener("click", gameMode2);
+        }
+    } 
+}
 
 
 // Keyboard and Switch Controls
@@ -1059,10 +1109,26 @@ function showMenu() {
 
     
 ///////////////////////////////////////////
-    // Game Mode
+    // Game Mode Mouse
+    if (mouseMode) {
     ctx.drawImage(gm1, 65, 485, 200, 100);
+    gm1.path = new Path2D();
+    gm1.path.rect(65, 485, 200, 100);
+
+    canvas.addEventListener("click", gameMode1);
+    }
     /////////////////////////////////////////////
 
+    ///////////////////////////////////////////
+    // Game Mode Keyboard
+    if (keyboardMode) {
+        ctx.drawImage(gk, 65, 485, 200, 100);
+        gk.path = new Path2D();
+        gk.path.rect(65, 485, 200, 100);
+    
+        canvas.addEventListener("click", gameMode2);
+        }
+        /////////////////////////////////////////////
 
 
 
@@ -1096,6 +1162,7 @@ function showMenu() {
 
     // keyboard controls for Menu
 
+    
         if (MSw1) {
         addEventListener("keydown", switchtKeysM1, false);
         }
@@ -1132,6 +1199,9 @@ function showMenu() {
         addEventListener("keydown", switchtKeysM9, false);
         }
 
+    
+
+
     } // KeyboardMenu
 
 } // setMenu
@@ -1142,7 +1212,9 @@ function showMenu() {
 // End Splash Screen
 function closeSplash(e) {
   if (!setMenu) {
-    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) {  
+    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) { 
+        
+        KeyboardGame = false;
         
         locked();
         splashAud.pause();
@@ -1152,6 +1224,9 @@ function closeSplash(e) {
 
         splashSpeech = false;
         splashSettings = false;
+
+        mouseMode = true;
+        keyboardMode = false;
 
         MCgameSc1 = true;
         gameIns = true;
@@ -1186,6 +1261,8 @@ function settingMouse1(e) {
     if (!setMenu) {
         if (splashSpeech && splashSettings && ctx.isPointInPath(SettingsBox.path, e.offsetX, e.offsetY)) {
 
+            mouseMode = true;
+
             setMenu=true;
 
             //BackCl=true;
@@ -1208,7 +1285,7 @@ function settingMouse1(e) {
 
 
 function gameStKey(e) {
-if (keys[32]) { // Go to game
+if (keys[32]) { // Go to Instructions
     splashAud.pause();
     splashAud.currentTime = 0;
     MCsplashSc = false;
@@ -1231,13 +1308,17 @@ if (keys[32]) { // Go to game
 
     SetSplashKey = false;
 
+    mouseMode = false;
+    keyboardMode = true;
+
     removeEventListener("keydown", gameStKey, false);
 }
 }
 
 function settingsKey(e) {
     if (keys[13] && SetSplashKey) { // settings
-        KeyboardMenu=true;
+        KeyboardMenu = true;
+        keyboardMode = true;
         setMenu=true;
         gameIns = false;
         removeEventListener("keydown", settingsKey, false);
@@ -1352,7 +1433,7 @@ function splash() {
 
 
 function closeSplash1(e) {
-    if (setMenu) {
+    if (setMenu && !keyboardMode) {
         if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
            gameInsSpeech.pause();
            gameInsSpeech.currentTime = 0;
@@ -1367,8 +1448,8 @@ function closeSplash1(e) {
 
 //// Mouse
 function gameStart(e) {
-    if (!setMenu) {
-        if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+    if (!setMenu && mouseMode && !keyboardMode) {
+        if (!setMenu && !keyboardMode && ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
             gameIns = false;
             gameInsSpeech.pause();
             gameInsSpeech.currentTime = 0;
@@ -1377,11 +1458,23 @@ function gameStart(e) {
     }
 }
 
+//// Keyboard
+function gameStartkey(e) {
+    if (!setMenu && keyboardMode && !mouseMode) {
+        if (keys[13]) {
+            gameIns = false;
+            gameInsSpeech.pause();
+            gameInsSpeech.currentTime = 0;
+            canvas.removeEventListener("keydown", gameStartkey, false);      
+        }
+    }
+}
+
 
 function gameInstructions() {
 
     if (togSpeech) {
-        gameInsSpeech.play();
+        //gameInsSpeech.play();
     }
     if (!togSpeech) {
         gameInsSpeech.pause();
@@ -1445,11 +1538,17 @@ function gameInstructions() {
             canvas.addEventListener("click", closeSplash1);
         }
 
-        if (!setMenu) {
+        if (!setMenu && mouseMode && !keyboardMode) {
             splashSpeech = false;
             splashSettings = false;
             canvas.addEventListener("click", gameStart);  
-        }    
+        }  
+        
+        if (!setMenu && keyboardMode && !mouseMode) {
+            splashSpeech = false;
+            splashSettings = false;
+            addEventListener("keydown", gameStartkey);  
+        }  
 
     }
 
@@ -1458,24 +1557,23 @@ function gameInstructions() {
 
 function firstQus() {
 
+    //console.log("gameIns is " + gameIns);
 
-    console.log("gameIns is " + gameIns);
+    //console.log("setMenu is " + setMenu);
 
-    console.log("setMenu is " + setMenu);
-
-    if (KeyboardGame && KeyGame1) {
+        //console.log("keyboardMode is " + keyboardMode);
+        if (!mouseMode && KeyboardGame && KeyGame1) {
         //console.log("KeyGame1 is " + KeyGame1);
-
         ctx.strokeStyle = "red";
         } else {
         ctx.strokeStyle = "blue";
-    }
+        }
 
     ctx.strokeRect(50, 150, 300, 200);
     ctx.fillStyle = "white";
     ctx.fillRect(55, 155, 42, 50);
 
-    if (KeyboardGame && KeyGame1) {
+    if (!mouseMode && KeyboardGame && KeyGame1) {
         ctx.fillStyle = "red";
         } else {
         ctx.fillStyle = "blue";
@@ -1486,7 +1584,7 @@ function firstQus() {
 }
 
 function secQus() {
-    if (KeyboardGame && KeyGame2) {
+    if (!mouseMode && KeyboardGame && KeyGame2) {
         ctx.strokeStyle = "red";
         } else {
         ctx.strokeStyle = "blue";
@@ -1495,7 +1593,7 @@ function secQus() {
     ctx.fillStyle = "white";
     ctx.fillRect(375, 155, 42, 50);
 
-    if (KeyboardGame && KeyGame2) {
+    if (!mouseMode && KeyboardGame && KeyGame2) {
         ctx.fillStyle = "red";
         } else {
         ctx.fillStyle = "blue";
@@ -1507,7 +1605,7 @@ function secQus() {
 
 function thQus() {
 
-    if (KeyboardGame && KeyGame3) {
+    if (!mouseMode && KeyboardGame && KeyGame3) {
         ctx.strokeStyle = "red";
         } else {
         ctx.strokeStyle = "blue";
@@ -1517,7 +1615,7 @@ function thQus() {
     ctx.fillStyle = "white";
     ctx.fillRect(55, 385, 42, 50);
 
-    if (KeyboardGame && KeyGame3) {
+    if (!mouseMode && KeyboardGame && KeyGame3) {
         ctx.fillStyle = "red";
         } else {
         ctx.fillStyle = "blue";
@@ -1529,9 +1627,9 @@ function thQus() {
 
 function foQus() {
 
-    if (KeyboardGame && KeyGame4) {
+    if (!mouseMode && KeyboardGame && KeyGame4) {
         ctx.strokeStyle = "red";
-        console.log("KeyGame4 is " + KeyGame4);
+        //console.log("KeyGame4 is " + KeyGame4);
         } else {
         ctx.strokeStyle = "blue";
     }
@@ -1540,7 +1638,7 @@ function foQus() {
     ctx.fillStyle = "white";
     ctx.fillRect(375, 385, 42, 50);
 
-    if (KeyboardGame && KeyGame4) {
+    if (!mouseMode && KeyboardGame && KeyGame4) {
         ctx.fillStyle = "red";
         } else {
         ctx.fillStyle = "blue";
@@ -1553,6 +1651,10 @@ function foQus() {
 }
 
 function instructions() {
+
+    console.log("mouseMode is " + mouseMode);
+    console.log("keyboardMode is " + keyboardMode);
+
     if (KeyboardGame) {
         ctx.font = "900 24px Comic Sans MS";
         ctx.fillStyle = "red";
@@ -1601,11 +1703,14 @@ function cardSetUp() {
     // Keyboard Settings
     if (keys[83]) { // settings
         setMenu=true;
+        KeyboardMenu=true;
     }
 
-    ctx.font = "15px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("settings", 40, 90);
+    ctx.font = "700 13px Comic Sans MS";
+    ctx.fillStyle = "red";
+    ctx.fillText("Settings", 40, 90);
+    ctx.fillText("Left Click", 40, 106);
+    ctx.fillText("OR press S", 40, 122);
 
     // text
     ctx.font = "80px Comic Sans MS";
@@ -1653,6 +1758,8 @@ function gameStartKeys(e) {
 
 ////// Q1 Mouse Controls ////////////////////////
 
+
+
 function Q1checkClick1(e) {
     if (!setMenu) {
 	if (ctx.isPointInPath(amb.path, e.offsetX, e.offsetY)) {
@@ -1699,21 +1806,61 @@ function Q1checkClick4(e) {
     }
 }
 
+
+function selectKeys1(e) {
+    if (keys[13] && KeyGame1 && Sw1 && !mouseMode) { // Correct
+        sir.pause();
+        sir.currentTime = 0;
+        incor = false;
+        cor1 = true;
+        removeEventListener("keydown", switchtKeys1, false);
+    }
+}
+
+function selectKeys2(e) {
+    if (keys[13] && KeyGame2 && Sw2 && !mouseMode) { // Correct
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("keydown", switchtKeys2, false);
+    }
+}
+
+function selectKeys3(e) {
+    if (keys[13] && KeyGame3 && Sw3 && !mouseMode) { // Correct
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("keydown", switchtKeys3, false);
+    }
+}
+
+function selectKeys4(e) {
+    if (keys[13] && KeyGame4 && Sw4 && !mouseMode) { // Correct
+        sir.pause();
+        sir.currentTime = 0;
+        incor = true;
+        removeEventListener("keydown", switchtKeys4, false);
+    }
+}
+
 /////////// end of Q1 Mouse Controls ////////////////////////////////
 
 /////////  Question 1 //////////////////
 
 function quest1() {
 
+    console.log("gameIns is " + gameIns);
+
     // Question 1
     // Only runs if instuctions and settings menu are off.
     if (!gameIns && sEff) {
-        console.log(sEff + "Running");
+        //console.log(sEff + "Running");
         sir.play();
     }
     
     if (!sEff) {
-        console.log(sEff + "Paused");
+        //console.log(sEff + "Paused");
         sir.pause();
         sir.currentTime = 0;
     }
@@ -1722,24 +1869,35 @@ function quest1() {
     cardSetUp();
     }
 
+    
     ctx.drawImage(amb, 50, 150, wdt, ht);
+    if (!KeyboardGame) {
 	amb.path = new Path2D();
     amb.path.rect(50, 150, wdt, ht);
+    }
     firstQus();
+
+
   
     ctx.drawImage(lam, 370, 150, wdt, ht);
+    if (!KeyboardGame) {
     lam.path = new Path2D();
     lam.path.rect(370, 150, wdt, ht);
+    }
     secQus();
 
     ctx.drawImage(micro, 50, 380, wdt, ht);
+    if (!KeyboardGame) {
     micro.path = new Path2D();
     micro.path.rect(50, 380, wdt, ht);
+    }
     thQus();
 
     ctx.drawImage(cow, 370, 380, wdt, ht);
+    if (!KeyboardGame) {
     cow.path = new Path2D();
     cow.path.rect(370, 380, wdt, ht);
+    }
     foQus();
 
     if (!gameIns) {
@@ -1757,56 +1915,26 @@ function quest1() {
 
     if (!gameIns) { // mouse controls for images
 
-        if (!KeyboardGame) {
+    if (!KeyboardGame && !keyboardMode && mouseMode) {
     canvas.addEventListener("click", Q1checkClick1);
     canvas.addEventListener("click", Q1checkClick2);
     canvas.addEventListener("click", Q1checkClick3);
     canvas.addEventListener("click", Q1checkClick4);
-        }
+    }
 
-
-    
-
+    if (KeyboardGame && keyboardMode && !mouseMode) {
+    addEventListener("keydown", selectKeys1, false);
+    addEventListener("keydown", selectKeys2, false);
+    addEventListener("keydown", selectKeys3, false);
+    addEventListener("keydown", selectKeys4, false);
+    }
 
     // Keyboard and Switch Controls
-
+    if (KeyboardGame && keyboardMode && !mouseMode) {
     keyboardAndswitch();
-    
-    
-    
-// keyboard controls for images
-
-    if (keys[13] && KeyGame1 && Sw1) { // Correct
-        sir.pause();
-        sir.currentTime = 0;
-        incor = false;
-        cor1 = true;
-    }
-
-    if (keys[13] && KeyGame2 && Sw2) { // Correct
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[13] && KeyGame3 && Sw3) { // Correct
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
-
-    if (keys[13] && KeyGame4 && Sw4) { // Correct
-        sir.pause();
-        sir.currentTime = 0;
-        incor = true;
-    }
-
-
-//////////////////////////////////////////
+    } // keyboard game is true
 
     
-
-
     }// Locked if gameIns = true
 
 }
@@ -3988,11 +4116,14 @@ function keyWrong() {
         ctx.fillText("Press the Spacebar", w, 600);
         ctx.fillText("to continue!", w, 655);
 
+        if (mouseMode) {
         addEventListener("click", clickWrong);
+        }
 
 
+        if (!mouseMode) {
         addEventListener("keydown", keyWrong, false);
-
+        }
         
 
     
@@ -4064,7 +4195,7 @@ function playGame() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (!cor2) {
-          quest2();
+            quest2();
         }
 
         if (incor) {
