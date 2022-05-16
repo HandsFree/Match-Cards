@@ -24,7 +24,7 @@ var splashSpeech = true;
 var splashSettings = true;
 
 
-    function switchtKeys1(e) {
+    function switchKeys1(e) {
         if ((keys[32]) && KeyGame1 && Sw1 && !mouseMode && keyboardMode) {
             KeyGame1 = false;
             KeyGame2 = true;
@@ -32,11 +32,11 @@ var splashSettings = true;
             KeyGame4 = false;
             Sw1 = false;
             Sw2 = true;
-            removeEventListener("keydown", switchtKeys1, false);
+            removeEventListener("keydown", switchKeys1, false);
         }
     }
     
-    function switchtKeys2(e) {
+    function switchKeys2(e) {
         if ((keys[32]) && KeyGame2 && Sw2 && !mouseMode && keyboardMode) {
         KeyGame1 = false;
         KeyGame2 = false;
@@ -46,12 +46,12 @@ var splashSettings = true;
         Sw2 = false;
         Sw3 = true;
         Sw4 = false; 
-        removeEventListener("keydown", switchtKeys2, false);
+        removeEventListener("keydown", switchKeys2, false);
         }
     }
     
     
-    function switchtKeys3(e) {
+    function switchKeys3(e) {
         if ((keys[32]) && KeyGame3 && Sw3 && !mouseMode && keyboardMode) {
         KeyGame1 = false;
         KeyGame2 = false;
@@ -61,11 +61,11 @@ var splashSettings = true;
         Sw2 = false;
         Sw3 = false;
         Sw4 = true;
-        removeEventListener("keydown", switchtKeys3, false);
+        removeEventListener("keydown", switchKeys3, false);
         }
     }
     
-    function switchtKeys4(e) {
+    function switchKeys4(e) {
         if ((keys[32]) && KeyGame4 && Sw4 && !mouseMode && keyboardMode) {
         KeyGame1 = true;
         KeyGame2 = false;
@@ -75,25 +75,25 @@ var splashSettings = true;
         Sw2 = false;
         Sw3 = false;
         Sw4 = false;
-        removeEventListener("keydown", switchtKeys4, false);
+        removeEventListener("keydown", switchKeys4, false);
         }
     }
     
     function keyboardAndswitch() {
         if (Sw1 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchtKeys1, false);
+        addEventListener("keydown", switchKeys1, false);
         }
     
         if (Sw2 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchtKeys2, false);
+        addEventListener("keydown", switchKeys2, false);
         }
         
         if (Sw3 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchtKeys3, false);
+        addEventListener("keydown", switchKeys3, false);
         }
         
         if (Sw4 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchtKeys4, false);
+        addEventListener("keydown", switchKeys4, false);
         }
     }
 
@@ -110,6 +110,7 @@ var KeyMenu6 = false;                   //
 var KeyMenu7 = false;                   //
 var KeyMenu8 = false;                   //
 var KeyMenu9 = false;                   //
+var KeyMenu10 = false;   
                                         //
 var MSw1 = true;                        //
 var MSw2 = false;                       //
@@ -119,7 +120,9 @@ var MSw5 = false;                       //
 var MSw6 = false;                       //                                        
 var MSw7 = false;                       // 
 var MSw8 = false;                       //
-var MSw9 = false;                       //
+var MSw9 = false;  
+var MSw10 = false; 
+                     //
                                         //
 //Game                                  //
 var KeyboardGame = false;               //
@@ -447,7 +450,8 @@ function locked() {
 }
 
 
-function switchtKeysM1(e) {
+function switchKeysM1(e) {
+    if (keyboardMode) {
     if ((keys[32]) && KeyMenu1 && MSw1) {
         KeyMenu1 = false;
         KeyMenu2 = true;
@@ -461,11 +465,13 @@ function switchtKeysM1(e) {
         MSw4 = false;
         MSw5 = false;
         MSw6 = false;
-        removeEventListener("keydown", switchtKeysM1, false);
+        removeEventListener("keydown", switchKeysM1, false);
+    }
     }
 }
 
-function switchtKeysM2(e) {
+function switchKeysM2(e) {
+    if (keyboardMode) {
     if ((keys[32]) && KeyMenu2 && MSw2) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -479,12 +485,14 @@ function switchtKeysM2(e) {
     MSw4 = false;
     MSw5 = false; 
     MSw6 = false; 
-    removeEventListener("keydown", switchtKeysM2, false);
+    removeEventListener("keydown", switchKeysM2, false);
+    }
     }
 }
 
 
-function switchtKeysM3(e) {
+function switchKeysM3(e) {
+    if (keyboardMode) {
     if ((keys[32]) && KeyMenu3 && MSw3) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -498,11 +506,12 @@ function switchtKeysM3(e) {
     MSw4 = true;
     MSw5 = false;
     MSw6 = false;
-    removeEventListener("keydown", switchtKeysM3, false);
+    removeEventListener("keydown", switchKeysM3, false);
     }
 }
+}
 
-function switchtKeysM4(e) {
+function switchKeysM4(e) {
     if ((keys[32]) && KeyMenu4 && MSw4) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -516,11 +525,11 @@ function switchtKeysM4(e) {
     MSw4 = false;
     MSw5 = true;
     MSw6 = false;
-    removeEventListener("keydown", switchtKeysM4, false);
+    removeEventListener("keydown", switchKeysM4, false);
     }
 }
 
-function switchtKeysM5(e) {
+function switchKeysM5(e) {
     if ((keys[32]) && KeyMenu5 && MSw5) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -534,11 +543,11 @@ function switchtKeysM5(e) {
     MSw4 = false;
     MSw5 = false;
     MSw6 = true;
-    removeEventListener("keydown", switchtKeysM5, false);
+    removeEventListener("keydown", switchKeysM5, false);
     }
 }
 
-function switchtKeysM6(e) {
+function switchKeysM6(e) {
     if ((keys[32]) && KeyMenu6 && MSw6) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -554,11 +563,11 @@ function switchtKeysM6(e) {
     MSw5 = false;
     MSw6 = false;
     MSw7 = true;
-    removeEventListener("keydown", switchtKeysM6, false);
+    removeEventListener("keydown", switchKeysM6, false);
     }
 }
 
-function switchtKeysM7(e) {
+function switchKeysM7(e) {
     if ((keys[32]) && KeyMenu7 && MSw7) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -578,11 +587,11 @@ function switchtKeysM7(e) {
     MSw7 = false;
     MSw8 = true;
     MSw9 = false;
-    removeEventListener("keydown", switchtKeysM7, false);
+    removeEventListener("keydown", switchKeysM7, false);
     }
 }
 
-function switchtKeysM8(e) {
+function switchKeysM8(e) {
     if ((keys[32]) && KeyMenu8 && MSw8) {
     KeyMenu1 = false;
     KeyMenu2 = false;
@@ -602,12 +611,38 @@ function switchtKeysM8(e) {
     MSw7 = false;
     MSw8 = false;
     MSw9 = true;
-    removeEventListener("keydown", switchtKeysM8, false);
+    removeEventListener("keydown", switchKeysM8, false);
     }
 }
 
-function switchtKeysM9(e) {
+function switchKeysM9(e) {
     if ((keys[32]) && KeyMenu9 && MSw9) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = false;
+    KeyMenu10 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = false;
+    MSw10 = true;
+    removeEventListener("keydown", switchKeysM9, false);
+    }
+}
+
+function switchKeysM10(e) {
+    if ((keys[32]) && KeyMenu10 && MSw10) {
     KeyMenu1 = true;
     KeyMenu2 = false;
     KeyMenu3 = false;
@@ -617,6 +652,7 @@ function switchtKeysM9(e) {
     KeyMenu7 = false;
     KeyMenu8 = false;
     KeyMenu9 = false;
+    KeyMenu10 = false;
     MSw1 = true;
     MSw2 = false;
     MSw3 = false;
@@ -626,7 +662,8 @@ function switchtKeysM9(e) {
     MSw7 = false;
     MSw8 = false;
     MSw9 = false;
-    removeEventListener("keydown", switchtKeysM9, false);
+    MSw10 = false;
+    removeEventListener("keydown", switchKeysM10, false);
     }
 }
 
@@ -663,11 +700,9 @@ function endMenu(e) {
 
 
 
-
-
-// Instructions //
+// Game Instructions open
 function gameInsMouse(e) {
-    if (setMenu) {
+    if (setMenu && !keyboardMode) {
         if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
             gameIns=true;
             locked();
@@ -812,7 +847,7 @@ function gameMode1(e) {
 
 function gameMode2(e) {
     if (setMenu) {
-       if (keyboardMode && ctx.isPointInPath(gk.path, e.offsetX, e.offsetY)) {
+       if (ctx.isPointInPath(gk.path, e.offsetX, e.offsetY)) {
            mouseMode = true;
            keyboardMode = false;
            KeyboardMenu=false;
@@ -1147,7 +1182,20 @@ function showMenu() {
 
     // Close Menu
     ctx.textAlign = "center"; 
+
     ctx.drawImage(cross, w-30, 645, 50, 50);
+
+    if (KeyboardMenu) {
+        if (KeyMenu10) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(w-30, 645, 50, 50);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
+
     cross.path = new Path2D();
     cross.path.rect(w-30, 645, 50, 50);
 
@@ -1164,42 +1212,112 @@ function showMenu() {
 
     
         if (MSw1) {
-        addEventListener("keydown", switchtKeysM1, false);
+        addEventListener("keydown", switchKeysM1, false);
         }
     
         if (MSw2) {
-        addEventListener("keydown", switchtKeysM2, false);
+        addEventListener("keydown", switchKeysM2, false);
         }
         
         if (MSw3) {
-        addEventListener("keydown", switchtKeysM3, false);
+        addEventListener("keydown", switchKeysM3, false);
         }
         
         if (MSw4) {
-        addEventListener("keydown", switchtKeysM4, false);
+        addEventListener("keydown", switchKeysM4, false);
         }
 
         if (MSw5) {
-        addEventListener("keydown", switchtKeysM5, false);
+        addEventListener("keydown", switchKeysM5, false);
         }
 
         if (MSw6) {
-        addEventListener("keydown", switchtKeysM6, false);
+        addEventListener("keydown", switchKeysM6, false);
         }
 
         if (MSw7) {
-        addEventListener("keydown", switchtKeysM7, false);
+        addEventListener("keydown", switchKeysM7, false);
         }
 
         if (MSw8) {
-        addEventListener("keydown", switchtKeysM8, false);
+        addEventListener("keydown", switchKeysM8, false);
         }
                 
         if (MSw9) {
-        addEventListener("keydown", switchtKeysM9, false);
+        addEventListener("keydown", switchKeysM9, false);
         }
 
-    
+        // close Settings Menu
+        if (MSw10) {
+            addEventListener("keydown", switchKeysM10, false);
+        }
+
+
+
+
+    if (setMenu) {
+        if (keys[13] && KeyMenu1 && MSw1) {
+            bkMus=true;
+        }
+
+        if (keys[13] && KeyMenu2 && MSw2) {
+            bkMus=false;
+        }
+
+        if (keys[13] && KeyMenu3 && MSw3) {
+            colod = true;
+            white = false;
+        }
+
+        if (keys[13] && KeyMenu4 && MSw4) {
+            colod = false;
+            white = true;
+        }
+
+        if (keys[13] && KeyMenu5 && MSw5) {
+            togSpeech=true;
+        }
+
+        if (keys[13] && KeyMenu6 && MSw6) {
+            togSpeech=false;
+        }
+
+        if (keys[13] && KeyMenu7 && MSw7) {
+            togQs1 = true;
+            togQs2 = false;
+            togQs3 = false;
+        }
+
+        if (keys[13] && KeyMenu8 && MSw8) {
+            togQs2 = true;
+            togQs1 = false;
+            togQs3 = false;
+        }
+
+        if (keys[13] && KeyMenu9 && MSw9) {
+            togQs3 = true;
+            togQs1 = false;
+            togQs2 = false;
+        }
+
+        if (keys[13] && KeyMenu10 && MSw10) {
+
+            setMenu=false;
+
+            if (keyboardMode) {
+                mouseMode=false;
+                KeyboardGame=true;
+                returnKey();      
+            }
+        }
+
+    }//setMenu
+
+
+
+
+
+
 
 
     } // KeyboardMenu
@@ -1212,6 +1330,7 @@ function showMenu() {
 // End Splash Screen
 function closeSplash(e) {
   if (!setMenu) {
+
     if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) { 
         
         KeyboardGame = false;
@@ -1683,12 +1802,12 @@ function instructions() {
 
 // Setting Menu mouse controls
 function settingMouse(e) {
-  //if (!setMenu) {
+  if (!keyboardMode) {
     if (ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
         //BackCl=true;
         setMenu=true;
         canvas.removeEventListener("click", settingMouse);
-    //}
+    }
   }
 }
 
@@ -1701,16 +1820,23 @@ function cardSetUp() {
     canvas.addEventListener("click", settingMouse);
 
     // Keyboard Settings
+if (keyboardMode) {
     if (keys[83]) { // settings
         setMenu=true;
         KeyboardMenu=true;
     }
+}
 
     ctx.font = "700 13px Comic Sans MS";
     ctx.fillStyle = "red";
     ctx.fillText("Settings", 40, 90);
-    ctx.fillText("Left Click", 40, 106);
-    ctx.fillText("OR press S", 40, 122);
+
+    if (mouseMode) {
+        ctx.fillText("Left Click", 40, 106);
+    }
+    if (keyboardMode) {
+        ctx.fillText("Press S", 40, 106);
+    }
 
     // text
     ctx.font = "80px Comic Sans MS";
@@ -1808,39 +1934,47 @@ function Q1checkClick4(e) {
 
 
 function selectKeys1(e) {
+    if (!setMenu) {
     if (keys[13] && KeyGame1 && Sw1 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = false;
         cor1 = true;
-        removeEventListener("keydown", switchtKeys1, false);
+        removeEventListener("keydown", selectKeys1, false);
+    }
     }
 }
 
 function selectKeys2(e) {
+    if (!setMenu) {
     if (keys[13] && KeyGame2 && Sw2 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", switchtKeys2, false);
+        removeEventListener("keydown", selectKeys2, false);
+    }
     }
 }
 
 function selectKeys3(e) {
+    if (!setMenu) {
     if (keys[13] && KeyGame3 && Sw3 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", switchtKeys3, false);
+        removeEventListener("keydown", selectKeys3, false);
+    }
     }
 }
 
 function selectKeys4(e) {
+    if (!setMenu) {
     if (keys[13] && KeyGame4 && Sw4 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", switchtKeys4, false);
+        removeEventListener("keydown", selectKeys4, false);
+    }
     }
 }
 
@@ -1909,20 +2043,20 @@ function quest1() {
     }
 
     if (gameIns) {
-        window.addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys, false);
         addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
 
-    if (!KeyboardGame && !keyboardMode && mouseMode) {
+    if (!KeyboardGame && !keyboardMode && mouseMode && !setMenu) {
     canvas.addEventListener("click", Q1checkClick1);
     canvas.addEventListener("click", Q1checkClick2);
     canvas.addEventListener("click", Q1checkClick3);
     canvas.addEventListener("click", Q1checkClick4);
     }
 
-    if (KeyboardGame && keyboardMode && !mouseMode) {
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
     addEventListener("keydown", selectKeys1, false);
     addEventListener("keydown", selectKeys2, false);
     addEventListener("keydown", selectKeys3, false);
@@ -1930,7 +2064,7 @@ function quest1() {
     }
 
     // Keyboard and Switch Controls
-    if (KeyboardGame && keyboardMode && !mouseMode) {
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
     keyboardAndswitch();
     } // keyboard game is true
 
@@ -2031,8 +2165,9 @@ function quest2() {
     }
 
         // Keyboard and Switch Controls
-
-        keyboardAndswitch();
+        if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+            keyboardAndswitch();
+        } // keyboard game is true
     
     
         // keyboard controls for images
@@ -2159,8 +2294,9 @@ function quest3() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
     // keyboard controls for images
@@ -2286,9 +2422,10 @@ function quest4() {
     canvas.addEventListener("click", Q4checkClick4);
     }
 
-     // Keyboard and Switch Controls
-
-     keyboardAndswitch();
+    // Keyboard and Switch Controls
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+     } // keyboard game is true
     
     
      // keyboard controls for images
@@ -2414,8 +2551,9 @@ function quest5() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
 // keyboard controls for images
@@ -2541,9 +2679,10 @@ function quest6() {
     canvas.addEventListener("click", Q6checkClick4);
     }
 
-        // Keyboard and Switch Controls
-
-        keyboardAndswitch();
+       // Keyboard and Switch Controls
+        if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+            keyboardAndswitch();
+        } // keyboard game is true
     
     
         // keyboard controls for images
@@ -2665,9 +2804,10 @@ function quest7() {
     canvas.addEventListener("click", Q7checkClick4);
     }
 
-     // Keyboard and Switch Controls
-
-     keyboardAndswitch();
+        // Keyboard and Switch Controls
+        if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+            keyboardAndswitch();
+        } // keyboard game is true
     
     
      // keyboard controls for images
@@ -2796,8 +2936,9 @@ function quest8() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
     // keyboard controls for images
@@ -2924,8 +3065,9 @@ function quest9() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
     // keyboard controls for images
@@ -3055,8 +3197,9 @@ function quest10() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
     // keyboard controls for images
@@ -3185,8 +3328,9 @@ function quest11() {
     }
 
     // Keyboard and Switch Controls
-
-    keyboardAndswitch();
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        keyboardAndswitch();
+    } // keyboard game is true
     
     
     // keyboard controls for images
@@ -3319,8 +3463,9 @@ function quest12() {
     }
 
         // Keyboard and Switch Controls
-
+    if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
         keyboardAndswitch();
+    } // keyboard game is true
     
     
         // keyboard controls for images
@@ -3573,11 +3718,18 @@ function rightClick1() {
         rightAnsText();
 
         if (keys[32]) { // Go to Q5
+            if (!togQs1) {
+                MCgameSc5 = true;
+            }
+    
+            if (togQs1) {
+                finalScreen = true;
+            }
             cor4 = false;
             telVoice.pause();
             telVoice.currentTime = 0;
             MCgameSc4 = false;
-            MCgameSc5 = true;
+            //MCgameSc5 = true;
         }
         addEventListener("click", rightClick4);
     }
@@ -3795,11 +3947,20 @@ function rightClick1() {
         ctx.fillText("for the next question!", w, 610);
 
         if (keys[32]) { // Go to Final Screen
+
+            if (!togQs2) {
+                MCgameSc9 = true;
+            }
+    
+            if (togQs2) {
+                finalScreen = true;
+            }  
+
             cor8 = false;
             polyEff.pause();
             polyEff.currentTime = 0;
             MCgameSc8 = false;
-            MCgameSc9 = true;
+            //MCgameSc9 = true;
         }
 
         addEventListener("click", rightClick8);
