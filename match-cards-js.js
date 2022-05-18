@@ -110,7 +110,8 @@ var KeyMenu6 = false;                   //
 var KeyMenu7 = false;                   //
 var KeyMenu8 = false;                   //
 var KeyMenu9 = false;                   //
-var KeyMenu10 = false;   
+var KeyMenu10 = false; 
+var KeyMenu11 = false; 
                                         //
 var MSw1 = true;                        //
 var MSw2 = false;                       //
@@ -122,6 +123,7 @@ var MSw7 = false;                       //
 var MSw8 = false;                       //
 var MSw9 = false;  
 var MSw10 = false; 
+var MSw11 = false; 
                      //
                                         //
 //Game                                  //
@@ -643,6 +645,34 @@ function switchKeysM9(e) {
 
 function switchKeysM10(e) {
     if ((keys[32]) && KeyMenu10 && MSw10) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = false;
+    KeyMenu10 = false;
+    KeyMenu11 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = false;
+    MSw10 = false;
+    MSw11 = true;
+    removeEventListener("keydown", switchKeysM10, false);
+    }
+}
+
+function switchKeysM11(e) {
+    if ((keys[32]) && KeyMenu11 && MSw11) {
     KeyMenu1 = true;
     KeyMenu2 = false;
     KeyMenu3 = false;
@@ -653,6 +683,8 @@ function switchKeysM10(e) {
     KeyMenu8 = false;
     KeyMenu9 = false;
     KeyMenu10 = false;
+    KeyMenu11 = false;
+
     MSw1 = true;
     MSw2 = false;
     MSw3 = false;
@@ -663,21 +695,22 @@ function switchKeysM10(e) {
     MSw8 = false;
     MSw9 = false;
     MSw10 = false;
-    removeEventListener("keydown", switchKeysM10, false);
+    MSw11 = false;
+    removeEventListener("keydown", switchKeysM11, false);
     }
 }
 
 
 // End Mouse Menu and return to game //
 function endMenu(e) {
-    if (setMenu) {
+    if (setMenu && !keyboardMode) {
         if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             locked();
             sEff = true;
             //BackCl = false;
             setMenu=false;
 
-            if (keyboardMode) {
+            /*if (keyboardMode) {
                 mouseMode=false;
                 KeyboardGame=true;
                 returnKey();      
@@ -690,7 +723,7 @@ function endMenu(e) {
                 KeyGame2=false;
                 KeyGame3=false;
                 KeyGame4=false;
-            }
+            }*/
 
             canvas.removeEventListener("click", endMenu);
         }
@@ -846,12 +879,12 @@ function gameMode1(e) {
 }
 
 function gameMode2(e) {
-    if (setMenu) {
+    if (setMenu && !mouseMode) {
        if (ctx.isPointInPath(gk.path, e.offsetX, e.offsetY)) {
            mouseMode = true;
            keyboardMode = false;
            KeyboardMenu=false;
-           canvas.removeEventListener("click", gameMode2);
+           canvas.removeEventListener("keydown", gameMode2);
         }
     } 
 }
@@ -1157,11 +1190,23 @@ function showMenu() {
     ///////////////////////////////////////////
     // Game Mode Keyboard
     if (keyboardMode) {
+
         ctx.drawImage(gk, 65, 485, 200, 100);
+
+        if (KeyboardMenu) {
+            if (KeyMenu10) {
+                ctx.globalAlpha = 0.3;
+                ctx.fillStyle = "Blue";
+                ctx.fillRect(66, 485, 195, 100);
+            }
+        }
+        
+            ctx.fillStyle = "black";
+            ctx.globalAlpha = 1.0;
         gk.path = new Path2D();
         gk.path.rect(65, 485, 200, 100);
     
-        canvas.addEventListener("click", gameMode2);
+        canvas.addEventListener("keydown", gameMode2);
         }
         /////////////////////////////////////////////
 
@@ -1186,7 +1231,7 @@ function showMenu() {
     ctx.drawImage(cross, w-30, 645, 50, 50);
 
     if (KeyboardMenu) {
-        if (KeyMenu10) {
+        if (KeyMenu11) {
             ctx.globalAlpha = 0.3;
             ctx.fillStyle = "Blue";
             ctx.fillRect(w-30, 645, 50, 50);
@@ -1201,7 +1246,7 @@ function showMenu() {
 
     canvas.addEventListener("click", endMenu);
 
-    if (KeyboardMenu) {
+    if (KeyboardMenu && !mouseMode) {
     ctx.textAlign = "center"; 
 	ctx.font = "900 18px Comic Sans MS";
     ctx.fillText("Use the SPACEBAR to select and then", w, 610);
@@ -1247,9 +1292,14 @@ function showMenu() {
         addEventListener("keydown", switchKeysM9, false);
         }
 
-        // close Settings Menu
+        // Change from Keyboard Mode to Mouse Mode
         if (MSw10) {
             addEventListener("keydown", switchKeysM10, false);
+            }
+
+        // close Settings Menu
+        if (MSw11) {
+            addEventListener("keydown", switchKeysM11, false);
         }
 
 
@@ -1300,16 +1350,31 @@ function showMenu() {
             togQs2 = false;
         }
 
+        // Game Mode
         if (keys[13] && KeyMenu10 && MSw10) {
+            gameIns=true;
+            keyboardMode = false;
+            mouseMode = true;
+        }
+
+
+//////////////////////////////////////////////////////////
+// Close Menu Key
+        if (keys[13] && KeyMenu11 && MSw11) {
 
             setMenu=false;
+            sEff=true;
+            mouseMode=false;
+            gameIns = true;
+            MCsplashSc = true;
+            KeyboardGame=true;
+            returnKey();
 
-            if (keyboardMode) {
-                mouseMode=false;
-                KeyboardGame=true;
-                returnKey();      
-            }
         }
+////////////////////////////////////////////////////////////
+
+
+
 
     }//setMenu
 
@@ -1472,14 +1537,29 @@ function splash() {
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "navy";
 
+    if (mouseMode) {
     ctx.drawImage(clickHere, 162, 410, 394, 90);
     clickHere.path = new Path2D();
     clickHere.path.rect(162, 410, 394, 90);
+    }
 
-    ctx.fillText("or press the Spacebar", w, 535);
+    if (keyboardMode) {
+    ctx.fillText("Press the Spacebar", w, 535);
     ctx.fillText("or use your switch", w, 572);
     ctx.fillText("to play!", w, 610);
     ctx.fillStyle = "white";
+    }
+
+    if (!keyboardMode && !mouseMode) {
+        ctx.drawImage(clickHere, 162, 410, 394, 90);
+        clickHere.path = new Path2D();
+        clickHere.path.rect(162, 410, 394, 90);
+        ctx.fillText("or press the Spacebar", w, 535);
+        ctx.fillText("or use your switch", w, 572);
+        ctx.fillText("to play!", w, 610);
+        ctx.fillStyle = "white";
+    }
+
 
     // Speech code //
 
@@ -1774,7 +1854,7 @@ function instructions() {
     console.log("mouseMode is " + mouseMode);
     console.log("keyboardMode is " + keyboardMode);
 
-    if (KeyboardGame) {
+    if (KeyboardGame && !mouseMode) {
         ctx.font = "900 24px Comic Sans MS";
         ctx.fillStyle = "red";
         ctx.fillText("Match the sound to the picture", w, 615);
