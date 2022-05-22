@@ -7,6 +7,8 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
+var langaugeMenuSettings = false;
+
 var SetSplashKey = true;
 
 //BackCl = false;
@@ -112,6 +114,9 @@ var KeyMenu8 = false;                   //
 var KeyMenu9 = false;                   //
 var KeyMenu10 = false; 
 var KeyMenu11 = false; 
+var KeyMenu12 = false; 
+var KeyMenu13 = false; 
+var KeyMenu14 = false; 
                                         //
 var MSw1 = true;                        //
 var MSw2 = false;                       //
@@ -124,6 +129,9 @@ var MSw8 = false;                       //
 var MSw9 = false;  
 var MSw10 = false; 
 var MSw11 = false; 
+var MSw12 = false; 
+var MSw13 = false; 
+var MSw14 = false; 
                      //
                                         //
 //Game                                  //
@@ -317,13 +325,24 @@ const BoxQ121 = new Image();
 BoxQ121.src = "images/menuAssets/BoxQ121.png";
 ///////////////////////////////////////////////////////////
 
+// Langauge Settings
+const lang = new Image();
+lang.src = "images/menuAssets/lang.png";
+
+const langE = new Image();
+langE.src = "images/menuAssets/langE.png";
 
 
+// Close Menu
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
 
 const cross1 = new Image();
 cross1.src = "images/menuAssets/cross1.png";
+
+// Langauge Sub-Menu
+const crossLang = new Image();
+crossLang.src = "images/menuAssets/langCross.png";
 
 const insMouse = new Image();
 insMouse.src = "images/menuAssets/gi.png";
@@ -655,7 +674,7 @@ function switchKeysM10(e) {
     KeyMenu8 = false;
     KeyMenu9 = false;
     KeyMenu10 = false;
-    KeyMenu11 = true;
+    KeyMenu13 = true;
     MSw1 = false;
     MSw2 = false;
     MSw3 = false;
@@ -666,13 +685,13 @@ function switchKeysM10(e) {
     MSw8 = false;
     MSw9 = false;
     MSw10 = false;
-    MSw11 = true;
+    MSw13 = true;
     removeEventListener("keydown", switchKeysM10, false);
     }
 }
 
-function switchKeysM11(e) {
-    if ((keys[32]) && KeyMenu11 && MSw11) {
+function switchKeysM13(e) {
+    if ((keys[32]) && KeyMenu13 && MSw13) {
     KeyMenu1 = true;
     KeyMenu2 = false;
     KeyMenu3 = false;
@@ -682,8 +701,15 @@ function switchKeysM11(e) {
     KeyMenu7 = false;
     KeyMenu8 = false;
     KeyMenu9 = false;
+
+    // big buttons
     KeyMenu10 = false;
     KeyMenu11 = false;
+    KeyMenu12 = false;
+
+    // close menu
+    KeyMenu13 = false;
+
 
     MSw1 = true;
     MSw2 = false;
@@ -694,36 +720,65 @@ function switchKeysM11(e) {
     MSw7 = false;
     MSw8 = false;
     MSw9 = false;
+
+    // big buttons
     MSw10 = false;
     MSw11 = false;
-    removeEventListener("keydown", switchKeysM11, false);
+    MSw12 = false;
+
+    // close menu
+    MSw13 = false;
+
+    removeEventListener("keydown", switchKeysM13, false);
     }
 }
 
 
+
+
+
+
+
+
+//////////////////////////////////////////////////////
+//  Bug
+function keyboardModeOff(e) {
+  if (keys[13] && KeyMenu10 && MSw10) {
+    if (splashSpeech) {
+        gameIns=true;
+    }
+    
+    keyboardMode = false;
+    mouseMode = true;
+    KeyboardGame = false;
+    KeyboardMenu = false;
+    locked();  
+
+
+    //console.log("keyboardMode is " + keyboardMode +  " keyboardGame is " + KeyboardGame + " mouseMode is " +  mouseMode);
+
+    removeEventListener("keydown", keyboardModeOff, false);
+   }
+}
+//////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 // End Mouse Menu and return to game //
 function endMenu(e) {
-    if (setMenu && !keyboardMode) {
+    if (setMenu && !keyboardMode && !langaugeMenuSettings) {
         if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
             locked();
             sEff = true;
-            //BackCl = false;
+            KeyboardGame=false;
             setMenu=false;
-
-            /*if (keyboardMode) {
-                mouseMode=false;
-                KeyboardGame=true;
-                returnKey();      
-            }
-
-            if (mouseMode) {
-                mouseMode=true;
-                KeyboardGame=false;
-                KeyGame1=false;
-                KeyGame2=false;
-                KeyGame3=false;
-                KeyGame4=false;
-            }*/
 
             canvas.removeEventListener("click", endMenu);
         }
@@ -735,7 +790,7 @@ function endMenu(e) {
 
 // Game Instructions open
 function gameInsMouse(e) {
-    if (setMenu && !keyboardMode) {
+    if (setMenu && !keyboardMode && !langaugeMenuSettings) {
         if (ctx.isPointInPath(insMouse.path, e.offsetX, e.offsetY)) {
             gameIns=true;
             locked();
@@ -868,26 +923,64 @@ function MtogQ12(e) {
 
 // Game Mode //
 function gameMode1(e) {
-    if (setMenu) {
+    if (setMenu && !langaugeMenuSettings) {
        if (mouseMode && ctx.isPointInPath(gm1.path, e.offsetX, e.offsetY)) {
+
            mouseMode = false;
            keyboardMode = true;
-           KeyboardMenu=true;
+           KeyboardMenu = true;
+
+           locked();
            canvas.removeEventListener("click", gameMode1);
         }
     } 
 }
 
-function gameMode2(e) {
-    if (setMenu && !mouseMode) {
-       if (ctx.isPointInPath(gk.path, e.offsetX, e.offsetY)) {
-           mouseMode = true;
-           keyboardMode = false;
-           KeyboardMenu=false;
-           canvas.removeEventListener("keydown", gameMode2);
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+// Langauge Mode //
+function langaugeMenu(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(le.path, e.offsetX, e.offsetY)) {
+        
+           langaugeMenuSettings = true;
+           locked();
+           canvas.removeEventListener("click", langaugeMenu);
         }
     } 
 }
+
+
+
+// End Sub-Menu Langauge Mode //
+function endMenuLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(crossLang.path, e.offsetX, e.offsetY)) {
+        
+           langaugeMenuSettings = false;
+           locked();
+           canvas.removeEventListener("click", endMenuLang);
+        }
+    } 
+}
+
+
+
+
+
+
+
+
+
+
 
 
 // Keyboard and Switch Controls
@@ -1174,7 +1267,8 @@ function showMenu() {
 
     canvas.addEventListener("click", MtogQ12);
 
-
+    // if LangaugeMenuSettings = false
+    if (!langaugeMenuSettings) {
     
 ///////////////////////////////////////////
     // Game Mode Mouse
@@ -1203,10 +1297,10 @@ function showMenu() {
         
             ctx.fillStyle = "black";
             ctx.globalAlpha = 1.0;
-        gk.path = new Path2D();
-        gk.path.rect(65, 485, 200, 100);
+            gk.path = new Path2D();
+            gk.path.rect(65, 485, 200, 100);
     
-        canvas.addEventListener("keydown", gameMode2);
+        //canvas.addEventListener("keydown", gameMode2);
         }
         /////////////////////////////////////////////
 
@@ -1223,20 +1317,57 @@ function showMenu() {
     ///////////////////////////////////////////
     // Language Mode
     ctx.drawImage(le, 470, 485, 200, 100);
+    le.path = new Path2D();
+    le.path.rect(470, 485, 200, 100);
+
+    } // langaugeMenuSettings = false
+
+    if (langaugeMenuSettings) {
+        ctx.drawImage(lang, 40, 500, 645, 180);
+        ctx.textAlign = "center";
+        ctx.fillStyle = "black";
+        ctx.font = "900 28px Comic Sans MS";
+        ctx.fillText("English", 100, 550);
+        ctx.drawImage(langE, 80, 560, 40, 40);
+        //if (togQs2) {
+            ctx.drawImage(rTick1, 80, 560, 40, 40);
+        //}
+        ctx.fillText("German", 220, 550);
+        ctx.drawImage(langE, 200, 560, 40, 40);
+        ctx.fillText("Romanian", 355, 550);
+        ctx.drawImage(langE, 340, 560, 40, 40);
+        ctx.fillText("Bulgarian", 500, 550);
+        ctx.drawImage(langE, 480, 560, 40, 40);
+        ctx.fillText("Greek", 630, 550);
+        ctx.drawImage(langE, 610, 560, 40, 40);
+
+
+        ctx.drawImage(crossLang, w-19, 616, 45, 45);
+        crossLang.path = new Path2D();
+        crossLang.path.rect(w-19, 616, 45, 45);
+
+        canvas.addEventListener("click", endMenuLang);
+    }
+
+    canvas.addEventListener("click", langaugeMenu);
     /////////////////////////////////////////////
 
     // Close Menu
     ctx.textAlign = "center"; 
 
+
+    if (!langaugeMenuSettings) {
     ctx.drawImage(cross, w-30, 645, 50, 50);
 
     if (KeyboardMenu) {
-        if (KeyMenu11) {
+        if (KeyMenu13) {
             ctx.globalAlpha = 0.3;
             ctx.fillStyle = "Blue";
             ctx.fillRect(w-30, 645, 50, 50);
         }
     }
+
+
 
     ctx.fillStyle = "black";
     ctx.globalAlpha = 1.0;
@@ -1251,11 +1382,17 @@ function showMenu() {
 	ctx.font = "900 18px Comic Sans MS";
     ctx.fillText("Use the SPACEBAR to select and then", w, 610);
     ctx.fillText("use the ENTER KEY to change settings", w, 633);
+
     
+    } // end LangaugeMenuSettings = false
+
+
+
+
 
     // keyboard controls for Menu
 
-    
+    if (!langaugeMenuSettings) {
         if (MSw1) {
         addEventListener("keydown", switchKeysM1, false);
         }
@@ -1294,15 +1431,28 @@ function showMenu() {
 
         // Change from Keyboard Mode to Mouse Mode
         if (MSw10) {
-            addEventListener("keydown", switchKeysM10, false);
-            }
-
-        // close Settings Menu
-        if (MSw11) {
-            addEventListener("keydown", switchKeysM11, false);
+        addEventListener("keydown", switchKeysM10, false);
         }
 
+        // Game Instructions
+        if (MSw11) {
+        addEventListener("keydown", switchKeysM11, false);
+        }
 
+        // Langauge Menu
+        if (MSw12) {
+        addEventListener("keydown", switchKeysM12, false);
+        }
+
+        /////////////////////////////////////////////////////
+        // close Settings Menu
+        if (MSw13) {
+        addEventListener("keydown", switchKeysM13, false);
+        }
+        /////////////////////////////////////////////////////
+
+
+    
 
 
     if (setMenu) {
@@ -1350,17 +1500,34 @@ function showMenu() {
             togQs2 = false;
         }
 
+
+
+
+
+
+
         // Game Mode
-        if (keys[13] && KeyMenu10 && MSw10) {
-            gameIns=true;
-            keyboardMode = false;
-            mouseMode = true;
-        }
+
+        if (keyboardMode) {
+            addEventListener("keydown", keyboardModeOff);
+            }
+
+        
+
+
+
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////
 // Close Menu Key
-        if (keys[13] && KeyMenu11 && MSw11) {
+        if (keys[13] && KeyMenu13 && MSw13) {
 
             setMenu=false;
             sEff=true;
@@ -1368,12 +1535,13 @@ function showMenu() {
             gameIns = true;
             MCsplashSc = true;
             KeyboardGame=true;
+            locked();
             returnKey();
 
         }
 ////////////////////////////////////////////////////////////
 
-
+    } // langaugeMenuSettings = false
 
 
     }//setMenu
@@ -1851,8 +2019,8 @@ function foQus() {
 
 function instructions() {
 
-    console.log("mouseMode is " + mouseMode);
-    console.log("keyboardMode is " + keyboardMode);
+    //console.log("mouseMode is " + mouseMode);
+    //console.log("keyboardMode is " + keyboardMode);
 
     if (KeyboardGame && !mouseMode) {
         ctx.font = "900 24px Comic Sans MS";
@@ -2013,47 +2181,47 @@ function Q1checkClick4(e) {
 }
 
 
-function selectKeys1(e) {
+function Q1selectKeys1(e) {
     if (!setMenu) {
     if (keys[13] && KeyGame1 && Sw1 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = false;
         cor1 = true;
-        removeEventListener("keydown", selectKeys1, false);
+        removeEventListener("keydown", Q1selectKeys1);
     }
     }
 }
 
-function selectKeys2(e) {
+function Q1selectKeys2(e) {
     if (!setMenu) {
     if (keys[13] && KeyGame2 && Sw2 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", selectKeys2, false);
+        removeEventListener("keydown", Q1selectKeys2);
     }
     }
 }
 
-function selectKeys3(e) {
+function Q1selectKeys3(e) {
     if (!setMenu) {
     if (keys[13] && KeyGame3 && Sw3 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", selectKeys3, false);
+        removeEventListener("keydown", Q1selectKeys3);
     }
     }
 }
 
-function selectKeys4(e) {
+function Q1selectKeys4(e) {
     if (!setMenu) {
     if (keys[13] && KeyGame4 && Sw4 && !mouseMode) { // Correct
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", selectKeys4, false);
+        removeEventListener("keydown", Q1selectKeys4);
     }
     }
 }
@@ -2064,7 +2232,7 @@ function selectKeys4(e) {
 
 function quest1() {
 
-    console.log("gameIns is " + gameIns);
+    //console.log("gameIns is " + gameIns);
 
     // Question 1
     // Only runs if instuctions and settings menu are off.
@@ -2137,10 +2305,10 @@ function quest1() {
     }
 
     if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
-    addEventListener("keydown", selectKeys1, false);
-    addEventListener("keydown", selectKeys2, false);
-    addEventListener("keydown", selectKeys3, false);
-    addEventListener("keydown", selectKeys4, false);
+    addEventListener("keydown", Q1selectKeys1);
+    addEventListener("keydown", Q1selectKeys2);
+    addEventListener("keydown", Q1selectKeys3);
+    addEventListener("keydown", Q1selectKeys4);
     }
 
     // Keyboard and Switch Controls
@@ -2203,6 +2371,8 @@ function Q2checkClick4(e) {
 /////////  Question 2 //////////////////
 function quest2() {
 
+    console.log("incor is " + incor +  " cor2 is " + cor2);
+
     // Question 2    
 
     if (sEff) {
@@ -2237,12 +2407,19 @@ function quest2() {
 
     instructions();
 
-    if (!KeyboardGame) {
+    if (mouseMode && !keyboardMode) {
     canvas.addEventListener("click", Q2checkClick1);
     canvas.addEventListener("click", Q2checkClick2);
     canvas.addEventListener("click", Q2checkClick3);
     canvas.addEventListener("click", Q2checkClick4);
     }
+
+    /*if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
+        addEventListener("keydown", Q2selectKeys1);
+        addEventListener("keydown", Q2selectKeys2);
+        addEventListener("keydown", Q2selectKeys3);
+        addEventListener("keydown", Q2selectKeys4);
+    }*/
 
         // Keyboard and Switch Controls
         if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
@@ -2252,6 +2429,7 @@ function quest2() {
     
         // keyboard controls for images
         
+        if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
             if (keys[13] && KeyGame1 && Sw1) { // Correct
                 cow1.pause();
                 cow1.currentTime = 0;
@@ -2276,6 +2454,7 @@ function quest2() {
                 incor = false;
                 cor2 = true;
             }
+        }
             
         //////////////////////////////////////////
 
@@ -4312,14 +4491,12 @@ function rightClick12() {
 // keyboard controls Wrong Answer
 function keyWrong() {
     if (keys[32]) { // Go to return to game
-        incor = false;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         sEff = true;
-
+        locked();
         returnKey();
-
-        removeEventListener("keydown", keyWrong, false);
+        removeEventListener("keydown", keyWrong);
     }
 }
 
@@ -4357,13 +4534,13 @@ function keyWrong() {
         ctx.fillText("Press the Spacebar", w, 600);
         ctx.fillText("to continue!", w, 655);
 
-        if (mouseMode) {
+        if (mouseMode && !keyboardMode) {
         addEventListener("click", clickWrong);
         }
 
 
-        if (!mouseMode) {
-        addEventListener("keydown", keyWrong, false);
+        if (keyboardMode && !mouseMode) {
+        addEventListener("keydown", keyWrong);
         }
         
 
