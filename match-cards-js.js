@@ -33,8 +33,8 @@ var splashSettings = true;
 
 ////////////////////////////////
 /////Translation Menu //////////
-var En = false;
-var Ger = true;
+var En = true;
+var Ger = false;
 var Rom = false;
 /////////////////////////////////
 
@@ -344,6 +344,12 @@ lang.src = "images/menuAssets/lang.png";
 
 const langE = new Image();
 langE.src = "images/menuAssets/langE.png";
+
+const langG = new Image();
+langG.src = "images/menuAssets/langG.png";
+
+const langR = new Image();
+langR.src = "images/menuAssets/langR.png";
 
 
 // Close Menu
@@ -774,8 +780,34 @@ function keyboardModeOff(e) {
 //////////////////////////////////////////////////////////////
 
 
+function Question() {
+    ctx.font = "80px Comic Sans MS";
+    ctx.fillStyle = "blue";
 
+    if (En) {
+        ctx.fillText("Match Cards", w, 77);
+    }
+    if (Ger) {
+        ctx.fillText("Spielkarten", w, 77);
+    }
+    if (Rom) {
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("Cărți de meci", w, 77);
+    }
 
+    ctx.font = "40px Comic Sans MS";
+    ctx.fillStyle = "red";
+
+    if (En) {
+        ctx.fillText("Question " + n, w, 125);
+    }
+    if (Ger) {
+        ctx.fillText("Frage " + n, w, 125);
+    }
+    if (Rom) {
+        ctx.fillText("Întrebare " + n, w, 125);
+    }
+}
 
 
 
@@ -982,6 +1014,51 @@ function langaugeMenu(e) {
         }
     } 
 }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// Langauge Translator
+function engLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langE.path, e.offsetX, e.offsetY)) {
+           En = true;
+           Ger = false;
+           Rom = false;
+           canvas.removeEventListener("click", engLang);
+        }
+    } 
+}
+
+function gerLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langG.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = true;
+           Rom = false;
+           canvas.removeEventListener("click", gerLang);
+        }
+    } 
+}
+
+function romLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langR.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = true;
+           canvas.removeEventListener("click", romLang);
+        }
+    } 
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 
 
@@ -1381,19 +1458,44 @@ function showMenu() {
         ctx.textAlign = "center";
         ctx.fillStyle = "black";
         ctx.font = "900 28px Comic Sans MS";
+
         ctx.fillText("English", 100, 550);
         ctx.drawImage(langE, 80, 560, 40, 40);
-        //if (togQs2) {
+        langE.path = new Path2D();
+        langE.path.rect(80, 560, 40, 40);
+        if (En) {
             ctx.drawImage(rTick1, 80, 560, 40, 40);
-        //}
+        }
+
         ctx.fillText("German", 220, 550);
-        ctx.drawImage(langE, 200, 560, 40, 40);
+        ctx.drawImage(langG, 200, 560, 40, 40);
+        langG.path = new Path2D();
+        langG.path.rect(200, 560, 40, 40);
+        if (Ger) {
+            ctx.drawImage(rTick1, 200, 560, 40, 40);
+        }
+
         ctx.fillText("Romanian", 355, 550);
-        ctx.drawImage(langE, 340, 560, 40, 40);
+        ctx.drawImage(langR, 340, 560, 40, 40);
+        langR.path = new Path2D();
+        langR.path.rect(340, 560, 40, 40);
+        if (Rom) {
+            ctx.drawImage(rTick1, 340, 560, 40, 40);
+        }
+
         ctx.fillText("Bulgarian", 500, 550);
         ctx.drawImage(langE, 480, 560, 40, 40);
         ctx.fillText("Greek", 630, 550);
         ctx.drawImage(langE, 610, 560, 40, 40);
+
+
+
+        canvas.addEventListener("click", engLang);
+        canvas.addEventListener("click", gerLang);
+        canvas.addEventListener("click", romLang);
+
+
+
 
 
         ctx.drawImage(crossLang, w-19, 616, 45, 45);
@@ -1735,14 +1837,26 @@ function settingsKey(e) {
 
 
 
+function translate1() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(15, 40, 687, 650);
+    ctx.strokeStyle = "green";
+    ctx.strokeRect(15, 40, 687, 650);
+    ctx.fillStyle = "green";
+    ctx.textAlign = "center"; 
+    ctx.font = "100px Comic Sans MS";
 
+    if (En) {
+        ctx.fillText("Well Done!", w, 180);
+    }
+    if (Ger) {
+        ctx.fillText("Gut erledigt!", w, 180);
+    }
+    if (Rom) {
+        ctx.fillText("Foarte bine!", w, 180);
+    }
 
-
-
-
-
-
-
+}
 
 
 
@@ -1899,13 +2013,14 @@ function gameInstructions() {
         ctx.font = "110px Comic Sans MS";
 
         if (En) {
-        ctx.fillText("Match Cards", w, 150);
+        ctx.fillText("Match Cards", w, 140);
         }
         if (Ger) {
-        ctx.fillText("Spielkarten", w, 150);
+        ctx.fillText("Spielkarten", w, 140);
         }
         if (Rom) {
-        ctx.fillText("Cărți de meci", w, 150);
+            ctx.font = "90px Comic Sans MS";
+            ctx.fillText("Cărți de meci", w, 140);
         }
 
         ctx.fillStyle = "Blue";
@@ -2135,13 +2250,13 @@ function instructions() {
         ctx.font = "35px Comic Sans MS";
         ctx.fillStyle = "blue";
     if (En) {
-        ctx.fillText("Match the sound to the picture", w, 625);
+        ctx.fillText("Match the sound to the picture", w, 630);
     }
     if (Ger) {
-        ctx.fillText("Ordne den Ton dem Bild zu", w, 625);
+        ctx.fillText("Ordne den Ton dem Bild zu", w, 630);
     }
     if (Rom) {
-        ctx.fillText("Potriviți sunetul cu imaginea", w, 615);
+        ctx.fillText("Potriviți sunetul cu imaginea", w, 630);
     }
 }
 
@@ -2208,12 +2323,7 @@ if (keyboardMode) {
     }
 
     // text
-    ctx.font = "80px Comic Sans MS";
-    ctx.fillStyle = "blue";
-    ctx.fillText("Match Cards", w, 77);
-    ctx.font = "40px Comic Sans MS";
-    ctx.fillStyle = "red";
-    ctx.fillText("Question " + n, w, 125);
+    Question();
     // white rectangle
     ctx.fillStyle = "white";
     // border
@@ -4452,14 +4562,8 @@ function rightKey1() {
             ambVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
+
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("The sound was an ambulance!", w, 290);
         ctx.font = "30px Comic Sans MS";
@@ -4512,14 +4616,7 @@ function rightKey1() {
             cowVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("The sound was a cow!", w, 290);
         ctx.font = "50px Comic Sans MS";
@@ -4560,21 +4657,11 @@ function rightKey1() {
             lambVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("The sound was a lamb!", w, 290);
         ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
+        rightAnsText();
 
         if (keys[32]) { // Go to Q4
             cor3 = false;
@@ -4619,14 +4706,7 @@ function rightKey1() {
             telVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "39px Comic Sans MS";
         ctx.fillText("The sound was an old telephone!", w, 290);
         ctx.font = "35px Comic Sans MS";
@@ -4677,14 +4757,7 @@ function rightKey1() {
             fEngVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("The sound was a Fire Engine!", w, 290);
         ctx.font = "50px Comic Sans MS";
@@ -4725,14 +4798,7 @@ function rightKey1() {
             microVoice.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("The sound was a Microwave!", w, 290);
         ctx.font = "40px Comic Sans MS";
@@ -4776,21 +4842,11 @@ function rightKey1() {
             doorbell.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("The sound was a Door Bell!", w, 290);
         ctx.font = "40px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
+        rightAnsText();
 
         if (keys[32]) { // Go to Final Screen
             cor7 = false;
@@ -4837,21 +4893,11 @@ function rightKey1() {
             polyEff.currentTime = 0;
         }
 
-        ctx.fillStyle = "white";
-        ctx.fillRect(15, 40, 687, 650);
-        ctx.strokeStyle = "green";
-        ctx.strokeRect(15, 40, 687, 650);
-        ctx.fillStyle = "green";
-        ctx.textAlign = "center"; 
-        ctx.font = "100px Comic Sans MS";
-        ctx.fillText("Well Done!", w, 180);
+        translate1();
         ctx.font = "35px Comic Sans MS";
         ctx.fillText("The sound was a Polacanthus Dinosaur", w, 290);
         ctx.font = "30px Comic Sans MS";
-        ctx.fillText("Left click on your mouse", w, 400);
-        ctx.fillText("OR", w, 465);
-        ctx.fillText("Press the Spacebar", w, 520);
-        ctx.fillText("for the next question!", w, 610);
+        rightAnsText();
 
         if (keys[32]) { // Go to Final Screen
 
@@ -4901,21 +4947,12 @@ function rightClick9() {
         pigEff.currentTime = 0;
     }
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(15, 40, 687, 650);
-    ctx.strokeStyle = "green";
-    ctx.strokeRect(15, 40, 687, 650);
-    ctx.fillStyle = "green";
-    ctx.textAlign = "center"; 
-    ctx.font = "100px Comic Sans MS";
-    ctx.fillText("Well Done!", w, 180);
+    translate1();
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("The sound was a Pigeon!", w, 290);
     ctx.font = "40px Comic Sans MS";
     ctx.fillText("Left click on your mouse", w, 400);
-    ctx.fillText("OR", w, 465);
-    ctx.fillText("Press the Spacebar", w, 520);
-    ctx.fillText("for the next question!", w, 610);
+    rightAnsText();
 
     if (keys[32]) { // Go to Final Screen
         cor9 = false;
@@ -4958,21 +4995,11 @@ function rightClick10() {
         rugEff.currentTime = 0;
     }
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(15, 40, 687, 650);
-    ctx.strokeStyle = "green";
-    ctx.strokeRect(15, 40, 687, 650);
-    ctx.fillStyle = "green";
-    ctx.textAlign = "center"; 
-    ctx.font = "100px Comic Sans MS";
-    ctx.fillText("Well Done!", w, 180);
+    translate1();
     ctx.font = "40px Comic Sans MS";
     ctx.fillText("The sound was a game of Rugby!", w, 290);
     ctx.font = "40px Comic Sans MS";
-    ctx.fillText("Left click on your mouse", w, 400);
-    ctx.fillText("OR", w, 465);
-    ctx.fillText("Press the Spacebar", w, 520);
-    ctx.fillText("for the next question!", w, 610);
+    rightAnsText();
 
     if (keys[32]) { // Go to Final Screen
         cor10 = false;
@@ -5013,21 +5040,11 @@ function rightClick11() {
         barkVce.currentTime = 0;
     }
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(15, 40, 687, 650);
-    ctx.strokeStyle = "green";
-    ctx.strokeRect(15, 40, 687, 650);
-    ctx.fillStyle = "green";
-    ctx.textAlign = "center"; 
-    ctx.font = "100px Comic Sans MS";
-    ctx.fillText("Amazing!", w, 180);
+    translate1();
     ctx.font = "40px Comic Sans MS";
     ctx.fillText("The sound was a Collie Dog!", w, 290);
     ctx.font = "40px Comic Sans MS";
-    ctx.fillText("Left click on your mouse", w, 400);
-    ctx.fillText("OR", w, 465);
-    ctx.fillText("Press the Spacebar", w, 520);
-    ctx.fillText("for the next question!", w, 610);
+    rightAnsText();
 
     if (keys[32]) { // Go to Final Screen
         cor11 = false;
@@ -5162,11 +5179,32 @@ function keyWrong() {
         ctx.fillStyle = "red";
         ctx.textAlign = "center"; 
         ctx.font = "120px Comic Sans MS";
+
+        if (En) {
         ctx.fillText("Oh No!", w, 170);
         ctx.font = "70px Comic Sans MS";
         ctx.fillText("that's not right!", w, 270);
         ctx.fillStyle = "blue";
         ctx.fillText("Why not try Again?", w, 380);
+        }
+
+        if (Ger) {
+            ctx.fillText("Ach nein!", w, 170);
+            ctx.font = "40px Comic Sans MS";
+            ctx.fillText("das ist nicht richtig!", w, 270);
+            ctx.fillStyle = "blue";
+            ctx.font = "30px Comic Sans MS";
+            ctx.fillText("Warum versuchen Sie es nicht noch einmal?", w, 380);
+        }
+
+        if (Rom) {
+            ctx.fillText("Oh nu!", w, 170);
+            ctx.font = "50px Comic Sans MS";
+            ctx.fillText("Nu este in regula!", w, 270);
+            ctx.fillStyle = "blue";
+            ctx.fillText("De ce să nu încerci din nou?", w, 380);
+        }
+
         ctx.fillStyle = "red";
         ctx.font = "50px Comic Sans MS";
         ctx.fillText("Left Click on your mouse", w, 500);
