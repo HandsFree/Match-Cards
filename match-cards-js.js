@@ -367,7 +367,7 @@ const insMouse = new Image();
 insMouse.src = "images/menuAssets/gi.png";
 
 const le = new Image();
-le.src = "images/menuAssets/le.png";
+le.src = "images/menuAssets/transLang.png";
 
 const gm1 = new Image();
 gm1.src = "images/menuAssets/gm1.png";
@@ -1448,6 +1448,21 @@ function showMenu() {
 
     // Language Mode
     ctx.drawImage(le, 470, 485, 200, 100);
+    ctx.fillStyle = "white";
+    ctx.font = "600 25px Arial";
+
+    if (En) {
+        ctx.fillText("English", 567, 543);
+    }
+
+    if (Ger) {
+        ctx.fillText("German", 567, 543);
+    }
+
+    if (Rom) {
+        ctx.fillText("Romanian", 567, 543);
+    }
+
     le.path = new Path2D();
     le.path.rect(470, 485, 200, 100);
 
@@ -2335,10 +2350,39 @@ if (keyboardMode) {
 ///////////////////////////////////
 ////part of right awnser text//////
 function rightAnsText() {
-    ctx.fillText("Left click on your mouse", w, 400);
-    ctx.fillText("OR", w, 465);
-    ctx.fillText("Press the Spacebar", w, 520);
-    ctx.fillText("for the next question!", w, 610);
+
+    if (mouseMode) {
+
+    ctx.font = "35px Comic Sans MS";
+
+    if (En) {
+       ctx.fillText("Left click on your mouse", w, 400);
+    }
+
+    if (Ger) {
+        ctx.fillText("Klicken Sie mit der linken Maustaste", w, 400);
+    }
+
+    if (Rom) {
+        ctx.fillText("Faceți clic stânga pe mouse", w, 400);
+    }
+
+    }
+
+    if (keyboardMode) {
+    ctx.fillText("Press the Spacebar", w, 400);
+    }
+
+    if (En) {
+        ctx.fillText("for the next question!", w, 450);
+     }
+     if (Ger) {
+         ctx.fillText("für die nächste Frage!", w, 450);
+     }
+     if (Rom) {
+         ctx.fillText("pentru următoarea întrebare!", w, 450);
+     }
+    
 }
 
 ////// Q1 Keyboard Controls ////////////////////////
@@ -4564,8 +4608,19 @@ function rightKey1() {
 
         translate1();
 
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("The sound was an ambulance!", w, 290);
+        ctx.font = "40px Comic Sans MS";
+
+        if (En) { 
+            ctx.fillText("The sound was an ambulance!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Sound war ein Krankenwagen!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul a fost o ambulanță!", w, 290);
+        }
+
+
         ctx.font = "30px Comic Sans MS";
         rightAnsText();
 
@@ -4617,8 +4672,17 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a cow!", w, 290);
+        ctx.font = "50px Comic Sans MS";
+        if (En) { 
+            ctx.fillText("The sound was a cow!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Das Geräusch war eine Kuh!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era o vacă!", w, 290);
+        }
+        
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
@@ -4951,7 +5015,6 @@ function rightClick9() {
     ctx.font = "50px Comic Sans MS";
     ctx.fillText("The sound was a Pigeon!", w, 290);
     ctx.font = "40px Comic Sans MS";
-    ctx.fillText("Left click on your mouse", w, 400);
     rightAnsText();
 
     if (keys[32]) { // Go to Final Screen
@@ -5206,11 +5269,29 @@ function keyWrong() {
         }
 
         ctx.fillStyle = "red";
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left Click on your mouse", w, 500);
-        ctx.fillText("OR", w, 555);
-        ctx.fillText("Press the Spacebar", w, 600);
-        ctx.fillText("to continue!", w, 655);
+        ctx.font = "36px Comic Sans MS";
+
+        if (mouseMode) {
+            if (En) {
+               ctx.fillText("Left Click on your mouse", w, 500);
+               ctx.fillText("to continue!", w, 560);
+            }
+            if (Ger) {
+                ctx.fillText("Klicken Sie mit der linken Maustaste", w, 500);
+                ctx.fillText("weitermachen!", w, 560);
+            }
+            if (Rom) {
+                ctx.fillText("Faceți clic stânga pe mouse", w, 500);
+                ctx.fillText("a continua!", w, 560);
+            }
+        }
+
+        if (keyboardMode) {
+        ctx.fillText("Press the Spacebar", w, 500);
+        ctx.fillText("to continue!", w, 560);
+        }
+
+        
 
         if (mouseMode && !keyboardMode) {
         addEventListener("click", clickWrong);
