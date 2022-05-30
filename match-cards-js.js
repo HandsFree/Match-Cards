@@ -1264,7 +1264,21 @@ function showMenu() {
         ctx.drawImage(rTick1, 417, 192, 50, 40);
     }
 
-    ctx.fillText("Colourful", 470, 230);
+
+
+
+
+    
+
+    if (En) {
+        ctx.fillText("Colourful", 470, 230);
+    }
+    if (Ger) {
+        ctx.fillText("Bunt", 470, 230);
+    }
+    if (Rom) {
+        ctx.fillText("Colorat", 470, 230);
+    }
 
     ctx.drawImage(BoxBack2, 410, 245, 50, 50);
     BoxBack2.path = new Path2D();
@@ -1276,7 +1290,17 @@ function showMenu() {
         ctx.drawImage(rTick1, 417, 247, 50, 40);
     }
 
-    ctx.fillText("White", 470, 282);
+
+    if (En) {
+        ctx.fillText("White", 470, 282);
+    }
+    if (Ger) {
+        ctx.fillText("Weiß", 470, 282);
+    }
+    if (Rom) {
+        ctx.fillText("alb", 470, 282);
+    }
+    
 
     canvas.addEventListener("click", BacktickT);
     canvas.addEventListener("click", BacktickF);
@@ -1501,18 +1525,23 @@ function showMenu() {
     // Language Mode
     ctx.drawImage(le, 470, 485, 200, 100);
     ctx.fillStyle = "white";
-    ctx.font = "600 25px Arial";
+    ctx.font = "600 22px Arial";
+
+    
 
     if (En) {
-        ctx.fillText("English", 567, 543);
+        ctx.fillText("Language", 567, 530);
+        ctx.fillText("English", 567, 555);
     }
 
     if (Ger) {
-        ctx.fillText("German", 567, 543);
+        ctx.fillText("Sprache", 567, 530);
+        ctx.fillText("Deutsch", 567, 555);
     }
 
     if (Rom) {
-        ctx.fillText("Romanian", 567, 543);
+        ctx.fillText("Limba", 567, 530);
+        ctx.fillText("rumänisch", 567, 555);
     }
 
     le.path = new Path2D();
@@ -1983,9 +2012,12 @@ function splash() {
 
     if (!keyboardMode && !mouseMode) {
         ctx.drawImage(clickHere, 162, 410, 394, 90);
+        clickHere.path = new Path2D();
+        clickHere.path.rect(162, 410, 394, 90);
+
         ctx.font = "700 45px Comic Sans MS";
-    ctx.textAlign = "center"; 
-    ctx.fillStyle = "navy";
+        ctx.textAlign = "center"; 
+        ctx.fillStyle = "navy";
 
     if (En) {
         ctx.fillText("Click Here!", w, 473);
@@ -1996,8 +2028,7 @@ function splash() {
     if (Rom) {
         ctx.fillText("Click aici!", w, 473);
     }
-        clickHere.path = new Path2D();
-        clickHere.path.rect(162, 410, 394, 90);
+        
         ctx.font = "30px Comic Sans MS";
         ctx.fillText("or press the Spacebar", w, 535);
         ctx.fillText("or use your switch", w, 572);
@@ -2062,8 +2093,15 @@ function splash() {
 function closeSplash1(e) {
     if (setMenu && mouseMode && !keyboardMode) {
         if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+           
+           // English
            gameInsSpeech.pause();
            gameInsSpeech.currentTime = 0;
+
+           // German
+           gerInstructions.pause();
+           gerInstructions.currentTime = 0;
+
            locked();
            incor=false;
            setMenu=true;
@@ -2079,8 +2117,16 @@ function gameStart(e) {
     if (!setMenu && mouseMode && !keyboardMode) {
         if (!setMenu && !keyboardMode && ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
             gameIns = false;
+
+            // English
             gameInsSpeech.pause();
             gameInsSpeech.currentTime = 0;
+
+            // German
+            gerInstructions.pause();
+            gerInstructions.currentTime = 0;
+
+
             canvas.removeEventListener("click", gameStart);
         }
     }
@@ -2093,7 +2139,7 @@ function gameStartkey(e) {
             gameIns = false;
             gameInsSpeech.pause();
             gameInsSpeech.currentTime = 0;
-            canvas.removeEventListener("keydown", gameStartkey, false);      
+            canvas.removeEventListener("keydown", gameStartkey, false);   
         }
     }
 }
@@ -5810,7 +5856,7 @@ function playGame() {
 
         if (cor12) {
           rightAns12();
-          returnTo1=true;
+          returnTo1 = true;
         }
     }
 
@@ -5826,10 +5872,7 @@ function playGame() {
         finalScreen = false;
         MCsplashSc = true;
 
-
-
-
-
+        openInstructions = false;
 
         removeEventListener("click", rightClickFS);
       }
