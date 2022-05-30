@@ -7,6 +7,8 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
+var openInstructions = false;
+
 var langaugeMenuSettings = false;
 
 var SetSplashKey = true;
@@ -472,6 +474,8 @@ var barkVce = new Audio("sounds/barkVce.mp3");
 var tramVce = new Audio("sounds/tramVce.mp3");
 
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
+
+var gerInstructions = new Audio("sounds/instructions-ger.mp3");
 
 function locked() {
     incor = false;
@@ -1136,7 +1140,17 @@ function showMenu() {
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
 	ctx.font = "100 80px Impact, fantasy";
-    ctx.fillText("Settings", w, 100);
+
+    if (En) {
+        ctx.fillText("Settings", w, 100);
+    }
+    if (Ger) {
+        ctx.fillText("Einstellungen", w, 100);
+    }
+    if (Rom) {
+        ctx.fillText("Setări", w, 100);
+    }
+
     ctx.textAlign = "left";
 
 
@@ -1176,7 +1190,16 @@ function showMenu() {
         ctx.drawImage(rTick1, 67, 192, 50, 40);
     }
 
-    ctx.fillText("On", 120, 230);
+    
+    if (En) {
+        ctx.fillText("On", 120, 230);
+    }
+    if (Ger) {
+        ctx.fillText("An", 120, 230);
+    }
+    if (Rom) {
+        ctx.fillText("Pe", 120, 230);
+    }
 
     ctx.drawImage(BoxMus2, 62, 245, 50, 50);
     BoxMus2.path = new Path2D();
@@ -1186,7 +1209,17 @@ function showMenu() {
         ctx.drawImage(rTick1, 67, 247, 50, 40);
     }
 
-    ctx.fillText("Off", 120, 282);
+    
+
+    if (En) {
+        ctx.fillText("Off", 120, 282);
+    }
+    if (Ger) {
+        ctx.fillText("Aus", 120, 282);
+    }
+    if (Rom) {
+        ctx.fillText("Oprit", 120, 282);
+    }
 
 
     canvas.addEventListener("click", MustickT);
@@ -1277,7 +1310,17 @@ function showMenu() {
         ctx.drawImage(rTick1, 67, 372, 50, 40);
     }
 
-    ctx.fillText("On", 120, 407);
+    
+
+    if (En) {
+        ctx.fillText("On", 120, 407);
+    }
+    if (Ger) {
+        ctx.fillText("An", 120, 407);
+    }
+    if (Rom) {
+        ctx.fillText("Pe", 120, 407);
+    }
 
     if (KeyboardMenu) {
         if (KeyMenu6) {
@@ -1298,7 +1341,16 @@ function showMenu() {
         ctx.drawImage(rTick1, 67, 427, 50, 40);
     }
 
-    ctx.fillText("Off", 120, 462);
+
+    if (En) {
+        ctx.fillText("Off", 120, 462);
+    }
+    if (Ger) {
+        ctx.fillText("Aus", 120, 462);
+    }
+    if (Rom) {
+        ctx.fillText("Oprit", 120, 462);
+    }
 
     canvas.addEventListener("click", SptickT);
     canvas.addEventListener("click", SptickF);
@@ -1735,6 +1787,14 @@ function closeSplash(e) {
   if (!setMenu) {
 
     if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) { 
+
+
+
+        openInstructions=true;
+
+
+
+
         
         KeyboardGame = false;
         
@@ -1892,11 +1952,29 @@ function splash() {
 
     if (mouseMode) {
     ctx.drawImage(clickHere, 162, 410, 394, 90);
+
+    ctx.font = "700 45px Comic Sans MS";
+    ctx.textAlign = "center"; 
+    ctx.fillStyle = "navy";
+
+    if (En) {
+        ctx.fillText("Click Here!", w, 473);
+    }
+    if (Ger) {
+        ctx.fillText("Klicken Sie hier!", w, 473);
+    }
+    if (Rom) {
+        ctx.fillText("Click aici!", w, 473);
+    }
+    
+
+
     clickHere.path = new Path2D();
     clickHere.path.rect(162, 410, 394, 90);
     }
 
     if (keyboardMode) {
+    ctx.font = "30px Comic Sans MS";
     ctx.fillText("Press the Spacebar", w, 535);
     ctx.fillText("or use your switch", w, 572);
     ctx.fillText("to play!", w, 610);
@@ -1905,8 +1983,22 @@ function splash() {
 
     if (!keyboardMode && !mouseMode) {
         ctx.drawImage(clickHere, 162, 410, 394, 90);
+        ctx.font = "700 45px Comic Sans MS";
+    ctx.textAlign = "center"; 
+    ctx.fillStyle = "navy";
+
+    if (En) {
+        ctx.fillText("Click Here!", w, 473);
+    }
+    if (Ger) {
+        ctx.fillText("Klicken Sie hier!", w, 473);
+    }
+    if (Rom) {
+        ctx.fillText("Click aici!", w, 473);
+    }
         clickHere.path = new Path2D();
         clickHere.path.rect(162, 410, 394, 90);
+        ctx.font = "30px Comic Sans MS";
         ctx.fillText("or press the Spacebar", w, 535);
         ctx.fillText("or use your switch", w, 572);
         ctx.fillText("to play!", w, 610);
@@ -2009,14 +2101,26 @@ function gameStartkey(e) {
 
 function gameInstructions() {
 
+    if (openInstructions) {
+
     console.log("gameIns is " + gameIns);
 
     if (togSpeech) {
-        //gameInsSpeech.play();
+
+        if (En) {
+        gameInsSpeech.play();
+        }
+        if (Ger) {
+        gerInstructions.play();
+        }
     }
     if (!togSpeech) {
+
         gameInsSpeech.pause();
         gameInsSpeech.currentTime = 0;
+        gerInstructions.pause();
+        gerInstructions.currentTime = 0;
+
     }
         
         ctx.fillStyle = "white";
@@ -2141,6 +2245,8 @@ function gameInstructions() {
         }  
 
         firstQu=false;
+
+    } // openInstruction = true
 
     }
 
@@ -4722,8 +4828,17 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "60px Comic Sans MS";
-        ctx.fillText("The sound was a lamb!", w, 290);
+        ctx.font = "45px Comic Sans MS";
+        
+        if (En) { 
+            ctx.fillText("The sound was a lamb!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Sound war ein Lamm!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un miel!", w, 290);
+        }
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
@@ -4772,7 +4887,16 @@ function rightKey1() {
 
         translate1();
         ctx.font = "39px Comic Sans MS";
-        ctx.fillText("The sound was an old telephone!", w, 290);
+        
+        if (En) { 
+            ctx.fillText("The sound was an old telephone!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Ton war ein altes Telefon!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un telefon vechi!", w, 290);
+        }
         ctx.font = "35px Comic Sans MS";
         rightAnsText();
 
@@ -4822,8 +4946,17 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("The sound was a Fire Engine!", w, 290);
+        ctx.font = "40px Comic Sans MS";
+        if (En) { 
+            ctx.fillText("The sound was a Fire Engine!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Sound war ein Feuerwehrauto!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era o mașină de pompieri!", w, 290);
+        }
+        
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
