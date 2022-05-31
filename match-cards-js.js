@@ -14,8 +14,8 @@ canvas.focus();
 
 
 
+var soundInstructions = false;
 
-var openInstructions = false;
 
 var langaugeMenuSettings = false;
 
@@ -483,7 +483,10 @@ var tramVce = new Audio("sounds/tramVce.mp3");
 
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
-var gerInstructions = new Audio("sounds/instructions-ger.mp3");
+// German
+var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
+var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
+var gerQ1 = new Audio("sounds/ger/Ger-Question1-ans.mp3");
 
 function locked() {
     incor = false;
@@ -1827,8 +1830,7 @@ function closeSplash(e) {
 
 
 
-        openInstructions=true;
-
+        soundInstructions = true;
 
 
 
@@ -1908,8 +1910,8 @@ function settingMouse1(e) {
 function gameStKey(e) {
 if (keys[32]) { // Go to Instructions
 
-    openInstructions=true;
-
+    soundInstructions=true;
+    
     splashAud.pause();
     splashAud.currentTime = 0;
     MCsplashSc = false;
@@ -2150,7 +2152,7 @@ function gameStart(e) {
 
 
 
-            
+   
 
 
 
@@ -2180,12 +2182,13 @@ function gameStartkey(e) {
 
 function gameInstructions() {
 
-
-    if (openInstructions) {
+    
 
     //console.log("gameIns is " + gameIns);
 
     if (togSpeech) {
+
+        if (soundInstructions) {
 
         if (En) {
         gameInsSpeech.play();
@@ -2193,6 +2196,10 @@ function gameInstructions() {
         if (Ger) {
         gerInstructions.play();
         }
+
+        } // soundInstructions = true
+
+
     }
     if (!togSpeech) {
 
@@ -2326,14 +2333,14 @@ function gameInstructions() {
 
         firstQu=false;
 
-    } // openInstruction = true
-
     }
 
 
 
 
 function firstQus() {
+
+
 
     //console.log("gameIns is " + gameIns);
 
@@ -4767,6 +4774,8 @@ function quest12() {
 function rightClick1() {
     ambVoice.pause();
     ambVoice.currentTime = 0;
+    gerQ1.pause();
+    gerQ1.currentTime = 0;
     incor = false;
     cor1 = false;
     MCgameSc1 = false;
@@ -4783,6 +4792,8 @@ function rightKey1() {
     cor1 = false;
     ambVoice.pause();
     ambVoice.currentTime = 0;   
+    gerQ1.pause();
+    gerQ1.currentTime = 0;
     removeEventListener("keydown", rightKey1);
    }
 }
@@ -4792,11 +4803,19 @@ function rightKey1() {
     function rightAns1() {
 
         if (togSpeech) {
+            if (En) {
             ambVoice.play();
+            }
+            if (Ger) {
+            gerQ1.play();
+            }
         }
+
         if (!togSpeech) {
             ambVoice.pause();
             ambVoice.currentTime = 0;
+            gerQ1.pause();
+            gerQ1.currentTime = 0;
         }
 
         translate1();
@@ -5083,8 +5102,18 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("The sound was a Microwave!", w, 290);
+        
+        ctx.font = "40px Comic Sans MS";
+        if (En) { 
+            ctx.fillText("The sound was a Microwave!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Ton war eine Mikrowelle!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un cuptor cu microunde!", w, 290);
+        }
+
         ctx.font = "40px Comic Sans MS";
         rightAnsText();
 
@@ -5127,8 +5156,19 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "50px Comic Sans MS";
-        ctx.fillText("The sound was a Door Bell!", w, 290);
+        
+        ctx.font = "40px Comic Sans MS";
+
+        if (En) { 
+            ctx.fillText("The sound was a Door Bell!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Ton war eine Türklingel!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul a fost un clopoțel!", w, 290);
+        }
+
         ctx.font = "40px Comic Sans MS";
         rightAnsText();
 
@@ -5178,8 +5218,18 @@ function rightKey1() {
         }
 
         translate1();
-        ctx.font = "35px Comic Sans MS";
-        ctx.fillText("The sound was a Polacanthus Dinosaur", w, 290);
+        
+        ctx.font = "30px Comic Sans MS";
+        if (En) { 
+            ctx.fillText("The sound was a Polacanthus Dinosaur", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Das Geräusch war ein Polacanthus-Dinosaurier", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un dinozaur Polacanthus", w, 290);
+        }
+
         ctx.font = "30px Comic Sans MS";
         rightAnsText();
 
@@ -5232,8 +5282,18 @@ function rightClick9() {
     }
 
     translate1();
-    ctx.font = "50px Comic Sans MS";
-    ctx.fillText("The sound was a Pigeon!", w, 290);
+
+    ctx.font = "40px Comic Sans MS";
+        if (En) { 
+            ctx.fillText("The sound was a Pigeon!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Sound war eine Taube!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un porumbel!", w, 290);
+        }
+
     ctx.font = "40px Comic Sans MS";
     rightAnsText();
 
@@ -5279,8 +5339,18 @@ function rightClick10() {
     }
 
     translate1();
+
     ctx.font = "40px Comic Sans MS";
-    ctx.fillText("The sound was a game of Rugby!", w, 290);
+        if (En) { 
+            ctx.fillText("The sound was a game of Rugby!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Der Sound war ein Rugbyspiel", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un joc de rugby", w, 290);
+        }
+
     ctx.font = "40px Comic Sans MS";
     rightAnsText();
 
@@ -5324,8 +5394,18 @@ function rightClick11() {
     }
 
     translate1();
+
     ctx.font = "40px Comic Sans MS";
-    ctx.fillText("The sound was a Collie Dog!", w, 290);
+        if (En) { 
+            ctx.fillText("The sound was a Collie Dog!", w, 290);
+        }
+        if (Ger) { 
+            ctx.fillText("Das Geräusch war ein Collie-Hund!", w, 290);
+        }
+        if (Rom) { 
+            ctx.fillText("Sunetul era un Collie Dog!", w, 290);
+        }
+
     ctx.font = "40px Comic Sans MS";
     rightAnsText();
 
@@ -5421,6 +5501,8 @@ function rightClick12() {
     function clickWrong() {
         if (!setMenu) {
         sEff = true;
+        gerWrong.pause();
+        gerWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         locked();
@@ -5431,6 +5513,8 @@ function rightClick12() {
 // keyboard controls Wrong Answer
 function keyWrong() {
     if (keys[32]) { // Go to return to game
+        gerWrong.pause();
+        gerWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         sEff = true;
@@ -5447,12 +5531,23 @@ function keyWrong() {
         sEff = false;
 
         if (togSpeech) {
+            if (En) {
             wrongVoice.play();
+            }
+            if (Ger) {
+            gerWrong.play();
+            }
         }
     
         if (!togSpeech) {
+            if (En) {
             wrongVoice.pause();
             wrongVoice.currentTime = 0;
+            }
+            if (Ger) {
+            gerWrong.pause();
+            gerWrong.currentTime = 0;
+            }
         }
 
         ctx.fillStyle = "white";
@@ -5552,6 +5647,8 @@ function playGame() {
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
 
+        soundInstructions = false;
+        
 
         if (colod) {
             ctx.fillStyle = "#FFA500";
@@ -5913,7 +6010,7 @@ function playGame() {
         finalScreen = false;
         MCsplashSc = true;
 
-        openInstructions = false;
+        
 
         removeEventListener("click", rightClickFS);
       }
