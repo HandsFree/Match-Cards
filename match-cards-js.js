@@ -7,6 +7,14 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
+
+
+
+
+
+
+
+
 var openInstructions = false;
 
 var langaugeMenuSettings = false;
@@ -1899,11 +1907,14 @@ function settingMouse1(e) {
 
 function gameStKey(e) {
 if (keys[32]) { // Go to Instructions
+
+    openInstructions=true;
+
     splashAud.pause();
     splashAud.currentTime = 0;
     MCsplashSc = false;
 
-    //gameIns = false;
+
     gameIns = true;
     KeyboardGame = true;
 
@@ -1967,6 +1978,12 @@ function translate1() {
 
 
 function splash() {
+
+
+
+
+
+
   if (!setMenu) {
 
 
@@ -2086,6 +2103,11 @@ function splash() {
 
   }
 
+
+
+
+
+
 }
 
 
@@ -2127,6 +2149,12 @@ function gameStart(e) {
             gerInstructions.currentTime = 0;
 
 
+
+            
+
+
+
+
             canvas.removeEventListener("click", gameStart);
         }
     }
@@ -2136,6 +2164,11 @@ function gameStart(e) {
 function gameStartkey(e) {
     if (!setMenu && keyboardMode && !mouseMode) {
         if (keys[13]) {
+
+
+            
+
+
             gameIns = false;
             gameInsSpeech.pause();
             gameInsSpeech.currentTime = 0;
@@ -2147,9 +2180,10 @@ function gameStartkey(e) {
 
 function gameInstructions() {
 
+
     if (openInstructions) {
 
-    console.log("gameIns is " + gameIns);
+    //console.log("gameIns is " + gameIns);
 
     if (togSpeech) {
 
@@ -2399,9 +2433,11 @@ function instructions() {
     //console.log("mouseMode is " + mouseMode);
     //console.log("keyboardMode is " + keyboardMode);
 
-    if (KeyboardGame && !mouseMode) {
+   if (KeyboardGame && !mouseMode) {
+
         ctx.font = "900 24px Comic Sans MS";
         ctx.fillStyle = "red";
+
         if (En) {
         ctx.fillText("Match the sound to the picture", w, 615);
         }
@@ -2411,6 +2447,7 @@ function instructions() {
         if (Rom) {
         ctx.fillText("Potriviți sunetul cu imaginea", w, 615);
         }
+
     }
 
     if (!KeyboardGame) {
@@ -2435,11 +2472,15 @@ function instructions() {
     ctx.fillText("and then", w, 671);
     ctx.fillStyle = "blue";
     ctx.fillText("press the ENTER KEY to select one", w, 700);
+
+    
+
     }
 
     if (!KeyboardGame) {
+
     if (En) {
-	ctx.fillText("Left Click on the picture", w, 680);
+	    ctx.fillText("Left Click on the picture", w, 680);
     }
     if (Ger) {
         ctx.font = "30px Comic Sans MS";
@@ -2863,7 +2904,7 @@ function quest2() {
     returnTo1=false;
     }
 
-    console.log("incor is " + incor +  " cor2 is " + cor2);
+    //console.log("incor is " + incor +  " cor2 is " + cor2);
 
     // Question 2    
 
