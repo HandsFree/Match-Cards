@@ -487,6 +487,10 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
 var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
 var gerQ1 = new Audio("sounds/ger/Ger-Question1-ans.mp3");
+var gerQ2 = new Audio("sounds/ger/ger-Q2.mp3");
+var gerQ3 = new Audio("sounds/ger/ger-Q3.mp3");
+var gerQ4 = new Audio("sounds/ger/ger-Q4.mp3");
+var gerQ5 = new Audio("sounds/ger/ger-Q5.mp3");
 
 function locked() {
     incor = false;
@@ -4844,7 +4848,7 @@ function rightKey1() {
         }
     }
 
-
+    ///////// End of Right Answer 1 //////////////////
 
 
     // mouse controls right Answer 2 //
@@ -4856,17 +4860,22 @@ function rightKey1() {
         MCgameSc3 = true;
         cowVoice.pause();
         cowVoice.currentTime = 0;
+        gerQ2.pause();
+        gerQ2.currentTime = 0;
         removeEventListener("click", rightClick2);
     }
     // End mouse controls right Answer //
 
     function rightKey2() {
         if (keys[32]) { // Go to Q3
+            incor = false;
             MCgameSc2 = false;
             //finalScreen = true;
             MCgameSc3 = true;
             cowVoice.pause();
             cowVoice.currentTime = 0;
+            gerQ2.pause();
+            gerQ2.currentTime = 0;
             cor2 = false;
             removeEventListener("keydown", rightKey2);
         }
@@ -4876,11 +4885,18 @@ function rightKey1() {
     function rightAns2() {
         
         if (togSpeech) {
-            cowVoice.play();
+            if (En) {
+                cowVoice.play();
+            }
+            if (Ger) {
+                gerQ2.play();
+            }
         }
         if (!togSpeech) {
             cowVoice.pause();
             cowVoice.currentTime = 0;
+            gerQ2.pause();
+            gerQ2.currentTime = 0;
         }
 
         translate1();
@@ -4907,6 +4923,8 @@ function rightKey1() {
             addEventListener("click", rightClick2);
             }
     }
+    ///////// End of Right Answer 2 //////////////////
+
 
        // mouse controls right Answer 3 //
        function rightClick3() {
@@ -4917,20 +4935,43 @@ function rightKey1() {
         MCgameSc4 = true;
         lambVoice.pause();
         lambVoice.currentTime = 0;
+        gerQ3.pause();
+        gerQ3.currentTime = 0;
         removeEventListener("click", rightClick3);
     }
     // End mouse controls right Answer //
+
+    function rightKey3() {
+    if (keys[32]) { // Go to Q4
+        incor = false;
+        cor3 = false;
+        lambVoice.pause();
+        lambVoice.currentTime = 0;
+        gerQ3.pause();
+        gerQ3.currentTime = 0;
+        MCgameSc3 = false;
+        MCgameSc4 = true;
+        removeEventListener("keydown", rightKey3);
+    }
+}
 
     /////////  Right Answer 3 //////////////////
     function rightAns3() {
 
         
         if (togSpeech) {
-            lambVoice.play();
+            if (En) {
+                lambVoice.play();
+            }
+            if (Ger) {
+                gerQ3.play();
+            }
         }
         if (!togSpeech) {
             lambVoice.pause();
             lambVoice.currentTime = 0;
+            gerQ3.pause();
+            gerQ3.currentTime = 0;
         }
 
         translate1();
@@ -4948,21 +4989,25 @@ function rightKey1() {
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
-        if (keys[32]) { // Go to Q4
-            cor3 = false;
-            lambVoice.pause();
-            lambVoice.currentTime = 0;
-            MCgameSc3 = false;
-            MCgameSc4 = true;
-        }
-        addEventListener("click", rightClick3);
+        
+        if (keyboardMode) {
+            addEventListener("keydown", rightKey3);
+            }
+            if (mouseMode) {
+            addEventListener("click", rightClick3);
+            }
+
     }
+
+    ///////// End of Right Answer 3 //////////////////
 
     // mouse controls right Answer 4 //
     function rightClick4() {
         telVoice.pause();
         cor4 = false;
         telVoice.currentTime = 0;
+        gerQ4.pause();
+        gerQ4.currentTime = 0;
         incor = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
@@ -4980,16 +5025,45 @@ function rightKey1() {
     }
     // End mouse controls right Answer //
 
+function rightKey4() {
+    if (keys[32]) { // Go to Q5
+        incor = false;
+        if (!togQs1) {
+            MCgameSc5 = true;
+        }
+
+        if (togQs1) {
+            finalScreen = true;
+        }
+        cor4 = false;
+        telVoice.pause();
+        telVoice.currentTime = 0;
+        gerQ4.pause();
+        gerQ4.currentTime = 0;
+        MCgameSc4 = false;
+        removeEventListener("keydown", rightKey4);
+    }
+}
+
      /////////  Right Answer 4 //////////////////
      function rightAns4() {
         
         if (togSpeech) {
-            telVoice.play();
+            
+            if (En) {
+                telVoice.play();
+            }
+            if (Ger) {
+                gerQ4.play();
+            }
+
         }
         if (!togSpeech) {
             telVoice.pause();
             telVoice.currentTime = 0;
-        }
+            gerQ4.pause();
+            gerQ4.currentTime = 0;
+        }     
 
         translate1();
         ctx.font = "39px Comic Sans MS";
@@ -5006,21 +5080,15 @@ function rightKey1() {
         ctx.font = "35px Comic Sans MS";
         rightAnsText();
 
-        if (keys[32]) { // Go to Q5
-            if (!togQs1) {
-                MCgameSc5 = true;
+        
+        
+        if (keyboardMode) {
+            addEventListener("keydown", rightKey4);
             }
-    
-            if (togQs1) {
-                finalScreen = true;
+            if (mouseMode) {
+            addEventListener("click", rightClick4);
             }
-            cor4 = false;
-            telVoice.pause();
-            telVoice.currentTime = 0;
-            MCgameSc4 = false;
-            //MCgameSc5 = true;
-        }
-        addEventListener("click", rightClick4);
+
     }
 
     // mouse controls right Answer 5 //
@@ -5028,6 +5096,8 @@ function rightKey1() {
         cor5 = false;
         fEngVoice.pause();
         fEngVoice.currentTime = 0;
+        gerQ5.pause();
+        gerQ5.currentTime = 0;
         incor = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
@@ -5043,12 +5113,20 @@ function rightKey1() {
     function rightAns5() {
 
         if (togSpeech) {
-            fEngVoice.play();
+            
+            if (En) {
+                fEngVoice.play();
+            }
+            if (Ger) {
+                gerQ5.play();
+            }
         }
 
         if (!togSpeech) {
             fEngVoice.pause();
             fEngVoice.currentTime = 0;
+            gerQ5.pause();
+            gerQ5.currentTime = 0;
         }
 
         translate1();
@@ -5070,6 +5148,8 @@ function rightKey1() {
             cor5 = false;
             fEngVoice.pause();
             fEngVoice.currentTime = 0;
+            gerQ5.pause();
+            gerQ5.currentTime = 0;
             MCgameSc5 = false;
             MCgameSc6 = true;
         }
