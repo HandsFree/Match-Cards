@@ -11,7 +11,7 @@ canvas.focus();
 
 
 
-
+var SplashScreenOn = true;
 
 
 var soundInstructions = false;
@@ -1812,13 +1812,6 @@ addEventListener("keydown", keyboardClose);
 
     }//setMenu
 
-
-
-
-
-
-
-
     } // KeyboardMenu
 
 } // setMenu
@@ -1830,15 +1823,10 @@ addEventListener("keydown", keyboardClose);
 function closeSplash(e) {
   if (!setMenu) {
 
-    if (ctx.isPointInPath(clickHere.path, e.offsetX, e.offsetY)) { 
-
-
+    if (ctx.isPointInPath(SplashScreenOn && clickHere.path, e.offsetX, e.offsetY)) { 
 
         soundInstructions = true;
-
-
-
-        
+      
         KeyboardGame = false;
         
         locked();
@@ -2003,6 +1991,9 @@ function splash() {
     ctx.fillStyle = "navy";
 
     if (mouseMode) {
+
+    if (SplashScreenOn) {  
+
     ctx.drawImage(clickHere, 162, 410, 394, 90);
 
     ctx.font = "700 45px Comic Sans MS";
@@ -2023,7 +2014,10 @@ function splash() {
 
     clickHere.path = new Path2D();
     clickHere.path.rect(162, 410, 394, 90);
+
+}
     }
+
 
     if (keyboardMode) {
     ctx.font = "30px Comic Sans MS";
@@ -2034,9 +2028,14 @@ function splash() {
     }
 
     if (!keyboardMode && !mouseMode) {
+
+        if (SplashScreenOn) {
+
         ctx.drawImage(clickHere, 162, 410, 394, 90);
         clickHere.path = new Path2D();
         clickHere.path.rect(162, 410, 394, 90);
+
+        }
 
         ctx.font = "700 45px Comic Sans MS";
         ctx.textAlign = "center"; 
@@ -2097,15 +2096,14 @@ function splash() {
 
 
 
-
+if (SplashScreenOn) {
     addEventListener("keydown", gameStKey, false);
     addEventListener("keydown", settingsKey, false);
     
-    
-
     canvas.addEventListener("click", closeSplash);
     canvas.addEventListener("click", speechMouse);
     canvas.addEventListener("click", settingMouse1);
+}
 
   }
 
@@ -5727,7 +5725,8 @@ function playGame() {
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
 
-        soundInstructions = false;
+        soundInstructions = false; // disable speech on Splash screen
+        SplashScreenOn = false; // disable splash screen Click Here!
         
 
         if (colod) {
@@ -6114,6 +6113,8 @@ function playGame() {
             wellDoneVoice.currentTime = 0;
         }
 
+        SplashScreenOn = true;
+        
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "blue";
         ctx.textAlign = "center"; 
