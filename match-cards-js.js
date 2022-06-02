@@ -1061,6 +1061,12 @@ function gerLang(e) {
     } 
 }
 
+
+
+
+
+
+
 function romLang(e) {
     if (setMenu) {
        if (mouseMode && ctx.isPointInPath(langR.path, e.offsetX, e.offsetY)) {
@@ -1072,6 +1078,17 @@ function romLang(e) {
     } 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2306,9 +2323,9 @@ function gameInstructions() {
             ctx.fillText("Să mergem!", w, 550);
         }
 
-        ctx.drawImage(cross1, w-30, 560, 50, 50);
+        ctx.drawImage(cross1, w-30, 600, 50, 50);
         cross1.path = new Path2D();
-        cross1.path.rect(w-30, 560, 50, 50);
+        cross1.path.rect(w-30, 600, 50, 50);
         }
 
     
