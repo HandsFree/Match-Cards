@@ -7,8 +7,11 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
-
-
+// Voiceovers ////////////
+var part1 = true;
+var part2 = false;
+var part3 = false;
+// End //////////////////
 
 
 var SplashScreenOn = true;
@@ -436,10 +439,32 @@ const tram = new Image();
 tram.src = "images/tram.jpg";
 
 
-
-
-
 /////////////////////////////////
+
+// Well Done
+var  wdEn = new Audio("sounds/well_done/w-d-eng.mp3");
+var  wdGer = new Audio("sounds/well_done/w-d-ger.mp3");
+var  wdRom = new Audio("sounds/well_done/w-d-rom.mp3");
+
+// uk voiceovers
+var  VOuk1 = new Audio("sounds/en/VOuk1.mp3");
+var  VOuk2 = new Audio("sounds/en/VOuk2.mp3");
+var  VOuk3 = new Audio("sounds/en/VOuk3.mp3");
+var  VOuk4 = new Audio("sounds/en/VOuk4.mp3");
+
+
+// mouse
+var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
+var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
+var  mseROM = new Audio("sounds/mouse/mseROM.mp3");
+
+// keyboard
+var  keyUK = new Audio("sounds/keyboard/keyUK.mp3");
+var  keyGER = new Audio("sounds/keyboard/keyGER.mp3");
+var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
+
+
+
 
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
@@ -508,6 +533,40 @@ function locked() {
     cor12=false;
 }
 
+
+function rightAnsClear() {
+    VOuk1.pause();
+    VOuk1.currentTime = 0;
+
+    VOuk2.pause();
+    VOuk2.currentTime = 0;
+
+    VOuk3.pause();
+    VOuk3.currentTime = 0;
+
+    VOuk4.pause();
+    VOuk4.currentTime = 0;
+
+
+    // click and keyboard next question //
+    mseUK.pause();
+    mseUK.currentTime = 0;
+    keyUK.pause();
+    keyUK.currentTime = 0;
+
+    mseGER.pause();
+    mseGER.currentTime = 0;
+    keyGER.pause();
+    keyGER.currentTime = 0;
+
+    mseROM.pause();
+    mseROM.currentTime = 0;
+    keyROM.pause();
+    keyROM.currentTime = 0;
+    // end //
+
+
+}
 
 function switchKeysM1(e) {
     if (keyboardMode) {
@@ -1984,6 +2043,43 @@ function translate1() {
 
 }
 
+function wellDone() {
+
+    if (part1 && togSpeech) {
+
+    if (En) {
+        wdEn.play();
+        part1 = false;
+        part2 = true;
+    }
+    if (Ger) {
+        wdGer.play();
+        part1 = false;
+        part2 = true;
+    }
+    if (Rom) {
+        wdRom.play();
+        part1 = false;
+        part2 = true;
+    }
+    /*if () {
+        wdEn.play();
+        part1 = false;
+        part2 = true;
+    }
+    if () {
+        wdEn.play();
+        part1 = false;
+        part2 = true;
+    }*/
+
+}
+
+}
+
+
+
+
 
 
 
@@ -2576,42 +2672,80 @@ function rightAnsText() {
 
     if (En) {
        ctx.fillText("Left click on your mouse", w, 400);
+       if (part3 && togSpeech) {
+           mseUK.play();
+           part3 = false;
+        }
     }
 
     if (Ger) {
         ctx.fillText("Klicken Sie mit der linken Maustaste", w, 400);
+        if (part3 && togSpeech) {
+            mseGER.play();
+            part3 = false;
+         }
     }
 
     if (Rom) {
         ctx.fillText("Faceți clic stânga pe mouse", w, 400);
+        if (part3 && togSpeech) {
+            mseROM.play();
+            part3 = false;
+         }
     }
 
     }
 
     if (keyboardMode) {
-    ctx.fillText("Press the Spacebar", w, 400);
+
+    if (En) {  
+       ctx.fillText("Press the Spacebar", w, 400);
+       if (part3 && togSpeech) {
+           keyUK.play();
+           part3 = false;
+        }
+    }
+
+    if (Ger) {  
+        ctx.fillText("Drücken Sie die Leertaste", w, 400);
+        if (part3 && togSpeech) {
+            keyGER.play();
+            part3 = false;
+         }
+     }
+
+     if (Rom) {  
+        ctx.fillText("Apăsați pe bara de spațiu", w, 400);
+        if (part3 && togSpeech) {
+            keyROM.play();
+            part3 = false;
+         }
+     }
+
     }
 
     if (En) {
         ctx.fillText("for the next question!", w, 450);
      }
+
      if (Ger) {
          ctx.fillText("für die nächste Frage!", w, 450);
      }
+
      if (Rom) {
          ctx.fillText("pentru următoarea întrebare!", w, 450);
      }
     
 }
 
+// End of rightAnsText() //
+
+
+
+
+
+
 ////// Q1 Keyboard Controls ////////////////////////
-
-
-
-
-
-
-
 
 
 //// Keyboard
@@ -4791,10 +4925,10 @@ function quest12() {
 
 // mouse controls right Answer 1 //
 function rightClick1() {
-    ambVoice.pause();
-    ambVoice.currentTime = 0;
-    gerQ1.pause();
-    gerQ1.currentTime = 0;
+
+    rightAnsClear();
+    part1=true;
+
     incor = false;
     cor1 = false;
     MCgameSc1 = false;
@@ -4806,13 +4940,14 @@ function rightClick1() {
 // keyboard
 function rightKey1() {
    if (keys[32]) { // Go to Q2
+
+    rightAnsClear();
+    part1=true;
+
+    incor = false;
     MCgameSc1 = false;
     MCgameSc2 = true;
     cor1 = false;
-    ambVoice.pause();
-    ambVoice.currentTime = 0;   
-    gerQ1.pause();
-    gerQ1.currentTime = 0;
     removeEventListener("keydown", rightKey1);
    }
 }
@@ -4821,21 +4956,7 @@ function rightKey1() {
 
     function rightAns1() {
 
-        if (togSpeech) {
-            if (En) {
-            ambVoice.play();
-            }
-            if (Ger) {
-            gerQ1.play();
-            }
-        }
-
-        if (!togSpeech) {
-            ambVoice.pause();
-            ambVoice.currentTime = 0;
-            gerQ1.pause();
-            gerQ1.currentTime = 0;
-        }
+        wellDone();
 
         translate1();
 
@@ -4843,12 +4964,29 @@ function rightKey1() {
 
         if (En) { 
             ctx.fillText("The sound was an ambulance!", w, 290);
+            if (part2 && togSpeech) {
+                VOuk1.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Ger) { 
             ctx.fillText("Der Sound war ein Krankenwagen!", w, 290);
+            if (part2 && togSpeech) {
+                //VOger1.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Rom) { 
             ctx.fillText("Sunetul a fost o ambulanță!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom1.play();
+                part2 = false;
+                part3 = true;
+            }
         }
 
 
@@ -4868,29 +5006,27 @@ function rightKey1() {
 
     // mouse controls right Answer 2 //
     function rightClick2() {
+
+        rightAnsClear();
+        part1=true;
+
         incor = false;
         cor2 = false;
         MCgameSc2 = false;
-        //finalScreen = true;
         MCgameSc3 = true;
-        cowVoice.pause();
-        cowVoice.currentTime = 0;
-        gerQ2.pause();
-        gerQ2.currentTime = 0;
         removeEventListener("click", rightClick2);
     }
     // End mouse controls right Answer //
 
     function rightKey2() {
         if (keys[32]) { // Go to Q3
+
+            rightAnsClear();
+            part1=true;
+
             incor = false;
             MCgameSc2 = false;
-            //finalScreen = true;
             MCgameSc3 = true;
-            cowVoice.pause();
-            cowVoice.currentTime = 0;
-            gerQ2.pause();
-            gerQ2.currentTime = 0;
             cor2 = false;
             removeEventListener("keydown", rightKey2);
         }
@@ -4898,32 +5034,38 @@ function rightKey1() {
 
     /////////  Right Answer 2 //////////////////
     function rightAns2() {
-        
-        if (togSpeech) {
-            if (En) {
-                cowVoice.play();
-            }
-            if (Ger) {
-                gerQ2.play();
-            }
-        }
-        if (!togSpeech) {
-            cowVoice.pause();
-            cowVoice.currentTime = 0;
-            gerQ2.pause();
-            gerQ2.currentTime = 0;
-        }
 
+        wellDone(); // Voiceover - well done!
+        
         translate1();
         ctx.font = "50px Comic Sans MS";
+     
+
         if (En) { 
             ctx.fillText("The sound was a cow!", w, 290);
+            if (part2 && togSpeech) {
+                VOuk2.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Ger) { 
             ctx.fillText("Das Geräusch war eine Kuh!", w, 290);
+            if (part2 && togSpeech) {
+                VOuk2.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Rom) { 
             ctx.fillText("Sunetul era o vacă!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom2.play();
+                part2 = false;
+                part3 = true;
+            }
         }
         
         ctx.font = "50px Comic Sans MS";
@@ -4943,27 +5085,27 @@ function rightKey1() {
 
        // mouse controls right Answer 3 //
        function rightClick3() {
+
+        rightAnsClear();
+        part1=true;
+
         incor = false;
         cor3 = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
         MCgameSc4 = true;
-        lambVoice.pause();
-        lambVoice.currentTime = 0;
-        gerQ3.pause();
-        gerQ3.currentTime = 0;
         removeEventListener("click", rightClick3);
     }
     // End mouse controls right Answer //
 
     function rightKey3() {
     if (keys[32]) { // Go to Q4
+
+        rightAnsClear();
+        part1=true;
+
         incor = false;
         cor3 = false;
-        lambVoice.pause();
-        lambVoice.currentTime = 0;
-        gerQ3.pause();
-        gerQ3.currentTime = 0;
         MCgameSc3 = false;
         MCgameSc4 = true;
         removeEventListener("keydown", rightKey3);
@@ -4974,33 +5116,38 @@ function rightKey1() {
     function rightAns3() {
 
         
-        if (togSpeech) {
-            if (En) {
-                lambVoice.play();
-            }
-            if (Ger) {
-                gerQ3.play();
-            }
-        }
-        if (!togSpeech) {
-            lambVoice.pause();
-            lambVoice.currentTime = 0;
-            gerQ3.pause();
-            gerQ3.currentTime = 0;
-        }
+        wellDone(); // Voiceover - well done!
 
         translate1();
         ctx.font = "45px Comic Sans MS";
         
         if (En) { 
             ctx.fillText("The sound was a lamb!", w, 290);
+            if (part2 && togSpeech) {
+                VOuk3.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Ger) { 
             ctx.fillText("Der Sound war ein Lamm!", w, 290);
+            if (part2 && togSpeech) {
+                //VOuk3.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Rom) { 
             ctx.fillText("Sunetul era un miel!", w, 290);
+            if (part2 && togSpeech) {
+                //VOuk3.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
@@ -5018,11 +5165,11 @@ function rightKey1() {
 
     // mouse controls right Answer 4 //
     function rightClick4() {
-        telVoice.pause();
+
+        rightAnsClear();
+        part1=true;
+
         cor4 = false;
-        telVoice.currentTime = 0;
-        gerQ4.pause();
-        gerQ4.currentTime = 0;
         incor = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
@@ -5042,6 +5189,10 @@ function rightKey1() {
 
 function rightKey4() {
     if (keys[32]) { // Go to Q5
+
+        rightAnsClear();
+        part1=true;
+
         incor = false;
         if (!togQs1) {
             MCgameSc5 = true;
@@ -5051,10 +5202,6 @@ function rightKey4() {
             finalScreen = true;
         }
         cor4 = false;
-        telVoice.pause();
-        telVoice.currentTime = 0;
-        gerQ4.pause();
-        gerQ4.currentTime = 0;
         MCgameSc4 = false;
         removeEventListener("keydown", rightKey4);
     }
@@ -5063,35 +5210,38 @@ function rightKey4() {
      /////////  Right Answer 4 //////////////////
      function rightAns4() {
         
-        if (togSpeech) {
-            
-            if (En) {
-                telVoice.play();
-            }
-            if (Ger) {
-                gerQ4.play();
-            }
-
-        }
-        if (!togSpeech) {
-            telVoice.pause();
-            telVoice.currentTime = 0;
-            gerQ4.pause();
-            gerQ4.currentTime = 0;
-        }     
+        wellDone();
 
         translate1();
         ctx.font = "39px Comic Sans MS";
         
         if (En) { 
             ctx.fillText("The sound was an old telephone!", w, 290);
+            if (part2 && togSpeech) {
+                VOuk4.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Ger) { 
             ctx.fillText("Der Ton war ein altes Telefon!", w, 290);
+            if (part2 && togSpeech) {
+                //VOger4.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Rom) { 
             ctx.fillText("Sunetul era un telefon vechi!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom4.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         ctx.font = "35px Comic Sans MS";
         rightAnsText();
 
@@ -5108,120 +5258,159 @@ function rightKey4() {
 
     // mouse controls right Answer 5 //
     function rightClick5() {
+
+        rightAnsClear();
+        part1=true;
+
         cor5 = false;
-        fEngVoice.pause();
-        fEngVoice.currentTime = 0;
-        gerQ5.pause();
-        gerQ5.currentTime = 0;
         incor = false;
         MCgameSc2 = false;
         MCgameSc3 = false;
         MCgameSc4 = false;
         MCgameSc5 = false;
-        //finalScreen = true;
         MCgameSc6 = true;
         removeEventListener("click", rightClick5);
     }
     // End mouse controls right Answer //
 
+    // keyboard controls right Answer 5 //
+    function rightKey5() {
+        if (keys[32]) { // Go to Q6
+
+            rightAnsClear();
+            part1=true;
+
+            cor5 = false;
+            incor = false;
+            MCgameSc5 = false;
+            MCgameSc6 = true;      
+            removeEventListener("keydown", rightKey5);
+        }
+    }
+    // End keyboard controls right Answer //
+
     /////////  Right Answer 5 //////////////////
     function rightAns5() {
 
-        if (togSpeech) {
-            
-            if (En) {
-                fEngVoice.play();
-            }
-            if (Ger) {
-                gerQ5.play();
-            }
-        }
-
-        if (!togSpeech) {
-            fEngVoice.pause();
-            fEngVoice.currentTime = 0;
-            gerQ5.pause();
-            gerQ5.currentTime = 0;
-        }
+        wellDone();
 
         translate1();
-        ctx.font = "40px Comic Sans MS";
+        ctx.font = "39px Comic Sans MS";
+
         if (En) { 
             ctx.fillText("The sound was a Fire Engine!", w, 290);
+            if (part2 && togSpeech) {
+                //VOuk5.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Ger) { 
             ctx.fillText("Der Sound war ein Feuerwehrauto!", w, 290);
+            if (part2 && togSpeech) {
+                //VOger5.play();
+                part2 = false;
+                part3 = true;
+            }
         }
+
         if (Rom) { 
             ctx.fillText("Sunetul era o mașină de pompieri!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom5.play();
+                part2 = false;
+                part3 = true;
+            }
         }
         
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
 
-        if (keys[32]) { // Go to Q6
-            cor5 = false;
-            fEngVoice.pause();
-            fEngVoice.currentTime = 0;
-            gerQ5.pause();
-            gerQ5.currentTime = 0;
-            MCgameSc5 = false;
-            MCgameSc6 = true;
-        }
-        addEventListener("click", rightClick5);
+        if (keyboardMode) {
+            addEventListener("keydown", rightKey5);
+            }
+            if (mouseMode) {
+            addEventListener("click", rightClick5);
+            }
+        
     }
+    // End of Right Awnser 6 //
+
 
       // mouse controls right Answer 6 //
       function rightClick6() {
+          
+      rightAnsClear();
+      part1=true;
+
       cor6 = false;
-      microVoice.pause();
-      microVoice.currentTime = 0;
       incor = false;
       MCgameSc6 = false;
-      //finalScreen = true;
       MCgameSc7 = true;
       removeEventListener("click", rightClick6);
     }
 // End mouse controls right Answer //
 
+// keyboard controls right Answer 6 //
+function rightKey6() {
+    if (keys[32]) { // Go to Final Screen
+
+    rightAnsClear();
+    part1=true;
+
+    cor6 = false;
+    incor = false;
+    MCgameSc6 = false;
+    MCgameSc7 = true;
+    removeEventListener("click", rightKey6);
+    }
+  }
+// End mouse controls right Answer //
+
     /////////  Right Answer 6 //////////////////
     function rightAns6() {
         
-        if (togSpeech) {
-            microVoice.play();
-        }
+        wellDone();
 
-        if (!togSpeech) {
-            microVoice.pause();
-            microVoice.currentTime = 0;
-        }
-
-        translate1();
-        
+        translate1();   
         ctx.font = "40px Comic Sans MS";
+
         if (En) { 
             ctx.fillText("The sound was a Microwave!", w, 290);
+            if (part2 && togSpeech) {
+                //VOuk6.play();
+                part2 = false;
+                part3 = true;
+            }
         }
         if (Ger) { 
             ctx.fillText("Der Ton war eine Mikrowelle!", w, 290);
+            if (part2 && togSpeech) {
+                //VOger6.play();
+                part2 = false;
+                part3 = true;
+            }
         }
         if (Rom) { 
             ctx.fillText("Sunetul era un cuptor cu microunde!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom6.play();
+                part2 = false;
+                part3 = true;
+            }
         }
 
         ctx.font = "40px Comic Sans MS";
         rightAnsText();
 
-        if (keys[32]) { // Go to Final Screen
-            microVoice.pause();
-            microVoice.currentTime = 0;
-            cor6 = false;
-            MCgameSc6 = false;
-            MCgameSc7 = true;
-            //finalScreen = true;
-        }
-
-        addEventListener("click", rightClick6);
+        
+        if (keyboardMode) {
+            addEventListener("keydown", rightKey6);
+            }
+            if (mouseMode) {
+            addEventListener("click", rightClick6);
+            }
     }
 
 
