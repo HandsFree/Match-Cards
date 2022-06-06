@@ -460,6 +460,33 @@ var  VOuk10 = new Audio("sounds/en/VOuk10.mp3");
 var  VOuk11 = new Audio("sounds/en/VOuk11.mp3");
 var  VOuk12 = new Audio("sounds/en/VOuk12.mp3");
 
+// ger voiceovers
+var  VOger1 = new Audio("sounds/ger/VOger1.mp3");
+var  VOger2 = new Audio("sounds/ger/VOger2.mp3");
+var  VOger3 = new Audio("sounds/ger/VOger3.mp3");
+var  VOger4 = new Audio("sounds/ger/VOger4.mp3");
+var  VOger5 = new Audio("sounds/ger/VOger5.mp3");
+var  VOger6 = new Audio("sounds/ger/VOger6.mp3");
+var  VOger7 = new Audio("sounds/ger/VOger7.mp3");
+var  VOger8 = new Audio("sounds/ger/VOger8.mp3");
+var  VOger9 = new Audio("sounds/ger/VOger9.mp3");
+var  VOger10 = new Audio("sounds/ger/VOger10.mp3");
+var  VOger11 = new Audio("sounds/ger/VOger11.mp3");
+var  VOger12 = new Audio("sounds/ger/VOger12.mp3");
+
+// rom
+var  VOrom1 = new Audio("sounds/rom/VOrom1.mp3");
+var  VOrom2 = new Audio("sounds/rom/VOrom2.mp3");
+var  VOrom3 = new Audio("sounds/rom/VOrom3.mp3");
+var  VOrom4 = new Audio("sounds/rom/VOrom4.mp3");
+var  VOrom5 = new Audio("sounds/rom/VOrom5.mp3");
+var  VOrom6 = new Audio("sounds/rom/VOrom6.mp3");
+/*var  VOrom7 = new Audio("sounds/rom/VOrom7.mp3");
+var  VOrom8 = new Audio("sounds/rom/VOrom8.mp3");
+var  VOrom9 = new Audio("sounds/rom/VOrom9.mp3");
+var  VOrom10 = new Audio("sounds/rom/VOrom10.mp3");
+var  VOrom11 = new Audio("sounds/rom/VOrom11.mp3");
+var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");*/
 
 // mouse
 var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
@@ -519,11 +546,6 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 // German
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
 var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
-var gerQ1 = new Audio("sounds/ger/Ger-Question1-ans.mp3");
-var gerQ2 = new Audio("sounds/ger/ger-Q2.mp3");
-var gerQ3 = new Audio("sounds/ger/ger-Q3.mp3");
-var gerQ4 = new Audio("sounds/ger/ger-Q4.mp3");
-var gerQ5 = new Audio("sounds/ger/ger-Q5.mp3");
 
 function locked() {
     incor = false;
@@ -569,6 +591,60 @@ function rightAnsClear() {
     VOuk12.pause();
     VOuk12.currentTime = 0;
     // end of UK voice overs //
+
+    // ger
+    VOger1.pause();
+    VOger1.currentTime = 0;
+    VOger2.pause();
+    VOger2.currentTime = 0;
+    VOger3.pause();
+    VOger3.currentTime = 0;
+    VOger4.pause();
+    VOger4.currentTime = 0;
+    VOger5.pause();
+    VOger5.currentTime = 0;
+    VOger6.pause();
+    VOger6.currentTime = 0;
+    VOger7.pause();
+    VOger7.currentTime = 0;
+    VOger8.pause();
+    VOger8.currentTime = 0;
+    VOger9.pause();
+    VOger9.currentTime = 0;
+    VOger10.pause();
+    VOger10.currentTime = 0;
+    VOger11.pause();
+    VOger11.currentTime = 0;
+    VOger12.pause();
+    VOger12.currentTime = 0;
+    // end of German voice overs //
+
+    // rom
+    VOrom1.pause();
+    VOrom1.currentTime = 0;
+    VOrom2.pause();
+    VOrom2.currentTime = 0;
+    VOrom3.pause();
+    VOrom3.currentTime = 0;
+    VOrom4.pause();
+    VOrom4.currentTime = 0;
+    VOrom5.pause();
+    VOrom5.currentTime = 0;
+    VOrom6.pause();
+    VOrom6.currentTime = 0;
+    /*VOrom7.pause();
+    VOrom7.currentTime = 0;
+    VOrom8.pause();
+    VOrom8.currentTime = 0;
+    VOrom9.pause();
+    VOrom9.currentTime = 0;
+    VOrom10.pause();
+    VOrom10.currentTime = 0;
+    VOrom11.pause();
+    VOrom11.currentTime = 0;
+    VOrom12.pause();
+    VOrom12.currentTime = 0;*/
+    // end of Romanian voice overs //
 
     // click and keyboard next question //
     mseUK.pause();
@@ -4996,7 +5072,7 @@ function rightKey1() {
         if (Ger) { 
             ctx.fillText("Der Sound war ein Krankenwagen!", w, 290);
             if (part2 && togSpeech) {
-                //VOger1.play();
+                VOger1.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5005,7 +5081,7 @@ function rightKey1() {
         if (Rom) { 
             ctx.fillText("Sunetul a fost o ambulanță!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom1.play();
+                VOrom1.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5075,7 +5151,7 @@ function rightKey1() {
         if (Ger) { 
             ctx.fillText("Das Geräusch war eine Kuh!", w, 290);
             if (part2 && togSpeech) {
-                VOuk2.play();
+                VOger2.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5084,7 +5160,7 @@ function rightKey1() {
         if (Rom) { 
             ctx.fillText("Sunetul era o vacă!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom2.play();
+                VOrom2.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5155,7 +5231,7 @@ function rightKey1() {
         if (Ger) { 
             ctx.fillText("Der Sound war ein Lamm!", w, 290);
             if (part2 && togSpeech) {
-                //VOuk3.play();
+                VOger3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5164,7 +5240,7 @@ function rightKey1() {
         if (Rom) { 
             ctx.fillText("Sunetul era un miel!", w, 290);
             if (part2 && togSpeech) {
-                //VOuk3.play();
+                VOrom3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5249,7 +5325,7 @@ function rightKey4() {
         if (Ger) { 
             ctx.fillText("Der Ton war ein altes Telefon!", w, 290);
             if (part2 && togSpeech) {
-                //VOger4.play();
+                VOger4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5258,7 +5334,7 @@ function rightKey4() {
         if (Rom) { 
             ctx.fillText("Sunetul era un telefon vechi!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom4.play();
+                VOrom4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5331,7 +5407,7 @@ function rightKey4() {
         if (Ger) { 
             ctx.fillText("Der Sound war ein Feuerwehrauto!", w, 290);
             if (part2 && togSpeech) {
-                //VOger5.play();
+                VOger5.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5340,7 +5416,7 @@ function rightKey4() {
         if (Rom) { 
             ctx.fillText("Sunetul era o mașină de pompieri!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom5.play();
+                VOrom5.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5410,7 +5486,7 @@ function rightKey6() {
         if (Ger) { 
             ctx.fillText("Der Ton war eine Mikrowelle!", w, 290);
             if (part2 && togSpeech) {
-                //VOger6.play();
+                VOger6.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5419,7 +5495,7 @@ function rightKey6() {
         if (Rom) { 
             ctx.fillText("Sunetul era un cuptor cu microunde!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom6.play();
+                VOrom6.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5491,7 +5567,7 @@ function rightKey6() {
         if (Ger) { 
             ctx.fillText("Der Ton war eine Türklingel!", w, 290);
             if (part2 && togSpeech) {
-                //VOger7.play();
+                VOger7.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5587,7 +5663,7 @@ function rightKey6() {
         if (Ger) { 
             ctx.fillText("Das Geräusch war ein Polacanthus-Dinosaurier", w, 290);
             if (part2 && togSpeech) {
-                //VOger8.play();
+                VOger8.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5668,7 +5744,7 @@ function rightKey9() {
         if (Ger) { 
             ctx.fillText("Der Sound war eine Taube!", w, 290);
             if (part2 && togSpeech) {
-                //VOger9.play();
+                VOger9.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5749,7 +5825,7 @@ function rightKey10() {
         if (Ger) { 
             ctx.fillText("Der Sound war ein Rugbyspiel", w, 290);
             if (part2 && togSpeech) {
-                //VOger10.play();
+                VOger10.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5830,7 +5906,7 @@ function rightKey11() {
         if (Ger) { 
             ctx.fillText("Das Geräusch war ein Collie-Hund!", w, 290);
             if (part2 && togSpeech) {
-                //VOger11.play();
+                VOger11.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5938,7 +6014,7 @@ function rightKey12() {
         if (Ger) { 
             ctx.fillText("Der Sound war eine Straßenbahn!", w, 290);
             if (part2 && togSpeech) {
-                //VOger12.play();
+                VOger12.play();
                 part2 = false;
                 part3 = true;
             }
