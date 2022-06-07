@@ -481,12 +481,12 @@ var  VOrom3 = new Audio("sounds/rom/VOrom3.mp3");
 var  VOrom4 = new Audio("sounds/rom/VOrom4.mp3");
 var  VOrom5 = new Audio("sounds/rom/VOrom5.mp3");
 var  VOrom6 = new Audio("sounds/rom/VOrom6.mp3");
-/*var  VOrom7 = new Audio("sounds/rom/VOrom7.mp3");
+var  VOrom7 = new Audio("sounds/rom/VOrom7.mp3");
 var  VOrom8 = new Audio("sounds/rom/VOrom8.mp3");
 var  VOrom9 = new Audio("sounds/rom/VOrom9.mp3");
 var  VOrom10 = new Audio("sounds/rom/VOrom10.mp3");
 var  VOrom11 = new Audio("sounds/rom/VOrom11.mp3");
-var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");*/
+var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");
 
 // mouse
 var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
@@ -546,6 +546,10 @@ var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 // German
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
 var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
+
+// Romanian
+var romInstructions = new Audio("sounds/rom/instructions-rom.mp3");
+var romWrong = new Audio("sounds/rom/rom-wrong.mp3");
 
 function locked() {
     incor = false;
@@ -632,7 +636,7 @@ function rightAnsClear() {
     VOrom5.currentTime = 0;
     VOrom6.pause();
     VOrom6.currentTime = 0;
-    /*VOrom7.pause();
+    VOrom7.pause();
     VOrom7.currentTime = 0;
     VOrom8.pause();
     VOrom8.currentTime = 0;
@@ -643,7 +647,7 @@ function rightAnsClear() {
     VOrom11.pause();
     VOrom11.currentTime = 0;
     VOrom12.pause();
-    VOrom12.currentTime = 0;*/
+    VOrom12.currentTime = 0;
     // end of Romanian voice overs //
 
     // click and keyboard next question //
@@ -2339,6 +2343,10 @@ function closeSplash1(e) {
            gerInstructions.pause();
            gerInstructions.currentTime = 0;
 
+           // Romanian
+           romInstructions.pause();
+           romInstructions.currentTime = 0;
+
            locked();
            incor=false;
            setMenu=true;
@@ -2362,6 +2370,10 @@ function gameStart(e) {
             // German
             gerInstructions.pause();
             gerInstructions.currentTime = 0;
+
+            // Romanian
+            romInstructions.pause();
+            romInstructions.currentTime = 0;
 
 
 
@@ -2404,10 +2416,13 @@ function gameInstructions() {
         if (soundInstructions) {
 
         if (En) {
-        gameInsSpeech.play();
+            gameInsSpeech.play();
         }
         if (Ger) {
-        gerInstructions.play();
+            gerInstructions.play();
+        }
+        if (Rom) {
+            romInstructions.play();
         }
 
         } // soundInstructions = true
@@ -2420,6 +2435,8 @@ function gameInstructions() {
         gameInsSpeech.currentTime = 0;
         gerInstructions.pause();
         gerInstructions.currentTime = 0;
+        romInstructions.pause();
+        romInstructions.currentTime = 0;
 
     }
         
@@ -5576,7 +5593,7 @@ function rightKey6() {
         if (Rom) { 
             ctx.fillText("Sunetul a fost un clopoțel!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom7.play();
+                VOrom7.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5672,7 +5689,7 @@ function rightKey6() {
         if (Rom) { 
             ctx.fillText("Sunetul era un dinozaur Polacanthus", w, 290);
             if (part2 && togSpeech) {
-                //VOrom8.play();
+                VOrom8.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5753,7 +5770,7 @@ function rightKey9() {
         if (Rom) { 
             ctx.fillText("Sunetul era un porumbel!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom9.play();
+                VOrom9.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5834,7 +5851,7 @@ function rightKey10() {
         if (Rom) { 
             ctx.fillText("Sunetul era un joc de rugby", w, 290);
             if (part2 && togSpeech) {
-                //VOrom10.play();
+                VOrom10.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5915,7 +5932,7 @@ function rightKey11() {
         if (Rom) { 
             ctx.fillText("Sunetul era un Collie Dog!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom11.play();
+                VOrom11.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6023,7 +6040,7 @@ function rightKey12() {
         if (Rom) { 
             ctx.fillText("Sunetul era un tramvai!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom12.play();
+                VOrom12.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6053,6 +6070,8 @@ function rightKey12() {
         sEff = true;
         gerWrong.pause();
         gerWrong.currentTime = 0;
+        romWrong.pause();
+        romWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         locked();
@@ -6065,6 +6084,8 @@ function keyWrong() {
     if (keys[32]) { // Go to return to game
         gerWrong.pause();
         gerWrong.currentTime = 0;
+        romWrong.pause();
+        romWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
         sEff = true;
@@ -6082,21 +6103,28 @@ function keyWrong() {
 
         if (togSpeech) {
             if (En) {
-            wrongVoice.play();
+                wrongVoice.play();
             }
             if (Ger) {
-            gerWrong.play();
+                gerWrong.play();
+            }
+            if (Rom) {
+                romWrong.play();
             }
         }
     
         if (!togSpeech) {
             if (En) {
-            wrongVoice.pause();
-            wrongVoice.currentTime = 0;
+                wrongVoice.pause();
+                wrongVoice.currentTime = 0;
             }
             if (Ger) {
-            gerWrong.pause();
-            gerWrong.currentTime = 0;
+                gerWrong.pause();
+                gerWrong.currentTime = 0;
+            }
+            if (Rom) {
+                romWrong.pause();
+                romWrong.currentTime = 0;
             }
         }
 
