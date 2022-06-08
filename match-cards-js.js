@@ -572,6 +572,15 @@ function locked() {
 
 
 function rightAnsClear() {
+
+    // well done!
+    wdEn.pause();
+    wdEn.currentTime = 0;
+    wdGer.pause();
+    wdGer.currentTime = 0;
+    wdRom.pause();
+    wdRom.currentTime = 0;
+
     // uk
     VOuk1.pause();
     VOuk1.currentTime = 0;
@@ -6681,30 +6690,73 @@ function playGame() {
             ctx.fillStyle = "white";
         }
 
+        SplashScreenOn = true;
+        
+        if (En) {
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         if (togSpeech) {
             wellDoneVoice.play();
         }
-        
-        if (!togSpeech) {
-            wellDoneVoice.pause();
-            wellDoneVoice.currentTime = 0;
-        }
-
-        SplashScreenOn = true;
-        
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "blue";
         ctx.textAlign = "center"; 
         ctx.font = "90px Comic Sans MS";
-        ctx.fillText("Well Done", w, 200);
+        ctx.fillText("Well Done!", w, 200);
         ctx.font = "70px Comic Sans MS";
         ctx.fillText("for completing the", w, 300);
         ctx.fillText("Match Cards!", w, 400);
         ctx.font = "50px Comic Sans MS";
-        ctx.fillText("Left click on your mouse, OR", w, 500);
-        ctx.fillText("Press the Enter Key", w, 560);
-        //ctx.fillText("Press the Spacebar", w, 560);
-        ctx.fillText("To play again!", w, 620);
+        if (mouseMode) {
+        ctx.fillText("Left click on your mouse", w, 500);
+        }
+        if (keyboardMode) {
+        ctx.fillText("Press the Enter Key", w, 500);
+        }
+        ctx.fillText("To play again!", w, 580);
+        }
+
+        if (Ger) {
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            /*if (togSpeech) {
+                wellDoneVoiceGer.play();
+            }*/
+            ctx.fillStyle = "blue";
+            ctx.textAlign = "center"; 
+            ctx.font = "90px Comic Sans MS";
+            ctx.fillText("Gut erledigt!", w, 200);
+            ctx.font = "70px Comic Sans MS";
+            ctx.fillText("zum Abschluss der", w, 300);
+            ctx.fillText("Spielkarten!", w, 400);
+            ctx.font = "35px Comic Sans MS";
+            if (mouseMode) {
+                ctx.fillText("Klicken Sie mit der linken Maustaste", w, 500);
+                }
+                if (keyboardMode) {
+                ctx.fillText("Drücken Sie die Eingabetaste", w, 500);
+                }
+                ctx.fillText("Wieder zu spielen!", w, 580);
+            }
+
+        if (Rom) {
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            /*if (togSpeech) {
+                wellDoneVoiceRom.play();
+            }*/
+            ctx.fillStyle = "blue";
+            ctx.textAlign = "center"; 
+            ctx.font = "90px Comic Sans MS";
+            ctx.fillText("Bine făcut!", w, 200);
+            ctx.font = "70px Comic Sans MS";
+            ctx.fillText("pentru completarea", w, 300);
+            ctx.fillText("Cărți de meci!", w, 400);
+            ctx.font = "35px Comic Sans MS";
+            if (mouseMode) {
+                ctx.fillText("Faceți clic stânga pe mouse", w, 500);
+                }
+                if (keyboardMode) {
+                ctx.fillText("Apăsați tasta Enter", w, 500);
+                }
+                ctx.fillText("Pentru a juca din nou!", w, 580);
+            }
 
         KeyboardGame = false;
         n = 1;
