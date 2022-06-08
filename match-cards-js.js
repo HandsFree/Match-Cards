@@ -289,6 +289,9 @@ const settings = new Image();
 settings.src = "images/settings.png";
 
 
+// SettingsPic1
+const settingsPic1 = new Image();
+settingsPic1.src = "images/menuAssets/settingsPic1.png";
 
 // Settings Menu
 const mBack = new Image();
@@ -1357,11 +1360,27 @@ function showMenu() {
     }
 }
     
-    ctx.fillStyle = "black";
+    
     ctx.globalAlpha = 1.0;
 
-    ctx.drawImage(mus, 62, 130, 250, 50);
- 
+    ctx.drawImage(settingsPic1, 62, 130, 250, 50);
+
+    ctx.fillStyle = "white";
+    ctx.font = "700 21px Arial"; 
+    
+    if (En) {
+        ctx.fillText("Music", 149, 162);
+    }
+
+    if (Ger) {
+        ctx.fillText("Musik", 149, 162);
+    }
+
+    if (Rom) {
+        ctx.fillText("Muzică", 149, 162);
+    }
+    
+    ctx.fillStyle = "black";
     ctx.font = "700 30px Arial";
 
     ctx.drawImage(BoxMus1, 62, 190, 50, 50);
@@ -1423,8 +1442,30 @@ function showMenu() {
 
     // Toggle Background
   
-    //if (BackCl) {
-    ctx.drawImage(background, 410, 130, 250, 50);
+
+
+    ctx.drawImage(settingsPic1, 410, 130, 250, 50);
+
+    ctx.fillStyle = "white";
+    ctx.font = "700 21px Arial"; 
+    
+    if (En) {
+        ctx.fillText("Background", 474, 162);
+    }
+
+    if (Ger) {
+        ctx.fillText("Hintergrund", 475, 162);
+    }
+
+    if (Rom) {
+        ctx.fillText("fundal", 500, 162);
+    }
+
+
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Arial";
+
+
 
     if (KeyboardMenu) {
     if (KeyMenu3) {
@@ -1498,14 +1539,31 @@ function showMenu() {
     canvas.addEventListener("click", BacktickT);
     canvas.addEventListener("click", BacktickF);
 
-
-//} // backcl
-
     // End of Background
 
 
     // Toggle Speech
-    ctx.drawImage(speechEff, 62, 310, 250, 50);
+
+    ctx.drawImage(settingsPic1, 62, 310, 250, 50);
+
+    ctx.fillStyle = "white";
+    ctx.font = "700 21px Arial"; 
+    
+    if (En) {
+        ctx.fillText("Speech", 150, 342);
+    }
+
+    if (Ger) {
+        ctx.fillText("Rede", 154, 342);
+    }
+
+    if (Rom) {
+        ctx.fillText("Vorbire", 150, 342);
+    }
+
+
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Arial";
 
     if (KeyboardMenu) {
         if (KeyMenu5) {
@@ -1576,7 +1634,26 @@ function showMenu() {
 
 
     // Toggle Number of Questions
-    ctx.drawImage(noQs, 410, 310, 250, 50);
+    //ctx.drawImage(noQs, 410, 310, 250, 50);
+    ctx.drawImage(settingsPic1, 410, 310, 250, 50);
+
+    ctx.fillStyle = "white";
+    ctx.font = "700 21px Arial"; 
+    
+    if (En) {
+        ctx.fillText("Number of Questions", 427, 342);
+    }
+
+    if (Ger) {
+        ctx.fillText("Anzahl der Fragen", 442, 342);
+    }
+
+    if (Rom) {
+        ctx.fillText("Numărul de întrebări", 430, 342);
+    }
+    
+    ctx.fillStyle = "black";
+    ctx.font = "700 30px Arial";
 
     // Q4
     ctx.drawImage(BoxQ41, 420, 370, 60, 60);
