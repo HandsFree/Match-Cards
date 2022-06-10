@@ -49,6 +49,9 @@ var splashSettings = true;
 var En = true;
 var Ger = false;
 var Rom = false;
+var Bul = false;
+var Grk = false;
+var Tuk = false;
 /////////////////////////////////
 
 
@@ -366,6 +369,9 @@ langG.src = "images/menuAssets/langG.png";
 
 const langR = new Image();
 langR.src = "images/menuAssets/langR.png";
+
+const langBul = new Image();
+langBul.src = "images/menuAssets/langBul.png";
 
 
 // Close Menu
@@ -986,6 +992,10 @@ function Question() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("Cărți de meci", w, 77);
     }
+    if (Bul) {
+        ctx.font = "60px Comic Sans MS";
+        ctx.fillText("Карти за мачове", w, 77);
+    }
 
     ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "red";
@@ -998,6 +1008,9 @@ function Question() {
     }
     if (Rom) {
         ctx.fillText("Întrebare " + n, w, 125);
+    }
+    if (Bul) {
+        ctx.fillText("Въпрос " + n, w, 125);
     }
 }
 
@@ -1218,6 +1231,7 @@ function engLang(e) {
            En = true;
            Ger = false;
            Rom = false;
+           Bul = false;
            canvas.removeEventListener("click", engLang);
         }
     } 
@@ -1229,6 +1243,7 @@ function gerLang(e) {
            En = false;
            Ger = true;
            Rom = false;
+           Bul = false;
            canvas.removeEventListener("click", gerLang);
         }
     } 
@@ -1246,10 +1261,26 @@ function romLang(e) {
            En = false;
            Ger = false;
            Rom = true;
+           Bul = false;
            canvas.removeEventListener("click", romLang);
         }
     } 
 }
+
+
+
+function bulLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langBul.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = true;
+           canvas.removeEventListener("click", bulLang);
+        }
+    } 
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -1355,6 +1386,9 @@ function showMenu() {
     if (Rom) {
         ctx.fillText("Setări", w, 100);
     }
+    if (Bul) {
+        ctx.fillText("Настройки", w, 100);
+    }
 
     ctx.textAlign = "left";
 
@@ -1387,6 +1421,10 @@ function showMenu() {
 
     if (Rom) {
         ctx.fillText("Muzică", 149, 162);
+    }
+
+    if (Bul) {
+        ctx.fillText("Музика", 149, 162);
     }
     
     ctx.fillStyle = "black";
@@ -1421,6 +1459,9 @@ function showMenu() {
     if (Rom) {
         ctx.fillText("Pe", 120, 230);
     }
+    if (Bul) {
+        ctx.fillText("Ha", 120, 230);
+    }
 
     ctx.drawImage(BoxMus2, 62, 245, 50, 50);
     BoxMus2.path = new Path2D();
@@ -1440,6 +1481,9 @@ function showMenu() {
     }
     if (Rom) {
         ctx.fillText("Oprit", 120, 282);
+    }
+    if (Bul) {
+        ctx.fillText("Изключено", 120, 282);
     }
 
 
@@ -1468,6 +1512,9 @@ function showMenu() {
 
     if (Rom) {
         ctx.fillText("fundal", 500, 162);
+    } 
+    if (Bul) {
+        ctx.fillText("Заден план", 500, 162);
     }
 
 
@@ -1508,11 +1555,6 @@ function showMenu() {
     }
 
 
-
-
-
-    
-
     if (En) {
         ctx.fillText("Colourful", 470, 230);
     }
@@ -1521,6 +1563,9 @@ function showMenu() {
     }
     if (Rom) {
         ctx.fillText("Colorat", 470, 230);
+    }
+    if (Bul) {
+        ctx.fillText("Цветен", 470, 230);
     }
 
     ctx.drawImage(BoxBack2, 410, 245, 50, 50);
@@ -1543,7 +1588,9 @@ function showMenu() {
     if (Rom) {
         ctx.fillText("alb", 470, 282);
     }
-    
+    if (Bul) {
+        ctx.fillText("Бяла", 470, 282);
+    }
 
     canvas.addEventListener("click", BacktickT);
     canvas.addEventListener("click", BacktickF);
@@ -1568,6 +1615,9 @@ function showMenu() {
 
     if (Rom) {
         ctx.fillText("Vorbire", 150, 342);
+    }
+    if (Bul) {
+        ctx.fillText("Реч", 150, 342);
     }
 
 
@@ -1605,6 +1655,9 @@ function showMenu() {
     if (Rom) {
         ctx.fillText("Pe", 120, 407);
     }
+    if (Bul) {
+        ctx.fillText("Ha", 120, 407);
+    }
 
     if (KeyboardMenu) {
         if (KeyMenu6) {
@@ -1635,6 +1688,9 @@ function showMenu() {
     if (Rom) {
         ctx.fillText("Oprit", 120, 462);
     }
+    if (Bul) {
+        ctx.fillText("Изключено", 120, 462);
+    }
 
     canvas.addEventListener("click", SptickT);
     canvas.addEventListener("click", SptickF);
@@ -1659,6 +1715,10 @@ function showMenu() {
 
     if (Rom) {
         ctx.fillText("Numărul de întrebări", 430, 342);
+    }
+
+    if (Bul) {
+        ctx.fillText("Брой въпроси", 430, 342);
     }
     
     ctx.fillStyle = "black";
@@ -1823,59 +1883,80 @@ function showMenu() {
         ctx.fillText("rumänisch", 567, 555);
     }
 
+    if (Bul) {
+        ctx.fillText("език", 567, 530);
+        ctx.fillText("български", 567, 555);
+    }
+
     le.path = new Path2D();
     le.path.rect(470, 485, 200, 100);
 
     } // langaugeMenuSettings = false
 
     if (langaugeMenuSettings) {
-        ctx.drawImage(lang, 40, 500, 645, 180);
+
+
+        ctx.drawImage(lang, 80, 480, 560, 230);
+
+
+
         ctx.textAlign = "center";
         ctx.fillStyle = "black";
-        ctx.font = "900 28px Comic Sans MS";
+        ctx.font = "900 24px Comic Sans MS";
 
-        ctx.fillText("English", 100, 550);
-        ctx.drawImage(langE, 80, 560, 40, 40);
+        ctx.fillText("English", 200, 525);
+        ctx.drawImage(langE, 180, 535, 40, 40);
         langE.path = new Path2D();
-        langE.path.rect(80, 560, 40, 40);
+        langE.path.rect(180, 535, 40, 40);
         if (En) {
-            ctx.drawImage(rTick1, 80, 560, 40, 40);
+            ctx.drawImage(rTick1, 180, 535, 40, 40);
         }
 
-        ctx.fillText("German", 220, 550);
-        ctx.drawImage(langG, 200, 560, 40, 40);
+        ctx.fillText("German", 344, 525);
+        ctx.drawImage(langG, 330, 535, 40, 40);
         langG.path = new Path2D();
-        langG.path.rect(200, 560, 40, 40);
+        langG.path.rect(330, 535, 40, 40);
         if (Ger) {
-            ctx.drawImage(rTick1, 200, 560, 40, 40);
+            ctx.drawImage(rTick1, 330, 535, 40, 40);
         }
 
-        ctx.fillText("Romanian", 355, 550);
-        ctx.drawImage(langR, 340, 560, 40, 40);
+        ctx.fillText("Romanian", 500, 525);
+        ctx.drawImage(langR, 480, 535, 40, 40);
         langR.path = new Path2D();
-        langR.path.rect(340, 560, 40, 40);
+        langR.path.rect(480, 535, 40, 40);
         if (Rom) {
-            ctx.drawImage(rTick1, 340, 560, 40, 40);
+            ctx.drawImage(rTick1, 480, 535, 40, 40);
         }
 
-        ctx.fillText("Bulgarian", 500, 550);
-        ctx.drawImage(langE, 480, 560, 40, 40);
-        ctx.fillText("Greek", 630, 550);
-        ctx.drawImage(langE, 610, 560, 40, 40);
+        ctx.fillText("Bulgarian", 200, 600);
+        ctx.drawImage(langBul, 180, 607, 40, 40);
+        langBul.path = new Path2D();
+        langBul.path.rect(180, 607, 40, 40);
+        if (Bul) {
+            ctx.drawImage(rTick1, 180, 607, 40, 40);
+        }
+
+        ctx.fillText("Greek", 346, 600);
+        ctx.drawImage(langE, 330, 607, 40, 40);
+
+        ctx.fillText("Turkish", 500, 600);
+        ctx.drawImage(langE, 480, 607, 40, 40);
 
 
 
         canvas.addEventListener("click", engLang);
         canvas.addEventListener("click", gerLang);
         canvas.addEventListener("click", romLang);
+        canvas.addEventListener("click", bulLang);
 
 
 
 
 
-        ctx.drawImage(crossLang, w-19, 616, 45, 45);
+
+        ctx.drawImage(crossLang, w-27, 658, 40, 40);
         crossLang.path = new Path2D();
-        crossLang.path.rect(w-19, 616, 45, 45);
+        crossLang.path.rect(w-27, 658, 40, 40);
 
         canvas.addEventListener("click", endMenuLang);
     }
@@ -2228,6 +2309,9 @@ function translate1() {
     if (Rom) {
         ctx.fillText("Foarte bine!", w, 180);
     }
+    if (Bul) {
+        ctx.fillText("Много добре!", w, 180);
+    }
 
 }
 
@@ -2310,6 +2394,9 @@ function splash() {
     if (Rom) {
         ctx.fillText("Click aici!", w, 473);
     }
+    if (Bul) {
+        ctx.fillText("Натисни тук!", w, 473);
+    }
     
 
 
@@ -2350,6 +2437,9 @@ function splash() {
     }
     if (Rom) {
         ctx.fillText("Click aici!", w, 473);
+    }
+    if (Bul) {
+        ctx.fillText("Натисни тук!", w, 473);
     }
         
         ctx.font = "30px Comic Sans MS";
@@ -2544,6 +2634,10 @@ function gameInstructions() {
             ctx.font = "90px Comic Sans MS";
             ctx.fillText("Cărți de meci", w, 140);
         }
+        if (Bul) {
+            ctx.font = "80px Comic Sans MS";
+            ctx.fillText("Карти за мачове", w, 140);
+        }
 
         ctx.fillStyle = "Blue";
         ctx.font = "600 65px Comic Sans MS";
@@ -2558,6 +2652,9 @@ function gameInstructions() {
         if (Rom) {
         ctx.fillText("Potriviți sunetul", w, 240);
         }
+        if (Bul) {
+            ctx.fillText("Съпоставете звука", w, 240);
+        }
 
         if (En) {
         ctx.fillText("to the picture!", w, 300);
@@ -2567,6 +2664,9 @@ function gameInstructions() {
         }
         if (Rom) {
             ctx.fillText("la poza!", w, 300);
+        }
+        if (Bul) {
+            ctx.fillText("към снимката!", w, 300);
         }
 
         ctx.font = "30px Comic Sans MS";
@@ -2595,6 +2695,10 @@ function gameInstructions() {
                 ctx.fillText("Folosind mouse-ul pentru a", w, 380);
                 ctx.fillText("Click stânga pe imagine", w, 440);
             }
+            if (Bul) {
+                ctx.fillText("С помощта на мишката за", w, 380);
+                ctx.fillText("Щракнете с левия бутон върху снимката", w, 440);
+            }
         }
 
         ctx.font = "30px Comic Sans MS";
@@ -2618,6 +2722,9 @@ function gameInstructions() {
         }
         if (Rom) {
             ctx.fillText("Să mergem!", w, 550);
+        }
+        if (Bul) {
+            ctx.fillText("Да тръгваме!", w, 550);
         }
 
         ctx.drawImage(cross1, w-30, 600, 50, 50);
@@ -2770,6 +2877,9 @@ function instructions() {
         if (Rom) {
         ctx.fillText("Potriviți sunetul cu imaginea", w, 615);
         }
+        if (Bul) {
+            ctx.fillText("Съпоставете звука с картината", w, 615);
+            }
 
     }
 
@@ -2785,12 +2895,33 @@ function instructions() {
     if (Rom) {
         ctx.fillText("Potriviți sunetul cu imaginea", w, 630);
     }
+    if (Bul) {
+        ctx.fillText("Съпоставете звука с картината", w, 615);
+    }
 }
 
     if (KeyboardGame) {
+     
+    
     ctx.fillStyle = "blue";
     ctx.font = "22px Comic Sans MS";
+
+    if (En) {  
 	ctx.fillText("using the SPACEBAR to tab between pictures", w, 645);
+    }
+
+    if (Ger) {  
+        ctx.fillText("Verwenden Sie die LEERTASTE, um zwischen den Bildern zu wechseln", w, 645);
+    }
+
+    if (Rom) {  
+        ctx.fillText("folosind BARA DE SPAȚIU pentru a tasta între imagini", w, 645);
+    }
+
+    if (Bul) {  
+        ctx.fillText("с помощта на ИНТЕРВАЛ за раздел между снимките", w, 645);
+    }
+
     ctx.fillStyle = "red";
     ctx.fillText("and then", w, 671);
     ctx.fillStyle = "blue";
