@@ -2334,8 +2334,8 @@ function wellDone() {
         part1 = false;
         part2 = true;
     }
-    /*if () {
-        wdEn.play();
+    /*if (Bul) {
+        //wdEn.play();
         part1 = false;
         part2 = true;
     }
@@ -2896,7 +2896,7 @@ function instructions() {
         ctx.fillText("Potriviți sunetul cu imaginea", w, 630);
     }
     if (Bul) {
-        ctx.fillText("Съпоставете звука с картината", w, 615);
+        ctx.fillText("Съпоставете звука с картината", w, 630);
     }
 }
 
@@ -2943,6 +2943,10 @@ function instructions() {
     if (Rom) {
         ctx.fillText("Click stânga pe imagine", w, 680);
     }
+    if (Bul) {
+        ctx.fillText("Щракнете с левия бутон върху снимката", w, 670);
+    }
+
     }
 }
 
@@ -3026,6 +3030,14 @@ function rightAnsText() {
          }
     }
 
+    if (Bul) {
+        ctx.fillText("Щракнете с левия бутон върху мишката", w, 400);
+        if (part3 && togSpeech) {
+            mseROM.play();
+            part3 = false;
+         }
+    }
+
     }
 
     if (keyboardMode) {
@@ -3054,6 +3066,14 @@ function rightAnsText() {
          }
      }
 
+     if (Bul) {  
+        ctx.fillText("Натиснете интервала", w, 400);
+        if (part3 && togSpeech) {
+            keyROM.play();
+            part3 = false;
+         }
+     }
+
     }
 
     if (En) {
@@ -3067,6 +3087,10 @@ function rightAnsText() {
      if (Rom) {
          ctx.fillText("pentru următoarea întrebare!", w, 450);
      }
+     
+     if (Bul) {
+        ctx.fillText("за следващия въпрос!", w, 450);
+    }
     
 }
 
@@ -5321,6 +5345,15 @@ function rightKey1() {
             }
         }
 
+        if (Bul) { 
+            ctx.fillText("Звукът беше линейка!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom1.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
 
         ctx.font = "30px Comic Sans MS";
         rightAnsText();
@@ -5395,6 +5428,15 @@ function rightKey1() {
             ctx.fillText("Sunetul era o vacă!", w, 290);
             if (part2 && togSpeech) {
                 VOrom2.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше крава!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom2.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5475,6 +5517,15 @@ function rightKey1() {
             ctx.fillText("Sunetul era un miel!", w, 290);
             if (part2 && togSpeech) {
                 VOrom3.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше агнешко!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5574,6 +5625,15 @@ function rightKey4() {
             }
         }
 
+        if (Bul) { 
+            ctx.fillText("Звукът беше стар телефон!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom4.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
         ctx.font = "35px Comic Sans MS";
         rightAnsText();
 
@@ -5655,6 +5715,15 @@ function rightKey4() {
                 part3 = true;
             }
         }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше пожарна машина!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom5.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
         
         ctx.font = "50px Comic Sans MS";
         rightAnsText();
@@ -5730,6 +5799,16 @@ function rightKey6() {
             ctx.fillText("Sunetul era un cuptor cu microunde!", w, 290);
             if (part2 && togSpeech) {
                 VOrom6.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.font = "35px Comic Sans MS";
+            ctx.fillText("Звукът беше от микровълнова печка!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom6.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6378,6 +6457,14 @@ function keyWrong() {
             ctx.fillText("De ce să nu încerci din nou?", w, 380);
         }
 
+        if (Bul) {
+            ctx.fillText("О, не!", w, 170);
+            ctx.font = "50px Comic Sans MS";
+            ctx.fillText("това не е правилно!", w, 270);
+            ctx.fillStyle = "blue";
+            ctx.fillText("Защо не опитате отново?", w, 380);
+        }
+
         ctx.fillStyle = "red";
         ctx.font = "36px Comic Sans MS";
 
@@ -6393,6 +6480,11 @@ function keyWrong() {
             if (Rom) {
                 ctx.fillText("Faceți clic stânga pe mouse", w, 500);
                 ctx.fillText("a continua!", w, 560);
+            }
+            if (Bul) {
+                ctx.font = "32px Comic Sans MS";
+                ctx.fillText("Щракнете с левия бутон върху мишката", w, 500);
+                ctx.fillText("продължавам!", w, 560);
             }
         }
 
@@ -6888,6 +6980,28 @@ function playGame() {
                 }
                 ctx.fillText("Pentru a juca din nou!", w, 580);
             }
+
+            if (Bul) {
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                /*if (togSpeech) {
+                    wellDoneVoice.play();
+                }*/
+                ctx.fillStyle = "blue";
+                ctx.textAlign = "center"; 
+                ctx.font = "90px Comic Sans MS";
+                ctx.fillText("Много добре!", w, 200);
+                ctx.font = "70px Comic Sans MS";
+                ctx.fillText("за завършване на", w, 300);
+                ctx.fillText("Карти за мачове!", w, 400);
+                ctx.font = "35px Comic Sans MS";
+                if (mouseMode) {
+                ctx.fillText("Щракнете с левия бутон върху мишката", w, 500);
+                }
+                if (keyboardMode) {
+                ctx.fillText("Натиснете клавиша Enter", w, 500);
+                }
+                ctx.fillText("Да играя отново!", w, 580);
+                }
 
         KeyboardGame = false;
         n = 1;
