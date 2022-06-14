@@ -454,6 +454,7 @@ tram.src = "images/tram.jpg";
 var  wdEn = new Audio("sounds/well_done/w-d-eng.mp3");
 var  wdGer = new Audio("sounds/well_done/w-d-ger.mp3");
 var  wdRom = new Audio("sounds/well_done/w-d-rom.mp3");
+var  wdBul = new Audio("sounds/well_done/w-d-bul.mp3");
 
 // uk voiceovers
 var  VOuk1 = new Audio("sounds/en/VOuk1.mp3");
@@ -497,6 +498,14 @@ var  VOrom10 = new Audio("sounds/rom/VOrom10.mp3");
 var  VOrom11 = new Audio("sounds/rom/VOrom11.mp3");
 var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");
 
+// bul
+var  VObul1 = new Audio("sounds/bul/VObul1.mp3");
+var  VObul2 = new Audio("sounds/bul/VObul2.mp3");
+var  VObul3 = new Audio("sounds/bul/VObul3.mp3");
+var  VObul4 = new Audio("sounds/bul/VObul4.mp3");
+var  VObul5 = new Audio("sounds/bul/VObul5.mp3");
+var  VObul6 = new Audio("sounds/bul/VObul6.mp3");
+
 // mouse
 var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
 var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
@@ -513,7 +522,7 @@ var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
 // Sound Effects
 var splashAud = new Audio("sounds/splash-screen1.mp3");
 
-var gameInsSpeech = new Audio("sounds/gameInsSpeech.mp3");
+
 
 var music = new Audio("sounds/ragtime.mp3");
 
@@ -552,12 +561,19 @@ var tramVce = new Audio("sounds/tramVce.mp3");
 
 var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
 
+// English
+var gameInsSpeech = new Audio("sounds/en/gameInsSpeech-uk.mp3");
+var gameInsSpeechKey = new Audio("sounds/en/gameInsSpeechkey-uk.mp3");
+
+
 // German
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
+//var gerInstructionsKey = new Audio("sounds/ger/instructions-ger.mp3");
 var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
 
 // Romanian
 var romInstructions = new Audio("sounds/rom/instructions-rom.mp3");
+//var romInstructionsKey = new Audio("sounds/rom/instructions-rom.mp3");
 var romWrong = new Audio("sounds/rom/rom-wrong.mp3");
 
 function locked() {
@@ -586,6 +602,8 @@ function rightAnsClear() {
     wdGer.currentTime = 0;
     wdRom.pause();
     wdRom.currentTime = 0;
+    wdBul.pause();
+    wdBul.currentTime = 0;
 
     // uk
     VOuk1.pause();
@@ -667,6 +685,21 @@ function rightAnsClear() {
     VOrom12.pause();
     VOrom12.currentTime = 0;
     // end of Romanian voice overs //
+
+    // bul
+    VObul1.pause();
+    VObul1.currentTime = 0;
+    VObul2.pause();
+    VObul2.currentTime = 0;
+    VObul3.pause();
+    VObul3.currentTime = 0;
+    VObul4.pause();
+    VObul4.currentTime = 0;
+    VObul5.pause();
+    VObul5.currentTime = 0;
+    VObul6.pause();
+    VObul6.currentTime = 0;
+    // end of Bulgarian voice overs //
 
     // click and keyboard next question //
     mseUK.pause();
@@ -891,6 +924,37 @@ function switchKeysM10(e) {
     KeyMenu8 = false;
     KeyMenu9 = false;
     KeyMenu10 = false;
+    KeyMenu11 = true;
+    KeyMenu13 = false;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = false;
+    MSw10 = false;
+    MSw11 = true;
+    MSw13 = false;
+    removeEventListener("keydown", switchKeysM10, false);
+    }
+}
+
+function switchKeysM11(e) {
+    if ((keys[32]) && KeyMenu11 && MSw11) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = false;
+    KeyMenu10 = false;
+    KeyMenu11 = false;
     KeyMenu13 = true;
     MSw1 = false;
     MSw2 = false;
@@ -902,8 +966,9 @@ function switchKeysM10(e) {
     MSw8 = false;
     MSw9 = false;
     MSw10 = false;
+    MSw11 = false;
     MSw13 = true;
-    removeEventListener("keydown", switchKeysM10, false);
+    removeEventListener("keydown", switchKeysM11, false);
     }
 }
 
@@ -1057,6 +1122,25 @@ function gameInsMouse(e) {
     }
 }
 
+// Game Instructions keyboard open
+/*function gameInsKeyboard(e) {
+        if (keys[13] && KeyMenu11 && MSw11) {
+            gameIns=true;
+            locked();
+            console.log("test");
+            removeEventListener("keydown", gameInsKeyboard);
+        }
+}*/
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1197,6 +1281,10 @@ function gameMode1(e) {
         }
     } 
 }
+
+
+
+
 
 ///////////////////////////////////////////////////////////////////////
 
@@ -1514,7 +1602,7 @@ function showMenu() {
         ctx.fillText("fundal", 500, 162);
     } 
     if (Bul) {
-        ctx.fillText("Заден план", 500, 162);
+        ctx.fillText("Заден план", 475, 162);
     }
 
 
@@ -1617,7 +1705,7 @@ function showMenu() {
         ctx.fillText("Vorbire", 150, 342);
     }
     if (Bul) {
-        ctx.fillText("Реч", 150, 342);
+        ctx.fillText("Реч", 167, 342);
     }
 
 
@@ -1718,7 +1806,7 @@ function showMenu() {
     }
 
     if (Bul) {
-        ctx.fillText("Брой въпроси", 430, 342);
+        ctx.fillText("Брой въпроси", 462, 342);
     }
     
     ctx.fillStyle = "black";
@@ -1803,7 +1891,11 @@ function showMenu() {
 
       
   ///////////////////////////////////////////////
-  if (playingGameMode) { // Comes on if the screen is on the Splash screen  
+
+
+  if (playingGameMode) { // Comes on if the screen is on the Splash screen 
+  
+  
 ///////////////////////////////////////////
     // Game Mode Mouse
     if (mouseMode) {
@@ -1833,28 +1925,57 @@ function showMenu() {
             ctx.globalAlpha = 1.0;
             gk.path = new Path2D();
             gk.path.rect(65, 485, 200, 100);
-    
-        //canvas.addEventListener("keydown", gameMode2);
+
+
         }
         /////////////////////////////////////////////
 
 
 ///////////////////////////
+
+
 } // playingGameMode = true
+
+
 ////////////////////////////////
 
 
     // Instructions
+   
     ctx.textAlign = "center"; 
     ctx.drawImage(insMouse, 268, 485, 200, 100);
+
+    if (KeyboardMenu) {
+        if (KeyMenu11) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(269, 486, 195, 100);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
     insMouse.path = new Path2D();
     insMouse.path.rect(268, 485, 200, 100);
 
+    if (mouseMode) {
     canvas.addEventListener("click", gameInsMouse);
+    }
 
+    /*if (keyboardMode) {
+    addEventListener("keydown", gameInsKeyboard);
+    }*/
+
+    
     
 
     ///////////////////////////////////////////
+
+    ///////////////////////////////////////////
+
+
+
+
 
 
 
@@ -2060,9 +2181,9 @@ function showMenu() {
         }
 
         // Langauge Menu
-        if (MSw12) {
+        /*if (MSw12) {
         addEventListener("keydown", switchKeysM12, false);
-        }
+        }*/
 
         /////////////////////////////////////////////////////
         // close Settings Menu
@@ -2118,6 +2239,14 @@ function showMenu() {
             togQs3 = true;
             togQs1 = false;
             togQs2 = false;
+        }
+
+
+
+
+        if (keys[13] && KeyMenu11 && MSw11) {   
+            gameIns=true;
+            locked();
         }
 
 
@@ -2334,12 +2463,12 @@ function wellDone() {
         part1 = false;
         part2 = true;
     }
-    /*if (Bul) {
-        //wdEn.play();
+    if (Bul) {
+        wdBul.play();
         part1 = false;
         part2 = true;
     }
-    if () {
+    /*if () {
         wdEn.play();
         part1 = false;
         part2 = true;
@@ -2532,6 +2661,31 @@ function closeSplash1(e) {
     }
 }
 
+function closeSplash1key(e) {
+    if (setMenu && !mouseMode && keyboardMode) {
+        //if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
+           
+           // English
+           gameInsSpeech.pause();
+           gameInsSpeech.currentTime = 0;
+
+           // German
+           gerInstructions.pause();
+           gerInstructions.currentTime = 0;
+
+           // Romanian
+           romInstructions.pause();
+           romInstructions.currentTime = 0;
+
+           locked();
+           incor=false;
+           setMenu=true;
+           gameIns=false;
+           removeEventListener("keydown", closeSplash1key);
+        }
+    //}
+}
+
 
 //// Mouse
 function gameStart(e) {
@@ -2587,7 +2741,7 @@ function gameInstructions() {
 
     //console.log("gameIns is " + gameIns);
 
-    if (togSpeech) {
+    if (mouseMode && togSpeech) {
 
         if (soundInstructions) {
 
@@ -2603,12 +2757,31 @@ function gameInstructions() {
 
         } // soundInstructions = true
 
-
     }
+
+        if (keyboardMode && togSpeech) {
+
+            if (soundInstructions) {
+    
+            if (En) {
+                gameInsSpeechKey.play();
+            }
+            if (Ger) {
+                //gerInstructions.play();
+            }
+            if (Rom) {
+                //romInstructions.play();
+            }
+    
+            } // soundInstructions = true
+        }
+
     if (!togSpeech) {
 
         gameInsSpeech.pause();
         gameInsSpeech.currentTime = 0;
+        gameInsSpeechKey.pause();
+        gameInsSpeechKey.currentTime = 0;
         gerInstructions.pause();
         gerInstructions.currentTime = 0;
         romInstructions.pause();
@@ -2737,6 +2910,15 @@ function gameInstructions() {
 
         incor=false;
         locked();
+
+
+
+        if (setMenu && !mouseMode && keyboardMode) {
+            addEventListener("keydown", closeSplash1key);
+        }
+
+
+
 
         if (setMenu && mouseMode && !keyboardMode) {
             canvas.addEventListener("click", closeSplash1);
@@ -2872,7 +3054,8 @@ function instructions() {
         ctx.fillText("Match the sound to the picture", w, 615);
         }
         if (Ger) {
-        ctx.fillText("Ordne den Ton dem Bild zu", w, 615);
+            ctx.font = "500 21px Comic Sans MS";
+            ctx.fillText("Ordne den Ton dem Bild zu", w, 615);
         }
         if (Rom) {
         ctx.fillText("Potriviți sunetul cu imaginea", w, 615);
@@ -2908,24 +3091,38 @@ function instructions() {
 
     if (En) {  
 	ctx.fillText("using the SPACEBAR to tab between pictures", w, 645);
-    }
-
-    if (Ger) {  
-        ctx.fillText("Verwenden Sie die LEERTASTE, um zwischen den Bildern zu wechseln", w, 645);
-    }
-
-    if (Rom) {  
-        ctx.fillText("folosind BARA DE SPAȚIU pentru a tasta între imagini", w, 645);
-    }
-
-    if (Bul) {  
-        ctx.fillText("с помощта на ИНТЕРВАЛ за раздел между снимките", w, 645);
-    }
-
     ctx.fillStyle = "red";
     ctx.fillText("and then", w, 671);
     ctx.fillStyle = "blue";
     ctx.fillText("press the ENTER KEY to select one", w, 700);
+    }
+
+    if (Ger) { 
+        ctx.font = "500 21px Comic Sans MS";
+        ctx.fillText("Verwenden Sie die LEERTASTE, um zwischen den Bildern zu wechseln", w, 645);
+        ctx.fillStyle = "red";
+        ctx.fillText("und dann", w, 671);
+        ctx.fillStyle = "blue";
+        ctx.fillText("Drücken Sie die EINGABETASTE, um eine auszuwählen", w, 700);
+    }
+
+    if (Rom) {  
+        ctx.fillText("folosind BARA DE SPAȚIU pentru a tasta între imagini", w, 645);
+        ctx.fillStyle = "red";
+        ctx.fillText("și apoi", w, 671);
+        ctx.fillStyle = "blue";
+        ctx.fillText("apăsați tasta ENTER pentru a selecta una", w, 700);
+    }
+
+    if (Bul) {  
+        ctx.fillText("с помощта на ИНТЕРВАЛ за раздел между снимките", w, 645);
+        ctx.fillStyle = "red";
+        ctx.fillText("и тогава", w, 671);
+        ctx.fillStyle = "blue";
+        ctx.fillText("натиснете клавиша ENTER, за да изберете един", w, 700);
+    }
+
+    
 
     
 
@@ -3033,7 +3230,7 @@ function rightAnsText() {
     if (Bul) {
         ctx.fillText("Щракнете с левия бутон върху мишката", w, 400);
         if (part3 && togSpeech) {
-            mseROM.play();
+            //mseBUL.play();
             part3 = false;
          }
     }
@@ -3069,7 +3266,7 @@ function rightAnsText() {
      if (Bul) {  
         ctx.fillText("Натиснете интервала", w, 400);
         if (part3 && togSpeech) {
-            keyROM.play();
+            //keyBUL.play();
             part3 = false;
          }
      }
@@ -5348,7 +5545,7 @@ function rightKey1() {
         if (Bul) { 
             ctx.fillText("Звукът беше линейка!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom1.play();
+                VObul1.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5436,7 +5633,7 @@ function rightKey1() {
         if (Bul) { 
             ctx.fillText("Звукът беше крава!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom2.play();
+                VObul2.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5525,7 +5722,7 @@ function rightKey1() {
         if (Bul) { 
             ctx.fillText("Звукът беше агнешко!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom3.play();
+                VObul3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5628,7 +5825,7 @@ function rightKey4() {
         if (Bul) { 
             ctx.fillText("Звукът беше стар телефон!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom4.play();
+                VObul4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5719,7 +5916,7 @@ function rightKey4() {
         if (Bul) { 
             ctx.fillText("Звукът беше пожарна машина!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom5.play();
+                VObul5.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5808,7 +6005,7 @@ function rightKey6() {
             ctx.font = "35px Comic Sans MS";
             ctx.fillText("Звукът беше от микровълнова печка!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom6.play();
+                VObul6.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5890,6 +6087,15 @@ function rightKey6() {
             ctx.fillText("Sunetul a fost un clopoțel!", w, 290);
             if (part2 && togSpeech) {
                 VOrom7.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше звънец на вратата!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom7.play();
                 part2 = false;
                 part3 = true;
             }
@@ -5991,6 +6197,15 @@ function rightKey6() {
             }
         }
 
+        if (Bul) { 
+            ctx.fillText("Звукът беше динозавър от Polacanthus", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom8.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
         ctx.font = "30px Comic Sans MS";
         rightAnsText();     
 
@@ -6067,6 +6282,15 @@ function rightKey9() {
             ctx.fillText("Sunetul era un porumbel!", w, 290);
             if (part2 && togSpeech) {
                 VOrom9.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше гълъб!", w, 290);
+            if (part2 && togSpeech) {
+                //VOuk9.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6153,6 +6377,15 @@ function rightKey10() {
             }
         }
 
+        if (Bul) { 
+            ctx.fillText("Звукът беше игра на ръгби!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom10.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
     ctx.font = "40px Comic Sans MS";
     rightAnsText();
 
@@ -6229,6 +6462,15 @@ function rightKey11() {
             ctx.fillText("Sunetul era un Collie Dog!", w, 290);
             if (part2 && togSpeech) {
                 VOrom11.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше куче Коли!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom11.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6337,6 +6579,15 @@ function rightKey12() {
             ctx.fillText("Sunetul era un tramvai!", w, 290);
             if (part2 && togSpeech) {
                 VOrom12.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Bul) { 
+            ctx.fillText("Звукът беше трамвай!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom12.play();
                 part2 = false;
                 part3 = true;
             }
