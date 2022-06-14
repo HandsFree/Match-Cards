@@ -456,7 +456,46 @@ var  wdGer = new Audio("sounds/well_done/w-d-ger.mp3");
 var  wdRom = new Audio("sounds/well_done/w-d-rom.mp3");
 var  wdBul = new Audio("sounds/well_done/w-d-bul.mp3");
 
-// uk voiceovers
+// mouse
+var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
+var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
+var  mseROM = new Audio("sounds/mouse/mseROM.mp3");
+
+// keyboard
+var  keyUK = new Audio("sounds/keyboard/keyUK.mp3");
+var  keyGER = new Audio("sounds/keyboard/keyGER.mp3");
+var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
+
+
+// Music
+var music = new Audio("sounds/ragtime.mp3");
+
+// Sound Effects
+var sir = new Audio("sounds/siren1.mp3");
+var cow1 = new Audio("sounds/cow.mp3");
+var lamb = new Audio("sounds/lamb.mp3");
+var oldPhone = new Audio("sounds/old-phone.mp3");
+var fireEng = new Audio("sounds/fire-eng.mp3");
+var microSound = new Audio("sounds/microwave.mp3");
+var bellSound = new Audio("sounds/DoorbellSound.mp3");
+var pigeonSdEff = new Audio("sounds/pigeon.mp3");
+var roarEff = new Audio("sounds/Roar.mp3");
+//var rookEff = new Audio("sounds/rook_song.mp3");
+var rugbyEff  = new Audio("sounds/rugby.mp3");
+var barkEff = new Audio("sounds/bark.mp3");
+var tramEff  = new Audio("sounds/TramBell.mp3");
+
+
+// English
+var gameInsSpeech = new Audio("sounds/en/gameInsSpeech-uk.mp3"); // Game Instructions Mouse
+var gameInsSpeechKey = new Audio("sounds/en/gameInsSpeechkey-uk.mp3"); // Game Instructions Keyboard
+var wellDoneVoice = new Audio("sounds/en/well-done-v.mp3"); // Completion Mouse
+//var wellDoneVoiceKey = new Audio("sounds/en/well-done-v-key.mp3"); // Completion Keyboard
+var wrongVoice = new Audio("sounds/en/wrong-v.mp3"); // Incorrect Mouse
+//var wrongVoiceKey = new Audio("sounds/en/wrong-v-key.mp3"); // Incorrect Keyboard
+var splashAud = new Audio("sounds/splash-screen1.mp3");  // Splash Screen
+
+// English Correct Awnsers
 var  VOuk1 = new Audio("sounds/en/VOuk1.mp3");
 var  VOuk2 = new Audio("sounds/en/VOuk2.mp3");
 var  VOuk3 = new Audio("sounds/en/VOuk3.mp3");
@@ -469,8 +508,14 @@ var  VOuk9 = new Audio("sounds/en/VOuk9.mp3");
 var  VOuk10 = new Audio("sounds/en/VOuk10.mp3");
 var  VOuk11 = new Audio("sounds/en/VOuk11.mp3");
 var  VOuk12 = new Audio("sounds/en/VOuk12.mp3");
+// End of English
 
-// ger voiceovers
+// German
+var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
+//var gerInstructionsKey = new Audio("sounds/ger/instructions-ger.mp3");
+var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
+
+// German Correct Awnsers
 var  VOger1 = new Audio("sounds/ger/VOger1.mp3");
 var  VOger2 = new Audio("sounds/ger/VOger2.mp3");
 var  VOger3 = new Audio("sounds/ger/VOger3.mp3");
@@ -483,8 +528,14 @@ var  VOger9 = new Audio("sounds/ger/VOger9.mp3");
 var  VOger10 = new Audio("sounds/ger/VOger10.mp3");
 var  VOger11 = new Audio("sounds/ger/VOger11.mp3");
 var  VOger12 = new Audio("sounds/ger/VOger12.mp3");
+// End of German
 
-// rom
+// Romanian
+var romInstructions = new Audio("sounds/rom/instructions-rom.mp3");
+//var romInstructionsKey = new Audio("sounds/rom/instructions-rom.mp3");
+var romWrong = new Audio("sounds/rom/rom-wrong.mp3");
+
+// Romanian Correct Awnsers
 var  VOrom1 = new Audio("sounds/rom/VOrom1.mp3");
 var  VOrom2 = new Audio("sounds/rom/VOrom2.mp3");
 var  VOrom3 = new Audio("sounds/rom/VOrom3.mp3");
@@ -497,84 +548,25 @@ var  VOrom9 = new Audio("sounds/rom/VOrom9.mp3");
 var  VOrom10 = new Audio("sounds/rom/VOrom10.mp3");
 var  VOrom11 = new Audio("sounds/rom/VOrom11.mp3");
 var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");
+// End of Romainian
 
-// bul
+// Bulgerian
+var bulInstructions = new Audio("sounds/bul/gameIns-bul-mse.mp3"); // Inst Mse
+//var bulInstructionsKey = new Audio("sounds/bul/instructions-bul.mp3"); // Inst Key
+var bulWrong = new Audio("sounds/bul/wrongBulMouse.mp3"); // Wrong Mse
+var bulWrongKey = new Audio("sounds/bul/wrongBulKey.mp3"); // Wrong Key
+
+// Bulgerian Correct Awnsers
 var  VObul1 = new Audio("sounds/bul/VObul1.mp3");
 var  VObul2 = new Audio("sounds/bul/VObul2.mp3");
 var  VObul3 = new Audio("sounds/bul/VObul3.mp3");
 var  VObul4 = new Audio("sounds/bul/VObul4.mp3");
 var  VObul5 = new Audio("sounds/bul/VObul5.mp3");
 var  VObul6 = new Audio("sounds/bul/VObul6.mp3");
+// End of Bulgerian
 
-// mouse
-var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
-var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
-var  mseROM = new Audio("sounds/mouse/mseROM.mp3");
+///////////////////////////////////////////////////////////////////////////////////
 
-// keyboard
-var  keyUK = new Audio("sounds/keyboard/keyUK.mp3");
-var  keyGER = new Audio("sounds/keyboard/keyGER.mp3");
-var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
-
-
-
-
-// Sound Effects
-var splashAud = new Audio("sounds/splash-screen1.mp3");
-
-
-
-var music = new Audio("sounds/ragtime.mp3");
-
-var sir = new Audio("sounds/siren1.mp3");
-var cow1 = new Audio("sounds/cow.mp3");
-var lamb = new Audio("sounds/lamb.mp3");
-var oldPhone = new Audio("sounds/old-phone.mp3");
-var fireEng = new Audio("sounds/fire-eng.mp3");
-var microSound = new Audio("sounds/microwave.mp3");
-var bellSound = new Audio("sounds/DoorbellSound.mp3");
-var pigeonSdEff = new Audio("sounds/pigeon.mp3");
-var roarEff = new Audio("sounds/Roar.mp3");
-var rookEff = new Audio("sounds/rook_song.mp3");
-var rugbyEff  = new Audio("sounds/rugby.mp3");
-
-var barkEff = new Audio("sounds/bark.mp3");
-var tramEff  = new Audio("sounds/TramBell.mp3");
-
-// Voices
-var wrongVoice = new Audio("sounds/wrong-v.mp3");
-
-var ambVoice = new Audio("sounds/amb-v1.mp3");
-var cowVoice = new Audio("sounds/cow-v1.mp3");
-var lambVoice = new Audio("sounds/lamb-v1.mp3");
-var telVoice = new Audio("sounds/old-phone-v1.mp3");
-var fEngVoice = new Audio("sounds/fire-en-v1.mp3");
-var microVoice = new Audio("sounds/micro-v1.mp3");
-var doorbell = new Audio("sounds/doorbell-v1.mp3");
-
-var polyEff = new Audio("sounds/polyEff.mp3");
-var pigEff = new Audio("sounds/pigEff.mp3");
-var rugEff = new Audio("sounds/rugbyVce.mp3");
-
-var barkVce = new Audio("sounds/barkVce.mp3");
-var tramVce = new Audio("sounds/tramVce.mp3");
-
-var wellDoneVoice = new Audio("sounds/well-done-v.mp3");
-
-// English
-var gameInsSpeech = new Audio("sounds/en/gameInsSpeech-uk.mp3");
-var gameInsSpeechKey = new Audio("sounds/en/gameInsSpeechkey-uk.mp3");
-
-
-// German
-var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
-//var gerInstructionsKey = new Audio("sounds/ger/instructions-ger.mp3");
-var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
-
-// Romanian
-var romInstructions = new Audio("sounds/rom/instructions-rom.mp3");
-//var romInstructionsKey = new Audio("sounds/rom/instructions-rom.mp3");
-var romWrong = new Audio("sounds/rom/rom-wrong.mp3");
 
 function locked() {
     incor = false;
@@ -2244,10 +2236,12 @@ function showMenu() {
 
 
 
-        if (keys[13] && KeyMenu11 && MSw11) {   
+        if (keys[13] && KeyMenu11 && MSw11) {  
+            if (setMenu && !mouseMode && keyboardMode && !langaugeMenuSettings) { 
             gameIns=true;
             locked();
         }
+    }
 
 
 
@@ -2683,7 +2677,6 @@ function closeSplash1key(e) {
            gameIns=false;
            removeEventListener("keydown", closeSplash1key);
         }
-    //}
 }
 
 
@@ -2705,12 +2698,11 @@ function gameStart(e) {
             romInstructions.pause();
             romInstructions.currentTime = 0;
 
-
-
-   
-
-
-
+            // Bulgarian
+            bulInstructions.pause();
+            bulInstructions.currentTime = 0;  
+            bulInstructionsKey.pause();
+            bulInstructionsKey.currentTime = 0;
 
             canvas.removeEventListener("click", gameStart);
         }
@@ -2754,6 +2746,9 @@ function gameInstructions() {
         if (Rom) {
             romInstructions.play();
         }
+        if (Bul) {
+            bulInstructions.play();
+        }
 
         } // soundInstructions = true
 
@@ -2772,6 +2767,9 @@ function gameInstructions() {
             if (Rom) {
                 //romInstructions.play();
             }
+            if (Bul) {
+                //bulInstructionsKey.play();
+            }
     
             } // soundInstructions = true
         }
@@ -2782,10 +2780,18 @@ function gameInstructions() {
         gameInsSpeech.currentTime = 0;
         gameInsSpeechKey.pause();
         gameInsSpeechKey.currentTime = 0;
+
         gerInstructions.pause();
         gerInstructions.currentTime = 0;
+
         romInstructions.pause();
         romInstructions.currentTime = 0;
+
+        bulInstructions.pause();
+        bulInstructions.currentTime = 0;
+
+        bulInstructionsKey.pause();
+        bulInstructionsKey.currentTime = 0;
 
     }
         
@@ -2846,12 +2852,14 @@ function gameInstructions() {
         ctx.fillStyle = "Purple";
 
         if (KeyboardGame) {
+            if (En) {
             ctx.fillText("Press the SPACEBAR to tab", w, 380);
             ctx.fillText("between the pictures", w, 430);
             ctx.fillText("and press the ENTER KEY to select one", w, 480);
             ctx.fillStyle = "Green";
             ctx.font = "600 26px Comic Sans MS";
             ctx.fillText("OR use your Switch - you need two Switches", w, 540);
+            }
         }
 
         if (!KeyboardGame) { 
@@ -6621,6 +6629,10 @@ function rightKey12() {
         romWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
+        bulWrong.pause();
+        bulWrong.currentTime = 0;
+        bulWrongKey.pause();
+        bulWrongKey.currentTime = 0;
         locked();
         removeEventListener("click", clickWrong);
         }
@@ -6635,6 +6647,10 @@ function keyWrong() {
         romWrong.currentTime = 0;
         wrongVoice.pause();
         wrongVoice.currentTime = 0;
+        bulWrong.pause();
+        bulWrong.currentTime = 0;
+        bulWrongKey.pause();
+        bulWrongKey.currentTime = 0;
         sEff = true;
         locked();
         returnKey();
@@ -6648,7 +6664,7 @@ function keyWrong() {
 
         sEff = false;
 
-        if (togSpeech) {
+        if (togSpeech && mouseMode) {
             if (En) {
                 wrongVoice.play();
             }
@@ -6658,22 +6674,39 @@ function keyWrong() {
             if (Rom) {
                 romWrong.play();
             }
+            if (Bul) {
+                bulWrong.play();
+            }
+        }
+
+        if (togSpeech && keyboardMode) {
+            if (En) {
+                //wrongVoice.play();
+            }
+            if (Ger) {
+                //gerWrong.play();
+            }
+            if (Rom) {
+                //romWrong.play();
+            }
+            if (Bul) {
+                bulWrongKey.play();
+            }
         }
     
         if (!togSpeech) {
-            if (En) {
                 wrongVoice.pause();
                 wrongVoice.currentTime = 0;
-            }
-            if (Ger) {
                 gerWrong.pause();
                 gerWrong.currentTime = 0;
-            }
-            if (Rom) {
                 romWrong.pause();
                 romWrong.currentTime = 0;
+
+                bulWrong.pause();
+                bulWrong.currentTime = 0;
+                bulWrongKey.pause();
+                bulWrongKey.currentTime = 0;
             }
-        }
 
         ctx.fillStyle = "white";
         ctx.fillRect(30, 40, 655, 650);
@@ -6740,8 +6773,14 @@ function keyWrong() {
         }
 
         if (keyboardMode) {
-        ctx.fillText("Press the Spacebar", w, 500);
-        ctx.fillText("to continue!", w, 560);
+            if (En) {
+                ctx.fillText("Press the Spacebar", w, 500);
+                ctx.fillText("to continue!", w, 560);
+            }
+            if (Bul) {
+                ctx.fillText("Натиснете интервала", w, 500);
+                ctx.fillText("продължавам!", w, 560);
+            }
         }
 
         
