@@ -145,7 +145,6 @@ var KeyMenu10 = false;
 var KeyMenu11 = false; 
 var KeyMenu12 = false; 
 var KeyMenu13 = false; 
-var KeyMenu14 = false; 
                                         //
 var MSw1 = true;                        //
 var MSw2 = false;                       //
@@ -160,7 +159,6 @@ var MSw10 = false;
 var MSw11 = false; 
 var MSw12 = false; 
 var MSw13 = false; 
-var MSw14 = false; 
                      //
                                         //
 //Game                                  //
@@ -460,11 +458,13 @@ var  wdBul = new Audio("sounds/well_done/w-d-bul.mp3");
 var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
 var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
 var  mseROM = new Audio("sounds/mouse/mseROM.mp3");
+//var  mseBul = new Audio("sounds/mouse/mseBUL.mp3");
 
 // keyboard
 var  keyUK = new Audio("sounds/keyboard/keyUK.mp3");
 var  keyGER = new Audio("sounds/keyboard/keyGER.mp3");
 var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
+//var  keyBul = new Audio("sounds/keyboard/keyBUL.mp3");
 
 
 // Music
@@ -489,11 +489,14 @@ var tramEff  = new Audio("sounds/TramBell.mp3");
 // English
 var gameInsSpeech = new Audio("sounds/en/gameInsSpeech-uk.mp3"); // Game Instructions Mouse
 var gameInsSpeechKey = new Audio("sounds/en/gameInsSpeechkey-uk.mp3"); // Game Instructions Keyboard
-var wellDoneVoice = new Audio("sounds/en/well-done-v.mp3"); // Completion Mouse
-//var wellDoneVoiceKey = new Audio("sounds/en/well-done-v-key.mp3"); // Completion Keyboard
-var wrongVoice = new Audio("sounds/en/wrong-v.mp3"); // Incorrect Mouse
-//var wrongVoiceKey = new Audio("sounds/en/wrong-v-key.mp3"); // Incorrect Keyboard
-var splashAud = new Audio("sounds/splash-screen1.mp3");  // Splash Screen
+
+var wellDoneMse = new Audio("sounds/en/well-done-mse.mp3"); // Completion Mouse
+var wellDoneKey = new Audio("sounds/en/well-done-key.mp3"); // Completion Keyboard
+
+var wrongVoice = new Audio("sounds/en/wrong-v-mse.mp3"); // Incorrect Mouse
+var wrongVoiceKey = new Audio("sounds/en/wrong-v-key.mp3"); // Incorrect Keyboard
+
+var splashAud = new Audio("sounds/en/splash-screen1.mp3");  // Splash Screen
 
 // English Correct Awnsers
 var  VOuk1 = new Audio("sounds/en/VOuk1.mp3");
@@ -509,11 +512,19 @@ var  VOuk10 = new Audio("sounds/en/VOuk10.mp3");
 var  VOuk11 = new Audio("sounds/en/VOuk11.mp3");
 var  VOuk12 = new Audio("sounds/en/VOuk12.mp3");
 // End of English
+/////////////////////////////////////////////
+/////////////////////////////////////////////
 
+////////////////////////////////////////////
 // German
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
 //var gerInstructionsKey = new Audio("sounds/ger/instructions-ger.mp3");
+
+//var gerWellDone = new Audio("sounds/ger/gerWellDone.mp3"); // Completion Mouse
+//var gerWellDoneKey = new Audio("sounds/ger/gerWellDoneKey.mp3"); // Completion Keyboard
+
 var gerWrong = new Audio("sounds/ger/ger-wrong.mp3");
+//var gerWrongKey = new Audio("sounds/ger/gerWrongKey.mp3"); // Incorrect Keyboard
 
 // German Correct Awnsers
 var  VOger1 = new Audio("sounds/ger/VOger1.mp3");
@@ -533,7 +544,12 @@ var  VOger12 = new Audio("sounds/ger/VOger12.mp3");
 // Romanian
 var romInstructions = new Audio("sounds/rom/instructions-rom.mp3");
 //var romInstructionsKey = new Audio("sounds/rom/instructions-rom.mp3");
+
+//var romWellDone = new Audio("sounds/rom/rom/WellDone.mp3"); // Completion Mouse
+//var romWellDoneKey = new Audio("sounds/rom/gerWellDoneKey.mp3"); // Completion Keyboard
+
 var romWrong = new Audio("sounds/rom/rom-wrong.mp3");
+//var romWrongKey = new Audio("sounds/rom/romWrongKey.mp3"); // Incorrect Keyboard
 
 // Romanian Correct Awnsers
 var  VOrom1 = new Audio("sounds/rom/VOrom1.mp3");
@@ -553,6 +569,10 @@ var  VOrom12 = new Audio("sounds/rom/VOrom12.mp3");
 // Bulgerian
 var bulInstructions = new Audio("sounds/bul/gameIns-bul-mse.mp3"); // Inst Mse
 //var bulInstructionsKey = new Audio("sounds/bul/instructions-bul.mp3"); // Inst Key
+
+//var bulWellDone = new Audio("sounds/bul/bulWellDone.mp3"); // Completion Mouse
+//var bulWellDoneKey = new Audio("sounds/bul/bulWellDoneKey.mp3"); // Completion Keyboard
+
 var bulWrong = new Audio("sounds/bul/wrongBulMouse.mp3"); // Wrong Mse
 var bulWrongKey = new Audio("sounds/bul/wrongBulKey.mp3"); // Wrong Key
 
@@ -917,7 +937,6 @@ function switchKeysM10(e) {
     KeyMenu9 = false;
     KeyMenu10 = false;
     KeyMenu11 = true;
-    KeyMenu13 = false;
     MSw1 = false;
     MSw2 = false;
     MSw3 = false;
@@ -929,7 +948,6 @@ function switchKeysM10(e) {
     MSw9 = false;
     MSw10 = false;
     MSw11 = true;
-    MSw13 = false;
     removeEventListener("keydown", switchKeysM10, false);
     }
 }
@@ -947,6 +965,37 @@ function switchKeysM11(e) {
     KeyMenu9 = false;
     KeyMenu10 = false;
     KeyMenu11 = false;
+    KeyMenu12 = true;
+    MSw1 = false;
+    MSw2 = false;
+    MSw3 = false;
+    MSw4 = false;
+    MSw5 = false;
+    MSw6 = false;
+    MSw7 = false;
+    MSw8 = false;
+    MSw9 = false;
+    MSw10 = false;
+    MSw11 = false;
+    MSw12 = true;
+    removeEventListener("keydown", switchKeysM11, false);
+    }
+}
+
+function switchKeysM12(e) {
+    if ((keys[32]) && KeyMenu12 && MSw12) {
+    KeyMenu1 = false;
+    KeyMenu2 = false;
+    KeyMenu3 = false;
+    KeyMenu4 = false;
+    KeyMenu5 = false;
+    KeyMenu6 = false;
+    KeyMenu7 = false;
+    KeyMenu8 = false;
+    KeyMenu9 = false;
+    KeyMenu10 = false;
+    KeyMenu11 = false;
+    KeyMenu12 = false;
     KeyMenu13 = true;
     MSw1 = false;
     MSw2 = false;
@@ -959,8 +1008,9 @@ function switchKeysM11(e) {
     MSw9 = false;
     MSw10 = false;
     MSw11 = false;
+    MSw12 = false;
     MSw13 = true;
-    removeEventListener("keydown", switchKeysM11, false);
+    removeEventListener("keydown", switchKeysM12, false);
     }
 }
 
@@ -1085,6 +1135,8 @@ function endMenu(e) {
             locked();
             sEff = true;
             //KeyboardGame=false;
+
+            
 
             if (splashSpeech) {
                 gameIns=true;
@@ -1268,6 +1320,8 @@ function gameMode1(e) {
            keyboardMode = true;
            KeyboardMenu = true;
 
+           
+
            locked();
            canvas.removeEventListener("click", gameMode1);
         }
@@ -1396,11 +1450,28 @@ function endMenuLang(e) {
 
 
 
+
+
+
+
+
 function keyboardClose(e) {
     if (keys[13] && KeyMenu13 && MSw13) {
         setMenu=false;
         sEff=true;
         mouseMode=false;
+
+
+
+
+
+
+        //soundInstructions = true;
+
+
+
+
+        
         if (splashSpeech) {
             gameIns=true;
         }
@@ -1411,6 +1482,10 @@ function keyboardClose(e) {
         canvas.removeEventListener("click", keyboardClose);
     }
 }
+
+
+
+
 
 
 
@@ -1976,10 +2051,9 @@ function showMenu() {
 
     // Language Mode
     ctx.drawImage(le, 470, 485, 200, 100);
-    ctx.fillStyle = "white";
-    ctx.font = "600 22px Arial";
 
-    
+    ctx.fillStyle = "white";
+    ctx.font = "600 22px Arial"; 
 
     if (En) {
         ctx.fillText("Language", 567, 530);
@@ -2000,6 +2074,17 @@ function showMenu() {
         ctx.fillText("език", 567, 530);
         ctx.fillText("български", 567, 555);
     }
+
+    if (KeyboardMenu) {
+        if (KeyMenu12) {
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = "Blue";
+            ctx.fillRect(472, 486, 193, 100);
+        }
+    }
+
+    ctx.fillStyle = "black";
+    ctx.globalAlpha = 1.0;
 
     le.path = new Path2D();
     le.path.rect(470, 485, 200, 100);
@@ -2173,9 +2258,9 @@ function showMenu() {
         }
 
         // Langauge Menu
-        /*if (MSw12) {
+        if (MSw12) {
         addEventListener("keydown", switchKeysM12, false);
-        }*/
+        }
 
         /////////////////////////////////////////////////////
         // close Settings Menu
@@ -2234,37 +2319,27 @@ function showMenu() {
         }
 
 
+        // Game Mode
+        if (keyboardMode) {
+            addEventListener("keydown", keyboardModeOff);
+        }
 
-
+        // Game Instructions
         if (keys[13] && KeyMenu11 && MSw11) {  
             if (setMenu && !mouseMode && keyboardMode && !langaugeMenuSettings) { 
             gameIns=true;
             locked();
-        }
-    }
-
-
-
-
-
-
-
-        // Game Mode
-
-        if (keyboardMode) {
-            addEventListener("keydown", keyboardModeOff);
             }
+        }
 
-        
-
-
-
-
-
-
-
+        // Translations
+        if (keys[13] && KeyMenu12 && MSw12) {
+            langaugeMenuSettings = true;
+            locked();
+        }
 
 
+   
 
 
 
@@ -2355,8 +2430,12 @@ function settingMouse1(e) {
 }
 
 
-
-
+function splashAudKey(e) {
+if (keys[83]) { // audio
+    splashAud.play();
+}
+removeEventListener("keydown", splashAudKey);
+}
 
 
 
@@ -2371,6 +2450,7 @@ function gameStKey(e) {
 if (keys[32]) { // Go to Instructions
 
     soundInstructions=true;
+
     
     splashAud.pause();
     splashAud.currentTime = 0;
@@ -2395,11 +2475,11 @@ if (keys[32]) { // Go to Instructions
     SetSplashKey = false;
 
     mouseMode = false;
-    keyboardMode = true;
+    keyboardMode = true;   
+}
+removeEventListener("keydown", gameStKey);
+}
 
-    removeEventListener("keydown", gameStKey, false);
-}
-}
 
 function settingsKey(e) {
     if (keys[13] && SetSplashKey) { // settings
@@ -2407,8 +2487,8 @@ function settingsKey(e) {
         keyboardMode = true;
         setMenu=true;
         gameIns = false;
-        removeEventListener("keydown", settingsKey, false);
     }
+    removeEventListener("keydown", settingsKey);
 }
 
 
@@ -2482,7 +2562,7 @@ function wellDone() {
 function splash() {
 
 
-
+    console.log("finalScreen is " + finalScreen);
 
 
 
@@ -2604,27 +2684,22 @@ function splash() {
     // End of Settings Code
 
 
-    if (keys[83]) { // audio
-        splashAud.play();
-    }
+    
 
 
 
 if (SplashScreenOn) {
-    addEventListener("keydown", gameStKey, false);
-    addEventListener("keydown", settingsKey, false);
+    addEventListener("keydown", gameStKey);
+    addEventListener("keydown", settingsKey);
+    addEventListener("keydown", splashAudKey);
+
     
     canvas.addEventListener("click", closeSplash);
     canvas.addEventListener("click", speechMouse);
     canvas.addEventListener("click", settingMouse1);
 }
 
-  }
-
-
-
-
-
+}
 
 }
 
@@ -2663,6 +2738,10 @@ function closeSplash1key(e) {
            gameInsSpeech.pause();
            gameInsSpeech.currentTime = 0;
 
+           
+           //gameInsSpeechKey.pause();
+           //gameInsSpeechKey.currentTime = 0;
+
            // German
            gerInstructions.pause();
            gerInstructions.currentTime = 0;
@@ -2675,8 +2754,8 @@ function closeSplash1key(e) {
            incor=false;
            setMenu=true;
            gameIns=false;
-           removeEventListener("keydown", closeSplash1key);
-        }
+           }
+    removeEventListener("keydown", closeSplash1key);
 }
 
 
@@ -2701,8 +2780,8 @@ function gameStart(e) {
             // Bulgarian
             bulInstructions.pause();
             bulInstructions.currentTime = 0;  
-            bulInstructionsKey.pause();
-            bulInstructionsKey.currentTime = 0;
+            //bulInstructionsKey.pause();
+           //bulInstructionsKey.currentTime = 0;
 
             canvas.removeEventListener("click", gameStart);
         }
@@ -2713,25 +2792,30 @@ function gameStart(e) {
 function gameStartkey(e) {
     if (!setMenu && keyboardMode && !mouseMode) {
         if (keys[13]) {
-
-
-            
-
-
             gameIns = false;
             gameInsSpeech.pause();
             gameInsSpeech.currentTime = 0;
-            canvas.removeEventListener("keydown", gameStartkey, false);   
+
+
+            gameInsSpeechKey.pause();
+            gameInsSpeechKey.currentTime = 0;
+            
+
         }
     }
-}
+        removeEventListener("keydown", gameStartkey, false);   
+ }
+
 
 
 function gameInstructions() {
 
-    
+    //soundInstructions = true;
 
-    //console.log("gameIns is " + gameIns);
+
+
+
+    //console.log("soundInstructions is " + soundInstructions);
 
     if (mouseMode && togSpeech) {
 
@@ -2790,8 +2874,8 @@ function gameInstructions() {
         bulInstructions.pause();
         bulInstructions.currentTime = 0;
 
-        bulInstructionsKey.pause();
-        bulInstructionsKey.currentTime = 0;
+        //bulInstructionsKey.pause();
+        //bulInstructionsKey.currentTime = 0;
 
     }
         
@@ -2852,14 +2936,44 @@ function gameInstructions() {
         ctx.fillStyle = "Purple";
 
         if (KeyboardGame) {
+
             if (En) {
-            ctx.fillText("Press the SPACEBAR to tab", w, 380);
-            ctx.fillText("between the pictures", w, 430);
-            ctx.fillText("and press the ENTER KEY to select one", w, 480);
-            ctx.fillStyle = "Green";
-            ctx.font = "600 26px Comic Sans MS";
-            ctx.fillText("OR use your Switch - you need two Switches", w, 540);
+                ctx.fillText("Press the SPACEBAR to tab", w, 380);
+                ctx.fillText("between the pictures", w, 430);
+                ctx.fillText("and press the ENTER KEY to select one", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "600 26px Comic Sans MS";
+                ctx.fillText("OR use your Switch - you need two Switches", w, 540);
             }
+
+            ctx.font = "23px Comic Sans MS";
+            if (Ger) {
+                ctx.fillText("Drücken Sie die LEERTASTE zum Tabulator", w, 380);
+                ctx.fillText("zwischen den Bildern", w, 430);
+                ctx.fillText("und drücken Sie die EINGABETASTE, um eine auszuwählen", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "600 20px Comic Sans MS";
+                ctx.fillText("ODER verwenden Sie Ihren Switch - Sie benötigen zwei Switches", w, 540);
+            }
+
+            if (Rom) {
+                ctx.fillText("Apăsați BARA DE SPAȚIU pentru a selecta tab", w, 380);
+                ctx.fillText("intre poze", w, 430);
+                ctx.fillText("și apăsați tasta ENTER pentru a selecta unul", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "600 20px Comic Sans MS";
+                ctx.fillText("SAU folosiți comutatorul dvs. - aveți nevoie de două comutatoare", w, 540);
+            }
+
+            if (Bul) {
+                ctx.fillText("Натиснете ИНТЕРВАЛ за раздел", w, 380);
+                ctx.fillText("между снимките", w, 430);
+                ctx.fillText("и натиснете клавиша ENTER, за да изберете един", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "900 18px Comic Sans MS";
+                ctx.fillText("ИЛИ използвайте своя Switch - имате нужда от два превключвателя", w, 540);
+            }
+
         }
 
         if (!KeyboardGame) { 
@@ -2887,16 +3001,32 @@ function gameInstructions() {
         
 
         if (KeyboardGame) {
-            ctx.textAlign = "center"; 
-            ctx.fillText("Let's Go!", w, 620);
-            ctx.fillText("Press the SPACEBAR to start!", w, 660);
+            if (En) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Let's Go!", w, 620);
+                ctx.fillText("Press the SPACEBAR to start!", w, 660);
+            }
+            if (Ger) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Lass uns gehen!", w, 620);
+                ctx.fillText("Drücken Sie die LEERTASTE, um zu starten!", w, 660);
+            }
+            if (Rom) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Să mergem!", w, 620);
+                ctx.fillText("Apăsați pe SPAȚIU pentru a începe!", w, 660);
+            }
+            if (Bul) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Да тръгваме!", w, 620);
+                ctx.fillText("Натиснете ИНТЕРВАЛ, за да започнете!", w, 660);
+            }
         }
 
         if (!KeyboardGame) { 
-        ctx.textAlign = "center";
 
         if (En) {
-        ctx.fillText("Let's Go!", w, 550);
+            ctx.fillText("Let's Go!", w, 550);
         }
         if (Ger) {
             ctx.fillText("Lass uns gehen!", w, 550);
@@ -2907,10 +3037,11 @@ function gameInstructions() {
         if (Bul) {
             ctx.fillText("Да тръгваме!", w, 550);
         }
-
-        ctx.drawImage(cross1, w-30, 600, 50, 50);
-        cross1.path = new Path2D();
-        cross1.path.rect(w-30, 600, 50, 50);
+     
+            ctx.textAlign = "center";
+            ctx.drawImage(cross1, w-30, 600, 50, 50);
+            cross1.path = new Path2D();
+            cross1.path.rect(w-30, 600, 50, 50);
         }
 
     
@@ -3312,8 +3443,8 @@ function rightAnsText() {
 //// Keyboard
 function gameStartKeys(e) {
     gameIns = false;
-    gameInsSpeech.pause();
-    gameInsSpeech.currentTime = 0;
+    gameInsSpeechKey.pause();
+    gameInsSpeechKey.currentTime = 0;
     window.removeEventListener("keyup", gameStartKeys);
 }
 
@@ -3369,6 +3500,7 @@ function Q1checkClick4(e) {
     }
 }
 
+// keyboard
 
 function Q1selectKeys1(e) {
     if (!setMenu) {
@@ -3376,10 +3508,10 @@ function Q1selectKeys1(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = false;
-        cor1 = true;
-        removeEventListener("keydown", Q1selectKeys1);
+        cor1 = true;      
     }
     }
+    removeEventListener("keydown", Q1selectKeys1);
 }
 
 function Q1selectKeys2(e) {
@@ -3388,9 +3520,9 @@ function Q1selectKeys2(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", Q1selectKeys2);
     }
     }
+    removeEventListener("keydown", Q1selectKeys2);
 }
 
 function Q1selectKeys3(e) {
@@ -3399,9 +3531,9 @@ function Q1selectKeys3(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", Q1selectKeys3);
     }
     }
+    removeEventListener("keydown", Q1selectKeys3);
 }
 
 function Q1selectKeys4(e) {
@@ -3410,9 +3542,9 @@ function Q1selectKeys4(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", Q1selectKeys4);
     }
     }
+    removeEventListener("keydown", Q1selectKeys4);
 }
 
 /////////// end of Q1 Mouse Controls ////////////////////////////////
@@ -6645,8 +6777,8 @@ function keyWrong() {
         gerWrong.currentTime = 0;
         romWrong.pause();
         romWrong.currentTime = 0;
-        wrongVoice.pause();
-        wrongVoice.currentTime = 0;
+        wrongVoiceKey.pause();
+        wrongVoiceKey.currentTime = 0;
         bulWrong.pause();
         bulWrong.currentTime = 0;
         bulWrongKey.pause();
@@ -6667,6 +6799,7 @@ function keyWrong() {
         if (togSpeech && mouseMode) {
             if (En) {
                 wrongVoice.play();
+
             }
             if (Ger) {
                 gerWrong.play();
@@ -6681,13 +6814,13 @@ function keyWrong() {
 
         if (togSpeech && keyboardMode) {
             if (En) {
-                //wrongVoice.play();
+                wrongVoiceKey.play();
             }
             if (Ger) {
-                //gerWrong.play();
+                //gerWrongKey.play();
             }
             if (Rom) {
-                //romWrong.play();
+                //romWrongKey.play();
             }
             if (Bul) {
                 bulWrongKey.play();
@@ -6697,6 +6830,9 @@ function keyWrong() {
         if (!togSpeech) {
                 wrongVoice.pause();
                 wrongVoice.currentTime = 0;
+                wrongVoiceKey.pause();
+                wrongVoiceKey.currentTime = 0;
+
                 gerWrong.pause();
                 gerWrong.currentTime = 0;
                 romWrong.pause();
@@ -7181,16 +7317,34 @@ function playGame() {
     ///////////// Final Screen ////////////////////
 
     function rightClickFS() {
-        wellDoneVoice.pause();
-        wellDoneVoice.currentTime = 0;
+        wellDoneMse.pause();
+        wellDoneMse.currentTime = 0;
         music.pause();
         music.currentTime = 0;
+
         finalScreen = false;
+
         MCsplashSc = true;
-
-        
-
+        mouseMode = false;
+        keyboardMode = false;
         removeEventListener("click", rightClickFS);
+      }
+
+      function rightKeyFS() {
+         if (keys[13]) { // Go to Splash Screen
+             wellDoneKey.pause();
+             wellDoneKey.currentTime = 0;
+             music.pause();
+             music.currentTime = 0;
+
+             finalScreen = false;
+
+             SetSplashKey = true;
+             MCsplashSc = true;
+             mouseMode = false;
+             keyboardMode = false;
+         }
+         removeEventListener("keydown", rightKeyFS);
       }
 
     if (finalScreen) {
@@ -7207,9 +7361,14 @@ function playGame() {
         
         if (En) {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        if (togSpeech) {
-            wellDoneVoice.play();
+
+        if (togSpeech && mouseMode) {
+            wellDoneMse.play();
         }
+        if (togSpeech && keyboardMode) {
+            wellDoneKey.play();
+        }
+
         ctx.fillStyle = "blue";
         ctx.textAlign = "center"; 
         ctx.font = "90px Comic Sans MS";
@@ -7218,12 +7377,15 @@ function playGame() {
         ctx.fillText("for completing the", w, 300);
         ctx.fillText("Match Cards!", w, 400);
         ctx.font = "50px Comic Sans MS";
+
         if (mouseMode) {
-        ctx.fillText("Left click on your mouse", w, 500);
+            ctx.fillText("Left click on your mouse", w, 500);
         }
+
         if (keyboardMode) {
-        ctx.fillText("Press the Enter Key", w, 500);
+            ctx.fillText("Press the Enter Key", w, 500);
         }
+
         ctx.fillText("To play again!", w, 580);
         }
 
@@ -7300,17 +7462,14 @@ function playGame() {
         splashSettings = true;
         playingGameMode = true;
 
-        if (keys[13]) { // Go to Splash Screen
-            wellDoneVoice.pause();
-            wellDoneVoice.currentTime = 0;
-            music.pause();
-            music.currentTime = 0;
-            finalScreen = false;
-            SetSplashKey = true;
-            MCsplashSc = true;
-        }
+       
+        if (keyboardMode) {
+            addEventListener("keydown", rightKeyFS);
+            }
 
-        addEventListener("click", rightClickFS);
+        if (mouseMode) {
+            addEventListener("click", rightClickFS);
+            }
 
     }
 
