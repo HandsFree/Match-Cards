@@ -63,7 +63,7 @@ var Tuk = false;
             KeyGame4 = false;
             Sw1 = false;
             Sw2 = true;
-            removeEventListener("keydown", switchKeys1, false);
+            removeEventListener("keydown", switchKeys1);
         }
     }
     
@@ -77,7 +77,7 @@ var Tuk = false;
         Sw2 = false;
         Sw3 = true;
         Sw4 = false; 
-        removeEventListener("keydown", switchKeys2, false);
+        removeEventListener("keydown", switchKeys2);
         }
     }
     
@@ -92,7 +92,7 @@ var Tuk = false;
         Sw2 = false;
         Sw3 = false;
         Sw4 = true;
-        removeEventListener("keydown", switchKeys3, false);
+        removeEventListener("keydown", switchKeys3);
         }
     }
     
@@ -106,25 +106,25 @@ var Tuk = false;
         Sw2 = false;
         Sw3 = false;
         Sw4 = false;
-        removeEventListener("keydown", switchKeys4, false);
+        removeEventListener("keydown", switchKeys4);
         }
     }
     
     function keyboardAndswitch() {
         if (Sw1 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchKeys1, false);
+        addEventListener("keydown", switchKeys1);
         }
     
         if (Sw2 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchKeys2, false);
+        addEventListener("keydown", switchKeys2);
         }
         
         if (Sw3 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchKeys3, false);
+        addEventListener("keydown", switchKeys3);
         }
         
         if (Sw4 && !mouseMode && keyboardMode) {
-        addEventListener("keydown", switchKeys4, false);
+        addEventListener("keydown", switchKeys4);
         }
     }
 
@@ -1461,17 +1461,8 @@ function keyboardClose(e) {
         sEff=true;
         mouseMode=false;
 
-
-
-
-
-
         //soundInstructions = true;
-
-
-
-
-        
+   
         if (splashSpeech) {
             gameIns=true;
         }
@@ -1479,7 +1470,7 @@ function keyboardClose(e) {
         KeyboardGame=true;
         locked();
         returnKey();
-        canvas.removeEventListener("click", keyboardClose);
+        removeEventListener("keydown", keyboardClose);
     }
 }
 
@@ -2433,8 +2424,8 @@ function settingMouse1(e) {
 function splashAudKey(e) {
 if (keys[83]) { // audio
     splashAud.play();
+    removeEventListener("keydown", splashAudKey);
 }
-removeEventListener("keydown", splashAudKey);
 }
 
 
@@ -2475,9 +2466,10 @@ if (keys[32]) { // Go to Instructions
     SetSplashKey = false;
 
     mouseMode = false;
-    keyboardMode = true;   
+    keyboardMode = true;
+    
+    removeEventListener("keydown", gameStKey);
 }
-removeEventListener("keydown", gameStKey);
 }
 
 
@@ -2487,8 +2479,8 @@ function settingsKey(e) {
         keyboardMode = true;
         setMenu=true;
         gameIns = false;
+        removeEventListener("keydown", settingsKey);
     }
-    removeEventListener("keydown", settingsKey);
 }
 
 
@@ -2562,7 +2554,7 @@ function wellDone() {
 function splash() {
 
 
-    console.log("finalScreen is " + finalScreen);
+    //console.log("finalScreen is " + finalScreen);
 
 
 
@@ -2684,7 +2676,7 @@ function splash() {
     // End of Settings Code
 
 
-    
+
 
 
 
@@ -2732,7 +2724,6 @@ function closeSplash1(e) {
 
 function closeSplash1key(e) {
     if (setMenu && !mouseMode && keyboardMode) {
-        //if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
            
            // English
            gameInsSpeech.pause();
@@ -2754,8 +2745,9 @@ function closeSplash1key(e) {
            incor=false;
            setMenu=true;
            gameIns=false;
-           }
-    removeEventListener("keydown", closeSplash1key);
+
+           removeEventListener("keydown", closeSplash1key);
+           }   
 }
 
 
@@ -2800,10 +2792,9 @@ function gameStartkey(e) {
             gameInsSpeechKey.pause();
             gameInsSpeechKey.currentTime = 0;
             
-
+            removeEventListener("keydown", gameStartkey);
         }
     }
-        removeEventListener("keydown", gameStartkey, false);   
  }
 
 
@@ -3072,8 +3063,10 @@ function gameInstructions() {
         if (!setMenu && keyboardMode && !mouseMode) {
             splashSpeech = false;
             splashSettings = false;
-            addEventListener("keydown", gameStartkey);  
-        }  
+            addEventListener("keydown", gameStartkey);
+        }
+
+        
 
         firstQu=false;
 
@@ -3445,7 +3438,8 @@ function gameStartKeys(e) {
     gameIns = false;
     gameInsSpeechKey.pause();
     gameInsSpeechKey.currentTime = 0;
-    window.removeEventListener("keyup", gameStartKeys);
+    //removeEventListener("keyup", gameStartKeys);
+    removeEventListener("keydown", gameStartKeys);
 }
 
 
@@ -3508,10 +3502,10 @@ function Q1selectKeys1(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = false;
-        cor1 = true;      
+        cor1 = true;
+        removeEventListener("keydown", Q1selectKeys1);
     }
     }
-    removeEventListener("keydown", Q1selectKeys1);
 }
 
 function Q1selectKeys2(e) {
@@ -3520,9 +3514,9 @@ function Q1selectKeys2(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
+        removeEventListener("keydown", Q1selectKeys2);
     }
     }
-    removeEventListener("keydown", Q1selectKeys2);
 }
 
 function Q1selectKeys3(e) {
@@ -3531,9 +3525,9 @@ function Q1selectKeys3(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
+        removeEventListener("keydown", Q1selectKeys3);
     }
     }
-    removeEventListener("keydown", Q1selectKeys3);
 }
 
 function Q1selectKeys4(e) {
@@ -3542,9 +3536,9 @@ function Q1selectKeys4(e) {
         sir.pause();
         sir.currentTime = 0;
         incor = true;
+        removeEventListener("keydown", Q1selectKeys4);
     }
-    }
-    removeEventListener("keydown", Q1selectKeys4);
+    }   
 }
 
 /////////// end of Q1 Mouse Controls ////////////////////////////////
@@ -3623,7 +3617,7 @@ function quest1() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -3709,6 +3703,7 @@ function Q2checkClick4(e) {
         removeEventListener("keydown", Q2selectKeys1);
     }
     }
+    
 }
 
 function Q2selectKeys2(e) {
@@ -3720,6 +3715,7 @@ function Q2selectKeys2(e) {
         removeEventListener("keydown", Q2selectKeys2);
     }
     }
+    
 }
 
 function Q2selectKeys3(e) {
@@ -3731,6 +3727,7 @@ function Q2selectKeys3(e) {
         removeEventListener("keydown", Q2selectKeys3);
     }
     }
+    
 }
 
 function Q2selectKeys4(e) {
@@ -3743,6 +3740,7 @@ function Q2selectKeys4(e) {
         removeEventListener("keydown", Q2selectKeys4);
     }
     }
+    
 }
     
 //////////////////////////////////////////
@@ -3800,7 +3798,7 @@ function quest2() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -3976,7 +3974,7 @@ function quest3() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4154,7 +4152,7 @@ function quest4() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4329,7 +4327,7 @@ function quest5() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4506,7 +4504,7 @@ function quest6() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4679,7 +4677,7 @@ function quest7() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4789,7 +4787,7 @@ function Q8selectKeys3(e) {
         roarEff.currentTime = 0;
         incor = false;
         cor8 = true;
-        removeEventListener("keydown", Q7selectKeys3);
+        removeEventListener("keydown", Q8selectKeys3);
     }
     }
 }
@@ -4856,7 +4854,7 @@ function quest8() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -4939,7 +4937,7 @@ function Q9selectKeys1(e) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
         incor = true;
-        removeEventListener("keydown", Q8selectKeys1);
+        removeEventListener("keydown", Q9selectKeys1);
     }
     }
 }
@@ -5030,7 +5028,7 @@ function quest9() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -5211,7 +5209,7 @@ function quest10() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -5388,7 +5386,7 @@ function quest11() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -5571,7 +5569,7 @@ function quest12() {
     }
 
     if (gameIns) {
-        addEventListener("keydown", gameStartKeys, false);
+        addEventListener("keydown", gameStartKeys);
         addEventListener("click", gameStart, false);
     }
 
@@ -6258,7 +6256,6 @@ function rightKey6() {
         rightAnsClear();
         part1=true;
 
-        incor = false;
         cor8 = false;
         incor = false;
         MCgameSc8 = false;
@@ -6283,6 +6280,10 @@ function rightKey6() {
         rightAnsClear();
         part1=true;
 
+        cor8 = false;
+        incor = false;
+        MCgameSc8 = false;  
+
         if (!togQs2) {
             MCgameSc9 = true;
         }
@@ -6290,10 +6291,6 @@ function rightKey6() {
         if (togQs2) {
             finalScreen = true;
         }  
-
-        cor8 = false;
-        incor = false;
-        MCgameSc8 = false;     
 
     removeEventListener("keydown", rightKey8);
     }
@@ -6386,6 +6383,7 @@ function rightKey9() {
     incor = false;
     MCgameSc9 = false;
     MCgameSc10 = true;
+    //finalScreen = true;
     removeEventListener("keydown", rightKey9);
     }
   }
@@ -6477,6 +6475,7 @@ function rightKey10() {
     incor = false;
     MCgameSc10 = false;
     MCgameSc11 = true;
+    //finalScreen=true;
     removeEventListener("keydown", rightKey10);
     }
   }
@@ -6567,6 +6566,7 @@ function rightKey11() {
     incor = false;
     MCgameSc11 = false;
     MCgameSc12 = true;
+    //finalScreen=true;
     removeEventListener("keydown", rightKey11);
   }
 }
@@ -6680,7 +6680,7 @@ function rightKey12() {
         finalScreen = true;
     }
 
-    removeEventListener("click", rightKey12);
+    removeEventListener("keydown", rightKey12);
   }
 }
 
@@ -7343,8 +7343,8 @@ function playGame() {
              MCsplashSc = true;
              mouseMode = false;
              keyboardMode = false;
+             removeEventListener("keydown", rightKeyFS);
          }
-         removeEventListener("keydown", rightKeyFS);
       }
 
     if (finalScreen) {
@@ -7465,11 +7465,13 @@ function playGame() {
        
         if (keyboardMode) {
             addEventListener("keydown", rightKeyFS);
-            }
+        }
+
+            
 
         if (mouseMode) {
             addEventListener("click", rightClickFS);
-            }
+        }
 
     }
 
