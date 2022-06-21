@@ -14,6 +14,23 @@ var part3 = false;
 // End //////////////////
 
 
+
+var Run1 = true;
+var Run2 = true;
+var Run3 = true;
+var Run4 = true;
+var Run5 = true;
+var Run6 = true;
+var Run7 = true;
+var Run8 = true;
+var Run9 = true;
+var Run10 = true;
+var Run11 = true;
+var Run12 = true;
+
+
+
+
 var SplashScreenOn = true;
 
 
@@ -371,6 +388,12 @@ langR.src = "images/menuAssets/langR.png";
 const langBul = new Image();
 langBul.src = "images/menuAssets/langBul.png";
 
+const langGrk = new Image();
+langGrk.src = "images/menuAssets/langGrk.png";
+
+const langTurk = new Image();
+langTurk.src = "images/menuAssets/langTrk.png";
+
 
 // Close Menu
 const cross = new Image();
@@ -385,6 +408,28 @@ crossLang.src = "images/menuAssets/langCross.png";
 
 const insMouse = new Image();
 insMouse.src = "images/menuAssets/gi.png";
+
+
+
+
+
+
+
+const transIns = new Image();
+transIns.src = "images/menuAssets/transIns.png";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const le = new Image();
 le.src = "images/menuAssets/transLang.png";
@@ -518,7 +563,7 @@ var  VOuk12 = new Audio("sounds/en/VOuk12.mp3");
 ////////////////////////////////////////////
 // German
 var gerInstructions = new Audio("sounds/ger/instructions-ger.mp3");
-//var gerInstructionsKey = new Audio("sounds/ger/instructions-ger.mp3");
+var gerInstructionsKey = new Audio("sounds/ger/instructions-ger-key.mp3");
 
 //var gerWellDone = new Audio("sounds/ger/gerWellDone.mp3"); // Completion Mouse
 //var gerWellDoneKey = new Audio("sounds/ger/gerWellDoneKey.mp3"); // Completion Keyboard
@@ -1103,6 +1148,13 @@ function Question() {
         ctx.font = "60px Comic Sans MS";
         ctx.fillText("Карти за мачове", w, 77);
     }
+    if (Grk) {
+        ctx.fillText("Κάρτες αγώνα", w, 77);
+    }
+    if (Tuk) {
+        ctx.fillText("Maç Kartları", w, 77);
+    }
+    
 
     ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "red";
@@ -1118,6 +1170,12 @@ function Question() {
     }
     if (Bul) {
         ctx.fillText("Въпрос " + n, w, 125);
+    }
+    if (Grk) {
+        ctx.fillText("Ερώτηση " + n, w, 125);
+    }
+    if (Tuk) {
+        ctx.fillText("Soru " + n, w, 125);
     }
 }
 
@@ -1366,6 +1424,8 @@ function engLang(e) {
            Ger = false;
            Rom = false;
            Bul = false;
+           Grk = false;
+           Tuk = false;
            canvas.removeEventListener("click", engLang);
         }
     } 
@@ -1378,16 +1438,12 @@ function gerLang(e) {
            Ger = true;
            Rom = false;
            Bul = false;
+           Grk = false;
+           Tuk = false;
            canvas.removeEventListener("click", gerLang);
         }
     } 
 }
-
-
-
-
-
-
 
 function romLang(e) {
     if (setMenu) {
@@ -1396,12 +1452,12 @@ function romLang(e) {
            Ger = false;
            Rom = true;
            Bul = false;
+           Grk = false;
+           Tuk = false;
            canvas.removeEventListener("click", romLang);
         }
     } 
 }
-
-
 
 function bulLang(e) {
     if (setMenu) {
@@ -1410,10 +1466,42 @@ function bulLang(e) {
            Ger = false;
            Rom = false;
            Bul = true;
+           Grk = false;
+           Tuk = false;
            canvas.removeEventListener("click", bulLang);
         }
     } 
 }
+
+function grkLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langGrk.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = false;
+           Grk = true;
+           Tuk = false;
+           canvas.removeEventListener("click", grkLang);
+        }
+    } 
+}
+
+function trkLang(e) {
+    if (setMenu) {
+       if (mouseMode && ctx.isPointInPath(langTurk.path, e.offsetX, e.offsetY)) {
+           En = false;
+           Ger = false;
+           Rom = false;
+           Bul = false;
+           Grk = false;
+           Tuk = true;
+           canvas.removeEventListener("click", trkLang);
+        }
+    } 
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1951,7 +2039,7 @@ function showMenu() {
   ///////////////////////////////////////////////
 
 
-  if (playingGameMode) { // Comes on if the screen is on the Splash screen 
+  //if (playingGameMode) { // Comes on if the screen is on the Splash screen 
   
   
 ///////////////////////////////////////////
@@ -1992,7 +2080,7 @@ function showMenu() {
 ///////////////////////////
 
 
-} // playingGameMode = true
+//} // playingGameMode = true
 
 
 ////////////////////////////////
@@ -2001,7 +2089,30 @@ function showMenu() {
     // Instructions
    
     ctx.textAlign = "center"; 
-    ctx.drawImage(insMouse, 268, 485, 200, 100);
+    ctx.drawImage(transIns, 268, 485, 200, 100);
+
+    ctx.fillStyle = "white";
+    ctx.font = "600 22px Arial"; 
+
+    if (En) {
+        ctx.fillText("Game", 368, 530);
+        ctx.fillText("Instructions", 368, 555);
+    }
+
+    if (Ger) {
+        ctx.font = "600 21px Arial"; 
+        ctx.fillText("Spielanleitung", 368, 540);
+    }
+
+    if (Rom) {
+        ctx.fillText("Instrucțiuni", 368, 530);
+        ctx.fillText("de joc", 368, 555);
+    }
+
+    if (Bul) {
+        ctx.fillText("Инструкции", 368, 530);
+        ctx.fillText("за игра", 368, 555);
+    }
 
     if (KeyboardMenu) {
         if (KeyMenu11) {
@@ -2013,8 +2124,8 @@ function showMenu() {
 
     ctx.fillStyle = "black";
     ctx.globalAlpha = 1.0;
-    insMouse.path = new Path2D();
-    insMouse.path.rect(268, 485, 200, 100);
+    transIns.path = new Path2D();
+    transIns.path.rect(268, 485, 200, 100);
 
     if (mouseMode) {
     canvas.addEventListener("click", gameInsMouse);
@@ -2126,10 +2237,20 @@ function showMenu() {
         }
 
         ctx.fillText("Greek", 346, 600);
-        ctx.drawImage(langE, 330, 607, 40, 40);
+        ctx.drawImage(langGrk, 330, 607, 40, 40);
+        langGrk.path = new Path2D();
+        langGrk.path.rect(330, 607, 40, 40);
+        if (Grk) {
+            ctx.drawImage(rTick1, 330, 607, 40, 40);
+        }
 
         ctx.fillText("Turkish", 500, 600);
-        ctx.drawImage(langE, 480, 607, 40, 40);
+        ctx.drawImage(langTurk, 480, 607, 40, 40);
+        langTurk.path = new Path2D();
+        langTurk.path.rect(480, 607, 40, 40);
+        if (Tuk) {
+            ctx.drawImage(rTick1, 480, 607, 40, 40);
+        }
 
 
 
@@ -2137,6 +2258,8 @@ function showMenu() {
         canvas.addEventListener("click", gerLang);
         canvas.addEventListener("click", romLang);
         canvas.addEventListener("click", bulLang);
+        canvas.addEventListener("click", grkLang);
+        canvas.addEventListener("click", trkLang);
 
 
 
@@ -2801,7 +2924,7 @@ function gameStartkey(e) {
 
 function gameInstructions() {
 
-    //soundInstructions = true;
+    soundInstructions = true;
 
 
 
@@ -2837,7 +2960,7 @@ function gameInstructions() {
                 gameInsSpeechKey.play();
             }
             if (Ger) {
-                //gerInstructions.play();
+                gerInstructionsKey.play();
             }
             if (Rom) {
                 //romInstructions.play();
@@ -3547,6 +3670,7 @@ function Q1selectKeys4(e) {
 
 function quest1() {
 
+    
     playingGameMode = false;
 
     if (returnTo1) {
@@ -3562,7 +3686,7 @@ function quest1() {
 
     // Question 1
     // Only runs if instuctions and settings menu are off.
-    if (!gameIns && sEff) {
+    if (!gameIns && sEff && Run1) {
         //console.log(sEff + "Running");
         sir.play();
     }
@@ -3759,7 +3883,7 @@ function quest2() {
 
     // Question 2    
 
-    if (sEff) {
+    if (sEff && Run2) {
         cow1.play();
     }
     if (!sEff) {
@@ -3934,7 +4058,7 @@ function quest3() {
 
     // Question 3    
 
-    if (sEff) {
+    if (sEff && Run3) {
         lamb.play();
     }
 
@@ -4113,7 +4237,7 @@ function quest4() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run4) {
         oldPhone.play();
     }
     if (!sEff) {
@@ -4287,7 +4411,7 @@ function quest5() {
         returnTo1=false;
         }
     
-    if (sEff) {
+    if (sEff && Run5) {
         fireEng.play();
     }
     if (!sEff) {
@@ -4465,7 +4589,7 @@ function quest6() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run6) {
         microSound.play();
     }
     if (!sEff) {
@@ -4638,7 +4762,7 @@ function quest7() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run7) {
         bellSound.play();
     }
     if (!sEff) {
@@ -4815,7 +4939,7 @@ function quest8() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run8) {
         roarEff.play();
     }
     if (!sEff) {
@@ -4989,7 +5113,7 @@ function quest9() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run9) {
         pigeonSdEff.play();
     }
     if (!sEff) {
@@ -5170,7 +5294,7 @@ function quest10() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run10) {
         rugbyEff.play();
     }
     if (!sEff) {
@@ -5347,7 +5471,7 @@ function quest11() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run11) {
         barkEff.play();
     }
     if (!sEff) {
@@ -5530,7 +5654,7 @@ function quest12() {
         returnTo1=false;
         }
 
-    if (sEff) {
+    if (sEff && Run12) {
         tramEff.play();
     }
     if (!sEff) {
@@ -5617,6 +5741,8 @@ function quest12() {
 // mouse controls right Answer 1 //
 function rightClick1() {
 
+    Run1 = false;
+
     rightAnsClear();
     part1=true;
 
@@ -5631,6 +5757,8 @@ function rightClick1() {
 // keyboard
 function rightKey1() {
    if (keys[32]) { // Go to Q2
+
+    Run1 = false;
 
     rightAnsClear();
     part1=true;
@@ -5707,6 +5835,8 @@ function rightKey1() {
     // mouse controls right Answer 2 //
     function rightClick2() {
 
+        Run2 = false;
+
         rightAnsClear();
         part1=true;
 
@@ -5720,6 +5850,8 @@ function rightKey1() {
 
     function rightKey2() {
         if (keys[32]) { // Go to Q3
+
+            Run2 = false;
 
             rightAnsClear();
             part1=true;
@@ -5795,6 +5927,8 @@ function rightKey1() {
        // mouse controls right Answer 3 //
        function rightClick3() {
 
+        Run3 = false;
+
         rightAnsClear();
         part1=true;
 
@@ -5809,6 +5943,8 @@ function rightKey1() {
 
     function rightKey3() {
     if (keys[32]) { // Go to Q4
+
+        Run3 = false;
 
         rightAnsClear();
         part1=true;
@@ -5887,6 +6023,8 @@ function rightKey1() {
         rightAnsClear();
         part1=true;
 
+        Run4 = false;
+
         cor4 = false;
         incor = false;
         MCgameSc2 = false;
@@ -5907,6 +6045,8 @@ function rightKey1() {
 
 function rightKey4() {
     if (keys[32]) { // Go to Q5
+
+        Run4 = false;
 
         rightAnsClear();
         part1=true;
@@ -5986,6 +6126,8 @@ function rightKey4() {
     // mouse controls right Answer 5 //
     function rightClick5() {
 
+        Run5 = false;
+
         rightAnsClear();
         part1=true;
 
@@ -6003,6 +6145,8 @@ function rightKey4() {
     // keyboard controls right Answer 5 //
     function rightKey5() {
         if (keys[32]) { // Go to Q6
+
+            Run5 = false;
 
             rightAnsClear();
             part1=true;
@@ -6076,6 +6220,8 @@ function rightKey4() {
 
       // mouse controls right Answer 6 //
       function rightClick6() {
+
+        Run6 = false;
           
       rightAnsClear();
       part1=true;
@@ -6091,6 +6237,8 @@ function rightKey4() {
 // keyboard controls right Answer 6 //
 function rightKey6() {
     if (keys[32]) { // Go to Final Screen
+
+        Run6 = false;
 
     rightAnsClear();
     part1=true;
@@ -6165,6 +6313,8 @@ function rightKey6() {
     // mouse controls right Answer 7 //
     function rightClick7() {
 
+        Run7 = false;
+
         rightAnsClear();
         part1=true;
 
@@ -6179,6 +6329,8 @@ function rightKey6() {
   // keyboard controls right Answer 7 //
   function rightKey7() {
     if (keys[32]) {
+
+        Run7 = false;
 
     rightAnsClear();
     part1=true;
@@ -6253,6 +6405,8 @@ function rightKey6() {
        // mouse controls right Answer 8 //
        function rightClick8() {
 
+        Run8 = false;
+
         rightAnsClear();
         part1=true;
 
@@ -6276,6 +6430,8 @@ function rightKey6() {
    // keyboard controls right Answer 8 //
    function rightKey8() {
     if (keys[32]) { // Go to Final Screen
+
+        Run8 = false;
 
         rightAnsClear();
         part1=true;
@@ -6361,6 +6517,8 @@ function rightKey6() {
 // mouse controls right Answer 9 //
 function rightClick9() {
 
+    Run9 = false;
+
     rightAnsClear();
     part1=true;
 
@@ -6375,6 +6533,8 @@ function rightClick9() {
 // keyboard controls right Answer 9 //
 function rightKey9() {
     if (keys[32]) {
+
+        Run9 = false;
 
     rightAnsClear();
     part1=true;
@@ -6456,6 +6616,8 @@ function rightClick10() {
     rightAnsClear();
     part1=true;
 
+    Run10 = false;
+
     cor10 = false;
     incor = false;
     MCgameSc10 = false;
@@ -6470,6 +6632,8 @@ function rightKey10() {
 
     rightAnsClear();
     part1=true;
+
+    Run10 = false;
     
     cor10 = false;
     incor = false;
@@ -6543,6 +6707,8 @@ function rightKey10() {
 
 function rightClick11() {
 
+    Run11 = false;
+
     rightAnsClear();
     part1=true;
 
@@ -6558,6 +6724,8 @@ function rightClick11() {
 
 function rightKey11() {
     if (keys[32]) {
+
+        Run11 = false;
 
     rightAnsClear();
     part1=true;
@@ -7317,6 +7485,20 @@ function playGame() {
     ///////////// Final Screen ////////////////////
 
     function rightClickFS() {
+
+        Run1 = true;
+        Run2 = true;
+        Run3 = true;
+        Run4 = true;
+        Run5 = true;
+        Run6 = true;
+        Run7 = true;
+        Run8 = true;
+        Run9 = true;
+        Run10 = true;
+        Run11 = true;
+        Run12 = true;
+
         wellDoneMse.pause();
         wellDoneMse.currentTime = 0;
         music.pause();
@@ -7332,6 +7514,20 @@ function playGame() {
 
       function rightKeyFS() {
          if (keys[13]) { // Go to Splash Screen
+
+            Run1 = true;
+            Run2 = true;
+            Run3 = true;
+            Run4 = true;
+            Run5 = true;
+            Run6 = true;
+            Run7 = true;
+            Run8 = true;
+            Run9 = true;
+            Run10 = true;
+            Run11 = true;
+            Run12 = true;
+
              wellDoneKey.pause();
              wellDoneKey.currentTime = 0;
              music.pause();
@@ -7391,9 +7587,7 @@ function playGame() {
 
         if (Ger) {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            /*if (togSpeech) {
-                wellDoneVoiceGer.play();
-            }*/
+            
             ctx.fillStyle = "blue";
             ctx.textAlign = "center"; 
             ctx.font = "90px Comic Sans MS";
@@ -7402,13 +7596,22 @@ function playGame() {
             ctx.fillText("zum Abschluss der", w, 300);
             ctx.fillText("Spielkarten!", w, 400);
             ctx.font = "35px Comic Sans MS";
+            
             if (mouseMode) {
+                if (togSpeech) {
+                    wellDoneVoiceGer.play();
+                }
                 ctx.fillText("Klicken Sie mit der linken Maustaste", w, 500);
-                }
-                if (keyboardMode) {
+            }
+            if (keyboardMode) {
+                /*if (togSpeech) {
+                    wellDoneVoiceGerKey.play();
+                }*/
                 ctx.fillText("Drücken Sie die Eingabetaste", w, 500);
-                }
-                ctx.fillText("Wieder zu spielen!", w, 580);
+            
+            }
+
+            ctx.fillText("Wieder zu spielen!", w, 580);
             }
 
         if (Rom) {
