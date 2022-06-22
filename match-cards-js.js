@@ -412,7 +412,11 @@ insMouse.src = "images/menuAssets/gi.png";
 
 
 
+const transMode = new Image();
+transMode.src = "images/menuAssets/transMode.png";
 
+const transModeKey = new Image();
+transModeKey.src = "images/menuAssets/transModeKey.png";
 
 
 const transIns = new Image();
@@ -1372,7 +1376,7 @@ function MtogQ12(e) {
 // Game Mode //
 function gameMode1(e) {
     if (setMenu && !langaugeMenuSettings) {
-       if (mouseMode && ctx.isPointInPath(gm1.path, e.offsetX, e.offsetY)) {
+       if (mouseMode && ctx.isPointInPath(transMode.path, e.offsetX, e.offsetY)) {
 
            mouseMode = false;
            keyboardMode = true;
@@ -2043,11 +2047,51 @@ function showMenu() {
   
   
 ///////////////////////////////////////////
+
+    ctx.fillStyle = "white";
+    ctx.font = "700 21px Arial"; 
+
     // Game Mode Mouse
     if (mouseMode) {
-    ctx.drawImage(gm1, 65, 485, 200, 100);
-    gm1.path = new Path2D();
-    gm1.path.rect(65, 485, 200, 100);
+    ctx.drawImage(transMode, 65, 485, 200, 100);
+    
+    if (En) {
+        ctx.fillText("Game Mode", 105, 530);
+    }
+
+    if (Ger) {
+        ctx.fillText("Spielmodus", 105, 530);
+    }
+
+    if (Rom) {
+        ctx.fillText("Mod de joc", 105, 530);
+    }
+
+    if (Bul) {
+        ctx.fillText("Режим на игра", 88, 530);
+    }
+
+    /////////////////////////////////////////
+
+
+    if (En) {
+        ctx.fillText("Mouse", 125, 553);
+    }
+
+    if (Ger) {
+        ctx.fillText("Maus", 140, 553);
+    }
+
+    if (Rom) {
+        ctx.fillText("Mouse", 125, 553);
+    }
+
+    if (Bul) {
+        ctx.fillText("Мишка", 125, 553);
+    }
+
+    transMode.path = new Path2D();
+    transMode.path.rect(65, 485, 200, 100);
 
     canvas.addEventListener("click", gameMode1);
     }
@@ -2057,7 +2101,41 @@ function showMenu() {
     // Game Mode Keyboard
     if (keyboardMode) {
 
-        ctx.drawImage(gk, 65, 485, 200, 100);
+        ctx.drawImage(transModeKey, 65, 485, 200, 100);
+
+        if (En) {
+            ctx.fillText("Game Mode", 105, 530);
+        }
+    
+        if (Ger) {
+            ctx.fillText("Spielmodus", 105, 530);
+        }
+    
+        if (Rom) {
+            ctx.fillText("Mod de joc", 105, 530);
+        }
+    
+        if (Bul) {
+            ctx.fillText("Режим на игра", 88, 530);
+        }
+    
+        /////////////////////////////////////////
+
+        if (En) {
+            ctx.fillText("Keyboard", 116, 553);
+        }
+    
+        if (Ger) {
+            ctx.fillText("eingeben", 140, 553);
+        }
+    
+        if (Rom) {
+            ctx.fillText("", 125, 553);
+        }
+    
+        if (Bul) {
+            ctx.fillText("", 125, 553);
+        }
 
         if (KeyboardMenu) {
             if (KeyMenu10) {
@@ -2069,8 +2147,8 @@ function showMenu() {
         
             ctx.fillStyle = "black";
             ctx.globalAlpha = 1.0;
-            gk.path = new Path2D();
-            gk.path.rect(65, 485, 200, 100);
+            transModeKey.path = new Path2D();
+            transModeKey.path.rect(65, 485, 200, 100);
 
 
         }
@@ -2175,6 +2253,16 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("език", 567, 530);
         ctx.fillText("български", 567, 555);
+    }
+
+    if (Grk) {
+        ctx.fillText("Γλώσσα", 567, 530);
+        ctx.fillText("Ελληνικά", 567, 555);
+    }
+
+    if (Tuk) {
+        ctx.fillText("Dil", 567, 530);
+        ctx.fillText("Türk", 567, 555);
     }
 
     if (KeyboardMenu) {
@@ -2715,6 +2803,12 @@ function splash() {
     if (Bul) {
         ctx.fillText("Натисни тук!", w, 473);
     }
+    if (Grk) {
+        ctx.fillText("Κάντε κλικ ΕΔΩ!", w, 473);
+    }
+    if (Tuk) {
+        ctx.fillText("Buraya tıklayın!", w, 473);
+    }
     
 
 
@@ -2759,6 +2853,13 @@ function splash() {
     if (Bul) {
         ctx.fillText("Натисни тук!", w, 473);
     }
+    if (Grk) {
+        ctx.fillText("Κάντε κλικ ΕΔΩ!", w, 473);
+    }
+    if (Tuk) {
+        ctx.fillText("Buraya tıklayın!", w, 473);
+    }
+    
         
         ctx.font = "30px Comic Sans MS";
         ctx.fillText("or press the Spacebar", w, 535);
