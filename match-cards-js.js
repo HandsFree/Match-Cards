@@ -1627,6 +1627,12 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("Настройки", w, 100);
     }
+    if (Grk) {
+        ctx.fillText("Ρυθμίσεις", w, 100);
+    }
+    if (Tuk) {
+        ctx.fillText("Ayarlar", w, 100);
+    }
 
     ctx.textAlign = "left";
 
@@ -1664,6 +1670,14 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("Музика", 149, 162);
     }
+
+    if (Grk) {
+        ctx.fillText("ΜΟΥΣΙΚΗ", 149, 162);
+    }
+
+    if (Tuk) {
+        ctx.fillText("Müzik", 149, 162);
+    }
     
     ctx.fillStyle = "black";
     ctx.font = "700 30px Arial";
@@ -1700,6 +1714,12 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("Ha", 120, 230);
     }
+    if (Grk) {
+        ctx.fillText("Επί", 120, 230);
+    }
+    if (Tuk) {
+        ctx.fillText("Açık", 120, 230);
+    }
 
     ctx.drawImage(BoxMus2, 62, 245, 50, 50);
     BoxMus2.path = new Path2D();
@@ -1722,6 +1742,12 @@ function showMenu() {
     }
     if (Bul) {
         ctx.fillText("Изключено", 120, 282);
+    }
+    if (Grk) {
+        ctx.fillText("Μακριά από", 120, 282);
+    }
+    if (Tuk) {
+        ctx.fillText("Kapalı", 120, 282);
     }
 
 
@@ -1753,6 +1779,13 @@ function showMenu() {
     } 
     if (Bul) {
         ctx.fillText("Заден план", 475, 162);
+    }
+    
+    if (Grk) {
+        ctx.fillText("Ιστορικό", 500, 162);
+    } 
+    if (Tuk) {
+        ctx.fillText("Arka fon", 475, 162);
     }
 
 
@@ -1805,6 +1838,12 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("Цветен", 470, 230);
     }
+    if (Grk) {
+        ctx.fillText("Πολύχρωμα", 470, 230);
+    }
+    if (Tuk) {
+        ctx.fillText("Renkli", 470, 230);
+    }
 
     ctx.drawImage(BoxBack2, 410, 245, 50, 50);
     BoxBack2.path = new Path2D();
@@ -1828,6 +1867,12 @@ function showMenu() {
     }
     if (Bul) {
         ctx.fillText("Бяла", 470, 282);
+    }
+    if (Grk) {
+        ctx.fillText("άσπρο", 470, 282);
+    }
+    if (Tuk) {
+        ctx.fillText("Beyaz", 470, 282);
     }
 
     canvas.addEventListener("click", BacktickT);
@@ -1896,6 +1941,12 @@ function showMenu() {
     if (Bul) {
         ctx.fillText("Ha", 120, 407);
     }
+    if (Grk) {
+        ctx.fillText("Επί", 120, 407);
+    }
+    if (Tuk) {
+        ctx.fillText("Açık", 120, 407);
+    }
 
     if (KeyboardMenu) {
         if (KeyMenu6) {
@@ -1928,6 +1979,12 @@ function showMenu() {
     }
     if (Bul) {
         ctx.fillText("Изключено", 120, 462);
+    }
+    if (Grk) {
+        ctx.fillText("Μακριά από", 120, 462);
+    }
+    if (Tuk) {
+        ctx.fillText("Kapalı", 120, 462);
     }
 
     canvas.addEventListener("click", SptickT);
@@ -2071,6 +2128,16 @@ function showMenu() {
         ctx.fillText("Режим на игра", 88, 530);
     }
 
+    if (Grk) {
+        ctx.font = "700 14px Arial"; 
+        ctx.fillText("Λειτουργία παιχνιδιού", 89, 530);
+    }
+
+    if (Tuk) {
+        ctx.fillText("Oyun modu", 100, 530);
+    }
+
+
     /////////////////////////////////////////
 
 
@@ -2088,6 +2155,14 @@ function showMenu() {
 
     if (Bul) {
         ctx.fillText("Мишка", 125, 553);
+    }
+
+    if (Grk) {
+        ctx.fillText("Ποντίκι", 135, 553);
+    }
+
+    if (Tuk) {
+        ctx.fillText("Fare", 135, 553);
     }
 
     transMode.path = new Path2D();
@@ -2117,6 +2192,14 @@ function showMenu() {
     
         if (Bul) {
             ctx.fillText("Режим на игра", 88, 530);
+        }
+
+        if (Grk) {
+            ctx.fillText("Λειτουργία παιχνιδιού", 105, 530);
+        }
+    
+        if (Tuk) {
+            ctx.fillText("Oyun modu", 105, 530);
         }
     
         /////////////////////////////////////////
@@ -2718,6 +2801,12 @@ function translate1() {
     if (Bul) {
         ctx.fillText("Много добре!", w, 180);
     }
+    if (Grk) {
+        ctx.fillText("Μπράβο!", w, 180);
+    }
+    if (Tuk) {
+        ctx.fillText("Aferin!", w, 180);
+    }
 
 }
 
@@ -3116,6 +3205,14 @@ function gameInstructions() {
             ctx.font = "80px Comic Sans MS";
             ctx.fillText("Карти за мачове", w, 140);
         }
+        if (Grk) {
+            ctx.font = "90px Comic Sans MS";
+            ctx.fillText("Κάρτες αγώνα", w, 140);
+        }
+        if (Tuk) {
+            ctx.font = "80px Comic Sans MS";
+            ctx.fillText("Maç Kartları", w, 140);
+        }
 
         ctx.fillStyle = "Blue";
         ctx.font = "600 65px Comic Sans MS";
@@ -3133,6 +3230,12 @@ function gameInstructions() {
         if (Bul) {
             ctx.fillText("Съпоставете звука", w, 240);
         }
+        if (Grk) {
+            ctx.fillText("Ταίριαξε τον ήχο", w, 240);
+            }
+            if (Tuk) {
+                ctx.fillText("Sesi eşleştir", w, 240);
+            }
 
         if (En) {
         ctx.fillText("to the picture!", w, 300);
@@ -3145,6 +3248,12 @@ function gameInstructions() {
         }
         if (Bul) {
             ctx.fillText("към снимката!", w, 300);
+        }
+        if (Grk) {
+            ctx.fillText("στην εικόνα!", w, 300);
+        }
+        if (Tuk) {
+            ctx.fillText("resme!", w, 300);
         }
 
         ctx.font = "30px Comic Sans MS";
@@ -3189,6 +3298,24 @@ function gameInstructions() {
                 ctx.fillText("ИЛИ използвайте своя Switch - имате нужда от два превключвателя", w, 540);
             }
 
+            if (Grk) {
+                ctx.fillText("", w, 380);
+                ctx.fillText("", w, 430);
+                ctx.fillText("", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "900 18px Comic Sans MS";
+                ctx.fillText("", w, 540);
+            }
+
+            if (Tuk) {
+                ctx.fillText("", w, 380);
+                ctx.fillText("", w, 430);
+                ctx.fillText("", w, 480);
+                ctx.fillStyle = "Green";
+                ctx.font = "900 18px Comic Sans MS";
+                ctx.fillText("", w, 540);
+            }
+
         }
 
         if (!KeyboardGame) { 
@@ -3208,6 +3335,14 @@ function gameInstructions() {
             if (Bul) {
                 ctx.fillText("С помощта на мишката за", w, 380);
                 ctx.fillText("Щракнете с левия бутон върху снимката", w, 440);
+            }
+            if (Grk) {
+                ctx.fillText("Χρησιμοποιώντας το ποντίκι σας για να", w, 380);
+                ctx.fillText("Αριστερό κλικ στην εικόνα", w, 440);
+            }
+            if (Tuk) {
+                ctx.fillText("Farenizi kullanarak", w, 380);
+                ctx.fillText("Resmin üzerine sol tıklayın", w, 440);
             }
         }
 
@@ -3236,6 +3371,16 @@ function gameInstructions() {
                 ctx.fillText("Да тръгваме!", w, 620);
                 ctx.fillText("Натиснете ИНТЕРВАЛ, за да започнете!", w, 660);
             }
+            if (Grk) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Πάμε!", w, 620);
+                ctx.fillText("Πατήστε το πλήκτρο διαστήματος για να ξεκινήσετε!", w, 660);
+            }
+            if (Tuk) {
+                ctx.textAlign = "center"; 
+                ctx.fillText("Hadi gidelim!", w, 620);
+                ctx.fillText("Başlamak için Ara Çubuğu'na basın!", w, 660);
+            }
         }
 
         if (!KeyboardGame) { 
@@ -3251,6 +3396,12 @@ function gameInstructions() {
         }
         if (Bul) {
             ctx.fillText("Да тръгваме!", w, 550);
+        }
+        if (Grk) {
+            ctx.fillText("Πάμε!", w, 550);
+        }
+        if (Tuk) {
+            ctx.fillText("Hadi gidelim!", w, 550);
         }
      
             ctx.textAlign = "center";
@@ -3499,6 +3650,12 @@ function instructions() {
     if (Bul) {
         ctx.fillText("Щракнете с левия бутон върху снимката", w, 670);
     }
+    if (Grk) {
+        ctx.fillText("Αριστερό κλικ στην εικόνα", w, 680);
+    }
+    if (Tuk) {
+        ctx.fillText("Resmin üzerine sol tıklayın", w, 670);
+    }
 
     }
 }
@@ -3591,6 +3748,22 @@ function rightAnsText() {
          }
     }
 
+    if (Grk) {
+        ctx.fillText("Αριστερό κλικ στο ποντίκι σας", w, 400);
+        if (part3 && togSpeech) {
+            //mseGRK.play();
+            part3 = false;
+         }
+    }
+
+    if (Tuk) {
+        ctx.fillText("Farenize sol tıklayın", w, 400);
+        if (part3 && togSpeech) {
+            //mseTUK.play();
+            part3 = false;
+         }
+    }
+
     }
 
     if (keyboardMode) {
@@ -3641,8 +3814,12 @@ function rightAnsText() {
          ctx.fillText("pentru următoarea întrebare!", w, 450);
      }
      
-     if (Bul) {
-        ctx.fillText("за следващия въпрос!", w, 450);
+     if (Grk) {
+        ctx.fillText("για την επόμενη ερώτηση!", w, 450);
+    }
+
+    if (Tuk) {
+        ctx.fillText("sonraki soru için!", w, 450);
     }
     
 }
@@ -7154,6 +7331,22 @@ function keyWrong() {
             ctx.fillText("Защо не опитате отново?", w, 380);
         }
 
+        if (Grk) {
+            ctx.fillText("Ωχ όχι!", w, 170);
+            ctx.font = "40px Comic Sans MS";
+            ctx.fillText("αυτό δεν είναι σωστό!", w, 270);
+            ctx.fillStyle = "blue";
+            ctx.fillText("Γιατί να μην δοκιμάσετε ξανά;", w, 380);
+            }
+
+            if (Tuk) {
+                ctx.fillText("Oh hayır!", w, 170);
+                ctx.font = "40px Comic Sans MS";
+                ctx.fillText("Bu doğru değil!", w, 270);
+                ctx.fillStyle = "blue";
+                ctx.fillText("Neden tekrar denemiyorsunuz?", w, 380);
+            }
+
         ctx.fillStyle = "red";
         ctx.font = "36px Comic Sans MS";
 
@@ -7174,6 +7367,15 @@ function keyWrong() {
                 ctx.font = "32px Comic Sans MS";
                 ctx.fillText("Щракнете с левия бутон върху мишката", w, 500);
                 ctx.fillText("продължавам!", w, 560);
+            }
+            if (Grk) {
+                ctx.fillText("Αριστερό κλικ στο ποντίκι σας", w, 500);
+                ctx.fillText("να συνεχίσει!", w, 560);
+            }
+            if (Tuk) {
+                ctx.font = "32px Comic Sans MS";
+                ctx.fillText("Farenize Sol Tıklayın", w, 500);
+                ctx.fillText("devam etmek!", w, 560);
             }
         }
 
@@ -7758,6 +7960,50 @@ function playGame() {
                 }
                 ctx.fillText("Да играя отново!", w, 580);
                 }
+
+                if (Grk) {
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    /*if (togSpeech) {
+                        wellDoneVoice.play();
+                    }*/
+                    ctx.fillStyle = "blue";
+                    ctx.textAlign = "center"; 
+                    ctx.font = "90px Comic Sans MS";
+                    ctx.fillText("Μπράβο!", w, 200);
+                    ctx.font = "55px Comic Sans MS";
+                    ctx.fillText("για την ολοκλήρωση του", w, 300);
+                    ctx.fillText("Κάρτες αγώνα", w, 400);
+                    ctx.font = "35px Comic Sans MS";
+                    if (mouseMode) {
+                    ctx.fillText("Αριστερό κλικ στο ποντίκι σας", w, 500);
+                    }
+                    if (keyboardMode) {
+                    ctx.fillText("Πατήστε το πλήκτρο Enter", w, 500);
+                    }
+                    ctx.fillText("Για να παίξω ξανά!", w, 580);
+                    }
+
+                    if (Tuk) {
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        /*if (togSpeech) {
+                            wellDoneVoice.play();
+                        }*/
+                        ctx.fillStyle = "blue";
+                        ctx.textAlign = "center"; 
+                        ctx.font = "90px Comic Sans MS";
+                        ctx.fillText("Aferin!", w, 200);
+                        ctx.font = "70px Comic Sans MS";
+                        ctx.fillText("tamamlamak için", w, 300);
+                        ctx.fillText("Maç Kartları", w, 400);
+                        ctx.font = "35px Comic Sans MS";
+                        if (mouseMode) {
+                        ctx.fillText("Farenize sol tıklayın", w, 500);
+                        }
+                        if (keyboardMode) {
+                        ctx.fillText("Enter Tuşuna basın", w, 500);
+                        }
+                        ctx.fillText("Tekrar oynamak için!", w, 580);
+                        }
 
         KeyboardGame = false;
         n = 1;
