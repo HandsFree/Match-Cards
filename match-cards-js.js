@@ -502,18 +502,24 @@ var  wdEn = new Audio("sounds/well_done/w-d-eng.mp3");
 var  wdGer = new Audio("sounds/well_done/w-d-ger.mp3");
 var  wdRom = new Audio("sounds/well_done/w-d-rom.mp3");
 var  wdBul = new Audio("sounds/well_done/w-d-bul.mp3");
+var  wdGrk = new Audio("sounds/well_done/w-d-Greek.mp3");
+var  wdTuk = new Audio("sounds/well_done/w-d-Tuk.mp3");
 
 // mouse
 var  mseUK = new Audio("sounds/mouse/mseUK.mp3");
 var  mseGER = new Audio("sounds/mouse/mseGER.mp3");
 var  mseROM = new Audio("sounds/mouse/mseROM.mp3");
-//var  mseBul = new Audio("sounds/mouse/mseBUL.mp3");
+var  mseBUL = new Audio("sounds/mouse/mseBUL.mp3");
+var  mseGRK = new Audio("sounds/mouse/mseGRK.mp3");
+var  mseTUK = new Audio("sounds/mouse/mseTUK.mp3");
 
 // keyboard
 var  keyUK = new Audio("sounds/keyboard/keyUK.mp3");
 var  keyGER = new Audio("sounds/keyboard/keyGER.mp3");
 var  keyROM = new Audio("sounds/keyboard/keyROM.mp3");
-//var  keyBul = new Audio("sounds/keyboard/keyBUL.mp3");
+var  keyBUL = new Audio("sounds/keyboard/keyBUL.mp3");
+var  keyGRK = new Audio("sounds/keyboard/keyGRK.mp3");
+var  keyTUK = new Audio("sounds/keyboard/keyTUK.mp3");
 
 
 // Music
@@ -633,6 +639,10 @@ var  VObul4 = new Audio("sounds/bul/VObul4.mp3");
 var  VObul5 = new Audio("sounds/bul/VObul5.mp3");
 var  VObul6 = new Audio("sounds/bul/VObul6.mp3");
 // End of Bulgerian
+
+// Greek
+
+// Turkish
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -2862,11 +2872,16 @@ function wellDone() {
         part1 = false;
         part2 = true;
     }
-    /*if () {
-        wdEn.play();
+    if (Grk) {
+        wdGrk.play();
         part1 = false;
         part2 = true;
-    }*/
+    }
+    if (Tuk) {
+        wdTuk.play();
+        part1 = false;
+        part2 = true;
+    }
 
 }
 
@@ -3789,7 +3804,7 @@ function rightAnsText() {
     if (Bul) {
         ctx.fillText("Щракнете с левия бутон върху мишката", w, 400);
         if (part3 && togSpeech) {
-            //mseBUL.play();
+            mseBUL.play();
             part3 = false;
          }
     }
@@ -3797,7 +3812,7 @@ function rightAnsText() {
     if (Grk) {
         ctx.fillText("Αριστερό κλικ στο ποντίκι σας", w, 400);
         if (part3 && togSpeech) {
-            //mseGRK.play();
+            mseGRK.play();
             part3 = false;
          }
     }
@@ -3805,7 +3820,7 @@ function rightAnsText() {
     if (Tuk) {
         ctx.fillText("Farenize sol tıklayın", w, 400);
         if (part3 && togSpeech) {
-            //mseTUK.play();
+            mseTUK.play();
             part3 = false;
          }
     }
@@ -3841,7 +3856,23 @@ function rightAnsText() {
      if (Bul) {  
         ctx.fillText("Натиснете интервала", w, 400);
         if (part3 && togSpeech) {
-            //keyBUL.play();
+            keyBUL.play();
+            part3 = false;
+         }
+     }
+
+     if (Grk) {  
+        ctx.fillText("Πατήστε το πλήκτρο διαστήματος", w, 400);
+        if (part3 && togSpeech) {
+            keyGRK.play();
+            part3 = false;
+         }
+     }
+
+     if (Tuk) {  
+        ctx.fillText("Ara Çubuğuna basın", w, 400);
+        if (part3 && togSpeech) {
+            keyTUK.play();
             part3 = false;
          }
      }
@@ -3859,6 +3890,10 @@ function rightAnsText() {
      if (Rom) {
          ctx.fillText("pentru următoarea întrebare!", w, 450);
      }
+
+     if (Bul) {
+        ctx.fillText("за следващия въпрос!", w, 450);
+    }
      
      if (Grk) {
         ctx.fillText("για την επόμενη ερώτηση!", w, 450);
@@ -6365,7 +6400,7 @@ function rightKey1() {
         if (Grk) { 
             ctx.fillText("Ο ήχος ήταν αρνί!", w, 290);
             if (part2 && togSpeech) {
-                VOrom3.play();
+                //VOgrk3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6374,7 +6409,7 @@ function rightKey1() {
         if (Tuk) { 
             ctx.fillText("Ses bir kuzuydu!", w, 290);
             if (part2 && togSpeech) {
-                VObul3.play();
+                //VOtuk3.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6490,7 +6525,7 @@ function rightKey4() {
         if (Grk) { 
             ctx.fillText("Ο ήχος ήταν παλιό τηλέφωνο!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom4.play();
+                //VOgrk4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6499,7 +6534,7 @@ function rightKey4() {
         if (Tuk) { 
             ctx.fillText("Ses eski bir telefondu!", w, 290);
             if (part2 && togSpeech) {
-                //VObul4.play();
+                //VOtuk4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6603,7 +6638,7 @@ function rightKey4() {
         if (Grk) { 
             ctx.fillText("Ο ήχος ήταν Πυροσβεστική!", w, 290);
             if (part2 && togSpeech) {
-                //VOrom5.play();
+                //VOgrk5.play();
                 part2 = false;
                 part3 = true;
             }
@@ -6612,7 +6647,7 @@ function rightKey4() {
         if (Tuk) { 
             ctx.fillText("Ses bir İtfaiye Aracıydı!", w, 290);
             if (part2 && togSpeech) {
-                //VObul5.play();
+                //VOtuk5.play();
                 part2 = false;
                 part3 = true;
             }
@@ -7176,6 +7211,24 @@ function rightKey10() {
             }
         }
 
+        if (Grk) { 
+            ctx.fillText("Ο ήχος ήταν παιχνίδι ράγκμπι!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom10.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Tuk) { 
+            ctx.fillText("Ses bir Rugby oyunuydu!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom10.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
     ctx.font = "40px Comic Sans MS";
     rightAnsText();
 
@@ -7264,6 +7317,24 @@ function rightKey11() {
 
         if (Bul) { 
             ctx.fillText("Звукът беше куче Коли!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom11.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Grk) { 
+            ctx.fillText("Ο ήχος ήταν σκύλος Κόλεϊ!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom11.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Tuk) { 
+            ctx.fillText("Ses bir Collie Dog'du!", w, 290);
             if (part2 && togSpeech) {
                 //VOrom11.play();
                 part2 = false;
@@ -7381,6 +7452,24 @@ function rightKey12() {
 
         if (Bul) { 
             ctx.fillText("Звукът беше трамвай!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom12.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Grk) { 
+            ctx.fillText("Ο ήχος ήταν τραμ!", w, 290);
+            if (part2 && togSpeech) {
+                //VOrom12.play();
+                part2 = false;
+                part3 = true;
+            }
+        }
+
+        if (Tuk) { 
+            ctx.fillText("Ses bir tramvaydı!", w, 290);
             if (part2 && togSpeech) {
                 //VOrom12.play();
                 part2 = false;
