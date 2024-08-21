@@ -7,11 +7,15 @@ const ctx = canvas.getContext('2d');
 canvas.setAttribute('tabindex','1');
 canvas.focus();
 
+var reStartAgain = false;
+
 // Voiceovers ////////////
 var part1 = true;
 var part2 = false;
 var part3 = false;
 // End //////////////////
+
+var startGame = true;
 
 
 
@@ -305,6 +309,10 @@ SettingsBox.src = "images/SettingsBox.png";
 
 const settings = new Image();
 settings.src = "images/settings.png";
+
+// reSet icon on game screen
+const reSet = new Image();
+reSet.src = "images/settings.png";
 
 
 // SettingsPic1
@@ -1134,9 +1142,6 @@ function keyboardModeOff(e) {
     KeyboardGame = false;
     KeyboardMenu = false;
     locked();  
-
-
-    //console.log("keyboardMode is " + keyboardMode +  " keyboardGame is " + KeyboardGame + " mouseMode is " +  mouseMode);
 
     removeEventListener("keydown", keyboardModeOff, false);
    }
@@ -2276,7 +2281,7 @@ function showMenu() {
     // Instructions
    
     ctx.textAlign = "center"; 
-    ctx.drawImage(transIns, 268, 485, 200, 100);
+    /*ctx.drawImage(transIns, 268, 485, 200, 100);
 
     ctx.fillStyle = "white";
     ctx.font = "600 22px Arial"; 
@@ -2328,7 +2333,7 @@ function showMenu() {
     canvas.addEventListener("click", gameInsMouse);
     }
 
-    /*if (keyboardMode) {
+    if (keyboardMode) {
     addEventListener("keydown", gameInsKeyboard);
     }*/
 
@@ -2687,9 +2692,74 @@ addEventListener("keydown", keyboardClose);
 
 // End Splash Screen
 function closeSplash(e) {
-  if (!setMenu) {
 
-    if (ctx.isPointInPath(SplashScreenOn && clickHere.path, e.offsetX, e.offsetY)) { 
+  if (!setMenu) {
+    
+    
+
+
+    if (ctx.isPointInPath(SplashScreenOn && clickHere.path, e.offsetX, e.offsetY)) {
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if (reStartAgain) {
+            //console.log("Been here before too!");
+            n = 1; // Question Count
+            gameSc = true;
+
+            MCgameSc1 = true;
+            MCgameSc2 = false;
+            MCgameSc3 = false;
+            MCgameSc4 = false;
+            MCgameSc5 = false;
+            MCgameSc6 = false;
+            MCgameSc7 = false;
+            MCgameSc8 = false;
+            MCgameSc9 = false;
+            MCgameSc10 = false;
+            MCgameSc11 = false;
+            MCgameSc12 = false;
+            cor1 = false;
+            cor2 = false;
+            cor3 = false;
+            cor4 = false;
+            cor5 = false;
+            cor6 = false;
+            cor7 = false;
+            cor8 = false;
+            cor9 = false;
+            cor10 = false;
+            cor11 = false;
+            cor12 = false;
+            gameIns = true;
+            startGame = true;
+
+
+        }
 
         soundInstructions = true;
       
@@ -2709,6 +2779,36 @@ function closeSplash(e) {
 
         MCgameSc1 = true;
         gameIns = true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         canvas.removeEventListener("click", closeSplash);
     }
@@ -2896,6 +2996,10 @@ function wellDone() {
 
 function splash() {
 
+    /*if (reStartAgain) {
+        console.log("Been here before!");
+    }*/
+
 
     //console.log("finalScreen is " + finalScreen);
 
@@ -3012,8 +3116,10 @@ function splash() {
 
     ctx.font = "900 12px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Speech", 77, 520);
-    ctx.fillText("S Key", 77, 540);
+    ctx.fillText("Left Click", 77, 520);
+    ctx.fillText("for", 77, 540);
+    ctx.fillText("Speech", 77, 560);
+    //ctx.fillText("S Key", 77, 540);
     // End of Speech Code //
 
     // Settings code //
@@ -3025,10 +3131,12 @@ function splash() {
 
     ctx.font = "900 12px arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Settings", 635, 510);
-    ctx.fillText("ENTER Key", 635, 530);
-    ctx.fillText("OR", 635, 545);
-    ctx.fillText("Switch", 635, 560);
+    ctx.fillText("Left Click", 635, 510);
+    ctx.fillText("For", 635, 530);
+    ctx.fillText("Settings", 635, 550);
+    //ctx.fillText("ENTER Key", 635, 530);
+    //ctx.fillText("OR", 635, 545);
+    //ctx.fillText("Switch", 635, 560);
     // End of Settings Code
 
 
@@ -3054,7 +3162,9 @@ if (SplashScreenOn) {
 
 
 function closeSplash1(e) {
+    
     if (setMenu && mouseMode && !keyboardMode) {
+    
         if (ctx.isPointInPath(cross1.path, event.offsetX, event.offsetY)) {
            
            // English
@@ -3152,6 +3262,72 @@ function gameStartkey(e) {
         }
     }
  }
+
+
+
+
+
+
+
+
+
+
+
+
+function reStart(e) {
+    if (ctx.isPointInPath(reSet.path, e.offsetX, e.offsetY)) {
+
+        startGame = false;
+        MCsplashSc = true;
+        mouseMode = false;
+        keyboardMode = false;
+        SplashScreenOn = true;
+
+        sir.pause();
+        sir.currentTime = 0;
+cow1.pause();
+cow1.currentTime = 0;
+lamb.pause();
+lamb.currentTime = 0;
+oldPhone.pause();
+oldPhone.currentTime = 0;
+fireEng.pause();
+fireEng.currentTime = 0;
+microSound.pause();
+microSound.currentTime = 0;
+bellSound.pause();
+bellSound.currentTime = 0;
+pigeonSdEff.pause();
+pigeonSdEff.currentTime = 0;
+roarEff.pause();
+roarEff.currentTime = 0;
+rugbyEff.pause();
+rugbyEff.currentTime = 0;
+barkEff.pause();
+barkEff.currentTime = 0;
+tramEff.pause();
+tramEff.currentTime = 0;
+
+reStartAgain = true;
+
+    canvas.removeEventListener("click", reStart);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3752,12 +3928,12 @@ if (keyboardMode) {
     ctx.fillStyle = "red";
     ctx.fillText("Settings", 40, 90);
 
-    if (mouseMode) {
+    //if (mouseMode) {
         ctx.fillText("Left Click", 40, 106);
-    }
-    if (keyboardMode) {
+    //}
+    /*if (keyboardMode) {
         ctx.fillText("Press S", 40, 106);
-    }
+    }*/
 
     // text
     Question();
@@ -3766,6 +3942,20 @@ if (keyboardMode) {
     // border
     ctx.lineWidth = 4;
     //ctx.strokeStyle = "blue";
+
+
+    //Restart Game
+
+    ctx.drawImage(reSet, 630, 0, 80, 80);
+    reSet.path = new Path2D();
+    reSet.path.rect(600, 0, 80, 80);
+
+    ctx.font = "bold 13px Comic sans MS";
+    ctx.fillStyle = "red";
+    ctx.fillText("Left Click", 670, 90);
+    ctx.fillText("to restart", 670, 105);
+
+    canvas.addEventListener("click", reStart);
 }
 
 
@@ -7722,9 +7912,15 @@ function playGame() {
 
     if (MCsplashSc) {
         splash();
-    }    
-
+    }
     
+    if (startGame) {
+        startPlayGame();
+    }
+
+}
+
+function startPlayGame() {
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
