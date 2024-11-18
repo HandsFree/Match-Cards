@@ -4,8 +4,10 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
-canvas.setAttribute('tabindex','1');
-canvas.focus();
+var volGameOff = true;
+
+//canvas.setAttribute('tabindex','1');
+//canvas.focus();
 
 var reStartAgain = false;
 
@@ -16,6 +18,9 @@ var part3 = false;
 // End //////////////////
 
 var startGame = true;
+
+// 11/11/24
+var rollBall = false;
 
 
 
@@ -32,7 +37,47 @@ var Run10 = true;
 var Run11 = true;
 var Run12 = true;
 
+var tapeOn = false;
 
+var vol1 = false;
+var vol2 = false;
+var vol3 = true;
+var vol4 = false;
+var vol5 = false;
+
+const reStartImg = new Image();
+reStartImg.src = "images/reload.png"; // Cog Image - Restart Game
+
+// vol gfx
+// 1
+const v1Gr = new Image();
+v1Gr.src = "red_vol.png";
+const v1Gb = new Image();
+v1Gb.src = "black_vol.png";
+
+// 2
+const v2Gr = new Image();
+v2Gr.src = "red_vol.png";
+const v2Gb = new Image();
+v2Gb.src = "black_vol.png";
+
+// 3
+const v3Gr = new Image();
+v3Gr.src = "red_vol.png";
+const v3Gb = new Image();
+v3Gb.src = "black_vol.png";
+
+// 4
+const v4Gr = new Image();
+v4Gr.src = "red_vol.png";
+const v4Gb = new Image();
+v4Gb.src = "black_vol.png";
+
+// 5
+const v5Gr = new Image();
+v5Gr.src = "red_vol.png";
+const v5Gb = new Image();
+v5Gb.src = "black_vol.png";
 
 
 var SplashScreenOn = true;
@@ -196,6 +241,16 @@ var Sw4 = false;                        //
 ///End Switch Controls////////////////////
 
 
+var setVoloff = false;
+var blue_rib = true;
+var reSet1 = false;
+var splashLock = true;
+
+var volLock = true;
+var volOff = true;
+
+var holdCountDown = false; // if vol controls are open
+var holdCountDownD = false; // if vol controls are open - no digits
 
 
 
@@ -291,6 +346,9 @@ window.addEventListener("keyup", function(e){
     }
 });
 
+const wBg = new Image();
+wBg.src = "images/white_bg.png";
+
 //Splash
 const mcSplash = new Image();
 mcSplash.src = "images/match-Cards.png";
@@ -312,7 +370,7 @@ settings.src = "images/settings.png";
 
 // reSet icon on game screen
 const reSet = new Image();
-reSet.src = "images/settings.png";
+reSet.src = "images/reload.png";
 
 
 // SettingsPic1
@@ -331,8 +389,8 @@ rTick1.src = "images/menuAssets/rTick1.png";
 
 //////////////////////////////////////////////////////////
 // music images //
-const mus = new Image();
-mus.src = "images/menuAssets/music.png";
+//const mus = new Image();
+//mus.src = "images/menuAssets/music.png";
 
 const BoxMus1 = new Image();
 BoxMus1.src = "images/menuAssets/BoxMus1.png";
@@ -407,6 +465,10 @@ langTurk.src = "images/menuAssets/langTrk.png";
 const cross = new Image();
 cross.src = "images/menuAssets/cross.png";
 
+// Vol Close
+const crossVol = new Image();
+crossVol.src = "images/menuAssets/cross.png";
+
 const cross1 = new Image();
 cross1.src = "images/menuAssets/cross1.png";
 
@@ -473,7 +535,7 @@ const fireEn = new Image();
 fireEn.src = "images/fire_eng.jpg";
 
 const bell = new Image();
-bell.src = "images/doorbel.jpg";
+bell.src = "images/ring.png";
 
 const pigeon = new Image();
 pigeon.src = "images/pigeon.jpg";
@@ -653,6 +715,1017 @@ var  VObul6 = new Audio("sounds/bul/VObul6.mp3");
 // Turkish
 
 ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+function menuShow(e) {
+    if (ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+        setMenu = true;
+        canvas.removeEventListener("click", menuShow);
+    }
+}
+
+
+
+function endVolCont(e) {
+    if (ctx.isPointInPath(!volLock && crossVol.path, e.offsetX, e.offsetY)) {
+        volGameOff = true;
+    holdCountDown = false;
+    volLock = true;
+    balloonLock = false;
+    splashLock = true;
+    blue_rib = true;
+    canvas.removeEventListener("click", endVolCont);
+    }	
+}
+
+// volume
+// v1
+function v1R(e) {  
+    if (!volLock && ctx.isPointInPath(v1Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v1R);
+    }
+}
+
+function v1B(e) {
+    if (!volLock && ctx.isPointInPath(v1Gb.path, e.offsetX, e.offsetY)) {
+        vol1=true;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v1B);
+    }
+}
+
+//v2
+function v2R(e) {
+    if (!volLock && ctx.isPointInPath(v2Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v2R);
+    }
+}
+
+function v2B(e) {
+    if (!volLock && ctx.isPointInPath(v2Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=true;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v2B);
+    }
+}
+
+// v3
+function v3R(e) {
+    if (!volLock && ctx.isPointInPath(v3Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v3R);
+    }
+}
+
+function v3B(e) {
+    if (!volLock && ctx.isPointInPath(v3Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=true;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v3B);
+    }
+}
+
+// v4
+function v4R(e) {
+    if (!volLock && ctx.isPointInPath(v4Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v4R);
+    }
+}
+
+function v4B(e) {
+    if (!volLock && ctx.isPointInPath(v4Gb.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=true;
+        vol5=false;
+        canvas.removeEventListener("click", v4B);
+    }
+}
+
+// v5
+function v5R(e) {
+    if (!volLock && ctx.isPointInPath(v5Gr.path, e.offsetX, e.offsetY)) {
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=false;
+        canvas.removeEventListener("click", v5R);
+    }
+}
+
+function v5B(e) {
+    if (!volLock && ctx.isPointInPath(v5Gb.path, e.offsetX, e.offsetY)) {   
+        vol1=false;
+        vol2=false;
+        vol3=false;
+        vol4=false;
+        vol5=true;
+        canvas.removeEventListener("click", v5B);
+    }
+}
+
+
+function wBgClick(e) {
+    if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
+        blue_rib = false;
+        volLock = false;
+        splashLock = false;
+        console.log("splashLock is " + splashLock);
+        canvas.removeEventListener("click", wBgClick);
+    }
+}
+
+
+
+
+function volumeSet() {
+
+if (vol1) {
+wdEn.volume = 0;
+wdGer.volume = 0;
+wdRom.volume = 0;
+wdBul.volume = 0;
+wdGrk.volume = 0;
+wdTuk.volume = 0;
+
+// mouse
+mseUK.volume = 0;
+mseGER.volume = 0;
+mseROM.volume = 0;
+mseBUL.volume = 0;
+mseGRK.volume = 0;
+mseTUK.volume = 0;
+
+// keyboard
+keyUK.volume = 0;
+keyGER.volume = 0;
+keyROM.volume = 0;
+keyBUL.volume = 0;
+keyGRK.volume = 0;
+keyTUK.volume = 0;
+
+// Music
+music.volume = 0;
+
+// Sound Effects
+sir.volume = 0;
+cow1.volume = 0;
+lamb.volume = 0;
+oldPhone.volume = 0;
+fireEng.volume = 0;
+microSound.volume = 0;
+bellSound.volume = 0;
+pigeonSdEff.volume = 0;
+roarEff.volume = 0;
+rugbyEff.volume = 0;
+barkEff.volume = 0;
+tramEff.volume = 0;
+
+// English
+gameInsSpeech.volume = 0;
+gameInsSpeechKey.volume = 0;
+
+wellDoneMse.volume = 0;
+wellDoneKey.volume = 0;
+
+wrongVoice.volume = 0;
+wrongVoiceKey.volume = 0;
+
+splashAud.volume = 0;
+
+// English Correct Awnsers
+VOuk1.volume = 0;
+VOuk2.volume = 0;
+VOuk3.volume = 0;
+VOuk4.volume = 0;
+VOuk5.volume = 0;
+VOuk6.volume = 0;
+VOuk7.volume = 0;
+VOuk8.volume = 0;
+VOuk9.volume = 0;
+VOuk10.volume = 0;
+VOuk11.volume = 0;
+VOuk12.volume = 0;
+// End of English
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+
+////////////////////////////////////////////
+// German
+gerInstructions.volume = 0;
+gerInstructionsKey.volume = 0;
+
+gerWrong.volume = 0;
+
+// German Correct Awnsers
+VOger1.volume = 0;
+VOger2.volume = 0;
+VOger3.volume = 0;
+VOger4.volume = 0;
+VOger5.volume = 0;
+VOger6.volume = 0;
+VOger7.volume = 0;
+VOger8.volume = 0;
+VOger9.volume = 0;
+VOger10.volume = 0;
+VOger11.volume = 0;
+VOger12.volume = 0;
+// End of German
+
+// Romanian
+romInstructions.volume = 0;
+
+romWrong.volume = 0;
+
+// Romanian Correct Awnsers
+VOrom1.volume = 0;
+VOrom2.volume = 0;
+VOrom3.volume = 0;
+VOrom4.volume = 0;
+VOrom5.volume = 0;
+VOrom6.volume = 0;
+VOrom7.volume = 0;
+VOrom8.volume = 0;
+VOrom9.volume = 0;
+VOrom10.volume = 0;
+VOrom11.volume = 0;
+VOrom12.volume = 0;
+// End of Romainian
+
+// Bulgerian
+bulInstructions.volume = 0;
+bulWrong.volume = 0;
+bulWrongKey.volume = 0;
+
+// Bulgerian Correct Awnsers
+VObul1.volume = 0;
+VObul2.volume = 0;
+VObul3.volume = 0;
+VObul4.volume = 0;
+VObul5.volume = 0;
+VObul6.volume = 0;
+// End of Volume 1
+}
+
+
+
+
+
+if (vol2) {
+
+    wdEn.volume = 0.2;
+wdGer.volume = 0.2;
+wdRom.volume = 0.2;
+wdBul.volume = 0.2;
+wdGrk.volume = 0.2;
+wdTuk.volume = 0.2;
+
+// mouse
+mseUK.volume = 0.2;
+mseGER.volume = 0.2;
+mseROM.volume = 0.2;
+mseBUL.volume = 0.2;
+mseGRK.volume = 0.2;
+mseTUK.volume = 0.2;
+
+// keyboard
+keyUK.volume = 0.2;
+keyGER.volume = 0.2;
+keyROM.volume = 0.2;
+keyBUL.volume = 0.2;
+keyGRK.volume = 0.2;
+keyTUK.volume = 0.2;
+
+// Music
+music.volume = 0.05;
+
+// Sound Effects
+sir.volume = 0.2;
+cow1.volume = 0.2;
+lamb.volume = 0.2;
+oldPhone.volume = 0.2;
+fireEng.volume = 0.2;
+microSound.volume = 0.2;
+bellSound.volume = 0.2;
+pigeonSdEff.volume = 0.2;
+roarEff.volume = 0.2;
+rugbyEff.volume = 0.2;
+barkEff.volume = 0.2;
+tramEff.volume = 0.2;
+
+// English
+gameInsSpeech.volume = 0.2;
+gameInsSpeechKey.volume = 0.2;
+
+wellDoneMse.volume = 0.2;
+wellDoneKey.volume = 0.2;
+
+wrongVoice.volume = 0.2;
+wrongVoiceKey.volume = 0.2;
+
+splashAud.volume = 0.2;
+
+// English Correct Awnsers
+VOuk1.volume = 0.2;
+VOuk2.volume = 0.2;
+VOuk3.volume = 0.2;
+VOuk4.volume = 0.2;
+VOuk5.volume = 0.2;
+VOuk6.volume = 0.2;
+VOuk7.volume = 0.2;
+VOuk8.volume = 0.2;
+VOuk9.volume = 0.2;
+VOuk10.volume = 0.2;
+VOuk11.volume = 0.2;
+VOuk12.volume = 0.2;
+// End of English
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+
+////////////////////////////////////////////
+// German
+gerInstructions.volume = 0.2;
+gerInstructionsKey.volume = 0.2;
+
+gerWrong.volume = 0.2;
+
+// German Correct Awnsers
+VOger1.volume = 0.2;
+VOger2.volume = 0.2;
+VOger3.volume = 0.2;
+VOger4.volume = 0.2;
+VOger5.volume = 0.2;
+VOger6.volume = 0.2;
+VOger7.volume = 0.2;
+VOger8.volume = 0.2;
+VOger9.volume = 0.2;
+VOger10.volume = 0.2;
+VOger11.volume = 0.2;
+VOger12.volume = 0.2;
+// End of German
+
+// Romanian
+romInstructions.volume = 0.2;
+
+romWrong.volume = 0.2;
+
+// Romanian Correct Awnsers
+VOrom1.volume = 0.2;
+VOrom2.volume = 0.2;
+VOrom3.volume = 0.2;
+VOrom4.volume = 0.2;
+VOrom5.volume = 0.2;
+VOrom6.volume = 0.2;
+VOrom7.volume = 0.2;
+VOrom8.volume = 0.2;
+VOrom9.volume = 0.2;
+VOrom10.volume = 0.2;
+VOrom11.volume = 0.2;
+VOrom12.volume = 0.2;
+// End of Romainian
+
+// Bulgerian
+bulInstructions.volume = 0.2;
+bulWrong.volume = 0.2;
+bulWrongKey.volume = 0.2;
+
+// Bulgerian Correct Awnsers
+VObul1.volume = 0.2;
+VObul2.volume = 0.2;
+VObul3.volume = 0.2;
+VObul4.volume = 0.2;
+VObul5.volume = 0.2;
+VObul6.volume = 0.2;
+// End of Volume 2
+
+}
+
+if (vol3) {
+
+    wdEn.volume = 0.5;
+    wdGer.volume = 0.5;
+    wdRom.volume = 0.5;
+    wdBul.volume = 0.5;
+    wdGrk.volume = 0.5;
+    wdTuk.volume = 0.5;
+    
+    // mouse
+    mseUK.volume = 0.5;
+    mseGER.volume = 0.5;
+    mseROM.volume = 0.5;
+    mseBUL.volume = 0.5;
+    mseGRK.volume = 0.5;
+    mseTUK.volume = 0.5;
+    
+    // keyboard
+    keyUK.volume = 0.5;
+    keyGER.volume = 0.5;
+    keyROM.volume = 0.5;
+    keyBUL.volume = 0.5;
+    keyGRK.volume = 0.5;
+    keyTUK.volume = 0.5;
+    
+    // Music
+    music.volume = 0.1;
+    
+    // Sound Effects
+    sir.volume = 0.5;
+    cow1.volume = 0.5;
+    lamb.volume = 0.5;
+    oldPhone.volume = 0.5;
+    fireEng.volume = 0.5;
+    microSound.volume = 0.5;
+    bellSound.volume = 0.5;
+    pigeonSdEff.volume = 0.5;
+    roarEff.volume = 0.5;
+    rugbyEff.volume = 0.5;
+    barkEff.volume = 0.5;
+    tramEff.volume = 0.5;
+    
+    // English
+    gameInsSpeech.volume = 0.5;
+    gameInsSpeechKey.volume = 0.5;
+    
+    wellDoneMse.volume = 0.5;
+    wellDoneKey.volume = 0.5;
+    
+    wrongVoice.volume = 0.5;
+    wrongVoiceKey.volume = 0.5;
+    
+    splashAud.volume = 0.5;
+    
+    // English Correct Awnsers
+    VOuk1.volume = 0.5;
+    VOuk2.volume = 0.5;
+    VOuk3.volume = 0.5;
+    VOuk4.volume = 0.5;
+    VOuk5.volume = 0.5;
+    VOuk6.volume = 0.5;
+    VOuk7.volume = 0.5;
+    VOuk8.volume = 0.5;
+    VOuk9.volume = 0.5;
+    VOuk10.volume = 0.5;
+    VOuk11.volume = 0.5;
+    VOuk12.volume = 0.5;
+    // End of English
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    
+    ////////////////////////////////////////////
+    // German
+    gerInstructions.volume = 0.5;
+    gerInstructionsKey.volume = 0.5;
+    
+    gerWrong.volume = 0.5;
+    
+    // German Correct Awnsers
+    VOger1.volume = 0.5;
+    VOger2.volume = 0.5;
+    VOger3.volume = 0.5;
+    VOger4.volume = 0.5;
+    VOger5.volume = 0.5;
+    VOger6.volume = 0.5;
+    VOger7.volume = 0.5;
+    VOger8.volume = 0.5;
+    VOger9.volume = 0.5;
+    VOger10.volume = 0.5;
+    VOger11.volume = 0.5;
+    VOger12.volume = 0.5;
+    // End of German
+    
+    // Romanian
+    romInstructions.volume = 0.5;
+    
+    romWrong.volume = 0.5;
+    
+    // Romanian Correct Awnsers
+    VOrom1.volume = 0.5;
+    VOrom2.volume = 0.5;
+    VOrom3.volume = 0.5;
+    VOrom4.volume = 0.5;
+    VOrom5.volume = 0.5;
+    VOrom6.volume = 0.5;
+    VOrom7.volume = 0.5;
+    VOrom8.volume = 0.5;
+    VOrom9.volume = 0.5;
+    VOrom10.volume = 0.5;
+    VOrom11.volume = 0.5;
+    VOrom12.volume = 0.5;
+    // End of Romainian
+    
+    // Bulgerian
+    bulInstructions.volume = 0.5;
+    bulWrong.volume = 0.5;
+    bulWrongKey.volume = 0.5;
+    
+    // Bulgerian Correct Awnsers
+    VObul1.volume = 0.5;
+    VObul2.volume = 0.5;
+    VObul3.volume = 0.5;
+    VObul4.volume = 0.5;
+    VObul5.volume = 0.5;
+    VObul6.volume = 0.5;
+    // End of Volume 3 
+
+}
+
+
+
+
+
+
+
+
+
+if (vol4) {
+
+    wdEn.volume = 0.8;
+    wdGer.volume = 0.8;
+    wdRom.volume = 0.8;
+    wdBul.volume = 0.8;
+    wdGrk.volume = 0.8;
+    wdTuk.volume = 0.8;
+    
+    // mouse
+    mseUK.volume = 0.8;
+    mseGER.volume = 0.8;
+    mseROM.volume = 0.8;
+    mseBUL.volume = 0.8;
+    mseGRK.volume = 0.8;
+    mseTUK.volume = 0.8;
+    
+    // keyboard
+    keyUK.volume = 0.8;
+    keyGER.volume = 0.8;
+    keyROM.volume = 0.8;
+    keyBUL.volume = 0.8;
+    keyGRK.volume = 0.8;
+    keyTUK.volume = 0.8;
+    
+    // Music
+    music.volume = 0.2;
+    
+    // Sound Effects
+    sir.volume = 0.8;
+    cow1.volume = 0.8;
+    lamb.volume = 0.8;
+    oldPhone.volume = 0.8;
+    fireEng.volume = 0.8;
+    microSound.volume = 0.8;
+    bellSound.volume = 0.8;
+    pigeonSdEff.volume = 0.8;
+    roarEff.volume = 0.8;
+    rugbyEff.volume = 0.8;
+    barkEff.volume = 0.8;
+    tramEff.volume = 0.8;
+    
+    // English
+    gameInsSpeech.volume = 0.8;
+    gameInsSpeechKey.volume = 0.8;
+    
+    wellDoneMse.volume = 0.8;
+    wellDoneKey.volume = 0.8;
+    
+    wrongVoice.volume = 0.8;
+    wrongVoiceKey.volume = 0.8;
+    
+    splashAud.volume = 0.8;
+    
+    // English Correct Awnsers
+    VOuk1.volume = 0.8;
+    VOuk2.volume = 0.8;
+    VOuk3.volume = 0.8;
+    VOuk4.volume = 0.8;
+    VOuk5.volume = 0.8;
+    VOuk6.volume = 0.8;
+    VOuk7.volume = 0.8;
+    VOuk8.volume = 0.8;
+    VOuk9.volume = 0.8;
+    VOuk10.volume = 0.8;
+    VOuk11.volume = 0.8;
+    VOuk12.volume = 0.8;
+    // End of English
+    /////////////////////////////////////////////
+    /////////////////////////////////////////////
+    
+    ////////////////////////////////////////////
+    // German
+    gerInstructions.volume = 0.8;
+    gerInstructionsKey.volume = 0.8;
+    
+    gerWrong.volume = 0.8;
+    
+    // German Correct Awnsers
+    VOger1.volume = 0.8;
+    VOger2.volume = 0.8;
+    VOger3.volume = 0.8;
+    VOger4.volume = 0.8;
+    VOger5.volume = 0.8;
+    VOger6.volume = 0.8;
+    VOger7.volume = 0.8;
+    VOger8.volume = 0.8;
+    VOger9.volume = 0.8;
+    VOger10.volume = 0.8;
+    VOger11.volume = 0.8;
+    VOger12.volume = 0.8;
+    // End of German
+    
+    // Romanian
+    romInstructions.volume = 0.8;
+    
+    romWrong.volume = 0.8;
+    
+    // Romanian Correct Awnsers
+    VOrom1.volume = 0.8;
+    VOrom2.volume = 0.8;
+    VOrom3.volume = 0.8;
+    VOrom4.volume = 0.8;
+    VOrom5.volume = 0.8;
+    VOrom6.volume = 0.8;
+    VOrom7.volume = 0.8;
+    VOrom8.volume = 0.8;
+    VOrom9.volume = 0.8;
+    VOrom10.volume = 0.8;
+    VOrom11.volume = 0.8;
+    VOrom12.volume = 0.8;
+    // End of Romainian
+    
+    // Bulgerian
+    bulInstructions.volume = 0.8;
+    bulWrong.volume = 0.8;
+    bulWrongKey.volume = 0.8;
+    
+    // Bulgerian Correct Awnsers
+    VObul1.volume = 0.8;
+    VObul2.volume = 0.8;
+    VObul3.volume = 0.8;
+    VObul4.volume = 0.8;
+    VObul5.volume = 0.8;
+    VObul6.volume = 0.8;
+    // End of Volume 4
+ 
+}
+
+
+
+
+
+
+
+
+if (vol5) {
+
+    wdEn.volume = 1;
+wdGer.volume = 1;
+wdRom.volume = 1;
+wdBul.volume = 1;
+wdGrk.volume = 1;
+wdTuk.volume = 1;
+
+// mouse
+mseUK.volume = 1;
+mseGER.volume = 1;
+mseROM.volume = 1;
+mseBUL.volume = 1;
+mseGRK.volume = 1;
+mseTUK.volume = 1;
+
+// keyboard
+keyUK.volume = 1;
+keyGER.volume = 1;
+keyROM.volume = 1;
+keyBUL.volume = 1;
+keyGRK.volume = 1;
+keyTUK.volume = 1;
+
+// Music
+music.volume = 0.3;
+
+// Sound Effects
+sir.volume = 1;
+cow1.volume = 1;
+lamb.volume = 1;
+oldPhone.volume = 1;
+fireEng.volume = 1;
+microSound.volume = 1;
+bellSound.volume = 1;
+pigeonSdEff.volume = 1;
+roarEff.volume = 1;
+rugbyEff.volume = 1;
+barkEff.volume = 1;
+tramEff.volume = 1;
+
+// English
+gameInsSpeech.volume = 1;
+gameInsSpeechKey.volume = 1;
+
+wellDoneMse.volume = 1;
+wellDoneKey.volume = 1;
+
+wrongVoice.volume = 1;
+wrongVoiceKey.volume = 1;
+
+splashAud.volume = 1;
+
+// English Correct Awnsers
+VOuk1.volume = 1;
+VOuk2.volume = 1;
+VOuk3.volume = 1;
+VOuk4.volume = 1;
+VOuk5.volume = 1;
+VOuk6.volume = 1;
+VOuk7.volume = 1;
+VOuk8.volume = 1;
+VOuk9.volume = 1;
+VOuk10.volume = 1;
+VOuk11.volume = 1;
+VOuk12.volume = 1;
+// End of English
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+
+////////////////////////////////////////////
+// German
+gerInstructions.volume = 1;
+gerInstructionsKey.volume = 1;
+
+gerWrong.volume = 1;
+
+// German Correct Awnsers
+VOger1.volume = 1;
+VOger2.volume = 1;
+VOger3.volume = 1;
+VOger4.volume = 1;
+VOger5.volume = 1;
+VOger6.volume = 1;
+VOger7.volume = 1;
+VOger8.volume = 1;
+VOger9.volume = 1;
+VOger10.volume = 1;
+VOger11.volume = 1;
+VOger12.volume = 1;
+// End of German
+
+// Romanian
+romInstructions.volume = 1;
+
+romWrong.volume = 1;
+
+// Romanian Correct Awnsers
+VOrom1.volume = 1;
+VOrom2.volume = 1;
+VOrom3.volume = 1;
+VOrom4.volume = 1;
+VOrom5.volume = 1;
+VOrom6.volume = 1;
+VOrom7.volume = 1;
+VOrom8.volume = 1;
+VOrom9.volume = 1;
+VOrom10.volume = 1;
+VOrom11.volume = 1;
+VOrom12.volume = 1;
+// End of Romainian
+
+// Bulgerian
+bulInstructions.volume = 1;
+bulWrong.volume = 1;
+bulWrongKey.volume = 1;
+
+// Bulgerian Correct Awnsers
+VObul1.volume = 1;
+VObul2.volume = 1;
+VObul3.volume = 1;
+VObul4.volume = 1;
+VObul5.volume = 1;
+VObul6.volume = 1;
+// End of Volume 5
+  
+}
+
+}
+
+// vol controls 24.10.24 /////////////////////////////////////////////////////////
+
+function volControls(e) {
+
+    if (!rollBall) {
+
+    if (!setVoloff) {
+
+    if (blue_rib) {
+        ctx.globalAlpha = 1.0;
+        ctx.fillStyle = "blue";
+        ctx.fillRect(0, 0, 800, 60);
+
+
+    //Restart Game
+ 
+     ctx.drawImage(reStartImg, 15, 2, 40, 40);
+     reStartImg.path = new Path2D();
+     reStartImg.path.rect(15, 2, 40, 40);
+ 
+     ctx.font = "500 15px arial";
+     ctx.fillStyle = "white";
+     ctx.fillText("Restart", 35, 55);
+
+     canvas.addEventListener("click", reStart);
+
+    //settings
+  
+    ctx.drawImage(settings, 650, 0, 47, 47);
+    settings.path = new Path2D();
+    settings.path.rect(650, 0, 80, 80);
+
+    notGame = true;
+
+    ctx.textAlign = "center";
+    ctx.font='500 15px Arial';
+    ctx.fillStyle = "white";
+
+    
+    if (En) {
+        ctx.fillText("Settings", 675, 55);
+    }
+    if (Ger) {
+        ctx.fillText("Einstellungen", 640, 85);
+    }
+    if (Rom) {
+        ctx.fillText("Setări", 640, 85);
+    }
+    if (Bul) {
+        ctx.fillText("Настройки", 640, 85);
+    }
+    if (Grk) {
+        ctx.fillText("Ρυθμίσεις", 640, 85);
+    }
+    if (Tuk) {
+        ctx.fillText("Ayarlar", 640, 85);
+    }
+
+    canvas.addEventListener("click", menuShow);
+
+
+    }// end of blue rib
+
+
+
+    ctx.globalAlpha = 1.0;
+
+    if (volLock && volOff) {
+        ctx.drawImage(wBg, w-160, 0, 350, 60);
+        wBg.path = new Path2D();
+        wBg.path.rect(w-160, 0, 350, 60);
+        ctx.fillStyle = "black";
+        ctx.font='900 35px Comic Sans MS';
+        ctx.fillText("Set Volume", w+10, 42);
+        canvas.addEventListener("click", wBgClick);
+        }
+
+    }// rollBall
+
+if (!volLock && volOff) {
+    volGameOff = false;
+    holdCountDown = true;
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, 100);
+
+            ctx.font = "700 35px Arial";
+            ctx.fillStyle = "blue";
+            ctx.fillText("Min", w-110, 47);
+            
+            // v1
+            if (vol1) {
+                ctx.drawImage(v1Gr, w-60, 17, 10, 35);
+                v1Gr.path = new Path2D();
+                v1Gr.path.rect(w-60, 20, 10, 45);
+            }
+            if (!vol1) {
+                ctx.drawImage(v1Gb, w-60, 17, 10, 35);
+                v1Gb.path = new Path2D();
+                v1Gb.path.rect(w-60, 20, 10, 45);
+            }
+                canvas.addEventListener("click", v1R);
+                canvas.addEventListener("click", v1B);
+            
+            // v2
+            if (vol2) {
+                ctx.drawImage(v2Gr, w-30, 17, 10, 35);
+                v2Gr.path = new Path2D();
+                v2Gr.path.rect(w-30, 17, 10, 45);
+            }
+            if (!vol2) {
+                ctx.drawImage(v2Gb, w-30, 17, 10, 35);
+                v2Gb.path = new Path2D();
+                v2Gb.path.rect(w-30, 17, 10, 45);
+            }
+                canvas.addEventListener("click", v2R);
+                canvas.addEventListener("click", v2B);
+            
+            //v3
+            if (vol3) {
+                ctx.drawImage(v3Gr, w, 17, 10, 35);
+                v3Gr.path = new Path2D();
+                v3Gr.path.rect(w, 17, 10, 35);
+            }
+            if (!vol3) {
+                ctx.drawImage(v3Gb, w, 17, 10, 35);
+                v3Gb.path = new Path2D();
+                v3Gb.path.rect(w, 17, 10, 35);
+            }
+                canvas.addEventListener("click", v3R);
+                canvas.addEventListener("click", v3B);
+            
+            // v4
+            if (vol4) {
+                ctx.drawImage(v4Gr, w+30, 17, 10, 35);
+                v4Gr.path = new Path2D();
+                v4Gr.path.rect(w+30, 17, 10, 35);
+            }
+            if (!vol4) {
+                ctx.drawImage(v4Gb, w+30, 17, 10, 35);
+                v4Gb.path = new Path2D();
+                v4Gb.path.rect(w+30, 17, 10, 35);
+            }
+                canvas.addEventListener("click", v4R);
+                canvas.addEventListener("click", v4B);
+            
+            
+            // v5
+            if (vol5) {
+                ctx.drawImage(v5Gr, w+60, 17, 10, 35);
+                v5Gr.path = new Path2D();
+                v5Gr.path.rect(w+60, 17, 10, 45);
+            }
+            if (!vol5) {
+                ctx.drawImage(v5Gb, w+60, 17, 10, 35);
+                v5Gb.path = new Path2D();
+                v5Gb.path.rect(w+60, 17, 10, 45);
+            }
+                canvas.addEventListener("click", v5R);
+                canvas.addEventListener("click", v5B);
+            
+            ctx.font = "700 35px Arial";
+            ctx.fillStyle = "blue";
+            ctx.fillText("Max", w+125, 47);
+            
+            
+            ctx.font = "700 15px Comic Sans MS";
+            //ctx.fillText("Volume", w+5, 70);
+            ctx.drawImage(crossVol, w-12, 60, 35, 35);
+            crossVol.path = new Path2D();
+            crossVol.path.rect(w-12, 60, 35, 35);
+            
+            }  // lockoff  
+
+            if (!volLock) {
+                canvas.addEventListener("click", endVolCont);
+            }
+
+        }//setVolOff
+            
+
+        }
+
+
+
+
+
+
+
 
 
 function locked() {
@@ -1150,11 +2223,12 @@ function keyboardModeOff(e) {
 
 
 function Question() {
+    
     ctx.font = "80px Comic Sans MS";
     ctx.fillStyle = "blue";
 
     if (En) {
-        ctx.fillText("Match Cards", w, 77);
+        //ctx.fillText("Match Cards", w, 77);
     }
     if (Ger) {
         ctx.fillText("Spielkarten", w, 77);
@@ -1175,11 +2249,11 @@ function Question() {
     }
     
 
-    ctx.font = "40px Comic Sans MS";
-    ctx.fillStyle = "red";
+    ctx.font = "900 55px Comic Sans MS";
+    ctx.fillStyle = "blue";
 
     if (En) {
-        ctx.fillText("Question " + n, w, 125);
+        ctx.fillText("Question " + n, w, 120);
     }
     if (Ger) {
         ctx.fillText("Frage " + n, w, 125);
@@ -2280,7 +3354,7 @@ function showMenu() {
 
     // Instructions
    
-    ctx.textAlign = "center"; 
+    ctx.textAlign = "center";
     /*ctx.drawImage(transIns, 268, 485, 200, 100);
 
     ctx.fillStyle = "white";
@@ -2890,7 +3964,7 @@ if (keys[32]) { // Go to Instructions
 
     if (bkMus) {
     music.play();
-    music.volume = 0.1;
+    //music.volume = 0.1;
     }
 
     incor = false;
@@ -2920,9 +3994,9 @@ function settingsKey(e) {
 
 function translate1() {
     ctx.fillStyle = "white";
-    ctx.fillRect(15, 40, 687, 650);
+    ctx.fillRect(15, 65, 687, 600);
     ctx.strokeStyle = "green";
-    ctx.strokeRect(15, 40, 687, 650);
+    ctx.strokeRect(15, 65, 687, 600);
     ctx.fillStyle = "green";
     ctx.textAlign = "center"; 
     ctx.font = "100px Comic Sans MS";
@@ -2996,6 +4070,8 @@ function wellDone() {
 
 function splash() {
 
+
+
     /*if (reStartAgain) {
         console.log("Been here before!");
     }*/
@@ -3008,7 +4084,7 @@ function splash() {
   if (!setMenu) {
 
 
-    ctx.drawImage(mcSplash, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(mcSplash, 0, 55, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
     ctx.fillRect(0, 400, 715, 235);
@@ -3275,7 +4351,7 @@ function gameStartkey(e) {
 
 
 function reStart(e) {
-    if (ctx.isPointInPath(reSet.path, e.offsetX, e.offsetY)) {
+    if (ctx.isPointInPath(reStartImg.path, e.offsetX, e.offsetY)) {
 
         startGame = false;
         MCsplashSc = true;
@@ -3332,6 +4408,8 @@ reStartAgain = true;
 
 
 function gameInstructions() {
+
+    
 
     //soundInstructions = true;
 
@@ -3416,14 +4494,14 @@ function gameInstructions() {
         
         ctx.fillStyle = "white";
         //ctx.globalAlpha = 0.85;
-        ctx.fillRect(20, 20, 675, 680);
+        ctx.fillRect(20, 70, 675, 600);
         ctx.globalAlpha = 1.0;
         ctx.textAlign = "center";
         ctx.fillStyle = "Red";
         ctx.font = "110px Comic Sans MS";
 
         if (En) {
-        ctx.fillText("Match Cards", w, 140);
+        ctx.fillText("Match Cards", w, 170);
         }
         if (Ger) {
         ctx.fillText("Spielkarten", w, 140);
@@ -3449,7 +4527,7 @@ function gameInstructions() {
         ctx.font = "600 65px Comic Sans MS";
 
         if (En) {
-        ctx.fillText("Match the sound", w, 240);
+        ctx.fillText("Match the sound", w, 265);
         }
         if (Ger) {
         ctx.font = "600 45px Comic Sans MS";
@@ -3469,7 +4547,7 @@ function gameInstructions() {
             }
 
         if (En) {
-        ctx.fillText("to the picture!", w, 300);
+        ctx.fillText("to the picture!", w, 340);
         }
         if (Ger) {
             ctx.fillText("zum Bild!", w, 300);
@@ -3551,8 +4629,8 @@ function gameInstructions() {
 
         if (!KeyboardGame) { 
             if (En) {
-	            ctx.fillText("Using your Mouse to", w, 380);
-                ctx.fillText("Left Click on the picture", w, 440);
+	            ctx.fillText("Using your Mouse to", w, 410);
+                ctx.fillText("Left Click on the picture", w, 460);
             }
             if (Ger) {
                 ctx.font = "600 26px Comic Sans MS";
@@ -3910,9 +4988,9 @@ function settingMouse(e) {
 
 function cardSetUp() {
     // settings
-    ctx.drawImage(settings, 0, 0, 80, 80);
-    settings.path = new Path2D();
-    settings.path.rect(0, 0, 80, 80);
+    //ctx.drawImage(settings, 0, 0, 80, 80);
+    //settings.path = new Path2D();
+    //settings.path.rect(0, 0, 80, 80);
 
     canvas.addEventListener("click", settingMouse);
 
@@ -3926,10 +5004,10 @@ if (keyboardMode) {
 
     ctx.font = "700 13px Comic Sans MS";
     ctx.fillStyle = "red";
-    ctx.fillText("Settings", 40, 90);
+    //ctx.fillText("Settings", 40, 90);
 
     //if (mouseMode) {
-        ctx.fillText("Left Click", 40, 106);
+        //ctx.fillText("Left Click", 40, 106);
     //}
     /*if (keyboardMode) {
         ctx.fillText("Press S", 40, 106);
@@ -3946,16 +5024,16 @@ if (keyboardMode) {
 
     //Restart Game
 
-    ctx.drawImage(reSet, 630, 0, 80, 80);
+    /*ctx.drawImage(reSet, 635, 8, 70, 70);
     reSet.path = new Path2D();
-    reSet.path.rect(600, 0, 80, 80);
+    reSet.path.rect(635, 8, 80, 80);
 
     ctx.font = "bold 13px Comic sans MS";
     ctx.fillStyle = "red";
     ctx.fillText("Left Click", 670, 90);
     ctx.fillText("to restart", 670, 105);
 
-    canvas.addEventListener("click", reStart);
+    canvas.addEventListener("click", reStart);*/
 }
 
 
@@ -7014,7 +8092,7 @@ function rightKey6() {
         ctx.font = "40px Comic Sans MS";
 
         if (En) { 
-            ctx.fillText("The sound was a Door Bell!", w, 290);
+            ctx.fillText("The sound was a Ring Door Bell!", w, 290);
             if (part2 && togSpeech) {
                 VOuk7.play();
                 part2 = false;
@@ -7779,9 +8857,9 @@ function keyWrong() {
             }
 
         ctx.fillStyle = "white";
-        ctx.fillRect(30, 40, 655, 650);
+        ctx.fillRect(30, 65, 655, 600);
         ctx.strokeStyle = "red";
-        ctx.strokeRect(30, 40, 655, 650);
+        ctx.strokeRect(30, 65, 655, 600);
         ctx.fillStyle = "red";
         ctx.textAlign = "center"; 
         ctx.font = "120px Comic Sans MS";
@@ -8529,7 +9607,7 @@ function animate() {
 
     if (bkMus) {
         music.play();
-        music.volume = 0.1;
+        //music.volume = 0.1;
     }
 
     if (!bkMus) {
@@ -8538,8 +9616,13 @@ function animate() {
     }
     
     
-    
+    if (volGameOff) {
     playGame();
+    }
+
+    volControls();
+    volumeSet();
+    /////////// vol 11/11/24
 
     requestAnimationFrame(animate);
     
