@@ -8842,23 +8842,23 @@ function keyWrong() {
 
         if (togSpeech && mouseMode) {
             if (En) {
-                wrongVoice.play();
+                //wrongVoice.play();
 
             }
             if (Ger) {
-                gerWrong.play();
+                //gerWrong.play();
             }
             if (Rom) {
-                romWrong.play();
+                //romWrong.play();
             }
             if (Bul) {
-                bulWrong.play();
+                //bulWrong.play();
             }
         }
 
         if (togSpeech && keyboardMode) {
             if (En) {
-                wrongVoiceKey.play();
+                //wrongVoiceKey.play();
             }
             if (Ger) {
                 //gerWrongKey.play();
@@ -8867,7 +8867,7 @@ function keyWrong() {
                 //romWrongKey.play();
             }
             if (Bul) {
-                bulWrongKey.play();
+                //bulWrongKey.play();
             }
         }
     
