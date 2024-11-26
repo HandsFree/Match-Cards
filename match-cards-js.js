@@ -532,13 +532,13 @@ const lam = new Image();
 lam.src = "images/lamb.jpg";
 
 const micro = new Image();
-micro.src = "images/microwave.jpg";
+micro.src = "images/microwave.png";
 
 const cow = new Image();
 cow.src = "images/cow.jpg";
 
 const oldPhn = new Image();
-oldPhn.src = "images/old_phone.jpg";
+oldPhn.src = "images/mobile.jpg";
 
 const fireEn = new Image();
 fireEn.src = "images/fire_eng.jpg";
@@ -7786,7 +7786,7 @@ function rightKey4() {
         if (En) { 
             ctx.fillText("The sound was an old telephone!", w, 290);
             if (part2 && togSpeech) {
-                VOuk4.play();
+                //VOuk4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -7795,7 +7795,7 @@ function rightKey4() {
         if (Ger) { 
             ctx.fillText("Der Ton war ein altes Telefon!", w, 290);
             if (part2 && togSpeech) {
-                VOger4.play();
+                //VOger4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -7804,7 +7804,7 @@ function rightKey4() {
         if (Rom) { 
             ctx.fillText("Sunetul era un telefon vechi!", w, 290);
             if (part2 && togSpeech) {
-                VOrom4.play();
+                //VOrom4.play();
                 part2 = false;
                 part3 = true;
             }
@@ -7813,7 +7813,7 @@ function rightKey4() {
         if (Bul) { 
             ctx.fillText("Звукът беше стар телефон!", w, 290);
             if (part2 && togSpeech) {
-                VObul4.play();
+                //VObul4.play();
                 part2 = false;
                 part3 = true;
             }
