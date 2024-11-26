@@ -4,6 +4,12 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+var volDis = false;
+
+// center text
+var w = canvas.width / 2;
+var dogImgWidth = 230;
+
 var volGameOff = true;
 
 //canvas.setAttribute('tabindex','1');
@@ -78,6 +84,10 @@ const v5Gr = new Image();
 v5Gr.src = "red_vol.png";
 const v5Gb = new Image();
 v5Gb.src = "black_vol.png";
+
+
+const dog = new Image();
+dog.src = "dog.jpg";
 
 
 var SplashScreenOn = true;
@@ -281,8 +291,7 @@ var togQs3 = true;
 
 /************end****************/
 
-// center text
-var w = canvas.width / 2;
+
 
 
 // main screen
@@ -732,6 +741,7 @@ function menuShow(e) {
 
 function endVolCont(e) {
     if (ctx.isPointInPath(!volLock && crossVol.path, e.offsetX, e.offsetY)) {
+
         volGameOff = true;
     holdCountDown = false;
     volLock = true;
@@ -861,6 +871,7 @@ function v5B(e) {
 
 function wBgClick(e) {
     if (ctx.isPointInPath(wBg.path, e.offsetX, e.offsetY)) {
+ 
         blue_rib = false;
         volLock = false;
         splashLock = false;
@@ -1618,6 +1629,7 @@ function volControls(e) {
     }// rollBall
 
 if (!volLock && volOff) {
+
     volGameOff = false;
     holdCountDown = true;
     ctx.fillStyle = "white";
@@ -2281,6 +2293,8 @@ function Question() {
 function endMenu(e) {
     if (setMenu && !keyboardMode && !langaugeMenuSettings) {
         if (ctx.isPointInPath(cross.path, e.offsetX, e.offsetY)) {
+
+            volDis = false;
     
 
             locked();
@@ -2685,6 +2699,8 @@ function returnKey() {
 
 function showMenu() {
   if (setMenu) {
+
+    volDis = true;
 
     if (KeyboardGame) {
     gameIns = false;
@@ -3772,7 +3788,7 @@ function closeSplash(e) {
     
 
 
-    if (ctx.isPointInPath(SplashScreenOn && clickHere.path, e.offsetX, e.offsetY)) {
+    if (ctx.isPointInPath(SplashScreenOn && clickHere.path, e.offsetX, e.offsetY) && volLock) {
         
         
 
@@ -4070,7 +4086,7 @@ function wellDone() {
 
 function splash() {
 
-
+    
 
     /*if (reStartAgain) {
         console.log("Been here before!");
@@ -4083,12 +4099,15 @@ function splash() {
 
   if (!setMenu) {
 
-
+    
     ctx.drawImage(mcSplash, 0, 55, canvas.width, canvas.height);
     ctx.fillStyle = "white";
     ctx.globalAlpha = 0.6;
     ctx.fillRect(0, 400, 715, 235);
+
     ctx.globalAlpha = 1.0;
+    
+    
     ctx.textAlign = "center"; 
     ctx.font = "30px Comic Sans MS";
     ctx.fillStyle = "navy";
@@ -4102,6 +4121,10 @@ function splash() {
     ctx.font = "700 45px Comic Sans MS";
     ctx.textAlign = "center"; 
     ctx.fillStyle = "navy";
+
+    
+
+    
 
     if (En) {
         ctx.fillText("Click Here!", w, 473);
@@ -4121,6 +4144,7 @@ function splash() {
     if (Tuk) {
         ctx.fillText("Buraya tıklayın!", w, 473);
     }
+
     
 
 
@@ -4221,14 +4245,15 @@ function splash() {
 
 
 if (SplashScreenOn) {
+    if (volLock) {
     addEventListener("keydown", gameStKey);
     addEventListener("keydown", settingsKey);
     addEventListener("keydown", splashAudKey);
 
-    
     canvas.addEventListener("click", closeSplash);
     canvas.addEventListener("click", speechMouse);
     canvas.addEventListener("click", settingMouse1);
+    }
 }
 
 }
@@ -4858,6 +4883,8 @@ function foQus() {
 
 function instructions() {
 
+   
+
     //console.log("mouseMode is " + mouseMode);
     //console.log("keyboardMode is " + keyboardMode);
 
@@ -5042,6 +5069,8 @@ if (keyboardMode) {
 function rightAnsText() {
 
     if (mouseMode) {
+
+        //console.log("pauseOff is " + pauseOff);
 
     ctx.font = "35px Comic Sans MS";
 
@@ -5369,7 +5398,7 @@ function quest1() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -5550,7 +5579,7 @@ function quest2() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -5726,7 +5755,7 @@ function quest3() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -5904,7 +5933,7 @@ function quest4() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6079,7 +6108,7 @@ function quest5() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6256,7 +6285,7 @@ function quest6() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6429,7 +6458,7 @@ function quest7() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6606,7 +6635,7 @@ function quest8() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6780,7 +6809,7 @@ function quest9() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -6961,7 +6990,7 @@ function quest10() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -7138,7 +7167,7 @@ function quest11() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -7321,7 +7350,7 @@ function quest12() {
 
     if (gameIns) {
         addEventListener("keydown", gameStartKeys);
-        addEventListener("click", gameStart, false);
+        canvas.addEventListener("click", gameStart, false);
     }
 
     if (!gameIns) { // mouse controls for images
@@ -7377,7 +7406,7 @@ function rightClick1() {
     cor1 = false;
     MCgameSc1 = false;
     MCgameSc2 = true;
-    removeEventListener("click", rightClick1);
+    canvas.removeEventListener("click", rightClick1);
 }
 // End mouse controls right Answer //
 
@@ -7470,7 +7499,7 @@ function rightKey1() {
         addEventListener("keydown", rightKey1);
         }
         if (mouseMode) {
-        addEventListener("click", rightClick1);
+        canvas.addEventListener("click", rightClick1);
         }
     }
 
@@ -7489,7 +7518,7 @@ function rightKey1() {
         cor2 = false;
         MCgameSc2 = false;
         MCgameSc3 = true;
-        removeEventListener("click", rightClick2);
+        canvas.removeEventListener("click", rightClick2);
     }
     // End mouse controls right Answer //
 
@@ -7581,7 +7610,7 @@ function rightKey1() {
             addEventListener("keydown", rightKey2);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick2);
+                canvas.addEventListener("click", rightClick2);
             }
     }
     ///////// End of Right Answer 2 //////////////////
@@ -7600,7 +7629,7 @@ function rightKey1() {
         MCgameSc2 = false;
         MCgameSc3 = false;
         MCgameSc4 = true;
-        removeEventListener("click", rightClick3);
+        canvas.removeEventListener("click", rightClick3);
     }
     // End mouse controls right Answer //
 
@@ -7623,7 +7652,7 @@ function rightKey1() {
     /////////  Right Answer 3 //////////////////
     function rightAns3() {
 
-        
+   
         wellDone(); // Voiceover - well done!
 
         translate1();
@@ -7691,7 +7720,7 @@ function rightKey1() {
             addEventListener("keydown", rightKey3);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick3);
+                canvas.addEventListener("click", rightClick3);
             }
 
     }
@@ -7720,7 +7749,7 @@ function rightKey1() {
             finalScreen = true;
         }
 
-        removeEventListener("click", rightClick4);
+        canvas.removeEventListener("click", rightClick4);
     }
     // End mouse controls right Answer //
 
@@ -7817,7 +7846,7 @@ function rightKey4() {
             addEventListener("keydown", rightKey4);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick4);
+                canvas.addEventListener("click", rightClick4);
             }
 
     }
@@ -7837,7 +7866,7 @@ function rightKey4() {
         MCgameSc4 = false;
         MCgameSc5 = false;
         MCgameSc6 = true;
-        removeEventListener("click", rightClick5);
+        canvas.removeEventListener("click", rightClick5);
     }
     // End mouse controls right Answer //
 
@@ -7928,7 +7957,7 @@ function rightKey4() {
             addEventListener("keydown", rightKey5);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick5);
+                canvas.addEventListener("click", rightClick5);
             }
         
     }
@@ -7947,7 +7976,7 @@ function rightKey4() {
       incor = false;
       MCgameSc6 = false;
       MCgameSc7 = true;
-      removeEventListener("click", rightClick6);
+      canvas.removeEventListener("click", rightClick6);
     }
 // End mouse controls right Answer //
 
@@ -8041,7 +8070,7 @@ function rightKey6() {
             addEventListener("keydown", rightKey6);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick6);
+                canvas.addEventListener("click", rightClick6);
             }
     }
 
@@ -8058,7 +8087,7 @@ function rightKey6() {
         incor = false;
         MCgameSc7 = false;
         MCgameSc8 = true;
-        removeEventListener("click", rightClick7);
+        canvas.removeEventListener("click", rightClick7);
       }
   // End mouse controls right Answer //
 
@@ -8152,7 +8181,7 @@ function rightKey6() {
             addEventListener("keydown", rightKey7);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick7);
+                canvas.addEventListener("click", rightClick7);
             }
     }
 
@@ -8176,7 +8205,7 @@ function rightKey6() {
             finalScreen = true;
         }     
 
-        removeEventListener("click", rightClick8);
+        canvas.removeEventListener("click", rightClick8);
 
       }
   // End mouse controls right Answer //
@@ -8278,7 +8307,7 @@ function rightKey6() {
             addEventListener("keydown", rightKey8);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick8);
+                canvas.addEventListener("click", rightClick8);
             }
     }
 
@@ -8298,7 +8327,7 @@ function rightClick9() {
     incor = false;
     MCgameSc9 = false;
     MCgameSc10 = true;
-    removeEventListener("click", rightClick9);
+    canvas.removeEventListener("click", rightClick9);
   }
 // End mouse controls right Answer //
 
@@ -8391,7 +8420,7 @@ function rightKey9() {
         addEventListener("keydown", rightKey9);
         }
         if (mouseMode) {
-        addEventListener("click", rightClick9);
+            canvas.addEventListener("click", rightClick9);
         }
 }
 
@@ -8412,7 +8441,7 @@ function rightClick10() {
     incor = false;
     MCgameSc10 = false;
     MCgameSc11 = true;
-    removeEventListener("click", rightClick10);
+    canvas.removeEventListener("click", rightClick10);
   }
 // End mouse controls right Answer //
 
@@ -8506,7 +8535,7 @@ function rightKey10() {
         addEventListener("keydown", rightKey10);
         }
         if (mouseMode) {
-        addEventListener("click", rightClick10);
+            canvas.addEventListener("click", rightClick10);
         }
 }
 
@@ -8524,7 +8553,7 @@ function rightClick11() {
     incor = false;
     MCgameSc11 = false;
     MCgameSc12 = true;
-    removeEventListener("click", rightClick11);
+    canvas.removeEventListener("click", rightClick11);
   }
 // End mouse controls right Answer //
 
@@ -8617,7 +8646,7 @@ function rightKey11() {
         addEventListener("keydown", rightKey11);
         }
         if (mouseMode) {
-        addEventListener("click", rightClick11);
+            canvas.addEventListener("click", rightClick11);
         }
 }
 // End of 11 ////////////////////////////////////////
@@ -8650,7 +8679,7 @@ function rightClick12() {
         finalScreen = true;
     }
 
-    removeEventListener("click", rightClick12);
+    canvas.removeEventListener("click", rightClick12);
   }
 // End mouse controls right Answer //
 
@@ -8752,7 +8781,7 @@ function rightKey12() {
             addEventListener("keydown", rightKey12);
             }
             if (mouseMode) {
-            addEventListener("click", rightClick12);
+            canvas.addEventListener("click", rightClick12);
             }
 }
 
@@ -8765,7 +8794,7 @@ function rightKey12() {
 
     // mouse controls Wrong Answer //
     function clickWrong() {
-        if (!setMenu) {
+        if (!setMenu && volLock) {
         sEff = true;
         gerWrong.pause();
         gerWrong.currentTime = 0;
@@ -8778,7 +8807,7 @@ function rightKey12() {
         bulWrongKey.pause();
         bulWrongKey.currentTime = 0;
         locked();
-        removeEventListener("click", clickWrong);
+        canvas.removeEventListener("click", clickWrong);
         }
     }
 
@@ -8805,6 +8834,9 @@ function keyWrong() {
     /////////  Wrong Awnser //////////////////
     function wrong() {
 
+        //console.log("pauseOff is " + pauseOff);
+
+        if (volLock) {
 
         sEff = false;
 
@@ -8858,18 +8890,17 @@ function keyWrong() {
 
         ctx.fillStyle = "white";
         ctx.fillRect(30, 65, 655, 600);
-        ctx.strokeStyle = "red";
+        ctx.strokeStyle = "blue";
         ctx.strokeRect(30, 65, 655, 600);
-        ctx.fillStyle = "red";
-        ctx.textAlign = "center"; 
-        ctx.font = "120px Comic Sans MS";
+        ctx.fillStyle = "green";
+        ctx.font = "80px Comic Sans MS";
 
         if (En) {
-        ctx.fillText("Oh No!", w, 170);
-        ctx.font = "70px Comic Sans MS";
-        ctx.fillText("that's not right!", w, 270);
-        ctx.fillStyle = "blue";
-        ctx.fillText("Why not try Again?", w, 380);
+        ctx.textAlign = "center"; 
+        ctx.drawImage(dog, (w - (dogImgWidth/2)), 80, dogImgWidth, 260);
+        ctx.font = "40px Comic Sans MS";
+        ctx.fillText("Sam the dog say's", w, 380);
+        ctx.fillText("'that's not quite right!'", w, 430);
         }
 
         if (Ger) {
@@ -8913,12 +8944,12 @@ function keyWrong() {
                 ctx.fillText("Neden tekrar denemiyorsunuz?", w, 380);
             }
 
-        ctx.fillStyle = "red";
-        ctx.font = "36px Comic Sans MS";
+        //ctx.fillStyle = "red";
+        ctx.font = "40px Comic Sans MS";
 
         if (mouseMode) {
             if (En) {
-               ctx.fillText("Left Click on your mouse", w, 500);
+               ctx.fillText("Left Click on your mouse", w, 515);
                ctx.fillText("to continue!", w, 560);
             }
             if (Ger) {
@@ -8959,16 +8990,18 @@ function keyWrong() {
         
 
         if (mouseMode && !keyboardMode) {
-        addEventListener("click", clickWrong);
+        canvas.addEventListener("click", clickWrong);
         }
 
 
         if (keyboardMode && !mouseMode) {
         addEventListener("keydown", keyWrong);
         }
+
+    } // volLocked
         
 
-    
+       
 
 
 }
@@ -9384,7 +9417,7 @@ function startPlayGame() {
         MCsplashSc = true;
         mouseMode = false;
         keyboardMode = false;
-        removeEventListener("click", rightClickFS);
+        canvas.removeEventListener("click", rightClickFS);
       }
 
       function rightKeyFS() {
@@ -9592,7 +9625,7 @@ function startPlayGame() {
             
 
         if (mouseMode) {
-            addEventListener("click", rightClickFS);
+            canvas.addEventListener("click", rightClickFS);
         }
 
     }
@@ -9614,15 +9647,29 @@ function animate() {
         music.pause();
         music.currentTime = 0;
     }
-    
-    
-    if (volGameOff) {
-    playGame();
-    }
 
-    volControls();
-    volumeSet();
-    /////////// vol 11/11/24
+    if (!volGameOff && !volLock) {
+        //console.log("pauseOff is " + pauseOff);
+        ctx.fillRect((canvas.width/2) - (w/2), 200, w, 150);
+        ctx.fillStyle = "blue";
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
+        ctx.font = "40px Arial";
+        ctx.fillText("Game is", w, 250); 
+        ctx.fillText("Paused except", w, 290);  
+        ctx.fillText("volume", w, 330);
+    }
+    
+    
+    if (volGameOff && volLock) {
+        playGame();
+    }
+    
+    
+    if (!volDis) { // Removes vol controls from settings menu
+        volControls();
+        volumeSet();
+    }
 
     requestAnimationFrame(animate);
     
