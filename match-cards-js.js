@@ -4,6 +4,8 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+var pausedForMenu = false;
+
 var volDis = false;
 
 // center text
@@ -732,6 +734,7 @@ var  VObul6 = new Audio("sounds/bul/VObul6.mp3");
 
 function menuShow(e) {
     if (ctx.isPointInPath(settings.path, e.offsetX, e.offsetY)) {
+        pausedForMenu = true;
         setMenu = true;
         canvas.removeEventListener("click", menuShow);
     }
@@ -2296,6 +2299,7 @@ function endMenu(e) {
 
             volDis = false;
     
+            pausedForMenu = false;
 
             locked();
             sEff = true;
@@ -2712,9 +2716,9 @@ function showMenu() {
 
     ctx.fillStyle = "black";
 
-    if (!gameIns) {
+    //if (!gameIns) {
     ctx.drawImage(mBack, 0, 0, canvas.width, canvas.height);
-    }
+    //}
 
     ctx.globalAlpha = 1.0; 
     ctx.textAlign = "center"; 
@@ -4208,32 +4212,32 @@ function splash() {
     // Speech code //
 
 
-    ctx.drawImage(soundBox, 25, 409, 110, 180); 
-    soundBox.path = new Path2D();
-    soundBox.path.rect(25, 409, 110, 180);
+    //ctx.drawImage(soundBox, 25, 409, 110, 180); 
+    //soundBox.path = new Path2D();
+    //soundBox.path.rect(25, 409, 110, 180);
 
-    ctx.drawImage(speech, 55, 435, 55, 55);
+    //ctx.drawImage(speech, 55, 435, 55, 55);
 
-    ctx.font = "900 12px arial";
-    ctx.fillStyle = "black";
-    ctx.fillText("Left Click", 77, 520);
-    ctx.fillText("for", 77, 540);
-    ctx.fillText("Speech", 77, 560);
+    //ctx.font = "900 12px arial";
+    //ctx.fillStyle = "black";
+    //ctx.fillText("Left Click", 77, 520);
+    //ctx.fillText("for", 77, 540);
+    //ctx.fillText("Speech", 77, 560);
     //ctx.fillText("S Key", 77, 540);
     // End of Speech Code //
 
     // Settings code //
-    ctx.drawImage(SettingsBox, 580, 409, 110, 180);
-    SettingsBox.path = new Path2D();
-    SettingsBox.path.rect(580, 409, 110, 180);
+    //ctx.drawImage(SettingsBox, 580, 409, 110, 180);
+    //SettingsBox.path = new Path2D();
+    //SettingsBox.path.rect(580, 409, 110, 180);
 
-    ctx.drawImage(settings, 594, 420, 80, 80);
+    //ctx.drawImage(settings, 594, 420, 80, 80);
 
-    ctx.font = "900 12px arial";
-    ctx.fillStyle = "black";
-    ctx.fillText("Left Click", 635, 510);
-    ctx.fillText("For", 635, 530);
-    ctx.fillText("Settings", 635, 550);
+    //ctx.font = "900 12px arial";
+    //ctx.fillStyle = "black";
+    //ctx.fillText("Left Click", 635, 510);
+    //ctx.fillText("For", 635, 530);
+    //ctx.fillText("Settings", 635, 550);
     //ctx.fillText("ENTER Key", 635, 530);
     //ctx.fillText("OR", 635, 545);
     //ctx.fillText("Switch", 635, 560);
@@ -4247,12 +4251,12 @@ function splash() {
 if (SplashScreenOn) {
     if (volLock) {
     addEventListener("keydown", gameStKey);
-    addEventListener("keydown", settingsKey);
-    addEventListener("keydown", splashAudKey);
+    //addEventListener("keydown", settingsKey);
+    //addEventListener("keydown", splashAudKey);
 
     canvas.addEventListener("click", closeSplash);
-    canvas.addEventListener("click", speechMouse);
-    canvas.addEventListener("click", settingMouse1);
+    //canvas.addEventListener("click", speechMouse);
+    //canvas.addEventListener("click", settingMouse1);
     }
 }
 
@@ -5228,7 +5232,8 @@ function gameStartKeys(e) {
 
 
 function Q1checkClick1(e) {
-    if (!setMenu) {
+    if (volLock) {
+    if (!setMenu && !volDis) {
 	if (ctx.isPointInPath(amb.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
@@ -5238,10 +5243,12 @@ function Q1checkClick1(e) {
     }
     }
 }
+}
 
 
 function Q1checkClick2(e) {
-    if (!setMenu) {
+    if (volLock) {
+    if (!setMenu && !volDis) {
     if (ctx.isPointInPath(lam.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
@@ -5250,9 +5257,11 @@ function Q1checkClick2(e) {
     }
     }
 }
+}
 
 function Q1checkClick3(e) {
-    if (!setMenu) {
+    if (volLock) {
+    if (!setMenu && !volDis) {
     if (ctx.isPointInPath(micro.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
@@ -5261,9 +5270,11 @@ function Q1checkClick3(e) {
     }
     }
 }
+}
 
 function Q1checkClick4(e) {
-    if (!setMenu) {
+    if (volLock) {
+    if (!setMenu && !volDis) {
     if (ctx.isPointInPath(cow.path, e.offsetX, e.offsetY)) {
         sir.pause();
         sir.currentTime = 0;
@@ -5271,6 +5282,7 @@ function Q1checkClick4(e) {
         canvas.removeEventListener("click", Q1checkClick4);
     }
     }
+}
 }
 
 // keyboard
@@ -5357,7 +5369,17 @@ function quest1() {
     cardSetUp();
     }
 
-    
+
+
+
+
+
+    if (volLock) {
+    ///// test 27.11.24
+
+
+
+
     ctx.drawImage(amb, 50, 150, wdt, ht);
     if (!KeyboardGame) {
 	amb.path = new Path2D();
@@ -5388,6 +5410,14 @@ function quest1() {
     }
     foQus();
 
+} // end of volLock
+
+
+
+
+
+
+
     if (!gameIns) {
         instructions(); // text which appears below images
     }
@@ -5402,6 +5432,12 @@ function quest1() {
     }
 
     if (!gameIns) { // mouse controls for images
+
+
+
+        if (volLock) { // test
+
+
 
     if (!KeyboardGame && !keyboardMode && mouseMode && !setMenu) {
     canvas.addEventListener("click", Q1checkClick1);
@@ -5422,6 +5458,13 @@ function quest1() {
     keyboardAndswitch();
     } // keyboard game is true
 
+
+
+} // volLock / 27.11.24
+
+
+
+
     
     }// Locked if gameIns = true
 
@@ -5433,6 +5476,7 @@ function quest1() {
 ///////// Q2 Mouse Controls ////////////////////////
 
 function Q2checkClick1(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         cow1.pause();
         cow1.currentTime = 0;
@@ -5440,8 +5484,10 @@ function Q2checkClick1(e) {
         canvas.removeEventListener("click", Q2checkClick1, false);
     }
 }
+}
 
 function Q2checkClick2(e) {
+    if (volLock) {
     if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {    
         cow1.pause();
         cow1.currentTime = 0;
@@ -5449,8 +5495,10 @@ function Q2checkClick2(e) {
         canvas.removeEventListener("click", Q2checkClick2, false);
     }
 }
+}
 
 function Q2checkClick3(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {    
         cow1.pause();
         cow1.currentTime = 0;
@@ -5458,8 +5506,10 @@ function Q2checkClick3(e) {
         canvas.removeEventListener("click", Q2checkClick3, false);
     }
 }
+}
 
 function Q2checkClick4(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         cow1.pause();
         cow1.currentTime = 0;
@@ -5468,6 +5518,7 @@ function Q2checkClick4(e) {
         cor2 = true;
         canvas.removeEventListener("click", Q2checkClick4, false);
     }
+}
 }
 
 /////////// end of Q2 Mouse Controls ////////////////////////////////
@@ -5614,6 +5665,7 @@ function quest2() {
 ///////// Q3 Mouse Controls ////////////////////////
 
 function Q3checkClick1(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         lamb.pause();
         lamb.currentTime = 0;
@@ -5621,34 +5673,41 @@ function Q3checkClick1(e) {
         cor1 = false;
         cor2 = false;
         cor3 = true;
-        canvas.removeEventListener("click", Q3checkClick1, false);
+        canvas.removeEventListener("click", Q3checkClick1);
     }
+}
 }
 
 function Q3checkClick2(e) {
+    if (volLock) {
     if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        canvas.removeEventListener("click", Q3checkClick2, false);
+        canvas.removeEventListener("click", Q3checkClick2);
     }
+}
 }
 
 function Q3checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        canvas.removeEventListener("click", Q3checkClick3, false);
+        canvas.removeEventListener("click", Q3checkClick3);
     }
+}
 }
 
 function Q3checkClick4(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         lamb.pause();
         lamb.currentTime = 0;
         incor = true;
-        canvas.removeEventListener("click", Q3checkClick4, false);
+        canvas.removeEventListener("click", Q3checkClick4);
+    }
     }
 }
 
@@ -5761,10 +5820,10 @@ function quest3() {
     if (!gameIns) { // mouse controls for images
 
     if (!KeyboardGame) {
-    canvas.addEventListener("click", Q3checkClick1, false);
-    canvas.addEventListener("click", Q3checkClick2, false);
-    canvas.addEventListener("click", Q3checkClick3, false);
-    canvas.addEventListener("click", Q3checkClick4, false);
+    canvas.addEventListener("click", Q3checkClick1);
+    canvas.addEventListener("click", Q3checkClick2);
+    canvas.addEventListener("click", Q3checkClick3);
+    canvas.addEventListener("click", Q3checkClick4);
     }
 
     if (KeyboardGame && keyboardMode && !mouseMode && !setMenu) {
@@ -5790,6 +5849,7 @@ function quest3() {
 ///////// Q4 Mouse Controls ////////////////////////
 
 function Q4checkClick1(e) {
+    if (volLock) {
     if (oldPhn.path && ctx.isPointInPath(oldPhn.path, event.offsetX, event.offsetY)) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
@@ -5801,8 +5861,10 @@ function Q4checkClick1(e) {
         canvas.removeEventListener("click", Q4checkClick1);
     }
 }
+}
 
 function Q4checkClick2(e) {
+    if (volLock) {
     if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
@@ -5810,9 +5872,11 @@ function Q4checkClick2(e) {
         canvas.removeEventListener("click", Q4checkClick2);
     }
 }
+}
 
 
 function Q4checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
@@ -5820,14 +5884,17 @@ function Q4checkClick3(e) {
         canvas.removeEventListener("click", Q4checkClick3);
     }
 }
+}
 
 function Q4checkClick4(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         oldPhone.pause();
         oldPhone.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q4checkClick4);
     }
+}
 }
 
 /////////// end of Q4 Mouse Controls ////////////////////////////////
@@ -5967,6 +6034,7 @@ function quest4() {
 ///////// Q5 Mouse Controls ////////////////////////
 
 function Q5checkClick1(e) {
+    if (volLock) {
     if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {
         fireEng.pause();
         fireEng.currentTime = 0;
@@ -5974,8 +6042,10 @@ function Q5checkClick1(e) {
         canvas.removeEventListener("click", Q5checkClick1, false);
     }
 }
+}
 
 function Q5checkClick2(e) {
+    if (volLock) {
     if (fireEn.path && ctx.isPointInPath(fireEn.path, event.offsetX, event.offsetY)) {
         fireEng.pause();
         fireEng.currentTime = 0;
@@ -5988,8 +6058,10 @@ function Q5checkClick2(e) {
         canvas.removeEventListener("click", Q5checkClick2, false);
     }
 }
+}
 
 function Q5checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         fireEng.pause();
         fireEng.currentTime = 0;
@@ -5997,14 +6069,17 @@ function Q5checkClick3(e) {
         canvas.removeEventListener("click", Q5checkClick3, false);
     }
 }
+}
 
 function Q5checkClick4(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         fireEng.pause();
         fireEng.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q5checkClick4, false);
     }
+}
 }
 
 /////////// end of Q5 Mouse Controls ////////////////////////////////
@@ -6145,6 +6220,7 @@ function quest5() {
 ////// Q6 Mouse Controls ////////////////////////
 
 function Q6checkClick1(e) {
+    if (volLock) {
     if (micro.path && ctx.isPointInPath(micro.path, event.offsetX, event.offsetY)) {
         microSound.pause();
         microSound.currentTime = 0;
@@ -6153,8 +6229,10 @@ function Q6checkClick1(e) {
         canvas.removeEventListener("click", Q6checkClick1);
     }
 }
+}
 
 function Q6checkClick2(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         microSound.pause();
         microSound.currentTime = 0;
@@ -6162,8 +6240,10 @@ function Q6checkClick2(e) {
         canvas.removeEventListener("click", Q6checkClick2);
     }
 }
+}
 
 function Q6checkClick3(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         microSound.pause();
         microSound.currentTime = 0;
@@ -6171,14 +6251,17 @@ function Q6checkClick3(e) {
         canvas.removeEventListener("click", Q6checkClick3);
     }
 }
+}
 
 function Q6checkClick4(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         microSound.pause();
         microSound.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q6checkClick4);
     }
+}
 }
 
 /////////// end of Q6 Mouse Controls ////////////////////////////////
@@ -6321,6 +6404,7 @@ function quest6() {
 ////// Q7 Mouse Controls ////////////////////////
 
 function Q7checkClick1(e) {
+    if (volLock) {
     if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
         bellSound.pause();
         bellSound.currentTime = 0;
@@ -6329,8 +6413,10 @@ function Q7checkClick1(e) {
         canvas.removeEventListener("click", Q7checkClick1);
     }
 }
+}
 
 function Q7checkClick2(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         bellSound.pause();
         bellSound.currentTime = 0;
@@ -6338,8 +6424,10 @@ function Q7checkClick2(e) {
         canvas.removeEventListener("click", Q7checkClick2);
     }
 }
+}
 
 function Q7checkClick3(e) {
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         bellSound.pause();
         bellSound.currentTime = 0;
@@ -6347,14 +6435,17 @@ function Q7checkClick3(e) {
         canvas.removeEventListener("click", Q7checkClick3);
     }
 }
+}
 
 function Q7checkClick4(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         bellSound.pause();
         bellSound.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q7checkClick4);
     }
+}
 }
 
 /////////// end of Q7 Mouse Controls ////////////////////////////////
@@ -6497,6 +6588,7 @@ function quest7() {
 ////// Q8 Mouse Controls ////////////////////////
 
 function Q8checkClick1(e) {
+    if (volLock) {
     if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
         roarEff.pause();
         roarEff.currentTime = 0;
@@ -6504,8 +6596,10 @@ function Q8checkClick1(e) {
         canvas.removeEventListener("click", Q8checkClick1);
     }
 }
+}
 
 function Q8checkClick2(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         roarEff.pause();
         roarEff.currentTime = 0;
@@ -6513,8 +6607,10 @@ function Q8checkClick2(e) {
         canvas.removeEventListener("click", Q8checkClick2);
     }
 }
+}
 
 function Q8checkClick3(e) {
+    if (volLock) {
     if (polac.path && ctx.isPointInPath(polac.path, event.offsetX, event.offsetY)) {
         roarEff.pause();
         roarEff.currentTime = 0;
@@ -6523,15 +6619,17 @@ function Q8checkClick3(e) {
         canvas.removeEventListener("click", Q8checkClick3);
     }
 }
+}
 
 function Q8checkClick4(e) {
-    
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         roarEff.pause();
         roarEff.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q8checkClick4);
     }
+}
 }
 
 /////////// end of Q8 Mouse Controls ////////////////////////////////
@@ -6670,6 +6768,7 @@ function quest8() {
 ////// Q9 Mouse Controls ////////////////////////
 
 function Q9checkClick1(e) {
+    if (volLock) {
     if (bell.path && ctx.isPointInPath(bell.path, event.offsetX, event.offsetY)) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
@@ -6677,8 +6776,10 @@ function Q9checkClick1(e) {
         canvas.removeEventListener("click", Q9checkClick1);
     }
 }
+}
 
 function Q9checkClick2(e) {
+    if (volLock) {
     if (pigeon.path && ctx.isPointInPath(pigeon.path, event.offsetX, event.offsetY)) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
@@ -6687,8 +6788,10 @@ function Q9checkClick2(e) {
         canvas.removeEventListener("click", Q9checkClick2);
     }
 }
+}
 
 function Q9checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
@@ -6696,15 +6799,17 @@ function Q9checkClick3(e) {
         canvas.removeEventListener("click", Q9checkClick3);
     }
 }
+}
 
 function Q9checkClick4(e) {
-    
+    if (volLock) {
     if (amb.path && ctx.isPointInPath(amb.path, event.offsetX, event.offsetY)) {
         pigeonSdEff.pause();
         pigeonSdEff.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q9checkClick4);
     }
+}
 }
 
 /////////// end of Q9 Mouse Controls ////////////////////////////////
@@ -6850,6 +6955,7 @@ function quest9() {
 ////// Q10 Mouse Controls ////////////////////////
 
 function Q10checkClick1(e) {
+    if (volLock) {
     if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
@@ -6857,8 +6963,10 @@ function Q10checkClick1(e) {
         canvas.removeEventListener("click", Q10checkClick1);
     }
 }
+}
 
 function Q10checkClick2(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
@@ -6866,8 +6974,10 @@ function Q10checkClick2(e) {
         canvas.removeEventListener("click", Q10checkClick2);
     }
 }
+}
 
 function Q10checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
@@ -6875,8 +6985,10 @@ function Q10checkClick3(e) {
         canvas.removeEventListener("click", Q10checkClick3);
     }
 }
+}
 
 function Q10checkClick4(e) {   
+    if (volLock) {
     if (Rugby.path && ctx.isPointInPath(Rugby.path, event.offsetX, event.offsetY)) {
         rugbyEff.pause();
         rugbyEff.currentTime = 0;
@@ -6884,6 +6996,7 @@ function Q10checkClick4(e) {
         cor10 = true;
         canvas.removeEventListener("click", Q10checkClick4);
     }
+}
 }
 
 /////////// end of Q10 Mouse Controls ////////////////////////////////
@@ -7029,6 +7142,7 @@ function quest10() {
 ////// Q11 Mouse Controls ////////////////////////
 
 function Q11checkClick1(e) {
+    if (volLock) {
     if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
         barkEff.pause();
         barkEff.currentTime = 0;
@@ -7036,8 +7150,10 @@ function Q11checkClick1(e) {
         canvas.removeEventListener("click", Q11checkClick1);
     }
 }
+}
 
 function Q11checkClick2(e) {
+    if (volLock) {
     if (lam.path && ctx.isPointInPath(lam.path, event.offsetX, event.offsetY)) {
         barkEff.pause();
         barkEff.currentTime = 0;
@@ -7045,8 +7161,10 @@ function Q11checkClick2(e) {
         canvas.removeEventListener("click", Q11checkClick2);
     }
 }
+}
 
 function Q11checkClick3(e) {
+    if (volLock) {
     if (collie.path && ctx.isPointInPath(collie.path, event.offsetX, event.offsetY)) {
         barkEff.pause();
         barkEff.currentTime = 0;
@@ -7055,14 +7173,17 @@ function Q11checkClick3(e) {
         canvas.removeEventListener("click", Q11checkClick3);
     }
 }
+}
 
-function Q11checkClick4(e) {   
+function Q11checkClick4(e) {  
+    if (volLock) {
     if (pCar.path && ctx.isPointInPath(pCar.path, event.offsetX, event.offsetY)) {
         barkEff.pause();
         barkEff.currentTime = 0;
         incor = true;
         canvas.removeEventListener("click", Q11checkClick4);
     }
+}
 }
 
 /////////// end of Q11 Mouse Controls ////////////////////////////////
@@ -7209,6 +7330,7 @@ function quest11() {
 ////// Q12 Mouse Controls ////////////////////////
 
 function Q12checkClick1(e) {
+    if (volLock) {
     if (rook.path && ctx.isPointInPath(rook.path, event.offsetX, event.offsetY)) {
         tramEff.pause();
         tramEff.currentTime = 0;
@@ -7216,8 +7338,10 @@ function Q12checkClick1(e) {
         canvas.removeEventListener("click", Q12checkClick1);
     }
 }
+}
 
 function Q12checkClick2(e) {
+    if (volLock) {
     if (tennis.path && ctx.isPointInPath(tennis.path, event.offsetX, event.offsetY)) {
         tramEff.pause();
         tramEff.currentTime = 0;
@@ -7225,8 +7349,10 @@ function Q12checkClick2(e) {
         canvas.removeEventListener("click", Q12checkClick2);
     }
 }
+}
 
 function Q12checkClick3(e) {
+    if (volLock) {
     if (cow.path && ctx.isPointInPath(cow.path, event.offsetX, event.offsetY)) {
         tramEff.pause();
         tramEff.currentTime = 0;
@@ -7234,8 +7360,10 @@ function Q12checkClick3(e) {
         canvas.removeEventListener("click", Q12checkClick3);
     }
 }
+}
 
-function Q12checkClick4(e) {   
+function Q12checkClick4(e) {
+    if (volLock) {
     if (tram.path && ctx.isPointInPath(tram.path, event.offsetX, event.offsetY)) {
         tramEff.pause();
         tramEff.currentTime = 0;
@@ -7244,6 +7372,7 @@ function Q12checkClick4(e) {
         //console.log(cor12);
         canvas.removeEventListener("click", Q12checkClick4);
     }
+}
 }
 
 /////////// end of Q12 Mouse Controls ////////////////////////////////
@@ -8794,7 +8923,7 @@ function rightKey12() {
 
     // mouse controls Wrong Answer //
     function clickWrong() {
-        if (!setMenu && volLock) {
+        if (!setMenu) {
         sEff = true;
         gerWrong.pause();
         gerWrong.currentTime = 0;
@@ -8836,7 +8965,7 @@ function keyWrong() {
 
         //console.log("pauseOff is " + pauseOff);
 
-        if (volLock) {
+        //if (volLock) {
 
         sEff = false;
 
@@ -8998,7 +9127,7 @@ function keyWrong() {
         addEventListener("keydown", keyWrong);
         }
 
-    } // volLocked
+    //} // volLocked
         
 
        
@@ -9011,15 +9140,15 @@ function playGame() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (setMenu) {
+    if (setMenu && pausedForMenu) {
         showMenu();
     }
 
-    if (gameIns) {
+    if (gameIns && !pausedForMenu) {
         gameInstructions();
     }
 
-    if (!setMenu) {
+    if (!setMenu && !pausedForMenu) {
 
     if (MCsplashSc) {
         splash();
@@ -9032,6 +9161,8 @@ function playGame() {
 }
 
 function startPlayGame() {
+
+   
 
     ///////// Question 1 //////////////////
     if (MCgameSc1) {
@@ -9386,6 +9517,8 @@ function startPlayGame() {
           rightAns12();
           returnTo1 = true;
         }
+
+
     }
 
 
